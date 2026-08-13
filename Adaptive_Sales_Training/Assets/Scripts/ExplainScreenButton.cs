@@ -1,7 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class ExplainScreenButton : MonoBehaviour
 {
@@ -32,9 +30,9 @@ public class ExplainScreenButton : MonoBehaviour
         }
         if (index == texts.Length)
         {
-            continueButton.SetActive(false);
-            backButton.SetActive(false);
-            Debug.Log("Load TopicMenuScene.");
+            gameObject.SetActive(false);
+            SceneManager.LoadScene("TopicMenuScene");
+            Debug.Log("Loading TopicMenuScene.");
             return;
         }
         texts[index].SetActive(true);
