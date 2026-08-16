@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ModuleFlowController : MonoBehaviour
@@ -14,6 +15,8 @@ public class ModuleFlowController : MonoBehaviour
     private GameObject questionScreen;
     [SerializeField]
     private GameObject pointScreen;
+    [SerializeField]
+    private GameObject finalPointScreen;
 
     [Header("Information UI")]
     [SerializeField]
@@ -43,17 +46,32 @@ public class ModuleFlowController : MonoBehaviour
     [SerializeField]
     private Button continueButton;
 
+    [Header("Final Points UI")]
+    [SerializeField]
+    private TMP_Text finalPointsText;
+    [SerializeField]
+    private TMP_Text topicCompletedText;
+    [SerializeField]
+    private Button finishTopicButton;
+    
+
     private int currentModuleIndex;
     private int currentQuestionIndex;
     private int currentModulePoints;
+    private int totalTopicPoints;
     private float remainingTime;
     private bool isQuestionActive;
+    private bool isScenarioModule;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // On click of module start button (info screen) => Start module question sequence
         startQuestionsButton.onClick.AddListener(StartQuestionSequence);
+        // On click of continue button (point screen) => Go to next module info screen
         continueButton.onClick.AddListener(ContinueToNextModule);
+        // On click (just 1 time at the end) of finish button (final point screen)=> Go to SetInfoScreen() edge case => FinishTopic()
+        finishTopicButton.onClick.AddListener(ContinueToNextModule);
 
         for (int i = 0; i < answerButtons.Length; i++)
         {
@@ -62,6 +80,7 @@ public class ModuleFlowController : MonoBehaviour
         }
 
         currentModuleIndex = 0;
+        totalTopicPoints = 0;
         SetInfoScreen();
     }
 
@@ -96,13 +115,19 @@ public class ModuleFlowController : MonoBehaviour
             return;
         }
 
+        // If index == last module in list => Now in scenario module
+        if (currentModuleIndex == topic.modules.Count - 1)
+        {
+            isScenarioModule = true;
+        }
+
         MicroModule currentModule = topic.modules[currentModuleIndex];
 
         // Set text attributes in info screen
         moduleTitle.text = currentModule.moduleTitle;
         infoText.text = currentModule.moduleText;
 
-        
+        pointScreen.SetActive(false);
         infoScreen.SetActive(true);
     }
 
@@ -123,7 +148,13 @@ public class ModuleFlowController : MonoBehaviour
 
         if (currentQuestionIndex >= currentModule.questions.Count)
         {
-            ShowPointScreen();
+            if (isScenarioModule)
+            {
+                ShowFinalPointScreen();
+            } else
+            {
+                ShowPointScreen();
+            }
             return;
         }
 
@@ -173,6 +204,7 @@ public class ModuleFlowController : MonoBehaviour
 
             int pointsAwarded = currentQuestion.basePoints + speedBonus;
             currentModulePoints += pointsAwarded;
+            totalTopicPoints += pointsAwarded;
         }
 
         currentQuestionIndex++;
@@ -181,36 +213,48 @@ public class ModuleFlowController : MonoBehaviour
 
     private void ShowPointScreen()
     {
-        isQuestionActive = false;
+        isQuestionActive = false; // TODO: Testear con o sin esta asignacion para ver si es necesaria
 
         MicroModule currentModule = topic.modules[currentModuleIndex];
 
         pointsText.text = $"Punkte:\n{currentModulePoints}";
         pointsDetailsText.text = $"{currentModule.moduleTitle}\nFragerunde geschafft!";
 
-        string continueButtonText;
-        if (currentModuleIndex < topic.modules.Count - 1)
-        {
-            continueButtonText = "Weiter";
-        } else
-        {
-            continueButtonText = "Thema abschließen";
-        }
-
-        continueButton.GetComponentInChildren<TMP_Text>().text = continueButtonText;
-
         questionScreen.SetActive(false);
         pointScreen.SetActive(true);
+    }
+
+    private void ShowFinalPointScreen()
+    {
+        finalPointsText.text = $"{totalTopicPoints}";
+        topicCompletedText.text = $"Thema \"{topic.topicTitle}\" geschafft!";
+
+        questionScreen.SetActive(false);
+        finalPointScreen.SetActive(true);
     }
 
     private void ContinueToNextModule()
     {
         currentModuleIndex++;
-        ShowPointScreen();
+        SetInfoScreen();
+    }
+
+    private void CleanUp()
+    {
+        startQuestionsButton.onClick.RemoveListener(StartQuestionSequence);
+        continueButton.onClick.RemoveListener(ContinueToNextModule);
+        finishTopicButton.onClick.RemoveListener(ContinueToNextModule);
+
+        for (int i = 0; i < answerButtons.Length; i++)
+        {
+            int capturedIndex = i;
+            answerButtons[i].onClick.RemoveListener(() => SelectAnswer(capturedIndex));
+        }
     }
 
     private void FinishTopic()
     {
-        Debug.Log("Topic completed");
+        CleanUp();
+        SceneManager.LoadScene("TopicMenuScene");
     }
 }
