@@ -182,6 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StartScreenButton
   startScreen: {fileID: 149233094}
   explainScreen: {fileID: 1112942355}
+  participantController: {fileID: 1530673054}
 --- !u!1 &154733837
 GameObject:
   m_ObjectHideFlags: 0
@@ -2733,6 +2734,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1452699659}
   m_CullTransparentMesh: 1
+--- !u!1 &1530673052
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1530673053}
+  - component: {fileID: 1530673054}
+  m_Layer: 0
+  m_Name: ParticipantSetupController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1530673053
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530673052}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1000, y: 400, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1530673054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530673052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbc6beddf40c9d244a75081b61bcdc32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticipantSetupController
+  allTopics:
+  - {fileID: 11400000, guid: 8229265e4f48e6a4ab985830576a5b38, type: 2}
 --- !u!1 &1767580326
 GameObject:
   m_ObjectHideFlags: 0
@@ -3294,3 +3341,4 @@ SceneRoots:
   - {fileID: 1302306660}
   - {fileID: 1298959977}
   - {fileID: 2147377957}
+  - {fileID: 1530673053}

@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14a60cf4d7d773c46800f4a709ac8f92, type: 3}
+  m_Name: TestModule1
+  m_EditorClassIdentifier: Assembly-CSharp::MicroModule
+  moduleId: TM_001
+  moduleTitle: Metallica
+  moduleText: 'Metallica is one of the big four of thrash metal. Their heaviest album
+    is Master of Puppets from the year 1986. Their most popular album is the Black
+    Album. Members: James Hetfield (Rythm Guitar and Vocals), Kirk Hammet (Lead Guitar),
+    Lars Ulrich (Drums), Robert Trujillo (Bass).'
+  questions:
+  - questionId: Q_001
+    questionText: What is Metallica's heaviest album?
+    answerOptions:
+    - And Justice for All
+    - The Black Album
+    - Master of Puppets
+    - St. Anger
+    correctAnswerIndex: 2
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: Q_002
+    questionText: Is Metallica one of the big four of thrash metal?
+    answerOptions:
+    - True
+    - False
+    correctAnswerIndex: 0
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: Q_003
+    questionText: In what year did Master of Puppets came out?
+    answerOptions:
+    - 1982
+    - 1986
+    - 1987
+    - 1999
+    correctAnswerIndex: 1
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: Q_004
+    questionText: Who is Metallica's drumer?
+    answerOptions:
+    - James
+    - Dave
+    - Robert
+    - Lars
+    correctAnswerIndex: 3
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: Q_005
+    questionText: What is Metallica's most popular album?
+    answerOptions:
+    - Rust in Peace
+    - Master of Puppets
+    - Ride the Lightning
+    - The Black Album
+    correctAnswerIndex: 3
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
