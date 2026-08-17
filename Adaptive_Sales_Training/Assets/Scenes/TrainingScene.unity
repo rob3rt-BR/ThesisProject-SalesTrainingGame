@@ -1237,7 +1237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 393749583}
   m_Layer: 5
-  m_Name: CurrentScoreScreen
+  m_Name: CurrentPointsScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1799,6 +1799,76 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579037561}
   m_CullTransparentMesh: 1
+--- !u!1 &593424240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 593424241}
+  - component: {fileID: 593424242}
+  m_Layer: 0
+  m_Name: ModuleFlowController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &593424241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593424240}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1000, y: 500, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &593424242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593424240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0c12f7fe5bb08498fb6f2474c1d5b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ModuleFlowController
+  infoScreen: {fileID: 1852956646}
+  questionScreen: {fileID: 1203954621}
+  pointScreen: {fileID: 393749582}
+  finalPointScreen: {fileID: 1866436560}
+  moduleTitle: {fileID: 1104103315}
+  infoText: {fileID: 352792098}
+  startQuestionsButton: {fileID: 447762363}
+  questionText: {fileID: 1248070016}
+  questionCounterText: {fileID: 763830412}
+  timerText: {fileID: 1627785482}
+  answerButtons:
+  - {fileID: 1139710368}
+  - {fileID: 860928655}
+  - {fileID: 33761774}
+  - {fileID: 28615090}
+  answerButtonsText:
+  - {fileID: 1330084985}
+  - {fileID: 1735511120}
+  - {fileID: 404799660}
+  - {fileID: 593932428}
+  pointsText: {fileID: 515054756}
+  pointsDetailsText: {fileID: 1642504334}
+  continueButton: {fileID: 232017138}
+  finalPointsText: {fileID: 56371400}
+  topicCompletedText: {fileID: 1846022042}
+  finishTopicButton: {fileID: 360565204}
 --- !u!1 &593932426
 GameObject:
   m_ObjectHideFlags: 0
@@ -3031,10 +3101,10 @@ RectTransform:
   - {fileID: 763830411}
   - {fileID: 1627785481}
   - {fileID: 1526585268}
-  - {fileID: 33761773}
-  - {fileID: 28615089}
   - {fileID: 1139710367}
   - {fileID: 860928654}
+  - {fileID: 33761773}
+  - {fileID: 28615089}
   m_Father: {fileID: 800999896}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4031,7 +4101,7 @@ GameObject:
   - component: {fileID: 1846022043}
   - component: {fileID: 1846022042}
   m_Layer: 5
-  m_Name: FinalDetailsText
+  m_Name: TopicCompletedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4205,7 +4275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1866436561}
   m_Layer: 5
-  m_Name: FinalScoreScreen
+  m_Name: FinalPointsScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4317,3 +4387,4 @@ SceneRoots:
   - {fileID: 904600526}
   - {fileID: 800999896}
   - {fileID: 1276461027}
+  - {fileID: 593424241}
