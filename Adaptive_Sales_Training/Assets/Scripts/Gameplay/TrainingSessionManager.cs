@@ -209,6 +209,17 @@ public class TrainingSessionManager : MonoBehaviour
         }
     }
 
+    public int GetCurrentModuleCorrectAnswers()
+    {
+        if (currentModuleResult != null)
+        {
+            return currentModuleResult.questionResults.FindAll(q => q.wasCorrect == true).Count;
+        } else
+        {
+            return 0;
+        }
+    }
+
     public int GetTotalPoints()
     {
         int total = 0;

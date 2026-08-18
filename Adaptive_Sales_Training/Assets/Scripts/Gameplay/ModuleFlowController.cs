@@ -39,9 +39,11 @@ public class ModuleFlowController : MonoBehaviour
 
     [Header("Points UI")]
     [SerializeField]
+    private TMP_Text moduleTitleEnd;
+    [SerializeField]
     private TMP_Text pointsText;
     [SerializeField]
-    private TMP_Text pointsDetailsText;
+    private TMP_Text correctAnswersText;
     [SerializeField]
     private Button continueButton;
 
@@ -249,9 +251,11 @@ public class ModuleFlowController : MonoBehaviour
 
         MicroModule currentModule = topic.modules[currentModuleIndex];
         int currentModulePoints = TrainingSessionManager.Instance.GetCurrentModulePoints();
+        int currentModuleCorrectAnswers = TrainingSessionManager.Instance.GetCurrentModuleCorrectAnswers();
 
-        pointsText.text = $"Punkte:\n{currentModulePoints}";
-        pointsDetailsText.text = $"{currentModule.moduleTitle}\nFragerunde geschafft!";
+        moduleTitleEnd.text = currentModule.moduleTitle;
+        pointsText.text = currentModulePoints.ToString();
+        correctAnswersText.text = $"{currentModuleCorrectAnswers} / {currentModule.questions.Count}";
 
         questionScreen.SetActive(false);
         pointScreen.SetActive(true);
