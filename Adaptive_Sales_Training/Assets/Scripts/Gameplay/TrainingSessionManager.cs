@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 
 public class TrainingSessionManager : MonoBehaviour
@@ -17,11 +18,14 @@ public class TrainingSessionManager : MonoBehaviour
 
     public string SessionStartCEST {get; private set;} // CEST (Central European Summer Time, UTC+2)
     
+    private List<SalesTopic> allTopics;
     private readonly HashSet<string> completedTopicsIds = new();
     private readonly HashSet<string> requiredTopicsIds = new();
     
     private ModuleResult currentModuleResult;
     private readonly Dictionary<string, int> totalPointsPerTopic = new();
+    private int totalCorrectAnswers;
+    private float avgResponseTime;
 
     void Awake()
     {
@@ -49,12 +53,19 @@ public class TrainingSessionManager : MonoBehaviour
         ModuleResults.Clear();
         currentModuleResult = null;
 
+        totalPointsPerTopic.Clear();
+
+        allTopics = requiredTopics;
+
+        totalCorrectAnswers = 0;
+        avgResponseTime = 0f;
+
         foreach (SalesTopic topic in requiredTopics)
         {
             if (topic != null)
             {
                 requiredTopicsIds.Add(topic.topicId);
-                totalPointsPerTopic.Add(topic.topicId, 0);
+                // totalPointsPerTopic.Add(topic.topicId, 0);
             }
         }
     }
@@ -68,6 +79,12 @@ public class TrainingSessionManager : MonoBehaviour
         }
 
         Debug.Log($"Session {SessionId} completed. \nTotal points: {GetTotalPoints()}.");
+
+        foreach (ModuleResult module in ModuleResults)
+        {
+            totalCorrectAnswers += module.questionResults.FindAll(question => question.wasCorrect == true).Count;    
+            avgResponseTime += module.questionResults.Average(q => q.responseTime);
+        }
         
         // Aqui export / upload final session data a database
         
@@ -122,7 +139,35 @@ public class TrainingSessionManager : MonoBehaviour
             Debug.LogError("No topic selected.");
             return;
         }
-        totalPointsPerTopic[SelectedTopic.topicId] = totalPoints;
+        // totalPointsPerTopic[SelectedTopic.topicId] = totalPoints;
+        totalPointsPerTopic.Add(SelectedTopic.topicId, totalPoints);
+    }
+
+    public string FinalPointsText()
+    {
+        StringBuilder statsText = new();
+
+        foreach (SalesTopic topic in allTopics)
+        {
+            statsText.AppendLine($"\"{topic.name}\" Punkte: {totalPointsPerTopic.GetValueOrDefault(topic.topicId, 0)}");
+        }
+        statsText.AppendLine($"Gesamtpunktzahl: {GetTotalPoints()}");
+        return statsText.ToString();
+    }
+
+    public string TotalCorrectAnswersText()
+    {
+        int totalQuestions = 0;
+        foreach (ModuleResult module in ModuleResults)
+        {
+            totalQuestions += module.questionResults.Count;
+        }
+        return $"{totalCorrectAnswers} / {totalQuestions}";
+    }
+
+    public string AverageResponseTimeText()
+    {
+        return $"{avgResponseTime}s";
     }
 
     public void BeginModule(MicroModule module)

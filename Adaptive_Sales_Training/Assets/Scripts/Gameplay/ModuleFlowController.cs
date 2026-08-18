@@ -297,7 +297,7 @@ public class ModuleFlowController : MonoBehaviour
         if (session.AllTopicsCompleted())
         {
             session.EndSession();
-            // SceneManager.LoadScene(TrainingResultsScene);
+            SceneManager.LoadScene("SessionResultsScene");
         } else
         {
             SceneManager.LoadScene("TopicMenuScene");
