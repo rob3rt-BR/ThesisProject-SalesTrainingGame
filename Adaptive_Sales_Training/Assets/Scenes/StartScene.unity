@@ -2780,6 +2780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ParticipantSetupController
   allTopics:
   - {fileID: 11400000, guid: 8229265e4f48e6a4ab985830576a5b38, type: 2}
+  - {fileID: 11400000, guid: db257647eae661d46b75b6f6fef71f3e, type: 2}
 --- !u!1 &1767580326
 GameObject:
   m_ObjectHideFlags: 0

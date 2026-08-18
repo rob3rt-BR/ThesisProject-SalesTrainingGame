@@ -10,65 +10,65 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14a60cf4d7d773c46800f4a709ac8f92, type: 3}
-  m_Name: TestModule3
+  m_Name: TestModule1-2
   m_EditorClassIdentifier: Assembly-CSharp::MicroModule
   moduleId: TM_001
-  moduleTitle: Testament
-  moduleText: 'Testament debuted in 1987 with their album The Legacy. Their heaviest
-    album is The New Order from the year 1988. Their most popular modern album is
-    The Brotherhood of the Snake. Original members: Chuck Billy (Vocals), Alex Skolnic
-    (Lead Guitar), Eric Peterson (Rythm Guitar).'
+  moduleTitle: Megadeth
+  moduleText: 'Megadeth is one of the big four of thrash metal. Their heaviest album
+    is Rust in Peace from the year 1990. Their most popular album is the Countdown
+    to Extinction. Members: Dave Mustain (Rythm Guitar and Vocals), Marty Friedman
+    (Lead Guitar), Dirk Verbreuen Ulrich (Drums), David Elefson (Bass).'
   questions:
   - questionId: Q_001
-    questionText: What is Testament's heaviest album?
+    questionText: What is Megadeth's heaviest album?
     answerOptions:
-    - The Legacy
-    - The New Order
-    - Souls of Black
-    - Brotherhood
-    correctAnswerIndex: 1
+    - Peace Sells
+    - Countdown to Extinction
+    - Kill Em All
+    - Rust in Peace
+    correctAnswerIndex: 3
     timeLimitSeconds: 30
     basePoints: 100
     speedBonusPoints: 50
   - questionId: Q_002
-    questionText: Is Testament one of the big four of thrash metal?
+    questionText: Is Megadeth one of the big four of thrash metal?
     answerOptions:
     - True
     - False
-    correctAnswerIndex: 1
+    correctAnswerIndex: 0
     timeLimitSeconds: 30
     basePoints: 100
     speedBonusPoints: 50
   - questionId: Q_003
-    questionText: In what year did Testament debut?
+    questionText: In what year did Rust in Peace came out?
     answerOptions:
     - 1985
     - 1990
     - 1987
     - 1999
-    correctAnswerIndex: 2
-    timeLimitSeconds: 30
-    basePoints: 100
-    speedBonusPoints: 50
-  - questionId: Q_004
-    questionText: Who is Testament's orginal rythm guitar player?
-    answerOptions:
-    - Alex
-    - Eric
-    - Dave
-    - Kirk
     correctAnswerIndex: 1
     timeLimitSeconds: 30
     basePoints: 100
     speedBonusPoints: 50
-  - questionId: Q_005
-    questionText: What is Testament's most modern popular album?
+  - questionId: Q_004
+    questionText: Who is Megadeth's bass player?
     answerOptions:
-    - Brotherhood of the Snake
-    - The New Order
-    - The Legacy
-    - Titans of Creation
-    correctAnswerIndex: 0
+    - James
+    - Dave
+    - David
+    - Dirk
+    correctAnswerIndex: 2
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: Q_005
+    questionText: What is Megadeth's most popular album?
+    answerOptions:
+    - Rust in Peace
+    - Dystopia
+    - Countdown to Extinction
+    - And Justice for All
+    correctAnswerIndex: 2
     timeLimitSeconds: 30
     basePoints: 100
     speedBonusPoints: 50

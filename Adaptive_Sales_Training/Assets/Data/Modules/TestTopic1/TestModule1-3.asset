@@ -10,65 +10,65 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14a60cf4d7d773c46800f4a709ac8f92, type: 3}
-  m_Name: TestModule1
+  m_Name: TestModule1-3
   m_EditorClassIdentifier: Assembly-CSharp::MicroModule
   moduleId: TM_001
-  moduleTitle: Metallica
-  moduleText: 'Metallica is one of the big four of thrash metal. Their heaviest album
-    is Master of Puppets from the year 1986. Their most popular album is the Black
-    Album. Members: James Hetfield (Rythm Guitar and Vocals), Kirk Hammet (Lead Guitar),
-    Lars Ulrich (Drums), Robert Trujillo (Bass).'
+  moduleTitle: Testament
+  moduleText: 'Testament debuted in 1987 with their album The Legacy. Their heaviest
+    album is The New Order from the year 1988. Their most popular modern album is
+    The Brotherhood of the Snake. Original members: Chuck Billy (Vocals), Alex Skolnic
+    (Lead Guitar), Eric Peterson (Rythm Guitar).'
   questions:
   - questionId: Q_001
-    questionText: What is Metallica's heaviest album?
+    questionText: What is Testament's heaviest album?
     answerOptions:
-    - And Justice for All
-    - The Black Album
-    - Master of Puppets
-    - St. Anger
-    correctAnswerIndex: 2
-    timeLimitSeconds: 30
-    basePoints: 100
-    speedBonusPoints: 50
-  - questionId: Q_002
-    questionText: Is Metallica one of the big four of thrash metal?
-    answerOptions:
-    - True
-    - False
-    correctAnswerIndex: 0
-    timeLimitSeconds: 30
-    basePoints: 100
-    speedBonusPoints: 50
-  - questionId: Q_003
-    questionText: In what year did Master of Puppets came out?
-    answerOptions:
-    - 1982
-    - 1986
-    - 1987
-    - 1999
+    - The Legacy
+    - The New Order
+    - Souls of Black
+    - Brotherhood
     correctAnswerIndex: 1
     timeLimitSeconds: 30
     basePoints: 100
     speedBonusPoints: 50
-  - questionId: Q_004
-    questionText: Who is Metallica's drumer?
+  - questionId: Q_002
+    questionText: Is Testament one of the big four of thrash metal?
     answerOptions:
-    - James
+    - True
+    - False
+    correctAnswerIndex: 1
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: Q_003
+    questionText: In what year did Testament debut?
+    answerOptions:
+    - 1985
+    - 1990
+    - 1987
+    - 1999
+    correctAnswerIndex: 2
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: Q_004
+    questionText: Who is Testament's orginal rythm guitar player?
+    answerOptions:
+    - Alex
+    - Eric
     - Dave
-    - Robert
-    - Lars
-    correctAnswerIndex: 3
+    - Kirk
+    correctAnswerIndex: 1
     timeLimitSeconds: 30
     basePoints: 100
     speedBonusPoints: 50
   - questionId: Q_005
-    questionText: What is Metallica's most popular album?
+    questionText: What is Testament's most modern popular album?
     answerOptions:
-    - Rust in Peace
-    - Master of Puppets
-    - Ride the Lightning
-    - The Black Album
-    correctAnswerIndex: 3
+    - Brotherhood of the Snake
+    - The New Order
+    - The Legacy
+    - Titans of Creation
+    correctAnswerIndex: 0
     timeLimitSeconds: 30
     basePoints: 100
     speedBonusPoints: 50

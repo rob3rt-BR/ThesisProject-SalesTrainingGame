@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14a60cf4d7d773c46800f4a709ac8f92, type: 3}
-  m_Name: TestModule2
+  m_Name: TestModule1-1
   m_EditorClassIdentifier: Assembly-CSharp::MicroModule
   moduleId: TM_001
-  moduleTitle: Megadeth
-  moduleText: 'Megadeth is one of the big four of thrash metal. Their heaviest album
-    is Rust in Peace from the year 1990. Their most popular album is the Countdown
-    to Extinction. Members: Dave Mustain (Rythm Guitar and Vocals), Marty Friedman
-    (Lead Guitar), Dirk Verbreuen Ulrich (Drums), David Elefson (Bass).'
+  moduleTitle: Metallica
+  moduleText: 'Metallica is one of the big four of thrash metal. Their heaviest album
+    is Master of Puppets from the year 1986. Their most popular album is the Black
+    Album. Members: James Hetfield (Rythm Guitar and Vocals), Kirk Hammet (Lead Guitar),
+    Lars Ulrich (Drums), Robert Trujillo (Bass).'
   questions:
   - questionId: Q_001
-    questionText: What is Megadeth's heaviest album?
+    questionText: What is Metallica's heaviest album?
     answerOptions:
-    - Peace Sells
-    - Countdown to Extinction
-    - Kill Em All
-    - Rust in Peace
-    correctAnswerIndex: 3
+    - And Justice for All
+    - The Black Album
+    - Master of Puppets
+    - St. Anger
+    correctAnswerIndex: 2
     timeLimitSeconds: 30
     basePoints: 100
     speedBonusPoints: 50
   - questionId: Q_002
-    questionText: Is Megadeth one of the big four of thrash metal?
+    questionText: Is Metallica one of the big four of thrash metal?
     answerOptions:
     - True
     - False
@@ -40,10 +40,10 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: Q_003
-    questionText: In what year did Rust in Peace came out?
+    questionText: In what year did Master of Puppets came out?
     answerOptions:
-    - 1985
-    - 1990
+    - 1982
+    - 1986
     - 1987
     - 1999
     correctAnswerIndex: 1
@@ -51,24 +51,24 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: Q_004
-    questionText: Who is Megadeth's bass player?
+    questionText: Who is Metallica's drumer?
     answerOptions:
     - James
     - Dave
-    - David
-    - Dirk
-    correctAnswerIndex: 2
+    - Robert
+    - Lars
+    correctAnswerIndex: 3
     timeLimitSeconds: 30
     basePoints: 100
     speedBonusPoints: 50
   - questionId: Q_005
-    questionText: What is Megadeth's most popular album?
+    questionText: What is Metallica's most popular album?
     answerOptions:
     - Rust in Peace
-    - Dystopia
-    - Countdown to Extinction
-    - And Justice for All
-    correctAnswerIndex: 2
+    - Master of Puppets
+    - Ride the Lightning
+    - The Black Album
+    correctAnswerIndex: 3
     timeLimitSeconds: 30
     basePoints: 100
     speedBonusPoints: 50

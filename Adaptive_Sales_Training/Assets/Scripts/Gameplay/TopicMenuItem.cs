@@ -21,7 +21,7 @@ public class TopicMenuItem : MonoBehaviour
 
         if (completedLabel != null)
         {
-            completedLabel.SetActive(topicCompleted);
+            completedLabel.SetActive(!topicCompleted);
         }
     }
 

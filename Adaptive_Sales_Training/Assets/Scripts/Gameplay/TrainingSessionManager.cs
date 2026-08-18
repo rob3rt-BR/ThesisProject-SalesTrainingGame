@@ -13,7 +13,7 @@ public class TrainingSessionManager : MonoBehaviour
 
     public SalesTopic SelectedTopic {get; private set;}
 
-    public List<ModuleResult> ModuleResults {get; private set;}
+    public List<ModuleResult> ModuleResults {get; private set;} = new();
 
     public string SessionStartCEST {get; private set;} // CEST (Central European Summer Time, UTC+2)
     
@@ -25,13 +25,15 @@ public class TrainingSessionManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null || Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            Debug.Log("TrainingSessionManager destroyed.");
             return;
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        Debug.Log("TrainingSessionManager created.");
     }
 
     public void StartSession(string participantId, TrainingVersion version, List<SalesTopic> requiredTopics)
