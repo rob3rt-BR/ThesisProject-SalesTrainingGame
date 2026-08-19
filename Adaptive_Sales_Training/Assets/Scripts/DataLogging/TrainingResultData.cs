@@ -22,6 +22,7 @@ public class QuestionResult
 [Serializable]
 public class ModuleResult
 {
+    public string topicId;
     public string moduleId;
     public int points;
     public bool completed;

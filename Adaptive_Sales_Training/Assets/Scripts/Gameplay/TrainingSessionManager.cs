@@ -23,9 +23,13 @@ public class TrainingSessionManager : MonoBehaviour
     private readonly HashSet<string> requiredTopicsIds = new();
     
     private ModuleResult currentModuleResult;
+
     private readonly Dictionary<string, int> totalPointsPerTopic = new();
     private int totalCorrectAnswers;
-    private float avgResponseTime;
+    private float finalAvgResponseTime;
+
+    private int topicCorrectAnswers;
+    private float topicAvgResponseTime;
 
     void Awake()
     {
@@ -58,7 +62,10 @@ public class TrainingSessionManager : MonoBehaviour
         allTopics = requiredTopics;
 
         totalCorrectAnswers = 0;
-        avgResponseTime = 0f;
+        finalAvgResponseTime = 0f;
+
+        topicCorrectAnswers = 0;
+        topicAvgResponseTime = 0f;
 
         foreach (SalesTopic topic in requiredTopics)
         {
@@ -83,7 +90,7 @@ public class TrainingSessionManager : MonoBehaviour
         foreach (ModuleResult module in ModuleResults)
         {
             totalCorrectAnswers += module.questionResults.FindAll(question => question.wasCorrect == true).Count;    
-            avgResponseTime += module.questionResults.Average(q => q.responseTime);
+            finalAvgResponseTime += module.questionResults.Average(q => q.responseTime);
         }
         
         // Aqui export / upload final session data a database
@@ -165,9 +172,9 @@ public class TrainingSessionManager : MonoBehaviour
         return $"{totalCorrectAnswers} / {totalQuestions}";
     }
 
-    public string AverageResponseTimeText()
+    public string FinalAverageResponseTimeText()
     {
-        return $"{avgResponseTime}s";
+        return $"{finalAvgResponseTime}s";
     }
 
     public void BeginModule(MicroModule module)
@@ -180,6 +187,7 @@ public class TrainingSessionManager : MonoBehaviour
 
         currentModuleResult = new()
         {
+            topicId = SelectedTopic.topicId,
             moduleId = module.moduleId,
             points = 0,
             completed = false
@@ -218,6 +226,34 @@ public class TrainingSessionManager : MonoBehaviour
         {
             return 0;
         }
+    }
+
+    public int GetSelectedTopicCorrectAnswers()
+    {
+        if (SelectedTopic != null)
+        {
+            List<ModuleResult> topicModuleResults = ModuleResults.FindAll(m => m.topicId.Equals(SelectedTopic.topicId));
+
+            foreach (ModuleResult moduleResult in topicModuleResults)
+            {
+                topicCorrectAnswers += moduleResult.questionResults.FindAll(q => q.wasCorrect == true).Count;
+            }
+        }
+        return topicCorrectAnswers;
+    }
+
+    public float GetSelectedTopicAvgResponseTime()
+    {
+        if (SelectedTopic != null)
+        {
+            List<ModuleResult> topicModuleResults = ModuleResults.FindAll(m => m.topicId.Equals(SelectedTopic.topicId));
+
+            foreach (ModuleResult moduleResult in topicModuleResults)
+            {
+                topicAvgResponseTime += moduleResult.questionResults.Average(q => q.responseTime);
+            }
+        }
+        return topicAvgResponseTime;
     }
 
     public int GetTotalPoints()

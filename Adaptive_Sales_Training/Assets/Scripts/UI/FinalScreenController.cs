@@ -22,7 +22,7 @@ public class FinalScreenController : MonoBehaviour
     {
         finalPointsText.text = TrainingSessionManager.Instance.FinalPointsText();
         correctAnswersText.text = TrainingSessionManager.Instance.TotalCorrectAnswersText();
-        avgResponseTimeText.text = TrainingSessionManager.Instance.AverageResponseTimeText();
+        avgResponseTimeText.text = TrainingSessionManager.Instance.FinalAverageResponseTimeText();
     }
 
     public void ContinueToThanksScreen()

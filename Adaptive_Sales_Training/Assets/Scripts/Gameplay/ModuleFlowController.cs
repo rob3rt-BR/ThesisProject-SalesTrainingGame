@@ -51,7 +51,9 @@ public class ModuleFlowController : MonoBehaviour
     [SerializeField]
     private TMP_Text finalPointsText;
     [SerializeField]
-    private TMP_Text topicCompletedText;
+    private TMP_Text topicCorrectAnsText;
+    [SerializeField]
+    private TMP_Text topicAvgResponseTimeText;
     [SerializeField]
     private Button finishTopicButton;
     
@@ -264,9 +266,17 @@ public class ModuleFlowController : MonoBehaviour
     private void ShowFinalPointScreen()
     {
         TrainingSessionManager.Instance.SetCurrentTopicTotalPoints(totalTopicPoints);
+        int topicCorrectAnswers = TrainingSessionManager.Instance.GetSelectedTopicCorrectAnswers();
+        int topicTotalQuestions = 0;
+        foreach (MicroModule module in topic.modules)
+        {
+            topicTotalQuestions += module.questions.Count;
+        }
+        float topicAvgResponseTime = TrainingSessionManager.Instance.GetSelectedTopicAvgResponseTime();
 
-        finalPointsText.text = $"{totalTopicPoints}";
-        topicCompletedText.text = $"Thema \"{topic.topicTitle}\" geschafft!";
+        finalPointsText.text = totalTopicPoints.ToString();
+        topicCorrectAnsText.text = $"{topicCorrectAnswers} / {topicTotalQuestions}";
+        topicAvgResponseTimeText.text = topicAvgResponseTime.ToString();
 
         questionScreen.SetActive(false);
         finalPointScreen.SetActive(true);
