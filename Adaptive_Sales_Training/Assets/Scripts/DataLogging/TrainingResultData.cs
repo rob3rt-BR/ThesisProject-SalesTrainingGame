@@ -24,9 +24,23 @@ public class ModuleResult
 {
     public string topicId;
     public string moduleId;
+    public string moduleTitle;
     public int points;
+    public int correctAnswers;
     public bool completed;
     public List<QuestionResult> questionResults = new();
+}
+
+[Serializable]
+public class TopicResult
+{
+    public string topicId;
+    public string topicTitle;
+    public int points;
+    public int correctAnswers;
+    public float avgResponseTime;
+    public bool completed;
+    public List<ModuleResult> moduleResults = new();
 }
 
 public enum TrainingVersion

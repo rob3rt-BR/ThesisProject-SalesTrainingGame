@@ -49,6 +49,8 @@ public class ModuleFlowController : MonoBehaviour
 
     [Header("Final Points UI")]
     [SerializeField]
+    private TMP_Text topicCompletedText;
+    [SerializeField]
     private TMP_Text finalPointsText;
     [SerializeField]
     private TMP_Text topicCorrectAnsText;
@@ -167,6 +169,9 @@ public class ModuleFlowController : MonoBehaviour
 
         if (currentQuestionIndex >= currentModule.questions.Count)
         {
+            TrainingSessionManager.Instance.CompleteCurrentModule();
+            TrainingSessionManager.Instance.RecordCurrentModuleResult();
+
             if (isScenarioModule)
             {
                 ShowFinalPointScreen();
@@ -247,8 +252,6 @@ public class ModuleFlowController : MonoBehaviour
 
     private void ShowPointScreen()
     {
-        TrainingSessionManager.Instance.CompleteCurrentModule();
-
         isQuestionActive = false; // TODO: Testear con o sin esta asignacion para ver si es necesaria
 
         MicroModule currentModule = topic.modules[currentModuleIndex];
@@ -266,17 +269,18 @@ public class ModuleFlowController : MonoBehaviour
     private void ShowFinalPointScreen()
     {
         TrainingSessionManager.Instance.SetCurrentTopicTotalPoints(totalTopicPoints);
-        int topicCorrectAnswers = TrainingSessionManager.Instance.GetSelectedTopicCorrectAnswers();
+        int topicCorrectAnswers = TrainingSessionManager.Instance.GetCurrentTopicCorrectAnswers();
         int topicTotalQuestions = 0;
         foreach (MicroModule module in topic.modules)
         {
             topicTotalQuestions += module.questions.Count;
         }
-        float topicAvgResponseTime = TrainingSessionManager.Instance.GetSelectedTopicAvgResponseTime();
+        float topicAvgResponseTime = TrainingSessionManager.Instance.GetCurrentTopicAvgResponseTime();
 
+        topicCompletedText.text = topic.topicTitle + "geschafft!";
         finalPointsText.text = totalTopicPoints.ToString();
         topicCorrectAnsText.text = $"{topicCorrectAnswers} / {topicTotalQuestions}";
-        topicAvgResponseTimeText.text = topicAvgResponseTime.ToString();
+        topicAvgResponseTimeText.text = topicAvgResponseTime.ToString() + "s";
 
         questionScreen.SetActive(false);
         finalPointScreen.SetActive(true);
@@ -306,7 +310,7 @@ public class ModuleFlowController : MonoBehaviour
         CleanUp();
 
         TrainingSessionManager session = TrainingSessionManager.Instance;
-        session.CompleteSelectedTopic();
+        session.CompleteCurrentTopic();
 
         if (session.AllTopicsCompleted())
         {

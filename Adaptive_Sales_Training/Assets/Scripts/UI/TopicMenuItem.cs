@@ -35,10 +35,11 @@ public class TopicMenuItem : MonoBehaviour
 
         if (session.IsTopicCompleted(topic))
         {
-            Debug.Log("Topic already compledted.");
+            Debug.Log("Topic already completed.");
             return;
         }
-
+        
+        session.BeginTopic(topic);
         session.SelectTopic(topic);
 
         SceneManager.LoadScene("TrainingScene");
