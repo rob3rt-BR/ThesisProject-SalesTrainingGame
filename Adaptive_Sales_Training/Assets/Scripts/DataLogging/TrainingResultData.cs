@@ -1,22 +1,32 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 
-//public class TrainingResultData
-//{
-    
-//}
+[Serializable]
+public class TrainingResultData
+{
+    public string participantId;
+    public string sessionId;
+    public string version;
+    public string sessionStart;
+    public string sessionEnd;
+    public int totalPoints;
+    public int totalCorrectAnswers;
+    public float finalAvgResponseTime;
+    public List<TopicResult> topicResults = new();
+}
 
 [Serializable]
-public class QuestionResult
+public class TopicResult
 {
-    public string moduleId;
-    public string questionId;
-    public int selectedAnswerIndex;
-    public bool wasCorrect;
-    public bool timedOut;
-    public float responseTime;
-    public int pointsAwarded;
+    public string topicId;
+    public string topicTitle;
+    public int points;
+    public int correctAnswers;
+    public float avgResponseTime;
+    public bool completed;
+    public List<ModuleResult> moduleResults = new();
 }
 
 [Serializable]
@@ -32,15 +42,15 @@ public class ModuleResult
 }
 
 [Serializable]
-public class TopicResult
+public class QuestionResult
 {
-    public string topicId;
-    public string topicTitle;
-    public int points;
-    public int correctAnswers;
-    public float avgResponseTime;
-    public bool completed;
-    public List<ModuleResult> moduleResults = new();
+    public string moduleId;
+    public string questionId;
+    public int selectedAnswerIndex;
+    public bool wasCorrect;
+    public bool timedOut;
+    public float responseTime;
+    public int pointsAwarded;
 }
 
 public enum TrainingVersion

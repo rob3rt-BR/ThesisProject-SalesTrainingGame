@@ -30,6 +30,8 @@ public class FinalScreenController : MonoBehaviour
 
     public void ContinueToThanksScreen()
     {
+        session.ExportSessionDataFinal();
+        
         finalStatsScreen.SetActive(false);
         thanksScreen.SetActive(true);
     }

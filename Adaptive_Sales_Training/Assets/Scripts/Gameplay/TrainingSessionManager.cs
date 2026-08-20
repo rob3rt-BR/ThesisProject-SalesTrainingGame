@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using UnityEngine;
@@ -12,7 +13,8 @@ public class TrainingSessionManager : MonoBehaviour
     public string SessionId {get; private set;}
     public TrainingVersion Version {get; private set;}
     
-    public string SessionStartCEST {get; private set;} // CEST (Central European Summer Time, UTC+2)
+    public string SessionStart {get; private set;} // CEST (Central European Summer Time, UTC+2)
+    public string SessionEnd {get; private set;}
 
     public List<TopicResult> TopicResults {get; private set;} = new();
     public SalesTopic SelectedTopic {get; private set;}
@@ -21,9 +23,11 @@ public class TrainingSessionManager : MonoBehaviour
     private TopicResult currentTopicResult;
     private ModuleResult currentModuleResult;
 
-    private int totalPoints;
-    private int totalCorrectAnswers;
-    private float finalAvgResponseTime;
+    private int TotalPoints;
+    private int TotalCorrectAnswers;
+    private float FinalAvgResponseTime;
+
+    private string SessionDataFinalPath;
 
     void Awake()
     {
@@ -47,7 +51,7 @@ public class TrainingSessionManager : MonoBehaviour
         Version = version;
         SessionId = Guid.NewGuid().ToString(); // TODO: Check alternatives para SessionId
 
-        SessionStartCEST = DateTime.UtcNow.ToString("O"); // TODO: Check funcionalidad
+        SessionStart = DateTime.Now.ToString(@"d/M/yyyy hh:mm:ss tt");
 
         // Reset important manager information trackers
         TopicResults.Clear();
@@ -55,11 +59,13 @@ public class TrainingSessionManager : MonoBehaviour
         currentTopicResult = null;
         currentModuleResult = null;
 
-        totalPoints = 0;
-        totalCorrectAnswers = 0;
-        finalAvgResponseTime = 0f;
+        TotalPoints = 0;
+        TotalCorrectAnswers = 0;
+        FinalAvgResponseTime = 0f;
 
-        Debug.Log($"Session {SessionId} started.");
+        SessionDataFinalPath = string.Empty;
+
+        Debug.Log($"Session {SessionId} started at {SessionStart}.");
     }
 
     public void EndSession()
@@ -69,18 +75,72 @@ public class TrainingSessionManager : MonoBehaviour
             Debug.LogWarning("Session cannot end - not all topics completed.");
             return;
         }
-        totalPoints = GetTotalPoints();
-        totalCorrectAnswers = GetTotalCorrectAnswers();
-        finalAvgResponseTime = GetFinalAvgResponseTime();
 
-        Debug.Log($"Session {SessionId} completed. \nTotal points: {totalPoints}. \n");
+        SessionEnd = DateTime.Now.ToString(@"d/M/yyyy hh:mm:ss tt");
 
+        TotalPoints = GetTotalPoints();
+        TotalCorrectAnswers = GetTotalCorrectAnswers();
+        FinalAvgResponseTime = GetFinalAvgResponseTime();
 
-        
         // Aqui export / upload final session data a database
-        
-        // Tal vez agregar lo de arriba aca?
+        SessionDataFinalPath = SaveSessionDataFinal();
+
+        Debug.Log($"Session {SessionId} completed at {SessionEnd}");
     }
+
+    private string SaveSessionDataFinal()
+    {
+        TrainingResultData saveData = CreateSaveData();
+        
+        saveData.sessionEnd = SessionEnd;
+        saveData.totalPoints = TotalPoints;
+        saveData.totalCorrectAnswers = TotalCorrectAnswers;
+        saveData.finalAvgResponseTime = FinalAvgResponseTime;
+
+        string folderPath = Path.Combine(Application.persistentDataPath, "Sessions");
+        Directory.CreateDirectory(folderPath);
+
+        string filePath = Path.Combine(folderPath, $"session_{SessionId}.json");
+        string json = JsonUtility.ToJson(saveData, true);
+
+        File.WriteAllText(filePath, json);
+
+        Debug.Log($"Final session data saved to {filePath}.");
+
+        return filePath;
+    }
+
+    private TrainingResultData CreateSaveData()
+    {
+        TrainingResultData saveData = new ()
+        {
+            participantId = ParticipantId,
+            sessionId = SessionId,
+            version = Version.ToString(),
+            sessionStart = SessionStart,
+            sessionEnd = string.Empty,
+            totalPoints = 0,
+            totalCorrectAnswers = 0,
+            finalAvgResponseTime = 0f,
+            topicResults = new List<TopicResult>(TopicResults)
+        };
+        return saveData;
+    }
+
+    public void ExportSessionDataFinal()
+    {
+        string sourcePath = SessionDataFinalPath;
+
+        string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        string exportFolder = Path.Combine(documentsPath, "SalesTrainingData", "Sessions");
+        Directory.CreateDirectory(exportFolder);
+
+        string destinationPath = Path.Combine(exportFolder, $"session_{SessionId}.json");
+        File.Copy(sourcePath, destinationPath, overwrite: true);
+        
+        Debug.Log($"Final session data exported to {destinationPath}");
+    }
+
     #endregion
 
     #region Topic Functions
@@ -290,7 +350,7 @@ public class TrainingSessionManager : MonoBehaviour
     {
         StringBuilder statsText = new();
         TopicResults.ForEach(t => statsText.AppendLine($"\"{t.topicTitle}\" Punkte: {t.points}"));
-        statsText.AppendLine($"Gesamtpunktzahl: {totalPoints}");
+        statsText.AppendLine($"Gesamtpunktzahl: {TotalPoints}");
         return statsText.ToString();
     }
 
@@ -298,12 +358,12 @@ public class TrainingSessionManager : MonoBehaviour
     {
         static int moduleTotalQuestion(ModuleResult m) => m.questionResults.Count;
         int totalQuestions = TopicResults.Sum(t => t.moduleResults.Sum(moduleTotalQuestion));
-        return $"{totalCorrectAnswers} / {totalQuestions}";
+        return $"{TotalCorrectAnswers} / {totalQuestions}";
     }
 
     public string FinalAvgResponseTimeText()
     {
-        return $"{finalAvgResponseTime:0.0}s";
+        return $"{FinalAvgResponseTime:0.0}s";
     }
     #endregion
 }

@@ -35,10 +35,9 @@ public class StartScreenController : MonoBehaviour
 
         if (session == null)
         {
-            Debug.LogWarning("Session not started.");
+            Debug.LogWarning("SessionManager not started.");
             return;
         }
-        session.StartSession("P_115", TrainingVersion.Traditional, allTopics);
 
         // On click => Go forward / back in texts
         continueButton.onClick.AddListener(ContinuePressed);
@@ -49,6 +48,8 @@ public class StartScreenController : MonoBehaviour
 
     public void StartGameNormal()
     {
+        session.StartSession("P_115", TrainingVersion.Traditional, allTopics); // Setting temporal
+
         startScreen.SetActive(false);
         explainScreen.SetActive(true);
     }
