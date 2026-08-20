@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,6 +8,8 @@ public class TopicMenuItem : MonoBehaviour
     [SerializeField]
     private SalesTopic topic;
     [SerializeField]
+    private TMP_Text topicText;
+    [SerializeField]
     private Button startButton;
     [SerializeField]
     private GameObject completedLabel;
@@ -15,6 +18,8 @@ public class TopicMenuItem : MonoBehaviour
 
     void Start()
     {
+        topicText.text = topic.topicTitle;
+        
         bool topicCompleted = session.IsTopicCompleted(topic);
 
         startButton.interactable = !topicCompleted;

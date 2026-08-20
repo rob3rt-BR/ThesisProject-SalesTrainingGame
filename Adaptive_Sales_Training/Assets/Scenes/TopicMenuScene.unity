@@ -894,7 +894,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1515425254913796732, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: m_text
-      value: Upselling & Cross-selling
+      value: <Topic title>
       objectReference: {fileID: 0}
     - target: {fileID: 5855081762049568722, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: m_Name
@@ -1002,6 +1002,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85116410}
     m_Modifications:
+    - target: {fileID: 1515425254913796732, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_text
+      value: <Topic title>
+      objectReference: {fileID: 0}
     - target: {fileID: 5855081762049568722, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: m_Name
       value: Topic1

@@ -58,6 +58,8 @@ public class TrainingSessionManager : MonoBehaviour
         totalPoints = 0;
         totalCorrectAnswers = 0;
         finalAvgResponseTime = 0f;
+
+        Debug.Log($"Session {SessionId} started.");
     }
 
     public void EndSession()
