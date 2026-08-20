@@ -2098,6 +2098,7 @@ MonoBehaviour:
   pointsText: {fileID: 515054756}
   correctAnswersText: {fileID: 238365354}
   continueButton: {fileID: 232017138}
+  topicCompletedText: {fileID: 1979124615}
   finalPointsText: {fileID: 1183723682}
   topicCorrectAnsText: {fileID: 1430477141}
   topicAvgResponseTimeText: {fileID: 1164491882}

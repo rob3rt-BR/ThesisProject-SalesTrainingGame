@@ -11,29 +11,19 @@ public class TrainingSessionManager : MonoBehaviour
     public string ParticipantId {get; private set;}
     public string SessionId {get; private set;}
     public TrainingVersion Version {get; private set;}
-
-    public SalesTopic SelectedTopic {get; private set;}
-
-    //public List<ModuleResult> ModuleResults {get; private set;} = new();
-    public List<TopicResult> TopicResults {get; private set;} = new();
-
+    
     public string SessionStartCEST {get; private set;} // CEST (Central European Summer Time, UTC+2)
-    
-    // private List<SalesTopic> allTopics;
 
-    // TODO: Check utilidad de hashSets despues de refactor
-    // private readonly HashSet<string> completedTopicsIds = new();
-    // private readonly HashSet<string> requiredTopicsIds = new();
+    public List<TopicResult> TopicResults {get; private set;} = new();
+    public SalesTopic SelectedTopic {get; private set;}
     
+    private List<SalesTopic> allTopics;
     private TopicResult currentTopicResult;
     private ModuleResult currentModuleResult;
 
-    // private readonly Dictionary<string, int> totalPointsPerTopic = new();
+    private int totalPoints;
     private int totalCorrectAnswers;
     private float finalAvgResponseTime;
-
-    // private int topicCorrectAnswers;
-    // private float topicAvgResponseTime;
 
     void Awake()
     {
@@ -48,38 +38,26 @@ public class TrainingSessionManager : MonoBehaviour
         Debug.Log("TrainingSessionManager created.");
     }
 
+    #region Session Functions
     public void StartSession(string participantId, TrainingVersion version, List<SalesTopic> requiredTopics)
     {
+        allTopics = requiredTopics;
+
         ParticipantId = participantId;
         Version = version;
         SessionId = Guid.NewGuid().ToString(); // TODO: Check alternatives para SessionId
 
         SessionStartCEST = DateTime.UtcNow.ToString("O"); // TODO: Check funcionalidad
 
-        // TODO: Incluir vaciar atributos en EndSession() => Testear primero y recoleactar datos
-        SelectedTopic = null;
-        // ModuleResults.Clear();
+        // Reset important manager information trackers
         TopicResults.Clear();
+        SelectedTopic = null;
+        currentTopicResult = null;
         currentModuleResult = null;
 
-        // totalPointsPerTopic.Clear();
-
-        // allTopics = requiredTopics;
-
+        totalPoints = 0;
         totalCorrectAnswers = 0;
         finalAvgResponseTime = 0f;
-
-        // topicCorrectAnswers = 0;
-        // topicAvgResponseTime = 0f;
-
-        /*foreach (SalesTopic topic in requiredTopics)
-        {
-            if (topic != null)
-            {
-                requiredTopicsIds.Add(topic.topicId);
-                // totalPointsPerTopic.Add(topic.topicId, 0);
-            }
-        }*/
     }
 
     public void EndSession()
@@ -89,23 +67,19 @@ public class TrainingSessionManager : MonoBehaviour
             Debug.LogWarning("Session cannot end - not all topics completed.");
             return;
         }
+        totalPoints = GetTotalPoints();
+        totalCorrectAnswers = GetTotalCorrectAnswers();
+        finalAvgResponseTime = GetFinalAvgResponseTime();
 
-        Debug.Log($"Session {SessionId} completed. \nTotal points: {GetTotalPoints()}.");
+        Debug.Log($"Session {SessionId} completed. \nTotal points: {totalPoints}. \n");
 
-        foreach (TopicResult topic in TopicResults)
-        {
-            foreach (ModuleResult module in topic.moduleResults)
-            {
-                totalCorrectAnswers += module.correctAnswers;    
-            }
-            finalAvgResponseTime += topic.avgResponseTime;
-        }
 
         
         // Aqui export / upload final session data a database
         
         // Tal vez agregar lo de arriba aca?
     }
+    #endregion
 
     #region Topic Functions
     public void BeginTopic(SalesTopic topic)
@@ -124,7 +98,7 @@ public class TrainingSessionManager : MonoBehaviour
             avgResponseTime = 0f,
             completed = false,
         };
-        TopicResults.Add(currentTopicResult);
+        TopicResults.Add(currentTopicResult); // Add current newly created topic result to list of topic results
     }
 
     public void SelectTopic(SalesTopic topic)
@@ -139,23 +113,17 @@ public class TrainingSessionManager : MonoBehaviour
             Debug.LogWarning("Topic is already completed.");
             return;
         }
-        SelectedTopic = topic;
+        SelectedTopic = topic; // Set selected topic (on TopicMenuItem[topic]) => Pass later to ModuleFlowContoller
     }
 
     public bool AllTopicsCompleted()
     {
-        return TopicResults.All(t => t.completed == true);
+        return TopicResults.Count > 0 && TopicResults.Count == allTopics.Count && TopicResults.All(t => t.completed);
     }
-
-    /*
-    public bool AllTopicsCompleted()
-    {
-        return requiredTopicsIds.Count > 0 && requiredTopicsIds.All(topicId => completedTopicsIds.Contains(topicId));
-    }*/
 
     public bool IsTopicCompleted(SalesTopic topic)
     {
-        return topic != null && currentTopicResult.topicId.Equals(topic.topicId) && currentTopicResult.completed == true;
+        return topic != null && TopicResults.Exists(t => t.topicId == topic.topicId) && TopicResults.Find(t => t.topicId == topic.topicId).completed;
     }
 
     public void CompleteCurrentTopic()
@@ -164,44 +132,43 @@ public class TrainingSessionManager : MonoBehaviour
         {
             return;
         }
-        foreach (ModuleResult moduleResult in currentTopicResult.moduleResults)
-        {
-            currentTopicResult.avgResponseTime += moduleResult.questionResults.Average(q => q.responseTime);
-        }
         currentTopicResult.completed = true;
-        // completedTopicsIds.Add(SelectedTopic.topicId);
     }
 
-    public void SetCurrentTopicTotalPoints(int totalPoints)
+    public int GetCurrentTopicPoints()
     {
-        if (SelectedTopic == null)
+        if (currentTopicResult == null)
         {
-            Debug.LogError("No topic selected.");
-            return;
+            Debug.LogError("No current topic active.");
+            return 0;
         }
-        // totalPointsPerTopic.Add(SelectedTopic.topicId, totalPoints);
+        return currentTopicResult.points;
     }
 
     public int GetCurrentTopicCorrectAnswers()
     {
-        if (currentTopicResult != null)
+        if (currentTopicResult == null)
         {
-            return currentTopicResult.correctAnswers;
-        } else
-        {
+            Debug.LogError("No current topic active.");
             return 0;
         }
+        return currentTopicResult.correctAnswers;
     }
 
     public float GetCurrentTopicAvgResponseTime()
     {
-        if (currentTopicResult != null)
+        if (currentTopicResult == null)
         {
-            return currentTopicResult.avgResponseTime;
-        } else
-        {
+            Debug.LogError("No current topic active.");
             return 0f;
         }
+
+        // Sum all average response times of each module result from current topic
+        foreach (ModuleResult moduleResult in currentTopicResult.moduleResults)
+        {
+            currentTopicResult.avgResponseTime += moduleResult.questionResults.Average(q => q.responseTime);
+        }
+        return currentTopicResult.avgResponseTime;
     }
     #endregion
 
@@ -223,7 +190,7 @@ public class TrainingSessionManager : MonoBehaviour
             correctAnswers = 0,
             completed = false
         };
-        currentTopicResult.moduleResults.Add(currentModuleResult);
+        currentTopicResult.moduleResults.Add(currentModuleResult); // Add current newly created module result to list of results from current topic
     }
 
     public void CompleteCurrentModule()
@@ -242,30 +209,28 @@ public class TrainingSessionManager : MonoBehaviour
             Debug.LogError("No active topic for current module.");
             return;
         }
-        currentTopicResult.points += currentModuleResult.points;
-        currentTopicResult.correctAnswers += currentModuleResult.correctAnswers;
+        currentTopicResult.points += currentModuleResult.points; // Add current module points (final) to current topic points
+        currentTopicResult.correctAnswers += currentModuleResult.correctAnswers; // Add current module correct answers (final) to current topic correct answers
     }
 
     public int GetCurrentModulePoints()
     {
-        if (currentModuleResult != null)
+        if (currentModuleResult == null)
         {
-            return currentModuleResult.points;
-        } else
-        {
+            Debug.LogError("No current module active.");
             return 0;
         }
+        return currentModuleResult.points;
     }
 
     public int GetCurrentModuleCorrectAnswers()
     {
-        if (currentModuleResult != null)
+        if (currentModuleResult == null)
         {
-            return currentModuleResult.correctAnswers;
-        } else
-        {
+            Debug.LogError("No current module active.");
             return 0;
         }
+        return currentModuleResult.correctAnswers;
     }
     #endregion
 
@@ -277,56 +242,66 @@ public class TrainingSessionManager : MonoBehaviour
             Debug.LogError("No active module for current question.");
             return;
         }
-        currentModuleResult.questionResults.Add(result);
-        currentModuleResult.points += result.pointsAwarded;
+        currentModuleResult.questionResults.Add(result); // Add current question result to list of results from current module
+        currentModuleResult.points += result.pointsAwarded; // Add the points of current question result to the points of current module
         if (result.wasCorrect)
         {
-            currentModuleResult.correctAnswers++;
+            currentModuleResult.correctAnswers++; // If current question result correct => increment correct answers of current module
         }
     }
     #endregion
 
     #region Final Results Functions
-    public string FinalPointsText()
+
+    public int GetTotalPoints()
+    {
+        if (TopicResults.Count == 0)
+        {
+            Debug.LogError("No topic results available.");
+            return 0;
+        } 
+        return TopicResults.Sum(t => t.points);
+    }
+
+    public int GetTotalCorrectAnswers()
+    {
+        if (TopicResults.Count == 0)
+        {
+            Debug.LogError("No topic results available.");
+            return 0;
+        }
+        static int moduleCorrectAnswers(ModuleResult m) => m.correctAnswers;
+        return TopicResults.Sum(t => t.moduleResults.Sum(moduleCorrectAnswers));
+    }
+
+    public float GetFinalAvgResponseTime()
+    {
+        if (TopicResults.Count == 0)
+        {
+            Debug.LogError("No topic results available.");
+            return 0f;
+        }
+        return TopicResults.Average(t => t.avgResponseTime);
+    }
+
+    public string TotalPointsText()
     {
         StringBuilder statsText = new();
-
-        foreach (TopicResult topic in TopicResults)
-        {
-            // TODO: Cambiar esto
-            statsText.AppendLine($"\"{topic.topicTitle}\" Punkte: {topic.points}");
-        }
-        statsText.AppendLine($"Gesamtpunktzahl: {GetTotalPoints()}");
+        TopicResults.ForEach(t => statsText.AppendLine($"\"{t.topicTitle}\" Punkte: {t.points}"));
+        statsText.AppendLine($"Gesamtpunktzahl: {totalPoints}");
         return statsText.ToString();
     }
 
     public string TotalCorrectAnswersText()
     {
-        int totalQuestions = 0;
-        foreach (TopicResult topic in TopicResults)
-        {
-            foreach (ModuleResult module in topic.moduleResults)
-            {
-                totalQuestions += module.questionResults.Count;
-            }
-        }
+        static int moduleTotalQuestion(ModuleResult m) => m.questionResults.Count;
+        int totalQuestions = TopicResults.Sum(t => t.moduleResults.Sum(moduleTotalQuestion));
         return $"{totalCorrectAnswers} / {totalQuestions}";
     }
 
-    public string FinalAverageResponseTimeText()
+    public string FinalAvgResponseTimeText()
     {
-        return $"{finalAvgResponseTime}s";
-    }
-
-    public int GetTotalPoints()
-    {
-        int total = 0;
-
-        foreach (TopicResult topic in TopicResults)
-        {
-            total += topic.points;
-        }
-        return total;
+        return $"{finalAvgResponseTime:0.0}s";
     }
     #endregion
 }

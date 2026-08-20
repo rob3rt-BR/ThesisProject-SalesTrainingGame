@@ -4,11 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class FinalScreenController : MonoBehaviour
 {
+    [Header("Screens")]
     [SerializeField]
     private GameObject finalStatsScreen;
     [SerializeField]
     private GameObject thanksScreen;
 
+    [Header("Final Results UI")]
     [SerializeField]
     private TMP_Text finalPointsText;
     [SerializeField]
@@ -16,13 +18,14 @@ public class FinalScreenController : MonoBehaviour
     [SerializeField]
     private TMP_Text avgResponseTimeText;
 
+    private readonly TrainingSessionManager session = TrainingSessionManager.Instance;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        finalPointsText.text = TrainingSessionManager.Instance.FinalPointsText();
-        correctAnswersText.text = TrainingSessionManager.Instance.TotalCorrectAnswersText();
-        avgResponseTimeText.text = TrainingSessionManager.Instance.FinalAverageResponseTimeText();
+        finalPointsText.text = session.TotalPointsText();
+        correctAnswersText.text = session.TotalCorrectAnswersText();
+        avgResponseTimeText.text = session.FinalAvgResponseTimeText();
     }
 
     public void ContinueToThanksScreen()
@@ -34,5 +37,6 @@ public class FinalScreenController : MonoBehaviour
     public void EndTrainingSession()
     {
         SceneManager.LoadScene("StartScene");
+        Debug.Log("Returning to StartScene.");
     }
 }

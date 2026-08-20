@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -5,8 +6,6 @@ using UnityEngine.UI;
 
 public class ModuleFlowController : MonoBehaviour
 {
-    private SalesTopic topic;
-
     [Header("Screens")]
     [SerializeField]
     private GameObject infoScreen;
@@ -59,18 +58,20 @@ public class ModuleFlowController : MonoBehaviour
     [SerializeField]
     private Button finishTopicButton;
     
+    private readonly TrainingSessionManager session = TrainingSessionManager.Instance;
+
+    private SalesTopic topic;
     private int currentModuleIndex;
     private int currentQuestionIndex;
     private float remainingTime;
     private bool isQuestionActive;
     private bool isScenarioModule;
 
-    private int totalTopicPoints;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        topic = TrainingSessionManager.Instance.SelectedTopic;
+        // Pass SelectedTopic (on TopicMenuItem) to ModuleFlowController
+        topic = session.SelectedTopic;
 
         if (topic == null)
         {
@@ -80,11 +81,14 @@ public class ModuleFlowController : MonoBehaviour
 
         // On click of module start button (info screen) => Start module question sequence
         startQuestionsButton.onClick.AddListener(StartQuestionSequence);
+
         // On click of continue button (point screen) => Go to next module info screen
         continueButton.onClick.AddListener(ContinueToNextModule);
-        // On click (just 1 time at the end) of finish button (final point screen)=> Go to SetInfoScreen() edge case => FinishTopic()
+
+        // On click (just 1 time at the end) of finish button (final point screen) => Go to SetInfoScreen() edge case => FinishTopic()
         finishTopicButton.onClick.AddListener(ContinueToNextModule);
 
+        // On click of answerButton[i] (question screen) => select an answer with a designated index
         for (int i = 0; i < answerButtons.Length; i++)
         {
             int capturedIndex = i;
@@ -92,7 +96,6 @@ public class ModuleFlowController : MonoBehaviour
         }
 
         currentModuleIndex = 0;
-        totalTopicPoints = 0;
 
         SetInfoScreen();
     }
@@ -105,6 +108,7 @@ public class ModuleFlowController : MonoBehaviour
             return;
         }
 
+        // If any module except scenario module (last) => track timer and update timer text, Else => disable timer
         if (!isScenarioModule)
         {
             remainingTime -= Time.unscaledDeltaTime;
@@ -127,7 +131,7 @@ public class ModuleFlowController : MonoBehaviour
             return;
         }
 
-        // If index outside module list range => Finish
+        // If index outside module list range => Finish topic
         if (currentModuleIndex >= topic.modules.Count)
         {
             FinishTopic();
@@ -143,7 +147,7 @@ public class ModuleFlowController : MonoBehaviour
         MicroModule currentModule = topic.modules[currentModuleIndex];
 
         // Initiate currentModuleResult in TrainingSessionManager
-        TrainingSessionManager.Instance.BeginModule(currentModule);
+        session.BeginModule(currentModule);
 
         // Set text attributes in info screen
         moduleTitle.text = currentModule.moduleTitle;
@@ -167,18 +171,10 @@ public class ModuleFlowController : MonoBehaviour
     {
         MicroModule currentModule = topic.modules[currentModuleIndex];
 
+        // If index outside question list range => Finish module
         if (currentQuestionIndex >= currentModule.questions.Count)
         {
-            TrainingSessionManager.Instance.CompleteCurrentModule();
-            TrainingSessionManager.Instance.RecordCurrentModuleResult();
-
-            if (isScenarioModule)
-            {
-                ShowFinalPointScreen();
-            } else
-            {
-                ShowPointScreen();
-            }
+            FinishModule();
             return;
         }
 
@@ -230,9 +226,9 @@ public class ModuleFlowController : MonoBehaviour
             int speedBonus = Mathf.RoundToInt(currentQuestion.speedBonusPoints * Mathf.Clamp01(speedRatio));
 
             pointsAwarded = currentQuestion.basePoints + speedBonus;
-            totalTopicPoints += pointsAwarded;
         }
 
+        // Creat new question result and set its values based on answer
         QuestionResult currentQuestionResult = new()
         {
             moduleId = currentModule.moduleId,
@@ -244,7 +240,8 @@ public class ModuleFlowController : MonoBehaviour
             pointsAwarded = pointsAwarded
         };
 
-        TrainingSessionManager.Instance.RecordQuestionResult(currentQuestionResult);
+        // Record question result in currentModuleResult from TrainingSessionManager
+        session.RecordQuestionResult(currentQuestionResult);
 
         currentQuestionIndex++;
         ShowCurrentQuestion();
@@ -252,12 +249,12 @@ public class ModuleFlowController : MonoBehaviour
 
     private void ShowPointScreen()
     {
-        isQuestionActive = false; // TODO: Testear con o sin esta asignacion para ver si es necesaria
-
         MicroModule currentModule = topic.modules[currentModuleIndex];
-        int currentModulePoints = TrainingSessionManager.Instance.GetCurrentModulePoints();
-        int currentModuleCorrectAnswers = TrainingSessionManager.Instance.GetCurrentModuleCorrectAnswers();
 
+        int currentModulePoints = session.GetCurrentModulePoints();
+        int currentModuleCorrectAnswers = session.GetCurrentModuleCorrectAnswers();
+
+        // Set text attributes in points screen
         moduleTitleEnd.text = currentModule.moduleTitle;
         pointsText.text = currentModulePoints.ToString();
         correctAnswersText.text = $"{currentModuleCorrectAnswers} / {currentModule.questions.Count}";
@@ -268,19 +265,16 @@ public class ModuleFlowController : MonoBehaviour
 
     private void ShowFinalPointScreen()
     {
-        TrainingSessionManager.Instance.SetCurrentTopicTotalPoints(totalTopicPoints);
-        int topicCorrectAnswers = TrainingSessionManager.Instance.GetCurrentTopicCorrectAnswers();
-        int topicTotalQuestions = 0;
-        foreach (MicroModule module in topic.modules)
-        {
-            topicTotalQuestions += module.questions.Count;
-        }
-        float topicAvgResponseTime = TrainingSessionManager.Instance.GetCurrentTopicAvgResponseTime();
+        int topicTotalPoints = session.GetCurrentTopicPoints();
+        int topicCorrectAnswers = session.GetCurrentTopicCorrectAnswers();
+        int topicTotalQuestions = topic.modules.Sum(m => m.questions.Count);
+        float topicAvgResponseTime = session.GetCurrentTopicAvgResponseTime();
 
-        topicCompletedText.text = topic.topicTitle + "geschafft!";
-        finalPointsText.text = totalTopicPoints.ToString();
+        // Set text attributes on final points screen (topic)
+        topicCompletedText.text = topic.topicTitle + " geschafft!";
+        finalPointsText.text = topicTotalPoints.ToString();
         topicCorrectAnsText.text = $"{topicCorrectAnswers} / {topicTotalQuestions}";
-        topicAvgResponseTimeText.text = topicAvgResponseTime.ToString() + "s";
+        topicAvgResponseTimeText.text = topicAvgResponseTime.ToString("0.0") + "s";
 
         questionScreen.SetActive(false);
         finalPointScreen.SetActive(true);
@@ -294,6 +288,7 @@ public class ModuleFlowController : MonoBehaviour
 
     private void CleanUp()
     {
+        // Cleanup of button listeners
         startQuestionsButton.onClick.RemoveListener(StartQuestionSequence);
         continueButton.onClick.RemoveListener(ContinueToNextModule);
         finishTopicButton.onClick.RemoveListener(ContinueToNextModule);
@@ -305,20 +300,41 @@ public class ModuleFlowController : MonoBehaviour
         }
     }
 
+    private void FinishModule()
+    {
+        // Set currentModuleResult.completed to true in TrainingSessionManager
+        session.CompleteCurrentModule();
+        // Record currentModuleResult attributes (final) in currentTopicResult in TrainingSessionManager
+        session.RecordCurrentModuleResult();
+
+        // If scenario module (last) => Go to final points screen (topic), Else => Go to current points screen (module)
+        if (isScenarioModule)
+        {
+            ShowFinalPointScreen();
+        } else
+        {
+            ShowPointScreen();
+        }
+    }
+
     private void FinishTopic()
     {
         CleanUp();
 
-        TrainingSessionManager session = TrainingSessionManager.Instance;
+        // Set currentTopicResult.completed to true in TrainingSessionManager
         session.CompleteCurrentTopic();
 
+        // If all topics completed => End session, send respective values to local store and go to SessionResultsScene
+        // Else => return to TopicMenuScene for next topic
         if (session.AllTopicsCompleted())
         {
             session.EndSession();
             SceneManager.LoadScene("SessionResultsScene");
+            Debug.Log("Loading SessionResultsScene.");
         } else
         {
             SceneManager.LoadScene("TopicMenuScene");
+            Debug.Log("Returning to TopicMenuScene.");
         }
     }
 }

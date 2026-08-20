@@ -39,9 +39,10 @@ public class TopicMenuItem : MonoBehaviour
             return;
         }
         
-        session.BeginTopic(topic);
-        session.SelectTopic(topic);
+        session.BeginTopic(topic); // Initiate currentTopicResult in TraniningSessionManager
+        session.SelectTopic(topic); // Set SelectedTopic as thisTopicMenuItem.topic
 
         SceneManager.LoadScene("TrainingScene");
+        Debug.Log($"Loading TrainingScene with topic: \"{topic.topicTitle}\".");
     }
 }
