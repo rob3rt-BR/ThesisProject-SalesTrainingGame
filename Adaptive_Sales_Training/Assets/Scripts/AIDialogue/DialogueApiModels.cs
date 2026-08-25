@@ -17,6 +17,7 @@ public class DialogueRequest
     public string scenarioContext;
     public string customerPersona;
     public string questionText;
+    public string questionDialogueContext;
     public string selectedAnswer;
     public string previousResponseId;
     

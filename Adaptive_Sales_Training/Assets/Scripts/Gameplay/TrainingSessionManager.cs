@@ -18,6 +18,8 @@ public class TrainingSessionManager : MonoBehaviour
 
     public List<TopicResult> TopicResults {get; private set;} = new();
     public SalesTopic SelectedTopic {get; private set;}
+
+    public List<AIDialogueScenario> TopicDialogueScenarios {get; private set;}
     
     private List<SalesTopic> allTopics;
     private TopicResult currentTopicResult;
@@ -58,6 +60,9 @@ public class TrainingSessionManager : MonoBehaviour
         // Reset important manager information trackers
         TopicResults.Clear();
         SelectedTopic = null;
+
+        TopicDialogueScenarios.Clear();
+
         currentTopicResult = null;
         currentModuleResult = null;
 
@@ -240,6 +245,18 @@ public class TrainingSessionManager : MonoBehaviour
         }
         return currentTopicResult.avgResponseTime;
     }
+
+    public void SetTopicDialogueScenarios(List<AIDialogueScenario> dialogueScenarios)
+    {
+        if (dialogueScenarios == null)
+        {
+            Debug.LogError("No AI dialogue scenarios for topic modules available.");
+            return;
+        }
+        TopicDialogueScenarios.Clear();
+        TopicDialogueScenarios = new(dialogueScenarios);
+    }
+
     #endregion
 
     #region Module Functions

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -74,10 +75,6 @@ public class AIDialogueController : MonoBehaviour
     [SerializeField]
     private Button finishTopicButton;
 
-    [Header("AI Dialogue Content")]
-    [SerializeField]
-    private AIDialogueScenario dialogueScenario;
-
     [Header("Backend")]
     [SerializeField]
     private string backendUrl = "TO Define";
@@ -91,12 +88,13 @@ public class AIDialogueController : MonoBehaviour
     private bool isQuestionActive;
     private bool isScenarioModule;
 
+    private List<AIDialogueScenario> dialogueScenarios;
     private string previousResponseId;
     private bool requestInProgress;
 
     void Start()
     {
-        // Pass SelectedTopic (on TopicMenuItem) to ModuleFlowController
+        // Pass SelectedTopic (on TopicMenuItem) to AIDialogueController
         topic = session.SelectedTopic;
 
         if (topic == null)
@@ -105,6 +103,14 @@ public class AIDialogueController : MonoBehaviour
             return;
         }
 
+        // Pass TopicDialogueScenarios (on TopicMenuItem) to AIDialogueController
+        dialogueScenarios = session.TopicDialogueScenarios;
+
+        if (dialogueScenarios == null)
+        {
+            Debug.LogError("No AI dialogue scenarios available for modules of current topic.");
+            return;
+        }
 
         // On click of module start button (info screen) => Show dialogue screen
         startDialogueButton.onClick.AddListener(StartDialogue);
@@ -190,16 +196,17 @@ public class AIDialogueController : MonoBehaviour
     }
     public void StartDialogue()
     {
-        if (dialogueScenario == null)
+        AIDialogueScenario currentDialogueScenario = dialogueScenarios[currentModuleIndex];
+        if (currentDialogueScenario == null)
         {
-            Debug.LogError("No dialogue scenario assigned.");
+            Debug.LogError("No AI dialogue scenario available for current module.");
             return;
         }
         previousResponseId = null;
 
         // Set text attributes in dialogue screen => display opening message in textbox
-        dialogueTitle.text = dialogueScenario.module.moduleTitle;
-        dialogueText.text = dialogueScenario.openingMessage;
+        dialogueTitle.text = currentDialogueScenario.module.moduleTitle;
+        dialogueText.text = currentDialogueScenario.openingMessage;
         
         infoScreen.SetActive(false);
         dialogueScreen.SetActive(true);
@@ -330,15 +337,32 @@ public class AIDialogueController : MonoBehaviour
         requestInProgress = true;
         loadingIndicator.SetActive(true);
 
+        AIDialogueScenario currentDialogueScenario = dialogueScenarios[currentModuleIndex];
+
+        if (currentDialogueScenario == null)
+        {
+            Debug.LogError("No AI dialogue scenario available for current module.");
+            yield break;
+        }
+
+        AIQuestionContext currentQuestionContext = currentDialogueScenario.questionContexts[currentQuestionIndex];
+
+        if (currentQuestionContext == null)
+        {
+            Debug.LogError("No question context available for current AI dialogue scenario.");
+            yield break;
+        }
+
         // Create new dialogue request data based on passed parameters data (module, question, selected answer)
         DialogueRequest requestData = new()
         {
-            scenarioId = dialogueScenario.name,
+            scenarioId = currentDialogueScenario.name,
             moduleId = module.moduleId,
             questionId = question.questionId,
-            scenarioContext = dialogueScenario.scenarioContext,
-            customerPersona = dialogueScenario.customerPersona,
+            scenarioContext = currentDialogueScenario.scenarioContext,
+            customerPersona = currentDialogueScenario.customerPersona,
             questionText = question.questionText,
+            questionDialogueContext = currentQuestionContext.dialogueContext,
             selectedAnswer = selectedAnswer,
             previousResponseId = previousResponseId
         };
@@ -354,7 +378,7 @@ public class AIDialogueController : MonoBehaviour
             uploadHandler = new UploadHandlerRaw(requestBody),
             downloadHandler = new DownloadHandlerBuffer()
         };
-        // Set web request headers => TODO: ver que hace 
+        // Set web request headers
         webRequest.SetRequestHeader("Content-Type", "application/json");
 
         // Begin communication with backend server

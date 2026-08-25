@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -5,6 +6,7 @@ using UnityEngine.UI;
 
 public class TopicMenuItem : MonoBehaviour
 {
+    [Header("Topic")]
     [SerializeField]
     private SalesTopic topic;
     [SerializeField]
@@ -13,6 +15,10 @@ public class TopicMenuItem : MonoBehaviour
     private Button startButton;
     [SerializeField]
     private GameObject completedLabel;
+
+    [Header("AI Dialogue Scenarios (pro Topic Module)")]
+    [SerializeField]
+    private List<AIDialogueScenario> dialogueScenarios;
 
     private readonly TrainingSessionManager session = TrainingSessionManager.Instance;
 
@@ -47,7 +53,17 @@ public class TopicMenuItem : MonoBehaviour
         session.BeginTopic(topic); // Initiate currentTopicResult in TraniningSessionManager
         session.SelectTopic(topic); // Set SelectedTopic as thisTopicMenuItem.topic
 
-        SceneManager.LoadScene("TrainingScene");
-        Debug.Log($"Loading TrainingScene with topic: \"{topic.topicTitle}\".");
+        if (session.Version.Equals(TrainingVersion.AI))
+        {
+            session.SetTopicDialogueScenarios(dialogueScenarios); // Set TopicDialogueScenarios as thisTopicMenuItem.dialogueScenarios (of selected topic)
+
+            SceneManager.LoadScene("AITrainingScene");
+            Debug.Log($"Loading AITrainingScene with topic: \"{topic.topicTitle}\".");
+        } else
+        {
+            SceneManager.LoadScene("TrainingScene");
+            Debug.Log($"Loading TrainingScene with topic: \"{topic.topicTitle}\".");
+        }
+
     }
 }
