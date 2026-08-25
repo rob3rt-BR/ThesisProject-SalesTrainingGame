@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /*
@@ -11,16 +12,26 @@ public class DialogueApiModels
 [Serializable]
 public class DialogueRequest
 {
+    public string sessionId;
     public string scenarioId;
     public string moduleId;
     public string questionId;
+
     public string scenarioContext;
     public string customerPersona;
-    public string questionText;
     public string questionDialogueContext;
+
+    public string questionText;
     public string selectedAnswer;
-    public string previousResponseId;
-    
+
+    public List<DialogueMessage> conversationHistory = new();    
+}
+
+[Serializable]
+public class DialogueMessage
+{
+    public string role;
+    public string content;
 }
 
 [Serializable]

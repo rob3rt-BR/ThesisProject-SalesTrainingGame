@@ -7,10 +7,13 @@ using UnityEngine;
 public class AIDialogueScenario : ScriptableObject
 {
     public MicroModule module;
-    [TextArea(3, 8)]
-    public string customerPersona;
+    
+    public string scenarioId;
     [TextArea(3, 8)]
     public string scenarioContext;
+    [TextArea(3, 8)]
+    public string customerPersona;
+
     [TextArea(3, 8)]
     public string openingMessage;
     

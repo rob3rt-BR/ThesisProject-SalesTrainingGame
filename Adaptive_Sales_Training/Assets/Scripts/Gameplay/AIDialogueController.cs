@@ -89,7 +89,7 @@ public class AIDialogueController : MonoBehaviour
     private bool isScenarioModule;
 
     private List<AIDialogueScenario> dialogueScenarios;
-    private string previousResponseId;
+    private List<DialogueMessage> currentConversationHistory;
     private bool requestInProgress;
 
     void Start()
@@ -202,7 +202,17 @@ public class AIDialogueController : MonoBehaviour
             Debug.LogError("No AI dialogue scenario available for current module.");
             return;
         }
-        previousResponseId = null;
+
+        // Clear conversation history before starting dialogue scenario of current module
+        currentConversationHistory.Clear();
+
+        // Create start message of conversation history (AI) =>
+        DialogueMessage startMessage = new()
+        {
+            role = "assistant",
+            content = currentDialogueScenario.openingMessage
+        };
+        currentConversationHistory.Add(startMessage);
 
         // Set text attributes in dialogue screen => display opening message in textbox
         dialogueTitle.text = currentDialogueScenario.module.moduleTitle;
@@ -356,15 +366,19 @@ public class AIDialogueController : MonoBehaviour
         // Create new dialogue request data based on passed parameters data (module, question, selected answer)
         DialogueRequest requestData = new()
         {
-            scenarioId = currentDialogueScenario.name,
+            sessionId = session.SessionId,
+            scenarioId = currentDialogueScenario.scenarioId,
             moduleId = module.moduleId,
             questionId = question.questionId,
+
             scenarioContext = currentDialogueScenario.scenarioContext,
             customerPersona = currentDialogueScenario.customerPersona,
-            questionText = question.questionText,
             questionDialogueContext = currentQuestionContext.dialogueContext,
+            
+            questionText = question.questionText,
             selectedAnswer = selectedAnswer,
-            previousResponseId = previousResponseId
+
+            conversationHistory = new(currentConversationHistory)
         };
 
         // Create JSON format request of dialogue request data
@@ -400,8 +414,24 @@ public class AIDialogueController : MonoBehaviour
         // If web request result successful => create new dialogue response data based on result
         DialogueResponse responseData = JsonUtility.FromJson<DialogueResponse>(webRequest.downloadHandler.text);
 
-        // Set previous response id based on response data and display response message in textbox of display screen
-        previousResponseId = responseData.responseId;
+        // Create user answer message to current question
+        DialogueMessage currentUserAnswerMessage = new()
+        {
+            role = "user",
+            content = $"Question: {question.questionText}\n" +
+                        $"Selected answer: {selectedAnswer}"
+        };
+        currentConversationHistory.Add(currentUserAnswerMessage);
+
+        // Create AI response to user answer
+        DialogueMessage currentAIResponseMessage = new()
+        {
+            role = "assistant",
+            content = responseData.replyText
+        };
+        currentConversationHistory.Add(currentAIResponseMessage);
+
+        // Set text attribute in dialogue screen => display response message in textbox
         dialogueText.text = responseData.replyText;
 
         dialogueScreen.SetActive(true);
