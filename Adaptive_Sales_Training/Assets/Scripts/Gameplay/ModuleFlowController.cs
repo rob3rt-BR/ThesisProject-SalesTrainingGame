@@ -61,8 +61,6 @@ public class ModuleFlowController : MonoBehaviour
     
     private readonly TrainingSessionManager session = TrainingSessionManager.Instance;
 
-    private AIDialogueController dialogueController;
-
     private SalesTopic topic;
     private int currentModuleIndex;
     private int currentQuestionIndex;

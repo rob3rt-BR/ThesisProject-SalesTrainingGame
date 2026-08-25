@@ -29,6 +29,8 @@ public class TrainingSessionManager : MonoBehaviour
 
     private string SessionDataFinalPath;
 
+    private static int participantIdCounter = 0;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -139,6 +141,12 @@ public class TrainingSessionManager : MonoBehaviour
         File.Copy(sourcePath, destinationPath, overwrite: true);
         
         Debug.Log($"Final session data exported to {destinationPath}");
+    }
+
+    public int GetParticipantIdCounter()
+    {
+        participantIdCounter++;
+        return participantIdCounter;
     }
 
     #endregion

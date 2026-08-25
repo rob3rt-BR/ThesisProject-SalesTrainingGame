@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,17 +14,35 @@ public class StartScreenController : MonoBehaviour
     [SerializeField]
     private GameObject startScreen;
     [SerializeField]
+    private GameObject assignValuesScreen;
+    [SerializeField]
     private GameObject explainScreen;
+
+    [Header("Assign Values UI")]
+    [SerializeField]
+    private TMP_Text participantIdText;
+    [SerializeField]
+    private Button generateParticipantValuesButton;
+    [SerializeField]
+    private Button continueToExplanationButton;
 
     [Header("Explanation UI")]
     [SerializeField]
-    private GameObject[] texts;
+    private TMP_Text[] texts;
     [SerializeField]
     private Button continueButton;
     [SerializeField]
     private Button backButton;
+    [SerializeField]
+    private ExplainScreenContent explainScreenContentNormal;
+    [SerializeField]
+    private ExplainScreenContent explainScreenContentAI;
     
     private TrainingSessionManager session;
+    private string participantId;
+    private TrainingVersion trainingVersion;
+
+    private int participantIdCounter;
 
     private int currentTextIndex = 0;
     private RectTransform continueButtonTrans;
@@ -39,6 +58,12 @@ public class StartScreenController : MonoBehaviour
             return;
         }
 
+        // On click => Generate participant ID and define training version based on that
+        generateParticipantValuesButton.onClick.AddListener(GenerateParticipantValues);
+
+        // On click => Show explanation screen and start session
+        continueToExplanationButton.onClick.AddListener(StartExplanation);
+
         // On click => Go forward / back in texts
         continueButton.onClick.AddListener(ContinuePressed);
         backButton.onClick.AddListener(BackPressed);
@@ -46,12 +71,10 @@ public class StartScreenController : MonoBehaviour
         continueButtonTrans = continueButton.gameObject.GetComponent<RectTransform>();
     }
 
-    public void StartGameNormal()
+    public void StartGame()
     {
-        session.StartSession("P_115", TrainingVersion.Traditional, allTopics); // Setting temporal
-
         startScreen.SetActive(false);
-        explainScreen.SetActive(true);
+        assignValuesScreen.SetActive(true);
     }
 
     public void QuitGame()
@@ -60,9 +83,44 @@ public class StartScreenController : MonoBehaviour
         Application.Quit();
     }
 
+    private void GenerateParticipantValues()
+    {
+        participantIdCounter = session.GetParticipantIdCounter();
+        participantId = $"P_{participantIdCounter}";
+
+        if (participantIdCounter % 2 == 0)
+        {
+            trainingVersion = TrainingVersion.Traditional;
+            SetExplainScreenTextContent(explainScreenContentNormal);
+        } else
+        {
+            trainingVersion = TrainingVersion.AI;
+            SetExplainScreenTextContent(explainScreenContentAI);
+        }
+
+        participantIdText.text += $" {participantId}";
+        continueToExplanationButton.interactable = true;
+    }
+
+    private void StartExplanation()
+    {
+        session.StartSession(participantId, trainingVersion, allTopics); // Setting temporal
+        
+        assignValuesScreen.SetActive(false);
+        explainScreen.SetActive(true);
+    }
+
+    private void SetExplainScreenTextContent(ExplainScreenContent content)
+    {
+        for (int i = 0; i < texts.Length; i++)
+        {
+            texts[i].text = content.texts[i];
+        }
+    }
+
     private void ContinuePressed()
     {
-        texts[currentTextIndex].SetActive(false);
+        texts[currentTextIndex].gameObject.SetActive(false);
         currentTextIndex++;
 
         // If on second text => Translate continueButton to the right and enable backButton
@@ -83,12 +141,12 @@ public class StartScreenController : MonoBehaviour
             Debug.Log("Loading TopicMenuScene.");
             return;
         }
-        texts[currentTextIndex].SetActive(true);
+        texts[currentTextIndex].gameObject.SetActive(true);
     }
 
     private void BackPressed()
     {
-        texts[currentTextIndex].SetActive(false);
+        texts[currentTextIndex].gameObject.SetActive(false);
         currentTextIndex--;
 
         // If on first text again => Reset continueButton to center and disable backButton
@@ -99,11 +157,13 @@ public class StartScreenController : MonoBehaviour
             continueButtonTrans.anchoredPosition = newPos;
             backButton.gameObject.SetActive(false);
         }
-        texts[currentTextIndex].SetActive(true);
+        texts[currentTextIndex].gameObject.SetActive(true);
     }
 
     private void CleanUp()
     {
+        generateParticipantValuesButton.onClick.RemoveListener(GenerateParticipantValues);
+        continueToExplanationButton.onClick.RemoveListener(StartExplanation);
         continueButton.onClick.RemoveListener(ContinuePressed);
         backButton.onClick.RemoveListener(BackPressed);
     }
