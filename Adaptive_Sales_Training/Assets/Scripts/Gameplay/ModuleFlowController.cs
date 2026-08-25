@@ -82,20 +82,6 @@ public class ModuleFlowController : MonoBehaviour
             return;
         }
 
-        // If training version is AI version => Find AIDialogueController in scene
-        if (session.Version.Equals(TrainingVersion.AI))
-        {
-            dialogueController = FindAnyObjectByType<AIDialogueController>();
-            if (dialogueController == null)
-            {
-                Debug.LogError("No AI dialogue controller set.");
-                return;
-            } else
-            {
-                Debug.Log("AI dialogue controller set.");
-            }
-        }
-
         // On click of module start button (info screen) => Start module question sequence
         startQuestionsButton.onClick.AddListener(StartQuestionSequence);
 
@@ -259,9 +245,7 @@ public class ModuleFlowController : MonoBehaviour
 
         // Record question result in currentModuleResult from TrainingSessionManager
         session.RecordQuestionResult(currentQuestionResult);
-
-        // AQUI: Hacer request de AI response a dialogue controller IF AI version
-
+        
         currentQuestionIndex++;
         ShowCurrentQuestion();
     }
