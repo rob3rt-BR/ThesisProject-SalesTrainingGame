@@ -434,6 +434,8 @@ public class AIDialogueController : MonoBehaviour
         // Set text attribute in dialogue screen => display response message in textbox
         dialogueText.text = responseData.replyText;
 
+        // TODO: logging de response => responseData.responseId, responseData.model
+
         dialogueScreen.SetActive(true);
 
         // Enable next question button to continue

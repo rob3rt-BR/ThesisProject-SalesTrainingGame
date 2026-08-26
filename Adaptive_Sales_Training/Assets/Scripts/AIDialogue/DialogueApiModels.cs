@@ -2,13 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
-[Serializable]
-public class DialogueApiModels
-{
-}
-*/
-
 [Serializable]
 public class DialogueRequest
 {
@@ -38,5 +31,6 @@ public class DialogueMessage
 public class DialogueResponse
 {
     public string responseId;
+    public string model;
     public string replyText;
 }
