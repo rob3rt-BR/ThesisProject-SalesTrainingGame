@@ -51,6 +51,18 @@ public class QuestionResult
     public bool timedOut;
     public float responseTime;
     public int pointsAwarded;
+
+    public AIResponseLog aIResponse;
+}
+
+[Serializable]
+public class AIResponseLog
+{
+    public string responseId;
+    public string model;
+    public long totalResponseTimeMilliseconds;
+
+    public string replyText;
 }
 
 public enum TrainingVersion

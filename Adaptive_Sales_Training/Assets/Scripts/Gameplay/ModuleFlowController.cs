@@ -238,7 +238,8 @@ public class ModuleFlowController : MonoBehaviour
             wasCorrect = isCorrect,
             timedOut = timedOut,
             responseTime = responseTime,
-            pointsAwarded = pointsAwarded
+            pointsAwarded = pointsAwarded,
+            aIResponse = null
         };
 
         // Record question result in currentModuleResult from TrainingSessionManager

@@ -152,7 +152,7 @@ public sealed class OpenRouterService
         }
 
         string userRequestProperties = $"""
-        Current question context: {request.QuestionDialogueContext}
+        Current question dialogue context: {request.QuestionDialogueContext}
         Question: {request.QuestionText}
         Selected answer: {request.SelectedAnswer}
         Reply as the customer.

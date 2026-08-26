@@ -253,8 +253,8 @@ public class TrainingSessionManager : MonoBehaviour
             Debug.LogError("No AI dialogue scenarios for topic modules available.");
             return;
         }
-        TopicDialogueScenarios.Clear();
-        TopicDialogueScenarios = new(dialogueScenarios);
+        TopicDialogueScenarios.Clear(); // Clear topic dialogue scenarios before new topic
+        TopicDialogueScenarios = new(dialogueScenarios); // Set topic dialogue scenarios (on TopicMenuItem[topic]) => Pass later to AIDialogueContoller
     }
 
     #endregion
@@ -335,6 +335,17 @@ public class TrainingSessionManager : MonoBehaviour
         {
             currentModuleResult.correctAnswers++; // If current question result correct => increment correct answers of current module
         }
+    }
+
+    public void RecordQuestionResultAIResponse(AIResponseLog aIResponse, string questionId)
+    {
+        if (currentModuleResult == null)
+        {
+            Debug.LogError("No active module for current question.");
+            return;
+        }
+        QuestionResult currentQuestionResult = currentModuleResult.questionResults.Find(q => q.questionId.Equals(questionId)); // Find previously recorded current question result
+        currentQuestionResult.aIResponse = aIResponse; // Save AI response values of current question result
     }
     #endregion
 

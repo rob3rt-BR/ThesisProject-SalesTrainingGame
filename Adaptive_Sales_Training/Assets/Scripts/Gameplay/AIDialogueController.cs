@@ -351,6 +351,8 @@ public class AIDialogueController : MonoBehaviour
 
         if (currentDialogueScenario == null)
         {
+            requestInProgress = false;
+            loadingIndicator.SetActive(false);
             Debug.LogError("No AI dialogue scenario available for current module.");
             yield break;
         }
@@ -359,6 +361,8 @@ public class AIDialogueController : MonoBehaviour
 
         if (currentQuestionContext == null)
         {
+            requestInProgress = false;
+            loadingIndicator.SetActive(false);
             Debug.LogError("No question context available for current AI dialogue scenario.");
             yield break;
         }
@@ -395,8 +399,13 @@ public class AIDialogueController : MonoBehaviour
         // Set web request headers
         webRequest.SetRequestHeader("Content-Type", "application/json");
 
+        var stopWatch = System.Diagnostics.Stopwatch.StartNew();
+
         // Begin communication with backend server
         yield return webRequest.SendWebRequest();
+
+        stopWatch.Stop();
+        long totalResponseTimeMilliseconds = stopWatch.ElapsedMilliseconds;
 
         requestInProgress = false;
         loadingIndicator.SetActive(false);
@@ -414,11 +423,31 @@ public class AIDialogueController : MonoBehaviour
         // If web request result successful => create new dialogue response data based on result
         DialogueResponse responseData = JsonUtility.FromJson<DialogueResponse>(webRequest.downloadHandler.text);
 
+        // Log AI response metrics
+        Debug.Log($"AI response received:\n" +
+                $"Response ID: {responseData.responseId}\n" + 
+                $"Model: {responseData.model}" +
+                $"Prompt Tokens: {responseData.promptTokens}\n" +
+                $"Completion Tokens: {responseData.completionTokens}\n" +
+                $"Backend Response Time: {responseData.responseTimeMilliseconds}\n" +
+                $"Total Response Time: {totalResponseTimeMilliseconds}");
+
+        // Record current AI response values to previously recorded question
+        AIResponseLog aIResponse = new()
+        {
+            responseId = responseData.responseId,
+            model = responseData.model,
+            totalResponseTimeMilliseconds = totalResponseTimeMilliseconds,
+            replyText = responseData.replyText
+        };
+        session.RecordQuestionResultAIResponse(aIResponse, question.questionId);
+
         // Create user answer message to current question
         DialogueMessage currentUserAnswerMessage = new()
         {
             role = "user",
-            content = $"Question: {question.questionText}\n" +
+            content = $"Current question dialogue context: {currentQuestionContext.dialogueContext}\n" +
+                        $"Question: {question.questionText}\n" +
                         $"Selected answer: {selectedAnswer}"
         };
         currentConversationHistory.Add(currentUserAnswerMessage);
@@ -433,8 +462,6 @@ public class AIDialogueController : MonoBehaviour
 
         // Set text attribute in dialogue screen => display response message in textbox
         dialogueText.text = responseData.replyText;
-
-        // TODO: logging de response => responseData.responseId, responseData.model
 
         dialogueScreen.SetActive(true);
 

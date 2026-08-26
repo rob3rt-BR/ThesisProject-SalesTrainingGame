@@ -32,5 +32,9 @@ public class DialogueResponse
 {
     public string responseId;
     public string model;
+    public int promptTokens;
+    public int completionTokens;
+    public long responseTimeMilliseconds;
+
     public string replyText;
 }
