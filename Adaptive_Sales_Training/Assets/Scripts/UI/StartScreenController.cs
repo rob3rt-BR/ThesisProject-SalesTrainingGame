@@ -28,7 +28,7 @@ public class StartScreenController : MonoBehaviour
 
     [Header("Explanation UI")]
     [SerializeField]
-    private TMP_Text[] texts;
+    private List<GameObject> texts;
     [SerializeField]
     private Button continueButton;
     [SerializeField]
@@ -99,6 +99,8 @@ public class StartScreenController : MonoBehaviour
         }
 
         participantIdText.text += $" {participantId}";
+
+        generateParticipantValuesButton.interactable = false;
         continueToExplanationButton.interactable = true;
     }
 
@@ -112,15 +114,27 @@ public class StartScreenController : MonoBehaviour
 
     private void SetExplainScreenTextContent(ExplainScreenContent content)
     {
-        for (int i = 0; i < texts.Length; i++)
+        if (content == null)
         {
-            texts[i].text = content.texts[i];
+            Debug.LogError("ExplainScreen is null");
+            return;
+        }
+
+        if (content.texts == null)
+        {
+            Debug.LogError("ExplainScreen texts is null");
+            return;
+        }
+
+        for (int i = 0; i < texts.Count; i++)
+        {
+            texts[i].GetComponent<TMP_Text>().text = content.texts[i];
         }
     }
 
     private void ContinuePressed()
     {
-        texts[currentTextIndex].gameObject.SetActive(false);
+        texts[currentTextIndex].SetActive(false);
         currentTextIndex++;
 
         // If on second text => Translate continueButton to the right and enable backButton
@@ -133,7 +147,7 @@ public class StartScreenController : MonoBehaviour
         }
 
         // If index outside texts range => Go to TopicMenuScene
-        if (currentTextIndex == texts.Length)
+        if (currentTextIndex == texts.Count)
         {
             CleanUp();
             explainScreen.SetActive(false);
@@ -141,12 +155,12 @@ public class StartScreenController : MonoBehaviour
             Debug.Log("Loading TopicMenuScene.");
             return;
         }
-        texts[currentTextIndex].gameObject.SetActive(true);
+        texts[currentTextIndex].SetActive(true);
     }
 
     private void BackPressed()
     {
-        texts[currentTextIndex].gameObject.SetActive(false);
+        texts[currentTextIndex].SetActive(false);
         currentTextIndex--;
 
         // If on first text again => Reset continueButton to center and disable backButton
@@ -157,7 +171,7 @@ public class StartScreenController : MonoBehaviour
             continueButtonTrans.anchoredPosition = newPos;
             backButton.gameObject.SetActive(false);
         }
-        texts[currentTextIndex].gameObject.SetActive(true);
+        texts[currentTextIndex].SetActive(true);
     }
 
     private void CleanUp()

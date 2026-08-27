@@ -19,7 +19,7 @@ public class TrainingSessionManager : MonoBehaviour
     public List<TopicResult> TopicResults {get; private set;} = new();
     public SalesTopic SelectedTopic {get; private set;}
 
-    public List<AIDialogueScenario> TopicDialogueScenarios {get; private set;}
+    public List<AIDialogueScenario> TopicDialogueScenarios {get; private set;} = new();
     
     private List<SalesTopic> allTopics;
     private TopicResult currentTopicResult;

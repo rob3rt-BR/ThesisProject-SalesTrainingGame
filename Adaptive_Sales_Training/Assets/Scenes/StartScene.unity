@@ -1292,8 +1292,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartScreenController
   allTopics:
-  - {fileID: 11400000, guid: 8229265e4f48e6a4ab985830576a5b38, type: 2}
-  - {fileID: 11400000, guid: db257647eae661d46b75b6f6fef71f3e, type: 2}
+  - {fileID: 11400000, guid: ad0f135467daae14480a0d9741cb1536, type: 2}
+  - {fileID: 11400000, guid: 5bc0d2740df22d14fb9cda9d6112eb82, type: 2}
   startScreen: {fileID: 149233094}
   assignValuesScreen: {fileID: 1896757640}
   explainScreen: {fileID: 1112942355}
