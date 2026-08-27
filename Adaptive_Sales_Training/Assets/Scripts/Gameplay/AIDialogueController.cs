@@ -38,6 +38,8 @@ public class AIDialogueController : MonoBehaviour
     private GameObject loadingIndicator;
     [SerializeField]
     private Button startQuestionsButton;
+    [SerializeField]
+    private Button nextQuestionButton;
 
     [Header("Question UI")]
     [SerializeField]
@@ -50,8 +52,6 @@ public class AIDialogueController : MonoBehaviour
     private Button[] answerButtons;
     [SerializeField]
     private TMP_Text[] answerButtonsText;
-    [SerializeField]
-    private Button nextQuestionButton;
 
     [Header("Points UI")]
     [SerializeField]
@@ -89,7 +89,7 @@ public class AIDialogueController : MonoBehaviour
     private bool isScenarioModule;
 
     private List<AIDialogueScenario> dialogueScenarios;
-    private List<DialogueMessage> currentConversationHistory;
+    private List<DialogueMessage> currentConversationHistory = new();
     private bool requestInProgress;
 
     void Start()
@@ -507,6 +507,9 @@ public class AIDialogueController : MonoBehaviour
 
     private void ContinueToNextQuestion()
     {
+        dialogueScreen.SetActive(false);
+        questionScreen.SetActive(true);
+        
         currentQuestionIndex++;
         ShowCurrentQuestion();
     }

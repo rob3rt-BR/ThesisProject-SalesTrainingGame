@@ -1927,7 +1927,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &428754442
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1941,11 +1941,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 202551159}
-  m_Father: {fileID: 1203954622}
+  m_Father: {fileID: 1799048124}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 325, y: -30}
+  m_AnchoredPosition: {x: 325, y: 0}
   m_SizeDelta: {x: 65, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &428754443
@@ -2321,8 +2321,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -30}
-  m_SizeDelta: {x: 475, y: 180}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 475, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &593932426
 GameObject:
@@ -2743,8 +2743,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 325, y: -30}
-  m_SizeDelta: {x: 65, y: 150}
+  m_AnchoredPosition: {x: 0, y: -145}
+  m_SizeDelta: {x: 160, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &860022895
 MonoBehaviour:
@@ -4260,7 +4260,6 @@ RectTransform:
   - {fileID: 860928654}
   - {fileID: 33761773}
   - {fileID: 28615089}
-  - {fileID: 428754442}
   m_Father: {fileID: 800999896}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4461,6 +4460,7 @@ MonoBehaviour:
   dialogueText: {fileID: 1957314032}
   loadingIndicator: {fileID: 1123512187}
   startQuestionsButton: {fileID: 860022895}
+  nextQuestionButton: {fileID: 428754443}
   questionText: {fileID: 1248070016}
   questionCounterText: {fileID: 763830412}
   timerText: {fileID: 1627785482}
@@ -4474,7 +4474,6 @@ MonoBehaviour:
   - {fileID: 1735511120}
   - {fileID: 404799660}
   - {fileID: 593932428}
-  nextQuestionButton: {fileID: 428754443}
   moduleTitleEnd: {fileID: 287866055}
   pointsText: {fileID: 515054756}
   correctAnswersText: {fileID: 238365354}
@@ -5519,7 +5518,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '>>'
+  m_text: Start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6044,8 +6043,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -30}
-  m_SizeDelta: {x: 500, y: 200}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 500, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1795085923
 MonoBehaviour:
@@ -6100,7 +6099,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1799048124
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6117,6 +6116,7 @@ RectTransform:
   - {fileID: 1795085922}
   - {fileID: 557203451}
   - {fileID: 860022894}
+  - {fileID: 428754442}
   m_Father: {fileID: 800999896}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -6139,7 +6139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1852956647
 RectTransform:
   m_ObjectHideFlags: 0
