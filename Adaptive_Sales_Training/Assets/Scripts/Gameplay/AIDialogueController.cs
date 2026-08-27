@@ -399,11 +399,13 @@ public class AIDialogueController : MonoBehaviour
         // Set web request headers
         webRequest.SetRequestHeader("Content-Type", "application/json");
 
+        // Start tracking total AI response time
         var stopWatch = System.Diagnostics.Stopwatch.StartNew();
 
         // Begin communication with backend server
         yield return webRequest.SendWebRequest();
 
+        // Stop tracking total AI response time
         stopWatch.Stop();
         long totalResponseTimeMilliseconds = stopWatch.ElapsedMilliseconds;
 

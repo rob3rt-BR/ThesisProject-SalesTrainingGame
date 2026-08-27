@@ -1,7 +1,4 @@
-using System.Net.Http.Headers;
-using System.Text.Json;
 using DialogueModels;
-using OpenRouterResponseModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +10,7 @@ builder.Services.AddHttpClient<OpenRouterService>(client =>
 
 var app = builder.Build();
 
-string backendUrl = "http://localhost:3000"; // TODO: Cambiar por el de verdad
+string backendUrl = "http://localhost:5065";
 
 app.MapPost("/api/dialogue", async (DialogueRequest request, OpenRouterService openRouterService, CancellationToken cancellationToken) =>
 {
