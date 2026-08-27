@@ -448,9 +448,9 @@ public class AIDialogueController : MonoBehaviour
         DialogueMessage currentUserAnswerMessage = new()
         {
             role = "user",
-            content = $"Current question dialogue context: {currentQuestionContext.dialogueContext}\n" +
-                        $"Question: {question.questionText}\n" +
-                        $"Selected answer: {selectedAnswer}"
+            content = $"Dialogkontext zur aktuellen Frage: {currentQuestionContext.dialogueContext}\n" +
+                        $"Frage: {question.questionText}\n" +
+                        $"Ausgewählte Antwort: {selectedAnswer}"
         };
         currentConversationHistory.Add(currentUserAnswerMessage);
 

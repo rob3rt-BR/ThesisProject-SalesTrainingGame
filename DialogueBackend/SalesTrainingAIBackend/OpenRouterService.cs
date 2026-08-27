@@ -111,17 +111,21 @@ public sealed class OpenRouterService
     private static List<object> BuildMessages(DialogueRequest request)
     {
         string systemPrompt = """
-        You are a customer in a sales-training dialogue.
-        Respond naturally and briefly to the trainee's selected answer.
-        Stay in character and remain relevant to the current scenario.
-        Do not reveal the correct answer.
-        Do not evaluate the trainee's score.
-        Return only the customer's dialogue response.
+        Du bist ein Kunde in einem Sales-Training.
+
+        Antworte ausschließlich auf Deutsch.
+        Reagiere natürlich und kurz auf die ausgewählte Antwort des Trainingsteilnehmers.
+        Bleibe in deiner Kundenrolle und berücksichtige den aktuellen Szenario-Kontext.
+        Verhalte dich professionell, aber leicht interaktiv und spielerisch.
+        Gib nicht die richtige Antwort auf die Frage bekannt.
+        Bewerte weder die Antwort noch den Punktestand des Teilnehmers.
+        Übernimm nicht die Rolle eines Trainers.
+        Antworte nur mit der Reaktion des Kunden.
         """;
 
         string requestProperties = $"""
-        Scenario context: {request.ScenarioContext}
-        Customer persona: {request.CustomerPersona}
+        Szenario-Kontext: {request.ScenarioContext}
+        Kundenpersona: {request.CustomerPersona}
         """;
 
         var messages = new List<object>();
@@ -152,10 +156,10 @@ public sealed class OpenRouterService
         }
 
         string userRequestProperties = $"""
-        Current question dialogue context: {request.QuestionDialogueContext}
-        Question: {request.QuestionText}
-        Selected answer: {request.SelectedAnswer}
-        Reply as the customer.
+        Dialogkontext zur aktuellen Frage: {request.QuestionDialogueContext}
+        Frage: {request.QuestionText}
+        Ausgewählte Antwort: {request.SelectedAnswer}
+        Reagiere als Kunde auf die ausgewählte Antwort.
         """;
 
         var userMessage = new
