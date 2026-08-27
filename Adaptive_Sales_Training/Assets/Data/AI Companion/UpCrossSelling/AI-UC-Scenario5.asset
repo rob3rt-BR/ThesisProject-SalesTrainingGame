@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4549cc761c8952748aed4c13489b9771, type: 3}
+  m_Name: AI-UC-Scenario5
+  m_EditorClassIdentifier: Assembly-CSharp::AIDialogueScenario
+  module: {fileID: 0}
+  scenarioId: AI-UC-05
+  scenarioContext: "Du betreust einen bestehenden SaaS-Kunden, der erfolgreich mit
+    dem aktuellen Produkt arbeitet. Ein Bundle aus Analytics-Modul und zus\xE4tzlichem
+    Support k\xF6nnte den Kunden bei der Expansion unterst\xFCtzen."
+  customerPersona: "Name: Katharina Wolf\nRolle: Customer Success Managerin auf Kundenseite\nPers\xF6nlichkeit:
+    Kundenorientiert und datenbewusst. Sie m\xF6chte den langfristigen Nutzen vor
+    einer Kaufentscheidung verstehen."
+  openingMessage: "\u201ESie schlagen ein Bundle vor. Wie k\xF6nnen wir beurteilen,
+    ob es uns tats\xE4chlich hilft und nicht nur unseren Bestellwert erh\xF6ht?\u201C"
+  questionContexts:
+  - questionId: UC-M05-Q01
+    dialogueContext: "Katharina fragt, warum ein Post-Purchase-Angebot f\xFCr ihre
+      bestehende L\xF6sung weniger riskant sein k\xF6nnte."
+  - questionId: UC-M05-Q02
+    dialogueContext: "Katharina m\xF6chte wissen, welche Kennzahl den durchschnittlichen
+      Bestellwert abbildet."
+  - questionId: UC-M05-Q03
+    dialogueContext: "Katharina bittet um eine Erkl\xE4rung, welche Bestandteile
+      ein sinnvolles Bundle enthalten sollte."
+  - questionId: UC-M05-Q04
+    dialogueContext: "Katharina m\xF6chte wissen, wie Sales und Customer Success
+      Informationen \xFCber ihre Ziele und Nutzung austauschen sollten."
+  - questionId: UC-M05-Q05
+    dialogueContext: "Katharina fragt, wie Erfolg gemessen werden kann, ohne nur
+      den zus\xE4tzlichen Umsatz zu betrachten."
+  - questionId: UC-M05-Q06
+    dialogueContext: Katharina reagiert skeptisch auf eine lange Liste von Add-ons
+      und fragt, warum mehr Angebote nicht automatisch besser sind.
+  - questionId: UC-M05-Q07
+    dialogueContext: "Katharina m\xF6chte verstehen, wie eine relevante Erweiterung
+      langfristig die Nutzung und Kundenbindung verbessern k\xF6nnte."

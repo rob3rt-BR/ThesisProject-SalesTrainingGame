@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14a60cf4d7d773c46800f4a709ac8f92, type: 3}
+  m_Name: CO_Module5
+  m_EditorClassIdentifier: Assembly-CSharp::MicroModule
+  moduleId: CO-M05
+  moduleTitle: 'Cold Outreach: Follow-up, Cadence und Metriken'
+  moduleText: "Erfolgreiches Cold Outreach besteht selten aus nur einem Kontaktversuch.
+    Eine Cadence kann mehrere gut geplante Touchpoints \xFCber unterschiedliche Kan\xE4le
+    enthalten. Jeder Follow-up sollte einen nachvollziehbaren Grund haben und m\xF6glichst
+    einen zus\xE4tzlichen Nutzen bieten.\nPersistence bedeutet nicht, einen Prospect
+    unbegrenzt zu kontaktieren. Wiederholte Nachrichten ohne neue Relevanz k\xF6nnen
+    als Spam wahrgenommen werden. Deshalb sollte eine Cadence klare Abst\xE4nde,
+    sinnvolle Inhalte und eine M\xF6glichkeit zum Beenden der Kommunikation enthalten.\nF\xFCr
+    die Bewertung sollten nicht nur Aktivit\xE4ten wie die Anzahl der Anrufe gemessen
+    werden. Aussagekr\xE4ftiger sind beispielsweise qualifizierte Gespr\xE4che, Reply
+    Rate, Meeting Rate und die Qualit\xE4t der weitergegebenen Informationen. Alle
+    Ergebnisse sollten im CRM dokumentiert werden."
+  questions:
+  - questionId: CO-M05-Q01
+    questionText: Was beschreibt eine Sales Cadence am besten?
+    answerOptions:
+    - "Einen einzelnen, zuf\xE4lligen Telefonanruf"
+    - "Eine geplante Folge von Kontaktversuchen \xFCber einen bestimmten Zeitraum"
+    - Eine Liste aller Produktfunktionen
+    - Eine Methode zur Berechnung des Produktpreises
+    correctAnswerIndex: 1
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: CO-M05-Q02
+    questionText: "Welche Kennzahl ist f\xFCr die Qualit\xE4t von Cold Outreach besonders
+      aussagekr\xE4ftig?"
+    answerOptions:
+    - Die Anzahl der geschriebenen internen Notizen
+    - "Die Anzahl der abgesendeten Nachrichten unabh\xE4ngig von ihrer Qualit\xE4t"
+    - "Die Zahl qualifizierter Meetings oder sinnvoller Gespr\xE4che"
+    - "Die L\xE4nge des verwendeten Sales Scripts"
+    correctAnswerIndex: 2
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: CO-M05-Q03
+    questionText: Was ist ein sinnvoller Follow-up, wenn ein Prospect nicht antwortet?
+    answerOptions:
+    - "Jeden Tag dieselbe Nachricht unver\xE4ndert zu senden"
+    - "Eine kurze, relevante Nachricht mit zus\xE4tzlichem Nutzen und klarer Ausstiegsm\xF6glichkeit
+      zu senden"
+    - "Den Prospect \xF6ffentlich zu markieren"
+    - "Sofort eine Beschwerde an die Gesch\xE4ftsf\xFChrung zu schicken"
+    correctAnswerIndex: 1
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: CO-M05-Q04
+    questionText: "Welche Information ist f\xFCr die \xDCbergabe eines warmen Prospects
+      an einen Account Executive besonders n\xFCtzlich?"
+    answerOptions:
+    - Nur der Name des Unternehmens
+    - "Die wichtigsten Pain Points, der Entscheidungsprozess und der vereinbarte
+      n\xE4chste Schritt"
+    - Nur die Anzahl der bisherigen Kontaktversuche
+    - "Eine allgemeine Produktbrosch\xFCre ohne Gespr\xE4chszusammenfassung"
+    correctAnswerIndex: 1
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: CO-M05-Q05
+    questionText: Wie sollte die Wirksamkeit von Cold Outreach in einem Trainingsexperiment
+      bewertet werden?
+    answerOptions:
+    - Nur anhand der Anzahl der versendeten Nachrichten
+    - "Nur anhand der L\xE4nge der Gespr\xE4che"
+    - "Durch den Vergleich relevanter Erfolgskennzahlen und der Gespr\xE4chsqualit\xE4t"
+    - Durch die Anzahl der verwendeten Produktbegriffe
+    correctAnswerIndex: 2
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: CO-M05-Q06
+    questionText: Persistence bedeutet, einen Prospect ohne zeitliche oder inhaltliche
+      Begrenzung weiter zu kontaktieren
+    answerOptions:
+    - Richtig
+    - Falsch
+    correctAnswerIndex: 1
+    timeLimitSeconds: 20
+    basePoints: 80
+    speedBonusPoints: 40
+  - questionId: CO-M05-Q07
+    questionText: "Eine gute CRM-Dokumentation erleichtert die sp\xE4tere \xDCbergabe
+      eines Prospects"
+    answerOptions:
+    - Richtig
+    - Falsch
+    correctAnswerIndex: 0
+    timeLimitSeconds: 20
+    basePoints: 80
+    speedBonusPoints: 40

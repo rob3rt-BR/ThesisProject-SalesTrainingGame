@@ -77,7 +77,7 @@ public class AIDialogueController : MonoBehaviour
 
     [Header("Backend")]
     [SerializeField]
-    private string backendUrl = "TO Define";
+    private string backendUrl = "http://localhost:5065/api/dialogue";
 
     private readonly TrainingSessionManager session = TrainingSessionManager.Instance;
 

@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14a60cf4d7d773c46800f4a709ac8f92, type: 3}
+  m_Name: UC_Module4
+  m_EditorClassIdentifier: Assembly-CSharp::MicroModule
+  moduleId: UC-M04
+  moduleTitle: 'Upselling und Cross-Selling: Wertorientierte Kommunikation'
+  moduleText: "Ein Zusatzangebot sollte als Empfehlung und nicht als Druckmittel
+    pr\xE4sentiert werden. Der Sales-Mitarbeiter kann zun\xE4chst die beobachtete
+    Situation zusammenfassen, den erwarteten Nutzen erkl\xE4ren und den Kunden fragen,
+    ob eine genauere Betrachtung sinnvoll ist.\nPreis, Leistungsumfang und m\xF6gliche
+    Einschr\xE4nkungen sollten transparent kommuniziert werden. Wenn ein Kunde eine
+    Empfehlung ablehnt, sollte die urspr\xFCngliche Kaufentscheidung respektiert
+    werden.\nEin professioneller Umgang mit Objections bedeutet, die Sorge anzuerkennen,
+    nach dem Grund zu fragen und gegebenenfalls eine kleinere Alternative oder einen
+    sp\xE4teren Zeitpunkt anzubieten. Vertrauen ist langfristig wichtiger als ein
+    einzelner zus\xE4tzlicher Verkauf."
+  questions:
+  - questionId: UC-M04-Q01
+    questionText: Wie sollte ein Sales-Mitarbeiter ein relevantes Upsell am besten
+      einleiten?
+    answerOptions:
+    - "\u201ESie m\xFCssen jetzt upgraden.\u201C"
+    - "\u201EAufgrund Ihres Wachstums k\xF6nnte Funktion X relevant sein. M\xF6chten
+      Sie pr\xFCfen, ob sie zu Ihrem Ziel passt?\u201C"
+    - "\u201EAlle erfolgreichen Kunden kaufen dieses Paket.\u201C"
+    - "\u201EIch aktiviere das Upgrade direkt f\xFCr Sie.\u201C"
+    correctAnswerIndex: 1
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: UC-M04-Q02
+    questionText: "Ein Kunde sagt: \u201EDas ist teurer als erwartet.\u201C Wie sollte
+      der Sales-Mitarbeiter reagieren?"
+    answerOptions:
+    - Den Einwand ignorieren und weiterreden
+    - Den Kunden unter Druck setzen
+    - "Nach dem konkreten Preisbedenken fragen und den Nutzen transparent erkl\xE4ren"
+    - Sofort behaupten, dass der Preis keine Rolle spielt
+    correctAnswerIndex: 2
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: UC-M04-Q03
+    questionText: Welche Information sollte bei einem Zusatzangebot transparent dargestellt
+      werden?
+    answerOptions:
+    - Nur der neue Gesamtpreis
+    - Preis, Leistungsumfang und relevante Bedingungen
+    - "Ausschlie\xDFlich der m\xF6gliche Umsatz f\xFCr den Anbieter"
+    - Nur besonders positive Kundenbewertungen
+    correctAnswerIndex: 1
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: UC-M04-Q04
+    questionText: "Warum sollte ein Sales-Mitarbeiter die urspr\xFCngliche Kaufentscheidung
+      des Kunden sch\xFCtzen?"
+    answerOptions:
+    - "Damit der Kunde nicht das Gef\xFChl bekommt, zum Zusatzkauf gedr\xE4ngt zu
+      werden"
+    - "Damit der Anbieter keine weiteren Produkte erkl\xE4ren muss"
+    - "Damit jeder Kunde automatisch beim urspr\xFCnglichen Produkt bleibt"
+    - "Damit Preisverhandlungen unm\xF6glich werden"
+    correctAnswerIndex: 0
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: UC-M04-Q05
+    questionText: Ein Kunde lehnt ein Cross-Sell ab. Was ist die professionellste
+      Reaktion?
+    answerOptions:
+    - Das Nein akzeptieren und die bestehende Kundenbeziehung positiv fortsetzen
+    - "Den Kunden so lange weiter \xFCberzeugen, bis er zustimmt"
+    - Den bestehenden Service sofort reduzieren
+    - Dem Kunden mitteilen, dass er eine schlechte Entscheidung getroffen hat
+    correctAnswerIndex: 0
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: UC-M04-Q06
+    questionText: "Druck und k\xFCnstliche Verknappung sind gute Methoden, um langfristiges
+      Kundenvertrauen aufzubauen"
+    answerOptions:
+    - Richtig
+    - Falsch
+    correctAnswerIndex: 1
+    timeLimitSeconds: 20
+    basePoints: 80
+    speedBonusPoints: 40
+  - questionId: UC-M04-Q07
+    questionText: "Eine wertorientierte Empfehlung erkl\xE4rt, wie das Angebot ein
+      relevantes Kundenproblem l\xF6sen kann"
+    answerOptions:
+    - Richtig
+    - Falsch
+    correctAnswerIndex: 0
+    timeLimitSeconds: 20
+    basePoints: 80
+    speedBonusPoints: 40

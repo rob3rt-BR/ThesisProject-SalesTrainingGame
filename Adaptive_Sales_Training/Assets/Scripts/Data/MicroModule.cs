@@ -19,6 +19,7 @@ public class ModuleQuestion
     public string questionId;
     [TextArea(2, 5)]
     public string questionText;
+    [TextArea(2, 4)]
     public List<string> answerOptions = new();
     public int correctAnswerIndex;
 

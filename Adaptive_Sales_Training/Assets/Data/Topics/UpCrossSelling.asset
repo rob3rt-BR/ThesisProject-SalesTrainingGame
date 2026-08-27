@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8f05cafa5023a84795e9d4f2a5cebf2, type: 3}
+  m_Name: UpCrossSelling
+  m_EditorClassIdentifier: Assembly-CSharp::SalesTopic
+  topicId: ST02-UC
+  topicTitle: Upselling und Cross-Selling
+  modules:
+  - {fileID: 11400000, guid: 32f8043d0a15a8e49969fbfae84924e3, type: 2}
+  - {fileID: 11400000, guid: 3b8c64e1107f52141b0237e5c1eb01f3, type: 2}
+  - {fileID: 11400000, guid: 974d5408a3bbae64c81ed303c42bb2e6, type: 2}
+  - {fileID: 11400000, guid: dcd6d4e5b89654f468dc085874c6d5e7, type: 2}
+  - {fileID: 11400000, guid: ee132f715b27e3846a18fee29d273262, type: 2}

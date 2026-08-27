@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4549cc761c8952748aed4c13489b9771, type: 3}
+  m_Name: AI-UC-Scenario1
+  m_EditorClassIdentifier: Assembly-CSharp::AIDialogueScenario
+  module: {fileID: 11400000, guid: 32f8043d0a15a8e49969fbfae84924e3, type: 2}
+  scenarioId: AI-UC-01
+  scenarioContext: "Du betreust einen Kunden, der aktuell den Basic-Tarif einer SaaS-Plattform
+    nutzt. Das Unternehmen w\xE4chst und ben\xF6tigt m\xF6glicherweise mehr Nutzer,
+    zus\xE4tzliche Auswertungen und eine Integration in das bestehende CRM."
+  customerPersona: "Name: Laura Brandt\nRolle: Teamleiterin Sales Operations\nPers\xF6nlichkeit:
+    Praktisch und budgetbewusst. Sie m\xF6chte den Unterschied zwischen einem Upgrade
+    und einem Zusatzmodul verstehen."
+  openingMessage: "\u201ESie sprechen von einer Erweiterung. Meinen Sie damit einen
+    gr\xF6\xDFeren Tarif oder ein zus\xE4tzliches Produkt?\u201C"
+  questionContexts:
+  - questionId: UC-M01-Q01
+    dialogueContext: "Laura fragt, ob der Wechsel auf einen Premium-Tarif ein Upselling
+      w\xE4re."
+  - questionId: UC-M01-Q02
+    dialogueContext: "Laura m\xF6chte wissen, ob eine CRM-Integration als erg\xE4nzende
+      Leistung ein Cross-Sell darstellt."
+  - questionId: UC-M01-Q03
+    dialogueContext: "Laura vergleicht ein Upgrade des bestehenden Tarifs mit einem
+      zus\xE4tzlichen Modul."
+  - questionId: UC-M01-Q04
+    dialogueContext: "Laura fragt, welchen konkreten Nutzen ein Upgrade f\xFCr ihr
+      Team h\xE4tte."
+  - questionId: UC-M01-Q05
+    dialogueContext: "Laura m\xF6chte sicherstellen, dass ein Angebot nicht nur wegen
+      eines internen Sales-Ziels gemacht wird."
+  - questionId: UC-M01-Q06
+    dialogueContext: Laura verwendet die Begriffe Upselling und Cross-Selling synonym
+      und bittet um eine klare Unterscheidung.
+  - questionId: UC-M01-Q07
+    dialogueContext: "Laura fragt, ob ein zus\xE4tzliches Angebot auch f\xFCr sie
+      selbst einen praktischen Vorteil haben muss."

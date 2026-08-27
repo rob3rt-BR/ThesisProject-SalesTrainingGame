@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14a60cf4d7d773c46800f4a709ac8f92, type: 3}
+  m_Name: CO_Module3
+  m_EditorClassIdentifier: Assembly-CSharp::MicroModule
+  moduleId: CO-M03
+  moduleTitle: 'Cold Outreach: Die erste Nachricht gestalten'
+  moduleText: "Die erste Nachricht sollte kurz, klar und auf den Prospect ausgerichtet
+    sein. Eine gute Er\xF6ffnung enth\xE4lt typischerweise die eigene Identit\xE4t,
+    einen relevanten Anlass und einen kurzen Hinweis auf den m\xF6glichen Nutzen.\nBei
+    einem Cold Call sollte die Value Proposition in wenigen S\xE4tzen verst\xE4ndlich
+    sein. Bei einer Cold Email helfen ein klarer, relevanter Betreff, kurze Abs\xE4tze
+    und ein eindeutiger Call-to-Action.\nEine Nachricht sollte nicht alle Features
+    des Produkts erkl\xE4ren. Features werden erst dann wichtig, wenn sie mit einem
+    konkreten Kundenproblem verbunden werden k\xF6nnen. Ein kleiner n\xE4chster Schritt,
+    zum Beispiel ein kurzer Austausch, ist oft geeigneter als sofort ein langer Demo-Termin."
+  questions:
+  - questionId: CO-M03-Q01
+    questionText: Welche Information sollte in den ersten Sekunden eines Cold Calls
+      besonders schnell klar werden?
+    answerOptions:
+    - "Die vollst\xE4ndige Unternehmensgeschichte des Anbieters"
+    - "Wer anruft, warum der Prospect kontaktiert wird und welcher m\xF6gliche Nutzen
+      besteht"
+    - Jede einzelne Funktion des Produkts
+    - "Der gesamte Ablauf eines sp\xE4teren Vertrags"
+    correctAnswerIndex: 1
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: CO-M03-Q02
+    questionText: "Welche Eigenschaft ist f\xFCr den Betreff einer Cold Email besonders
+      sinnvoll?"
+    answerOptions:
+    - Er ist kurz und stellt einen relevanten Bezug zum Prospect her
+    - "Er enth\xE4lt m\xF6glichst viele Gro\xDFbuchstaben und Ausrufezeichen"
+    - Er beschreibt alle Produktfunktionen
+    - "Er bleibt vollst\xE4ndig leer"
+    correctAnswerIndex: 0
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: CO-M03-Q03
+    questionText: "Welcher Call-to-Action ist f\xFCr eine erste Cold-Outreach-Nachricht
+      meist am passendsten?"
+    answerOptions:
+    - "\u201EKaufen Sie jetzt sofort.\u201C"
+    - "\u201ELesen Sie bitte unser komplettes Handbuch.\u201C"
+    - "\u201EW\xE4ren 15 Minuten n\xE4chste Woche sinnvoll, um die Situation kurz
+      zu pr\xFCfen?\u201C"
+    - "\u201ELeiten Sie diese Nachricht an alle Kollegen weiter.\u201C"
+    correctAnswerIndex: 2
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: CO-M03-Q04
+    questionText: Welche Aussage formuliert einen Kundennutzen statt nur ein Feature?
+    answerOptions:
+    - "\u201EUnsere Plattform enth\xE4lt ein Dashboard.\u201C"
+    - "\u201EWir bieten API-Zugriff.\u201C"
+    - "\u201EDas System besitzt f\xFCnf Benutzerrollen.\u201C"
+    - "\u201EIhr Team kann den manuellen Aufwand bei der Auswertung reduzieren.\u201C"
+    correctAnswerIndex: 3
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: CO-M03-Q05
+    questionText: "Welche Form der Personalisierung ist am st\xE4rksten?"
+    answerOptions:
+    - Den Vornamen des Prospects in eine identische Massenmail einzusetzen
+    - "Einen aktuellen gesch\xE4ftlichen Anlass mit dem m\xF6glichen Kundennutzen
+      zu verbinden"
+    - Den Namen des Unternehmens mehrfach zu wiederholen
+    - "Einen besonders langen Text \xFCber die eigene Firma zu schreiben"
+    correctAnswerIndex: 1
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: CO-M03-Q06
+    questionText: "Ein Sales-Script sollte wortw\xF6rtlich vorgelesen werden, damit
+      kein Satz ver\xE4ndert wird"
+    answerOptions:
+    - Richtig
+    - Falsch
+    correctAnswerIndex: 1
+    timeLimitSeconds: 20
+    basePoints: 80
+    speedBonusPoints: 40
+  - questionId: CO-M03-Q07
+    questionText: Eine erste Nachricht sollte normalerweise nur einen klaren Call-to-Action
+      enthalten
+    answerOptions:
+    - Richtig
+    - Falsch
+    correctAnswerIndex: 0
+    timeLimitSeconds: 20
+    basePoints: 80
+    speedBonusPoints: 40

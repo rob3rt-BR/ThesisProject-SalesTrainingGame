@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14a60cf4d7d773c46800f4a709ac8f92, type: 3}
+  m_Name: UC_Module1
+  m_EditorClassIdentifier: Assembly-CSharp::MicroModule
+  moduleId: UC-M01
+  moduleTitle: 'Upselling und Cross-Selling: Grundlagen'
+  moduleText: "Upselling bedeutet, einem Kunden eine h\xF6herwertige oder umfangreichere
+    Version des bereits betrachteten oder genutzten Produkts anzubieten. Ein Beispiel
+    ist der Wechsel von einem Basic- auf einen Premium-Tarif.\nCross-Selling bedeutet,
+    ein erg\xE4nzendes oder verwandtes Produkt beziehungsweise eine zus\xE4tzliche
+    Leistung anzubieten. Bei einer Software kann dies beispielsweise ein passendes
+    Reporting-Modul, eine Integration oder ein zus\xE4tzlicher Service sein.\nBeide
+    Ans\xE4tze k\xF6nnen den durchschnittlichen Bestellwert erh\xF6hen. Entscheidend
+    ist jedoch, dass das Angebot einen nachvollziehbaren Mehrwert f\xFCr den Kunden
+    bietet. Ein h\xF6herer Umsatz allein ist kein ausreichender Grund f\xFCr eine
+    Empfehlung."
+  questions:
+  - questionId: UC-M01-Q01
+    questionText: "Was ist ein typisches Beispiel f\xFCr Upselling?"
+    answerOptions:
+    - "Ein Kunde erh\xE4lt eine Support-Anfrage zu seinem bestehenden Vertrag"
+    - Ein Kunde wechselt von einem Basic- auf einen Premium-Tarif
+    - Ein Kunde empfiehlt das Produkt einem Freund
+    - "Ein Kunde verl\xE4ngert denselben Vertrag ohne \xC4nderung"
+    correctAnswerIndex: 1
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: UC-M01-Q02
+    questionText: "Was ist ein typisches Beispiel f\xFCr Cross-Selling?"
+    answerOptions:
+    - "Der Kunde erh\xE4lt einen niedrigeren Preis f\xFCr dasselbe Produkt"
+    - Der Kunde wechselt zu einer teureren Version desselben Produkts
+    - "Der Kunde kauft eine erg\xE4nzende Integration zur bereits genutzten Software"
+    - Der Kunde beendet seinen Vertrag
+    correctAnswerIndex: 2
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: UC-M01-Q03
+    questionText: "Ein Kunde kauft einen Laptop und erh\xE4lt das Angebot f\xFCr
+      einen leistungsf\xE4higeren Prozessor. Welche Technik wird angewendet?"
+    answerOptions:
+    - Cross-Selling
+    - Cold Outreach
+    - Upselling
+    - Lead Nurturing
+    correctAnswerIndex: 2
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: UC-M01-Q04
+    questionText: Was sollten Upselling und Cross-Selling idealerweise gemeinsam
+      leisten?
+    answerOptions:
+    - "Den Kunden zu einer m\xF6glichst teuren Entscheidung dr\xE4ngen"
+    - "Den Kunden bei der Erreichung seiner Ziele unterst\xFCtzen"
+    - "Die urspr\xFCngliche Kaufentscheidung unn\xF6tig komplizieren"
+    - Die Beratung durch eine automatische Empfehlung ersetzen
+    correctAnswerIndex: 1
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: UC-M01-Q05
+    questionText: Wann ist ein Zusatzangebot am wahrscheinlichsten sinnvoll?
+    answerOptions:
+    - "Wenn es unabh\xE4ngig vom Bedarf des Kunden den Umsatz erh\xF6ht"
+    - "Wenn es relevant ist und die Nutzung oder das Ergebnis f\xFCr den Kunden verbessert"
+    - Wenn der Sales-Mitarbeiter noch ein Ziel erreichen muss
+    - "Wenn der Kunde bereits ausdr\xFCcklich Nein gesagt hat"
+    correctAnswerIndex: 1
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
+  - questionId: UC-M01-Q06
+    questionText: Upselling und Cross-Selling bezeichnen exakt dieselbe Verkaufstechnik
+    answerOptions:
+    - Richtig
+    - Falsch
+    correctAnswerIndex: 1
+    timeLimitSeconds: 20
+    basePoints: 80
+    speedBonusPoints: 40
+  - questionId: UC-M01-Q07
+    questionText: "Upselling und Cross-Selling k\xF6nnen sowohl den Umsatz als auch
+      den Kundennutzen erh\xF6hen, wenn das Angebot relevant ist"
+    answerOptions:
+    - Richtig
+    - Falsch
+    correctAnswerIndex: 0
+    timeLimitSeconds: 20
+    basePoints: 80
+    speedBonusPoints: 40
