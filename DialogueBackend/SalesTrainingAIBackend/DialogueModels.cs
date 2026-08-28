@@ -31,6 +31,13 @@ namespace DialogueModels
         public int CompletionTokens {get; set;}
         public long ResponseTimeMilliseconds {get; set;}
 
+        public string TraineeDialogueText {get; set;} = "";
+        public string ReplyText {get; set;} = "";
+    }
+
+    public sealed class DialogueOutput
+    {
+        public string TraineeDialogueText {get; set;} = "";
         public string ReplyText {get; set;} = "";
     }
 }

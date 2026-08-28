@@ -35,6 +35,8 @@ public class AIDialogueController : MonoBehaviour
     [SerializeField]
     private TMP_Text dialogueText;
     [SerializeField]
+    private TMP_Text traineeDialogueText;
+    [SerializeField]
     private GameObject loadingIndicator;
     [SerializeField]
     private Button startQuestionsButton;
@@ -435,6 +437,8 @@ public class AIDialogueController : MonoBehaviour
             responseId = responseData.responseId,
             model = responseData.model,
             totalResponseTimeMilliseconds = totalResponseTimeMilliseconds,
+            
+            traineeDialogueText = responseData.traineeDialogueText,
             replyText = responseData.replyText
         };
         session.RecordQuestionResultAIResponse(aIResponse, question.questionId);
@@ -443,9 +447,10 @@ public class AIDialogueController : MonoBehaviour
         DialogueMessage currentUserAnswerMessage = new()
         {
             role = "user",
-            content = $"Dialogkontext zur aktuellen Frage: {currentQuestionContext.dialogueContext}\n" +
-                        $"Frage: {question.questionText}\n" +
-                        $"Ausgewählte Antwort: {selectedAnswer}"
+            content = responseData.traineeDialogueText
+            /*content = $"Dialogkontext zur aktuellen Frage: {currentQuestionContext.dialogueContext}\n" +
+                        $"Aktuelle Trainingsfrage: {question.questionText}\n" +
+                        $"Ausgewählte Antwort: {selectedAnswer}"*/
         };
         currentConversationHistory.Add(currentUserAnswerMessage);
 
@@ -459,6 +464,7 @@ public class AIDialogueController : MonoBehaviour
 
         // Set text attribute in dialogue screen => display response message in textbox
         dialogueText.text = responseData.replyText;
+        traineeDialogueText.text = responseData.traineeDialogueText;
 
         dialogueScreen.SetActive(true);
 

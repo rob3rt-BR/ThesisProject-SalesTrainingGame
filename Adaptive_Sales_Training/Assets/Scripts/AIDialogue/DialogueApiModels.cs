@@ -36,5 +36,6 @@ public class DialogueResponse
     public int completionTokens;
     public long responseTimeMilliseconds;
 
+    public string traineeDialogueText;
     public string replyText;
 }

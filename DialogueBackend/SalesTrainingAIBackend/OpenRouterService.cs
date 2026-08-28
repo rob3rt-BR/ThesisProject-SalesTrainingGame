@@ -83,12 +83,16 @@ public sealed class OpenRouterService
             throw new InvalidOperationException("OpenRouter returned an empty response.");
         }
 
+        string resultContent = openRouterResult.Choices[0].Message.Content;
+        DialogueOutput? dialogueOutput = JsonSerializer.Deserialize<DialogueOutput>(resultContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
         OpenRouterUsage? usage = openRouterResult.Usage;
 
         logger.LogInformation("OpenRouter request completed. Model: {Model}, " +
         "Scenario: {ScenarioId}, Module: {ModuleId}, Question: {QuestionId}, " +
         "PromptTokens: {PromptTokens}, CompletionTokens: {CompletionTokens}, " +
         "ResponseTimeMs: {ResponseTimeMs}" +
+        "TraineeDialogueText: {TraineeDialogueText}" +
         "ReplyText: {ReplyText}",
         openRouterResult.Model,
         request.ScenarioId,
@@ -97,7 +101,8 @@ public sealed class OpenRouterService
         usage?.PromptTokens ?? 0,
         usage?.CompletionTokens ?? 0,
         stopWatch.ElapsedMilliseconds,
-        openRouterResult.Choices[0].Message.Content);
+        dialogueOutput?.TraineeDialogueText,
+        dialogueOutput?.ReplyText);
 
         return new DialogueResponse
         {
@@ -106,7 +111,9 @@ public sealed class OpenRouterService
             PromptTokens = usage?.PromptTokens ?? 0,
             CompletionTokens = usage?.CompletionTokens ?? 0,
             ResponseTimeMilliseconds = stopWatch.ElapsedMilliseconds,
-            ReplyText = openRouterResult.Choices[0].Message.Content
+            
+            TraineeDialogueText = dialogueOutput?.TraineeDialogueText ?? "No TraineeDialogueText",
+            ReplyText = dialogueOutput?.ReplyText ?? "No ReplyText"
         };
     }
 
@@ -120,15 +127,28 @@ public sealed class OpenRouterService
         Verhalte dich professionell, aber leicht interaktiv und spielerisch.
         Übernimm nicht die Rolle eines Trainers.
 
-        Reagiere natürlich und kurz auf die ausgewählte Antwort des Trainingsteilnehmers.
+        Erzeuge zwei zusammenhängende Texte:
+
+        1. traineeDialogueText:
+        Formuliere aus der ausgewählten Antwort eine kurze, natürliche Aussage des Trainingsteilnehmers.
+        Verändere nicht die Bedeutung der ausgewählten Antwort und füge keine neuen fachlichen Behauptungen hinzu.
+
+        2. replyText:
+        Reagiere als Kunde passend auf diese Aussage.
+        Diese Reaktion darf keine zusätzliche Fragen enthalten.
         Stelle anschließend höchstens eine kurze Kundenfrage zum nächsten Lernaspekt, der im aktuellen Dialogkontext beschrieben ist.
 
-        Die Frage dark keine richtige Antwort verraten und keine neue, unabhängige Thematik einführen.
-        Wiederhole keine Trainingsfrage wörtlich.
-        Bewerte weder die Antwort noch den Punktestand des Teilnehmers.
+        Die Kundenfrage ist nur eine dialogische Überleitung.
+        Wiederhole keine Trainingsfrage wörtlich und verrate nicht die richtige Antwort.
+        Bewerte weder die Antwort noch den Punktestand und führe kein unabhängiges neues Thema ein.
+
+        Gib ausschließlich gültiges JSON zurück:
+        {
+            "traineeDialogueText": "...",
+            "replyText: "..."
+        }
         
-        Antworte in höchsten zwei kurzen Sätzen:
-        eine Reaktion des Kunden und eine passende Überleitungsfrage.
+        Antworte in höchstens zwei kurzen Sätzen pro Text.
         """;
 
         string requestProperties = $"""
@@ -167,7 +187,9 @@ public sealed class OpenRouterService
         Dialogkontext zur aktuellen Frage: {request.QuestionDialogueContext}
         Aktuelle Trainingsfrage: {request.QuestionText}
         Ausgewählte Antwort: {request.SelectedAnswer}
-        Formuliere jetzt die passende Kundenantwor für diesen Gesprächsschritt.
+
+        Formuliere zuerst eine natürliche Teilnehmeraussage aus der ausgewählten Antwort.
+        Reagiere danach als Kunde auf diese Aussage und stelle eine passende Überleitungsfrage zum nächsten Lernaspekt aus dem Dialogkontext.
         """;
 
         var userMessage = new
