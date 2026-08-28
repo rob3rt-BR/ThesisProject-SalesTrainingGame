@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AIDialogueScenario
   module: {fileID: 11400000, guid: 3b8c64e1107f52141b0237e5c1eb01f3, type: 2}
   scenarioId: AI-UC-02
-  scenarioContext: Du betreust ein Unternehmen, das deine Projektmanagement-Software
+  scenarioContext: "Du betreust ein Unternehmen, das deine Projektmanagement-Software
     seit acht Monaten erfolgreich nutzt. Das Unternehmen expandiert und plant, weitere
-    Abteilungen einzubinden.
+    Abteilungen einzubinden. Das Gespr\xE4ch behandelt Customer Readiness, Health
+    Signals, erfolgreichen Produktgebrauch und den richtigen Zeitpunkt f\xFCr ein
+    Angebot."
   customerPersona: "Name: Miriam Scholz\nRolle: Head of Operations\nPers\xF6nlichkeit:
     Zufrieden mit dem aktuellen Produkt, aber vorsichtig gegen\xFCber zus\xE4tzlichen
     Kosten."
@@ -24,23 +26,28 @@ MonoBehaviour:
     Sie gerade jetzt \xFCber eine Erweiterung?\u201C"
   questionContexts:
   - questionId: UC-M02-Q01
-    dialogueContext: "Miriam erkl\xE4rt, dass ihr Team mit dem aktuellen Tarif gute
-      Ergebnisse erzielt, aber an das Nutzerlimit st\xF6\xDFt."
+    dialogueContext: "Reagiere auf die Antwort zu Signalen f\xFCr Customer Readiness.
+      Frage anschlie\xDFend, wann mit einem Zusatzangebot eher gewartet werden sollte."
   - questionId: UC-M02-Q02
-    dialogueContext: "Miriam erw\xE4hnt einen ungel\xF6sten Support-Fall und fragt,
-      ob jetzt wirklich ein guter Zeitpunkt f\xFCr ein Zusatzangebot ist."
+    dialogueContext: "Reagiere auf die Antwort zu ungel\xF6sten Problemen. Frage
+      anschlie\xDFend, welches Nutzungs- oder Erfolgs-Signal auf eine m\xF6gliche
+      Bereitschaft f\xFCr ein Upgrade hinweisen k\xF6nnte."
   - questionId: UC-M02-Q03
-    dialogueContext: "Miriam berichtet, dass eine zentrale Funktion regelm\xE4\xDFig
-      genutzt wird und die Produktivit\xE4t verbessert hat."
+    dialogueContext: "Reagiere auf die Antwort zu Customer-Health-Signals. Frage
+      anschlie\xDFend, warum der nachweisbare Erfolg mit dem bestehenden Produkt
+      f\xFCr ein Upselling wichtig sein kann."
   - questionId: UC-M02-Q04
-    dialogueContext: "Miriam m\xF6chte verstehen, warum der bisherige Erfolg die
-      Grundlage f\xFCr ein Upgrade sein kann."
+    dialogueContext: "Reagiere auf die Antwort zum bestehenden Kundenerfolg. Frage
+      anschlie\xDFend, wie die Expansion auf weitere Abteilungen neue Anforderungen
+      erzeugen k\xF6nnte."
   - questionId: UC-M02-Q05
-    dialogueContext: "Miriam erkl\xE4rt, dass drei neue Abteilungen in den n\xE4chsten
-      Monaten mit der Software arbeiten sollen."
+    dialogueContext: "Reagiere auf die Antwort zum Unternehmenswachstum. Frage anschlie\xDFend,
+      ob Upselling ausschlie\xDFlich vor dem urspr\xFCnglichen Kauf stattfinden kann."
   - questionId: UC-M02-Q06
-    dialogueContext: "Miriam fragt, ob Upselling auch nach dem urspr\xFCnglichen
-      Kauf m\xF6glich ist."
+    dialogueContext: "Reagiere auf die Antwort zum m\xF6glichen Zeitpunkt von Upselling.
+      Frage anschlie\xDFend, ob Customer Success durch Nutzung und Kundenziele Expansion-Chancen
+      erkennen kann."
   - questionId: UC-M02-Q07
-    dialogueContext: "Miriam m\xF6chte wissen, welche Nutzungsdaten oder Kundensignale
-      f\xFCr eine faire Empfehlung verwendet werden."
+    dialogueContext: "Reagiere auf die Antwort zur Rolle von Customer Success. Stelle
+      abschlie\xDFend eine kurze Frage dazu, wie ein guter Zeitpunkt f\xFCr ein Zusatzangebot
+      insgesamt beurteilt werden sollte."

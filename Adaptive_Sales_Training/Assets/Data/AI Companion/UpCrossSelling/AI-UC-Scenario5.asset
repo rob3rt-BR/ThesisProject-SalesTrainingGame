@@ -16,7 +16,9 @@ MonoBehaviour:
   scenarioId: AI-UC-05
   scenarioContext: "Du betreust einen bestehenden SaaS-Kunden, der erfolgreich mit
     dem aktuellen Produkt arbeitet. Ein Bundle aus Analytics-Modul und zus\xE4tzlichem
-    Support k\xF6nnte den Kunden bei der Expansion unterst\xFCtzen."
+    Support k\xF6nnte den Kunden bei der Expansion unterst\xFCtzen. Das Gespr\xE4ch
+    behandelt Post-Purchase-Angebote, AOV, Bundles, Zusammenarbeit zwischen Sales
+    und Customer Success sowie langfristige Kundenbindung."
   customerPersona: "Name: Katharina Wolf\nRolle: Customer Success Managerin auf Kundenseite\nPers\xF6nlichkeit:
     Kundenorientiert und datenbewusst. Sie m\xF6chte den langfristigen Nutzen vor
     einer Kaufentscheidung verstehen."
@@ -24,23 +26,28 @@ MonoBehaviour:
     ob es uns tats\xE4chlich hilft und nicht nur unseren Bestellwert erh\xF6ht?\u201C"
   questionContexts:
   - questionId: UC-M05-Q01
-    dialogueContext: "Katharina fragt, warum ein Post-Purchase-Angebot f\xFCr ihre
-      bestehende L\xF6sung weniger riskant sein k\xF6nnte."
+    dialogueContext: "Reagiere auf die Antwort zum Post-Purchase-Upsell. Frage anschlie\xDFend,
+      welche Kennzahl den durchschnittlichen Wert einer Bestellung beschreibt."
   - questionId: UC-M05-Q02
-    dialogueContext: "Katharina m\xF6chte wissen, welche Kennzahl den durchschnittlichen
-      Bestellwert abbildet."
+    dialogueContext: "Reagiere auf die Antwort zu Average Order Value. Frage anschlie\xDFend,
+      was ein sinnvolles Bundle aus mehreren Produkten oder Leistungen ausmacht."
   - questionId: UC-M05-Q03
-    dialogueContext: "Katharina bittet um eine Erkl\xE4rung, welche Bestandteile
-      ein sinnvolles Bundle enthalten sollte."
+    dialogueContext: "Reagiere auf die Antwort zur Bedeutung eines Bundles. Frage
+      anschlie\xDFend, warum Sales und Customer Success bei solchen Angeboten zusammenarbeiten
+      sollten."
   - questionId: UC-M05-Q04
-    dialogueContext: "Katharina m\xF6chte wissen, wie Sales und Customer Success
-      Informationen \xFCber ihre Ziele und Nutzung austauschen sollten."
+    dialogueContext: "Reagiere auf die Antwort zur Zusammenarbeit von Sales und Customer
+      Success. Frage anschlie\xDFend, welche Faktoren neben dem Umsatz den Erfolg
+      von Upselling und Cross-Selling beurteilen sollten."
   - questionId: UC-M05-Q05
-    dialogueContext: "Katharina fragt, wie Erfolg gemessen werden kann, ohne nur
-      den zus\xE4tzlichen Umsatz zu betrachten."
+    dialogueContext: "Reagiere auf die Antwort zur umfassenden Erfolgsmessung. Frage
+      anschlie\xDFend, ob mehr Zusatzangebote unabh\xE4ngig von ihrer Relevanz immer
+      bessere Ergebnisse erzeugen."
   - questionId: UC-M05-Q06
-    dialogueContext: Katharina reagiert skeptisch auf eine lange Liste von Add-ons
-      und fragt, warum mehr Angebote nicht automatisch besser sind.
+    dialogueContext: "Reagiere auf die Antwort zur Bedeutung von Relevanz. Frage
+      anschlie\xDFend, wie relevante Angebote langfristig zur Kundenbindung beitragen
+      k\xF6nnen."
   - questionId: UC-M05-Q07
-    dialogueContext: "Katharina m\xF6chte verstehen, wie eine relevante Erweiterung
-      langfristig die Nutzung und Kundenbindung verbessern k\xF6nnte."
+    dialogueContext: "Reagiere auf die Antwort zur Kundenbindung. Stelle abschlie\xDFend
+      eine kurze Frage dazu, wie Katharina entscheiden w\xFCrde, ob das vorgeschlagene
+      Bundle wirklich zu ihren langfristigen Zielen passt."

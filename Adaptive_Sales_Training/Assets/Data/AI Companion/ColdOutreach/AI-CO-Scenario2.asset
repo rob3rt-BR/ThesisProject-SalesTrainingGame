@@ -16,8 +16,9 @@ MonoBehaviour:
   scenarioId: AI-CO-02
   scenarioContext: "Du verkaufst eine SaaS-L\xF6sung f\xFCr interne Prozesse und
     Kundenverwaltung. Der Prospect ist ein wachsendes Unternehmen, das k\xFCrzlich
-    drei neue Niederlassungen er\xF6ffnet hat. Du m\xF6chtest zeigen, dass deine
-    Ansprache auf einer relevanten Unternehmensentwicklung basiert."
+    drei neue Niederlassungen er\xF6ffnet hat. Das Gespr\xE4ch f\xFChrt von der Auswahl
+    des passenden Kundentyps \xFCber Research und Ansprechpartner bis zur Dokumentation
+    im CRM."
   customerPersona: "Name: Markus Vogel\nRolle: Leiter des Customer Operations Teams\nPers\xF6nlichkeit:
     Analytisch und direkt. Er reagiert positiv auf konkrete Informationen, lehnt
     aber oberfl\xE4chliche Personalisierung ab.\n"
@@ -25,23 +26,30 @@ MonoBehaviour:
     hat das mit Ihrer Software zu tun?\u201C"
   questionContexts:
   - questionId: CO-M02-Q01
-    dialogueContext: "Markus m\xF6chte wissen, warum sein Unternehmen als passender
-      Prospect ausgew\xE4hlt wurde."
+    dialogueContext: "Reagiere auf die Antwort zur Bedeutung eines Ideal Customer
+      Profile. Frage anschlie\xDFend, welche aktuelle Unternehmensentwicklung als
+      relevanter Anlass f\xFCr Cold Outreach dienen k\xF6nnte."
   - questionId: CO-M02-Q02
-    dialogueContext: "Markus best\xE4tigt, dass die Expansion aktuell viele neue
-      operative Herausforderungen erzeugt."
+    dialogueContext: "Reagiere auf die Antwort zu Trigger Events. Frage anschlie\xDFend,
+      welche Person im Unternehmen f\xFCr das angesprochene Problem besonders relevant
+      sein k\xF6nnte."
   - questionId: CO-M02-Q03
-    dialogueContext: Markus ist nicht der alleinige Entscheider und fragt, welche
-      Rolle in einem Unternehmen ebenfalls einbezogen werden sollte.
+    dialogueContext: "Reagiere auf die Antwort zur Rolle des passenden Ansprechpartners.
+      Frage anschlie\xDFend, welche Unternehmensinformationen vor der Kontaktaufnahme
+      recherchiert werden sollten."
   - questionId: CO-M02-Q04
-    dialogueContext: "Markus fragt, welche Information \xFCber die Expansion tats\xE4chlich
-      f\xFCr die\n  Kontaktaufnahme relevant war."
+    dialogueContext: "Reagiere auf die Antwort zu sinnvoller Recherche. Frage anschlie\xDFend,
+      wo diese Erkenntnisse dokumentiert werden sollten, damit sie f\xFCr weitere
+      Kontaktversuche verf\xFCgbar bleiben."
   - questionId: CO-M02-Q05
-    dialogueContext: "Markus m\xF6chte wissen, ob Informationen aus dem Gespr\xE4ch
-      sp\xE4ter f\xFCr andere Sales-Mitarbeiter verf\xFCgbar w\xE4ren."
+    dialogueContext: "Reagiere auf die Antwort zur CRM-Dokumentation. Frage anschlie\xDFend,
+      ob ein dokumentiertes Trigger Event als Gespr\xE4chsanlass verwendet werden
+      kann."
   - questionId: CO-M02-Q06
-    dialogueContext: "Markus pr\xFCft, ob die Expansion als konkreter Gespr\xE4chsanlass
-      oder nur als allgemeine Werbeformulierung verwendet wird."
+    dialogueContext: "Reagiere auf die Antwort zur Bedeutung eines Trigger Events.
+      Frage anschlie\xDFend, ob das Sammeln m\xF6glichst vieler privater Informationen
+      eine bessere Personalisierung erzeugt."
   - questionId: CO-M02-Q07
-    dialogueContext: "Markus reagiert skeptisch auf eine Ansprache, die zu viele
-      pers\xF6nliche oder irrelevante Details \xFCber ihn enth\xE4lt"
+    dialogueContext: "Reagiere auf die Antwort zu privaten und relevanten Informationen.
+      Stelle abschlie\xDFend eine kurze Frage dazu, welche Informationen f\xFCr eine
+      respektvolle Personalisierung wirklich ausreichen."

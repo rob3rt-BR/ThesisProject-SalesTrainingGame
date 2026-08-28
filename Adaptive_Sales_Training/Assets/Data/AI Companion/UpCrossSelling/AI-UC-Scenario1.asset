@@ -16,7 +16,9 @@ MonoBehaviour:
   scenarioId: AI-UC-01
   scenarioContext: "Du betreust einen Kunden, der aktuell den Basic-Tarif einer SaaS-Plattform
     nutzt. Das Unternehmen w\xE4chst und ben\xF6tigt m\xF6glicherweise mehr Nutzer,
-    zus\xE4tzliche Auswertungen und eine Integration in das bestehende CRM."
+    zus\xE4tzliche Auswertungen und eine CRM-Integration. Das Gespr\xE4ch f\xFChrt
+    von der Unterscheidung zwischen Upselling und Cross-Selling zur Bedeutung des
+    Kundennutzens."
   customerPersona: "Name: Laura Brandt\nRolle: Teamleiterin Sales Operations\nPers\xF6nlichkeit:
     Praktisch und budgetbewusst. Sie m\xF6chte den Unterschied zwischen einem Upgrade
     und einem Zusatzmodul verstehen."
@@ -24,23 +26,29 @@ MonoBehaviour:
     gr\xF6\xDFeren Tarif oder ein zus\xE4tzliches Produkt?\u201C"
   questionContexts:
   - questionId: UC-M01-Q01
-    dialogueContext: "Laura fragt, ob der Wechsel auf einen Premium-Tarif ein Upselling
+    dialogueContext: "Reagiere auf die Antwort zur Bedeutung von Upselling. Frage
+      anschlie\xDFend, ob eine erg\xE4nzende CRM-Integration eher ein Cross-Sell
       w\xE4re."
   - questionId: UC-M01-Q02
-    dialogueContext: "Laura m\xF6chte wissen, ob eine CRM-Integration als erg\xE4nzende
-      Leistung ein Cross-Sell darstellt."
+    dialogueContext: "Reagiere auf die Antwort zur Bedeutung von Cross-Selling. Frage
+      anschlie\xDFend, wie das Angebot eines leistungsf\xE4higeren Prozessors bei
+      einem Laptop einzuordnen w\xE4re."
   - questionId: UC-M01-Q03
-    dialogueContext: "Laura vergleicht ein Upgrade des bestehenden Tarifs mit einem
-      zus\xE4tzlichen Modul."
+    dialogueContext: "Reagiere auf die Antwort zur Einordnung des Prozessor-Upgrades.
+      Frage anschlie\xDFend, was Upselling und Cross-Selling unabh\xE4ngig von ihrer
+      technischen Unterscheidung gemeinsam erreichen sollten."
   - questionId: UC-M01-Q04
-    dialogueContext: "Laura fragt, welchen konkreten Nutzen ein Upgrade f\xFCr ihr
-      Team h\xE4tte."
+    dialogueContext: "Reagiere auf die Antwort zum Kundennutzen. Frage anschlie\xDFend,
+      wann ein Zusatzangebot f\xFCr den Kunden tats\xE4chlich sinnvoll w\xE4re."
   - questionId: UC-M01-Q05
-    dialogueContext: "Laura m\xF6chte sicherstellen, dass ein Angebot nicht nur wegen
-      eines internen Sales-Ziels gemacht wird."
+    dialogueContext: "Reagiere auf die Antwort zu Relevanz und Kundennutzen. Frage
+      anschlie\xDFend, ob Upselling und Cross-Selling exakt dieselbe Verkaufstechnik
+      bezeichnen."
   - questionId: UC-M01-Q06
-    dialogueContext: Laura verwendet die Begriffe Upselling und Cross-Selling synonym
-      und bittet um eine klare Unterscheidung.
+    dialogueContext: "Reagiere auf die Antwort zur Unterscheidung der Begriffe. Frage
+      anschlie\xDFend, ob beide Techniken bei relevanten Angeboten sowohl den Umsatz
+      als auch den Kundennutzen erh\xF6hen k\xF6nnen."
   - questionId: UC-M01-Q07
-    dialogueContext: "Laura fragt, ob ein zus\xE4tzliches Angebot auch f\xFCr sie
-      selbst einen praktischen Vorteil haben muss."
+    dialogueContext: "Reagiere auf die Antwort zu Umsatz und Kundennutzen. Stelle
+      abschlie\xDFend eine kurze Frage dazu, woran Laura ein faires und hilfreiches
+      Zusatzangebot erkennen w\xFCrde."

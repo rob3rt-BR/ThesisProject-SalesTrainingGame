@@ -16,30 +16,38 @@ MonoBehaviour:
   scenarioId: AI-UC-04
   scenarioContext: "Du betreust einen Kunden, der mit dem aktuellen Tarif zufrieden
     ist. Ein Premium-Tarif k\xF6nnte einen wichtigen Reporting-Prozess verbessern,
-    kostet aber deutlich mehr als der aktuelle Tarif."
+    kostet aber deutlich mehr als der aktuelle Tarif. Das Gespr\xE4ch behandelt permission-based
+    Empfehlungen, Preis-Objections, Transparenz und den Erhalt des Kundenvertrauens."
   customerPersona: "Name: Stefan K\xF6nig\nRolle: Einkaufsleiter\nPers\xF6nlichkeit:
     Preisbewusst, erfahren und empfindlich gegen\xFCber manipulativen Verkaufstechniken."
   openingMessage: "\u201EDas Upgrade klingt interessant, aber der Preis ist deutlich
     h\xF6her. Warum sollte ich daf\xFCr mehr bezahlen?\u201C"
   questionContexts:
   - questionId: UC-M04-Q01
-    dialogueContext: Stefan soll mit einer transparenten, permission-based Empfehlung
-      angesprochen werden, nicht mit einer direkten Kaufaufforderung.
+    dialogueContext: "Reagiere auf die Antwort zur permission-based Empfehlung. Frage
+      anschlie\xDFend, wie mit der Aussage \u201EDas ist teurer als erwartet\u201C
+      professionell umgegangen werden sollte"
   - questionId: UC-M04-Q02
-    dialogueContext: "Stefan \xE4u\xDFert eine konkrete Preis-Objection und erwartet
-      eine sachliche Erkl\xE4rung statt eines Rabatts ohne Begr\xFCndung."
+    dialogueContext: "Reagiere auf die Antwort zur Preis-Objection. Frage anschlie\xDFend,
+      welche Informationen bei einem Zusatzangebot transparent dargestellt werden
+      sollten."
   - questionId: UC-M04-Q03
-    dialogueContext: "Stefan m\xF6chte wissen, welche zus\xE4tzlichen Leistungen
-      im h\xF6heren Preis enthalten sind."
+    dialogueContext: "Reagiere auf die Antwort zu Preis, Leistungsumfang und Bedingungen.
+      Frage anschlie\xDFend, warum die urspr\xFCngliche Kaufentscheidung des Kunden
+      gesch\xFCtzt werden sollte."
   - questionId: UC-M04-Q04
-    dialogueContext: "Stefan fragt, ob der bestehende Tarif weiterhin verf\xFCgbar
-      bleibt, falls er sich gegen das Upgrade entscheidet."
+    dialogueContext: "Reagiere auf die Antwort zum Schutz der urspr\xFCnglichen Entscheidung.
+      Frage anschlie\xDFend, wie ein Sales-Mitarbeiter reagieren sollte, wenn der
+      Kunde ein Cross-Sell ablehnt."
   - questionId: UC-M04-Q05
-    dialogueContext: "Stefan lehnt das Cross-Sell zun\xE4chst ab und beobachtet,
-      ob der Sales-Mitarbeiter professionell reagiert."
+    dialogueContext: "Reagiere auf die Antwort zum professionellen Umgang mit einem
+      Nein. Frage anschlie\xDFend, ob Druck und k\xFCnstliche Verknappung langfristiges
+      Kundenvertrauen aufbauen."
   - questionId: UC-M04-Q06
-    dialogueContext: "Stefan bemerkt, dass der Sales-Mitarbeiter k\xFCnstlichen Zeitdruck
-      erzeugt."
+    dialogueContext: "Reagiere auf die Antwort zu Druck und k\xFCnstlicher Verknappung.
+      Frage anschlie\xDFend, woran der Kunde eine wertorientierte Empfehlung erkennen
+      k\xF6nnte."
   - questionId: UC-M04-Q07
-    dialogueContext: "Stefan fragt nach dem konkreten Nutzen des Premium-Reportings
-      f\xFCr seinen Einkaufsprozess."
+    dialogueContext: "Reagiere auf die Antwort zur wertorientierten Empfehlung. Stelle
+      abschlie\xDFend eine kurze Frage dazu, welcher konkrete Kundennutzen hinter
+      dem Premium-Angebot stehen sollte."

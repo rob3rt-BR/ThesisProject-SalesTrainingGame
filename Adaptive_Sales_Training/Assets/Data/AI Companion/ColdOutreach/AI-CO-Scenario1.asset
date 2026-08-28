@@ -17,7 +17,9 @@ MonoBehaviour:
   scenarioContext: "Du arbeitest als Sales Development Representative f\xFCr eine
     Software, die mittelst\xE4ndische Unternehmen bei der Verwaltung von Angeboten
     und Kundenkontakten unterst\xFCtzt. Du f\xFChrst ein erstes Gespr\xE4ch mit einem
-    Prospect, der bisher keinen Kontakt zu deinem Unternehmen hatte."
+    Prospect, zu dem bisher keine Gesch\xE4ftsbeziehung besteht. Das Gespr\xE4ch
+    soll schrittweise von der Bedeutung von Cold Outreach bis zu einem respektvollen
+    n\xE4chsten Schritt f\xFChren."
   customerPersona: "Name: Sabine Keller\nRolle: Operations Managerin eines mittelst\xE4ndischen
     Unternehmens\nPers\xF6nlichkeit: H\xF6flich, aber vorsichtig und zeitlich stark
     ausgelastet.\nSie m\xF6chte schnell erkennen, ob ein Gespr\xE4ch relevant ist."
@@ -25,24 +27,30 @@ MonoBehaviour:
     es genau?\u201C"
   questionContexts:
   - questionId: CO-M01-Q01
-    dialogueContext: "Sabine m\xF6chte wissen, ob die Ansprache tats\xE4chlich ein
-      Cold-Outreach-Gespr\xE4ch ist oder ob bereits Informationen \xFCber ihr Unternehmen
-      vorliegen."
+    dialogueContext: "Reagiere auf die Antwort des Teilnehmers zur Bedeutung von
+      Cold Outreach. Frage anschlie\xDFend als Kunde, welches Ziel ein solcher Erstkontakt
+      normalerweise verfolgt."
   - questionId: CO-MO1-Q02
-    dialogueContext: "Sabine reagiert skeptisch auf den Anruf und m\xF6chte wissen,
-      was der konkrete n\xE4chste Schritt nach dem Gespr\xE4ch w\xE4re."
+    dialogueContext: "Reagiere auf die Antwort zur Zielsetzung des ersten Kontakts.
+      Frage anschlie\xDFend, wie der m\xF6gliche Nutzen f\xFCr den Kunden in einer
+      kurzen Value Proposition formuliert werden k\xF6nnte."
   - questionId: CO-M01-Q03
-    dialogueContext: "Sabine erw\xE4hnt, dass ihr Team viel Zeit mit manueller Angebotserstellung
-      verliert und fragt, welchen praktischen Nutzen die Software h\xE4tte."
+    dialogueContext: "Reagiere auf die Erkl\xE4rung der Value Proposition. Frage
+      anschlie\xDFend, woran der Prospect erkennen kann, dass dieser Nutzen speziell
+      f\xFCr sein Unternehmen relevant ist."
   - questionId: CO-M01-Q04
-    dialogueContext: Sabine fragt, warum gerade ihr Unternehmen kontaktiert wurde
+    dialogueContext: "Reagiere auf die Antwort zur Relevanz der Ansprache. Frage
+      anschlie\xDFend, welcher Kommunikationskanal f\xFCr diesen Kontakt geeignet
+      w\xE4re und warum."
   - questionId: CO-M01-Q05
-    dialogueContext: "Sabine sagt, dass sie tags\xFCber kaum Zeit f\xFCr Telefonate
-      hat, aber gesch\xE4ftliche E-Mails regelm\xE4\xDFig liest."
+    dialogueContext: "Reagiere auf die Antwort zur Auswahl des Kommunikationskanals.
+      Frage anschlie\xDFend, ob Cold Outreach normalerweise schon beim ersten Kontakt
+      zu einem abgeschlossenen Kauf f\xFChren sollte."
   - questionId: CO-M01-Q06
-    dialogueContext: "Sabine macht deutlich, dass sie heute keinen Kauf abschlie\xDFen
-      wird und m\xF6chte sehen, ob der Sales-Mitarbeiter unrealistischen Druck aus\xFCbt."
+    dialogueContext: "Reagiere auf die Antwort zur direkten Kaufentscheidung. Frage
+      anschlie\xDFend, wie der Sales-Mitarbeiter verhindern kann, dass die Ansprache
+      aufdringlich wirkt."
   - questionId: CO-M01-Q07
-    dialogueContext: "Sabine reagiert positiv auf eine respektvolle Ansprache und
-      erkl\xE4rt, dass sie nur weiterreden m\xF6chte, wenn das Thema wirklich relevant
-      ist."
+    dialogueContext: "Reagiere auf die Antwort zu Respekt und Relevanz. Stelle abschlie\xDFend
+      eine kurze Frage dazu, wie ein sinnvoller und respektvoller n\xE4chster Schritt
+      aussehen k\xF6nnte."

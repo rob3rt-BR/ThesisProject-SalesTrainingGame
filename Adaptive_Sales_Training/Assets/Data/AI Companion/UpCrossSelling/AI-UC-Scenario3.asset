@@ -16,7 +16,8 @@ MonoBehaviour:
   scenarioId: AI-UC-03
   scenarioContext: "Du betreust einen Kunden, der eine CRM-Software verwendet. Im
     Gespr\xE4ch wird deutlich, dass viele Daten noch manuell zwischen CRM und Marketing-System
-    \xFCbertragen werden."
+    \xFCbertragen werden. Das Gespr\xE4ch f\xFChrt von Discovery und Personalisierung
+    zu einer konkreten Cross-Selling-Empfehlung."
   customerPersona: "Name: Oliver Meier\nRolle: Marketing Director\nPers\xF6nlichkeit:
     L\xF6sungsorientiert, aber kritisch gegen\xFCber Angeboten, die nur aus einer
     Feature-Liste bestehen."
@@ -24,23 +25,29 @@ MonoBehaviour:
     Welche Erweiterung w\xFCrde uns dabei konkret helfen?\u201C"
   questionContexts:
   - questionId: UC-M03-Q01
-    dialogueContext: "Oliver soll zun\xE4chst nach seinen Zielen und dem aktuellen
-      Ablauf gefragt werden, bevor eine konkrete Erweiterung empfohlen wird."
+    dialogueContext: "Reagiere auf die Antwort zur Discovery. Frage anschlie\xDFend,
+      was eine Cross-Selling-Empfehlung besonders passend und relevant macht."
   - questionId: UC-M03-Q02
-    dialogueContext: "Oliver m\xF6chte wissen, warum eine bestimmte Integration f\xFCr
-      seine Situation relevanter ist als ein beliebiges Zusatzprodukt."
+    dialogueContext: "Reagiere auf die Antwort zur Relevanz einer Empfehlung. Frage
+      anschlie\xDFend, welches zus\xE4tzliche Angebot zu einer CRM-Software mit manueller
+      Marketingdaten\xFCbertragung passen k\xF6nnte."
   - questionId: UC-M03-Q03
-    dialogueContext: "Oliver beschreibt die manuelle \xDCbertragung zwischen zwei
-      Systemen und erwartet eine passende Software-Erg\xE4nzung."
+    dialogueContext: "Reagiere auf die Antwort zur Marketing-Automation-Integration.
+      Frage anschlie\xDFend, was vor einem Premium-Tarif-Upsell gepr\xFCft werden
+      sollte."
   - questionId: UC-M03-Q04
-    dialogueContext: "Oliver fragt, ob ein Premium-Tarif tats\xE4chlich sein konkretes
-      Problem l\xF6sen w\xFCrde oder nur zus\xE4tzliche Funktionen enth\xE4lt."
+    dialogueContext: "Reagiere auf die Antwort zur Pr\xFCfung des konkreten Kundenproblems.
+      Frage anschlie\xDFend, warum ein einzelnes Product Feature noch kein ausreichender
+      Grund f\xFCr ein Upsell ist."
   - questionId: UC-M03-Q05
-    dialogueContext: "Oliver reagiert skeptisch auf eine Pr\xE4sentation, die nur
-      Features aufz\xE4hlt."
+    dialogueContext: "Reagiere auf die Antwort zum Bezug zwischen Feature und Kundenziel.
+      Frage anschlie\xDFend, ob eine Empfehlung m\xF6glichst viele irrelevante Features
+      enthalten sollte"
   - questionId: UC-M03-Q06
-    dialogueContext: "Oliver erh\xE4lt eine lange Liste zus\xE4tzlicher Funktionen
-      und fragt, welche davon f\xFCr sein Ziel wirklich notwendig ist."
+    dialogueContext: "Reagiere auf die Antwort zur Begrenzung auf relevante Features.
+      Frage anschlie\xDFend, ob ein Cross-Sell einen direkten Bezug zum bestehenden
+      Produkt oder zur Kundensituation haben sollte."
   - questionId: UC-M03-Q07
-    dialogueContext: "Oliver pr\xFCft, ob die vorgeschlagene Integration einen direkten
-      Bezug zu seiner bestehenden CRM-Nutzung hat."
+    dialogueContext: "Reagiere auf die Antwort zum direkten Produktbezug. Stelle
+      abschlie\xDFend eine kurze Frage dazu, wie Oliver eine gute Empfehlung von
+      einer beliebigen Produktwerbung unterscheiden w\xFCrde."

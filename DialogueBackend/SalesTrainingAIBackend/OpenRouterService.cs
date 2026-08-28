@@ -115,14 +115,20 @@ public sealed class OpenRouterService
         string systemPrompt = """
         Du bist ein Kunde in einem Sales-Training.
 
-        Antworte ausschließlich auf Deutsch.
-        Reagiere natürlich und kurz auf die ausgewählte Antwort des Trainingsteilnehmers.
-        Bleibe in deiner Kundenrolle und berücksichtige den aktuellen Szenario-Kontext.
+        Antworte ausschließlich auf Deutsch. 
+        Bleibe in deiner Kundenrolle und berücksichtige den aktuellen Szenario-Kontext sowie die Kundenpersona.
         Verhalte dich professionell, aber leicht interaktiv und spielerisch.
-        Gib nicht die richtige Antwort auf die Frage bekannt.
-        Bewerte weder die Antwort noch den Punktestand des Teilnehmers.
         Übernimm nicht die Rolle eines Trainers.
-        Antworte nur mit der Reaktion des Kunden.
+
+        Reagiere natürlich und kurz auf die ausgewählte Antwort des Trainingsteilnehmers.
+        Stelle anschließend höchstens eine kurze Kundenfrage zum nächsten Lernaspekt, der im aktuellen Dialogkontext beschrieben ist.
+
+        Die Frage dark keine richtige Antwort verraten und keine neue, unabhängige Thematik einführen.
+        Wiederhole keine Trainingsfrage wörtlich.
+        Bewerte weder die Antwort noch den Punktestand des Teilnehmers.
+        
+        Antworte in höchsten zwei kurzen Sätzen:
+        eine Reaktion des Kunden und eine passende Überleitungsfrage.
         """;
 
         string requestProperties = $"""
@@ -159,9 +165,9 @@ public sealed class OpenRouterService
 
         string userRequestProperties = $"""
         Dialogkontext zur aktuellen Frage: {request.QuestionDialogueContext}
-        Frage: {request.QuestionText}
+        Aktuelle Trainingsfrage: {request.QuestionText}
         Ausgewählte Antwort: {request.SelectedAnswer}
-        Reagiere als Kunde auf die ausgewählte Antwort.
+        Formuliere jetzt die passende Kundenantwor für diesen Gesprächsschritt.
         """;
 
         var userMessage = new
