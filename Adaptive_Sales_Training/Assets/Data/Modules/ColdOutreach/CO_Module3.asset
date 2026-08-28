@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CO_Module3
   m_EditorClassIdentifier: Assembly-CSharp::MicroModule
   moduleId: CO-M03
-  moduleTitle: 'Cold Outreach: Die erste Nachricht gestalten'
+  moduleTitle: Die erste Nachricht gestalten
   moduleText: "Die erste Nachricht sollte kurz, klar und auf den Prospect ausgerichtet
     sein. Eine gute Er\xF6ffnung enth\xE4lt typischerweise die eigene Identit\xE4t,
     einen relevanten Anlass und einen kurzen Hinweis auf den m\xF6glichen Nutzen.\nBei

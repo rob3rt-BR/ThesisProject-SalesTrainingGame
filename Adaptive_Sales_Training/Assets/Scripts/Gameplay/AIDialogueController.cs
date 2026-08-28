@@ -333,9 +333,6 @@ public class AIDialogueController : MonoBehaviour
 
         string selectedAnswer = question.answerOptions[selectedAnswerIndex];
 
-        // Disable answer buttons interactable property
-        SetAnswerButtonsInteractable(false);
-
         // Start coroutine of requestinf AI dialogue response based on current module, question, and selected answer data
         StartCoroutine(RequestDialogueResponse(module, question, selectedAnswer));
     }
@@ -417,8 +414,6 @@ public class AIDialogueController : MonoBehaviour
         {
             Debug.LogError($"Dialogue request failed: {webRequest.error}");
             dialogueText.text = "Dialogue currently unavailable.";
-            
-            SetAnswerButtonsInteractable(true);
             yield break;
         }
 
@@ -573,14 +568,6 @@ public class AIDialogueController : MonoBehaviour
         {
             SceneManager.LoadScene("TopicMenuScene");
             Debug.Log("Returning to TopicMenuScene.");
-        }
-    }
-
-    private void SetAnswerButtonsInteractable(bool value)
-    {
-        foreach (Button button in answerButtons)
-        {
-            button.interactable = value;
         }
     }
 }

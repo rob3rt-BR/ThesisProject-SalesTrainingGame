@@ -88,14 +88,16 @@ public sealed class OpenRouterService
         logger.LogInformation("OpenRouter request completed. Model: {Model}, " +
         "Scenario: {ScenarioId}, Module: {ModuleId}, Question: {QuestionId}, " +
         "PromptTokens: {PromptTokens}, CompletionTokens: {CompletionTokens}, " +
-        "ResponseTimeMs: {ResponseTimeMs}",
+        "ResponseTimeMs: {ResponseTimeMs}" +
+        "ReplyText: {ReplyText}",
         openRouterResult.Model,
         request.ScenarioId,
         request.ModuleId,
         request.QuestionId,
         usage?.PromptTokens ?? 0,
         usage?.CompletionTokens ?? 0,
-        stopWatch.ElapsedMilliseconds);
+        stopWatch.ElapsedMilliseconds,
+        openRouterResult.Choices[0].Message.Content);
 
         return new DialogueResponse
         {

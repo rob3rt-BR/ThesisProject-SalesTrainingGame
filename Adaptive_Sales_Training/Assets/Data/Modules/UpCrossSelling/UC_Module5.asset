@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UC_Module5
   m_EditorClassIdentifier: Assembly-CSharp::MicroModule
   moduleId: UC-M05
-  moduleTitle: 'Upselling und Cross-Selling: Prozess und Erfolgsmessung'
+  moduleTitle: Prozess und Erfolgsmessung
   moduleText: "Upselling und Cross-Selling k\xF6nnen an verschiedenen Stellen der
     Customer Journey stattfinden: w\xE4hrend der Beratung, im Checkout, nach dem
     Kauf oder w\xE4hrend eines Customer-Success-Gespr\xE4chs.\nBundles, Add-ons und

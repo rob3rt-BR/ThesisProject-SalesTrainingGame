@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CO_Module5
   m_EditorClassIdentifier: Assembly-CSharp::MicroModule
   moduleId: CO-M05
-  moduleTitle: 'Cold Outreach: Follow-up, Cadence und Metriken'
+  moduleTitle: Follow-up, Cadence und Metriken
   moduleText: "Erfolgreiches Cold Outreach besteht selten aus nur einem Kontaktversuch.
     Eine Cadence kann mehrere gut geplante Touchpoints \xFCber unterschiedliche Kan\xE4le
     enthalten. Jeder Follow-up sollte einen nachvollziehbaren Grund haben und m\xF6glichst

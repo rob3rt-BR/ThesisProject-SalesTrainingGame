@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UC_Module4
   m_EditorClassIdentifier: Assembly-CSharp::MicroModule
   moduleId: UC-M04
-  moduleTitle: 'Upselling und Cross-Selling: Wertorientierte Kommunikation'
+  moduleTitle: Wertorientierte Kommunikation
   moduleText: "Ein Zusatzangebot sollte als Empfehlung und nicht als Druckmittel
     pr\xE4sentiert werden. Der Sales-Mitarbeiter kann zun\xE4chst die beobachtete
     Situation zusammenfassen, den erwarteten Nutzen erkl\xE4ren und den Kunden fragen,

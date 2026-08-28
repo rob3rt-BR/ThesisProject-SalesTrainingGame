@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UC_Module3
   m_EditorClassIdentifier: Assembly-CSharp::MicroModule
   moduleId: UC-M03
-  moduleTitle: 'Upselling und Cross-Selling: Bedarf verstehen'
+  moduleTitle: Bedarf verstehen
   moduleText: "Gute Zusatzangebote beginnen mit Discovery. Der Sales-Mitarbeiter
     sollte verstehen, welche Ziele der Kunde verfolgt, welche Probleme aktuell bestehen
     und wie das bestehende Produkt verwendet wird.\nEine personalisierte Empfehlung

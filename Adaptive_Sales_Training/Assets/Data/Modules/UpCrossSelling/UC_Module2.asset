@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UC_Module2
   m_EditorClassIdentifier: Assembly-CSharp::MicroModule
   moduleId: UC-M02
-  moduleTitle: 'Upselling und Cross-Selling: Timing und Customer Readiness'
+  moduleTitle: Timing und Customer Readiness
   moduleText: "Ein Angebot f\xFCr Upselling oder Cross-Selling sollte zum richtigen
     Zeitpunkt erfolgen. Besonders geeignet sind Situationen, in denen der Kunde mit
     dem bestehenden Produkt bereits Erfolg erzielt, eine hohe Nutzung zeigt oder

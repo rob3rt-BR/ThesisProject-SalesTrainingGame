@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CO_Module2
   m_EditorClassIdentifier: Assembly-CSharp::MicroModule
   moduleId: CO-M02
-  moduleTitle: 'Cold Outreach: Targeting und Prospect Research'
+  moduleTitle: Targeting und Prospect Research
   moduleText: "Effektives Cold Outreach beginnt mit der Auswahl geeigneter Prospects.
     Ein Ideal Customer Profile (ICP) beschreibt, welche Unternehmen besonders gut
     zum Angebot passen. Dabei k\xF6nnen Branche, Unternehmensgr\xF6\xDFe, Rolle,
