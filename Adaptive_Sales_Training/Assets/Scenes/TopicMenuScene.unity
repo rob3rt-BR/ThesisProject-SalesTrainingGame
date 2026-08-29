@@ -991,23 +991,23 @@ PrefabInstance:
     - target: {fileID: 8712347450625164883, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: 'dialogueScenarios.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: a3cc06a4b73f4e8479e6ec4b2cda55a7, type: 2}
+      objectReference: {fileID: 11400000, guid: d3bd4f8dc6cd62b46b11abb719f976eb, type: 2}
     - target: {fileID: 8712347450625164883, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: 'dialogueScenarios.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 9d5cdca7437ee4449b01de82b6c1b086, type: 2}
+      objectReference: {fileID: 11400000, guid: 2fe9be5ef6d443245a4cf7c4ee8b1bb2, type: 2}
     - target: {fileID: 8712347450625164883, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: 'dialogueScenarios.Array.data[2]'
       value: 
-      objectReference: {fileID: 11400000, guid: 1168322548244ae419cef71fa4620afa, type: 2}
+      objectReference: {fileID: 11400000, guid: 9a1bf286553091c47b645e346478f354, type: 2}
     - target: {fileID: 8712347450625164883, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: 'dialogueScenarios.Array.data[3]'
       value: 
-      objectReference: {fileID: 11400000, guid: 56ba274a6e95dca4cb25ef52692285ec, type: 2}
+      objectReference: {fileID: 11400000, guid: d30e77eed924c154eb20c25a64e70165, type: 2}
     - target: {fileID: 8712347450625164883, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: 'dialogueScenarios.Array.data[4]'
       value: 
-      objectReference: {fileID: 11400000, guid: 66aea5dcb511f714facb08beec54dc31, type: 2}
+      objectReference: {fileID: 11400000, guid: b109157912a67724b9ee2e90cb4fdf98, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1125,23 +1125,23 @@ PrefabInstance:
     - target: {fileID: 8712347450625164883, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: 'dialogueScenarios.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: a874ed4cf88efef45af698ceee42fbcf, type: 2}
+      objectReference: {fileID: 11400000, guid: df982b84313ab6443a9e5e7a782b7fe1, type: 2}
     - target: {fileID: 8712347450625164883, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: 'dialogueScenarios.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 49693f60820ef524d9fb94db6545d261, type: 2}
+      objectReference: {fileID: 11400000, guid: 9ed5ef6b542afcf409678b59d1eb0aa5, type: 2}
     - target: {fileID: 8712347450625164883, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: 'dialogueScenarios.Array.data[2]'
       value: 
-      objectReference: {fileID: 11400000, guid: 40815823b6fc5064181a8a8dcef79b03, type: 2}
+      objectReference: {fileID: 11400000, guid: 61d025e402ef28d4081660f1e07545e0, type: 2}
     - target: {fileID: 8712347450625164883, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: 'dialogueScenarios.Array.data[3]'
       value: 
-      objectReference: {fileID: 11400000, guid: bc5ed9801ce64404c9996dee4ea4067f, type: 2}
+      objectReference: {fileID: 11400000, guid: 9518c02022c11d14a840d828ec0c1f9f, type: 2}
     - target: {fileID: 8712347450625164883, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: 'dialogueScenarios.Array.data[4]'
       value: 
-      objectReference: {fileID: 11400000, guid: 8bde619ce9da7274e95491a50a1ddbfa, type: 2}
+      objectReference: {fileID: 11400000, guid: 004b85b1b408da140b79f80429bad7fb, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

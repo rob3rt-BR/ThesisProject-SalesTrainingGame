@@ -71,7 +71,7 @@ public sealed class OpenRouterService
 
             if (apiResponse.StatusCode == HttpStatusCode.TooManyRequests)
             {
-                throw new InvalidOperationException("OpenRouter rate limit reached.");
+                throw new OpenRouterRateLimitException("OpenRouter rate limit reached.");
             }
             throw new HttpRequestException($"OpenRouter returned {(int)apiResponse.StatusCode}.");
         }
@@ -83,8 +83,18 @@ public sealed class OpenRouterService
             throw new InvalidOperationException("OpenRouter returned an empty response.");
         }
 
-        string resultContent = openRouterResult.Choices[0].Message.Content;
-        DialogueOutput? dialogueOutput = JsonSerializer.Deserialize<DialogueOutput>(resultContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        var choice = openRouterResult.Choices[0];
+        logger.LogInformation("AI finish reason for {QuestionId}: {FinishReason}", request.QuestionId, choice.FinishReason);
+
+        string rawResultContent = openRouterResult.Choices[0].Message.Content;
+        string replyText = rawResultContent.Trim();
+
+        logger.LogWarning("Raw result content for {QuestionId}: {Content}", request.QuestionId, rawResultContent);
+
+        if (string.IsNullOrWhiteSpace(replyText))
+        {
+            throw new InvalidOperationException("The AI returned an empty customer response.");
+        }
 
         OpenRouterUsage? usage = openRouterResult.Usage;
 
@@ -101,8 +111,8 @@ public sealed class OpenRouterService
         usage?.PromptTokens ?? 0,
         usage?.CompletionTokens ?? 0,
         stopWatch.ElapsedMilliseconds,
-        dialogueOutput?.TraineeDialogueText,
-        dialogueOutput?.ReplyText);
+        request.TraineeDialogueText,
+        replyText);
 
         return new DialogueResponse
         {
@@ -112,47 +122,40 @@ public sealed class OpenRouterService
             CompletionTokens = usage?.CompletionTokens ?? 0,
             ResponseTimeMilliseconds = stopWatch.ElapsedMilliseconds,
             
-            TraineeDialogueText = dialogueOutput?.TraineeDialogueText ?? "No TraineeDialogueText",
-            ReplyText = dialogueOutput?.ReplyText ?? "No ReplyText"
+            ReplyText = replyText
         };
     }
 
     private static List<object> BuildMessages(DialogueRequest request)
     {
         string systemPrompt = """
-        Du bist ein Kunde in einem Sales-Training.
+        Du bist der Kunde in einem deutschsprachigen Sales-Training.
 
-        Antworte ausschließlich auf Deutsch. 
-        Bleibe in deiner Kundenrolle und berücksichtige den aktuellen Szenario-Kontext sowie die Kundenpersona.
-        Verhalte dich professionell, aber leicht interaktiv und spielerisch.
+        Antworte ausschließlich auf Deutsch.
+        Bleibe vollständig in deiner Kundenrolle und berücksichtige den Szenariokontext sowie die Kundenpersona.
+        Verhalte dich professionell, glaubwürdig und leicht interaktiv.
         Übernimm nicht die Rolle eines Trainers.
 
-        Erzeuge zwei zusammenhängende Texte:
+        Reagiere natürlich und konkret auf die vorbereitete Aussage des Teilnehmers, ohne sie wörtlich zu wiederholen.
+        Beziehe dich auf die Kundenpersona und die aktuelle Situation.
+        Deine Reaktion darf positiv, zurückhaltend, irritiert oder kritisch ausfallen.
+        Stelle innerhalb dieser Reaktion keine weiteren Fragen und verwende keine rhetorischen Fragen.
 
-        1. traineeDialogueText:
-        Formuliere aus der ausgewählten Antwort eine kurze, natürliche Aussage des Trainingsteilnehmers.
-        Verändere nicht die Bedeutung der ausgewählten Antwort und füge keine neuen fachlichen Behauptungen hinzu.
+        Stelle anschließend höchstens eine kurze, beiläufige Frage, die sich aus dem aktuellen Dialogkontext ergibt.
+        Die Frage soll wie eine natürliche Kundennachfrage klingen, nicht wie eine Quiz- oder Lernfrage.
+        Falls keine sinnvolle Anschlussfrage vorhanden ist, beende die Reaktion ohne zusätzliche Frage.
 
-        2. replyText:
-        Reagiere als Kunde passend auf diese Aussage.
-        Diese Reaktion darf keine zusätzliche Fragen enthalten.
-        Stelle anschließend höchstens eine kurze Kundenfrage zum nächsten Lernaspekt, der im aktuellen Dialogkontext beschrieben ist.
+        Erwähne keine Trainingsfragen, Antwortoptionen, Lernziele oder nächsten Module.
+        Verrate keine richtige Antwort und bewerte weder die Aussage noch den Punktestand.
 
-        Die Kundenfrage ist nur eine dialogische Überleitung.
-        Wiederhole keine Trainingsfrage wörtlich und verrate nicht die richtige Antwort.
-        Bewerte weder die Antwort noch den Punktestand und führe kein unabhängiges neues Thema ein.
-
-        Gib ausschließlich gültiges JSON zurück:
-        {
-            "traineeDialogueText": "...",
-            "replyText: "..."
-        }
-        
-        Antworte in höchstens zwei kurzen Sätzen pro Text.
+        Gib ausschließlich die fertige Kundenreaktion als normalen Text zurück.
+        Setze den gesamten Text nicht in Anführungszeichen.
+        Verwende keine Markdown-Formatierung und kein Präfix wie „Kunde:“.
         """;
 
         string requestProperties = $"""
-        Szenario-Kontext: {request.ScenarioContext}
+        Aktueller Szenariokontext: {request.ScenarioContext}
+
         Kundenpersona: {request.CustomerPersona}
         """;
 
@@ -184,12 +187,15 @@ public sealed class OpenRouterService
         }
 
         string userRequestProperties = $"""
-        Dialogkontext zur aktuellen Frage: {request.QuestionDialogueContext}
-        Aktuelle Trainingsfrage: {request.QuestionText}
-        Ausgewählte Antwort: {request.SelectedAnswer}
+        Aktueller Dialogkontext:
+        {request.QuestionDialogueContext}
 
-        Formuliere zuerst eine natürliche Teilnehmeraussage aus der ausgewählten Antwort.
-        Reagiere danach als Kunde auf diese Aussage und stelle eine passende Überleitungsfrage zum nächsten Lernaspekt aus dem Dialogkontext.
+        Vorbereitete Aussage des Teilnehmers:
+        {request.TraineeDialogueText}
+
+        Reagiere als Kunde natürlich und konkret auf diese Aussage.
+        Führe das Gespräch mit höchstens einer passenden, beiläufigen Nachfrage weiter.
+        Gib nur den fertigen Kundentext zurück, ohne Anführungszeichen um die gesamte Antwort.
         """;
 
         var userMessage = new

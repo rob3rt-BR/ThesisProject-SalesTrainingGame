@@ -19,15 +19,40 @@ app.MapPost("/api/dialogue", async (DialogueRequest request, OpenRouterService o
         var result = await openRouterService.GenerateDialogueAsync(request, cancellationToken);
 
         return Results.Ok(result);
-    } 
-    catch (InvalidOperationException)
-    {
-        return Results.StatusCode(StatusCodes.Status503ServiceUnavailable);
-    } 
-    catch (HttpRequestException)
-    {
-        return Results.StatusCode(StatusCodes.Status502BadGateway);
     }
+    catch (OpenRouterRateLimitException ex)
+    {
+        return Results.Problem(
+            title: "OpenROuter rate limit reached",
+            detail: ex.Message,
+            statusCode: StatusCodes.Status429TooManyRequests
+        );
+    }
+    catch (InvalidDialogueFormatException ex)
+    {
+        return Results.Problem(
+            title: "Invalid AI response",
+            detail: ex.Message,
+            statusCode: StatusCodes.Status502BadGateway
+        );
+    }
+    catch (HttpRequestException ex)
+    {
+        return Results.Problem(
+            title: "OpenROuter request failed",
+            detail: ex.Message,
+            statusCode: StatusCodes.Status502BadGateway
+        );
+    }
+    catch (InvalidOperationException ex)
+    {
+        return Results.Problem(
+            title: "Backend configuration error",
+            detail: ex.Message,
+            statusCode: StatusCodes.Status500InternalServerError
+        );
+    } 
 });
 
 app.Run(backendUrl);
+

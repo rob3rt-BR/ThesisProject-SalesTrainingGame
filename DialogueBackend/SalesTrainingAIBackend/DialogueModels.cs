@@ -13,6 +13,7 @@ namespace DialogueModels
 
         public string QuestionText {get; set;} = "";
         public string SelectedAnswer {get; set;} = "";
+        public string TraineeDialogueText {get; set;} = "";
 
         public List<DialogueMessage> ConversationHistory {get; set;} = [];
     }
@@ -31,13 +32,6 @@ namespace DialogueModels
         public int CompletionTokens {get; set;}
         public long ResponseTimeMilliseconds {get; set;}
 
-        public string TraineeDialogueText {get; set;} = "";
-        public string ReplyText {get; set;} = "";
-    }
-
-    public sealed class DialogueOutput
-    {
-        public string TraineeDialogueText {get; set;} = "";
         public string ReplyText {get; set;} = "";
     }
 }

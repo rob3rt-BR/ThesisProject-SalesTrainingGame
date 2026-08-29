@@ -333,13 +333,11 @@ public class AIDialogueController : MonoBehaviour
             return;
         }
 
-        string selectedAnswer = question.answerOptions[selectedAnswerIndex];
-
         // Start coroutine of requestinf AI dialogue response based on current module, question, and selected answer data
-        StartCoroutine(RequestDialogueResponse(module, question, selectedAnswer));
+        StartCoroutine(RequestDialogueResponse(module, question, selectedAnswerIndex));
     }
 
-    private IEnumerator RequestDialogueResponse(MicroModule module, ModuleQuestion question, string selectedAnswer)
+    private IEnumerator RequestDialogueResponse(MicroModule module, ModuleQuestion question, int selectedAnswerIndex)
     {
         questionScreen.SetActive(false);
 
@@ -366,6 +364,9 @@ public class AIDialogueController : MonoBehaviour
             yield break;
         }
 
+        string selectedAnswer = question.answerOptions[selectedAnswerIndex];
+        string currentTraineeDialogue = currentQuestionContext.traineeDialogueTexts[selectedAnswerIndex];
+
         // Create new dialogue request data based on passed parameters data (module, question, selected answer)
         DialogueRequest requestData = new()
         {
@@ -380,6 +381,8 @@ public class AIDialogueController : MonoBehaviour
             
             questionText = question.questionText,
             selectedAnswer = selectedAnswer,
+
+            traineeDialogueText = currentTraineeDialogue,
 
             conversationHistory = new(currentConversationHistory)
         };
@@ -438,7 +441,6 @@ public class AIDialogueController : MonoBehaviour
             model = responseData.model,
             totalResponseTimeMilliseconds = totalResponseTimeMilliseconds,
             
-            traineeDialogueText = responseData.traineeDialogueText,
             replyText = responseData.replyText
         };
         session.RecordQuestionResultAIResponse(aIResponse, question.questionId);
@@ -447,10 +449,7 @@ public class AIDialogueController : MonoBehaviour
         DialogueMessage currentUserAnswerMessage = new()
         {
             role = "user",
-            content = responseData.traineeDialogueText
-            /*content = $"Dialogkontext zur aktuellen Frage: {currentQuestionContext.dialogueContext}\n" +
-                        $"Aktuelle Trainingsfrage: {question.questionText}\n" +
-                        $"Ausgewählte Antwort: {selectedAnswer}"*/
+            content = requestData.traineeDialogueText
         };
         currentConversationHistory.Add(currentUserAnswerMessage);
 
@@ -462,9 +461,9 @@ public class AIDialogueController : MonoBehaviour
         };
         currentConversationHistory.Add(currentAIResponseMessage);
 
-        // Set text attribute in dialogue screen => display response message in textbox
+        // Set text attribute in dialogue screen => display trainee dialogue and AI response message in textbox
+        traineeDialogueText.text = requestData.traineeDialogueText;
         dialogueText.text = responseData.replyText;
-        traineeDialogueText.text = responseData.traineeDialogueText;
 
         dialogueScreen.SetActive(true);
 

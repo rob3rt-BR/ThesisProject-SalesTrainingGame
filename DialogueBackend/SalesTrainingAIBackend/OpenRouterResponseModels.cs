@@ -23,6 +23,9 @@ namespace OpenRouterResponseModels
     {
         [JsonPropertyName("message")]
         public OpenRouterMessage Message {get; set;} = new();
+        
+        [JsonPropertyName("finish_reason")]
+        public string? FinishReason {get; set;}
     }
 
     public sealed class OpenRouterResponse

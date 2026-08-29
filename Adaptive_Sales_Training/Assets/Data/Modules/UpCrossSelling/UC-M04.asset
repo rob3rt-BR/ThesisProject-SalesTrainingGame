@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14a60cf4d7d773c46800f4a709ac8f92, type: 3}
-  m_Name: UC_Module4
+  m_Name: UC-M04
   m_EditorClassIdentifier: Assembly-CSharp::MicroModule
   moduleId: UC-M04
   moduleTitle: Wertorientierte Kommunikation

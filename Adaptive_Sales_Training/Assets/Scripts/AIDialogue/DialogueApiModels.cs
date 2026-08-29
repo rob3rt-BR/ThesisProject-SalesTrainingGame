@@ -17,6 +17,8 @@ public class DialogueRequest
     public string questionText;
     public string selectedAnswer;
 
+    public string traineeDialogueText;
+
     public List<DialogueMessage> conversationHistory = new();    
 }
 
@@ -36,6 +38,5 @@ public class DialogueResponse
     public int completionTokens;
     public long responseTimeMilliseconds;
 
-    public string traineeDialogueText;
     public string replyText;
 }

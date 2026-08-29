@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4549cc761c8952748aed4c13489b9771, type: 3}
+  m_Name: AI-CO-04
+  m_EditorClassIdentifier: Assembly-CSharp::AIDialogueScenario
+  module: {fileID: 11400000, guid: da6e65ccdd83e7c4da09abeb5258144f, type: 2}
+  scenarioId: AI-CO-04
+  scenarioContext: "Du sprichst mit einem Prospect, dessen Team aktuell mit mehreren
+    Tabellen arbeitet. Der Prospect hat jedoch erkl\xE4rt, dass momentan kein Budget
+    eingeplant ist. Das Gespr\xE4ch behandelt Discovery-Fragen, aktives Zuh\xF6ren,
+    den Umgang mit Objections und die \xDCbergabe eines qualifizierten Prospects."
+  customerPersona: "Name: Thomas Richter\nRolle: Finance Manager\nPers\xF6nlichkeit:
+    Skeptisch, aber gespr\xE4chsbereit, wenn seine Bedenken ernst genommen werden."
+  openingMessage: "\u201EWir haben daf\xFCr kein Budget. Ich glaube nicht, dass dieses
+    Gespr\xE4ch etwas bringt.\u201C"
+  questionContexts:
+  - questionId: CO-M04-Q01
+    dialogueContext: "Reagiere nat\u00fcrlich auf die gestellte Frage und beantworte sie aus deiner Kundensituation heraus. Frage danach beil\u00e4ufig: Was m\u00f6chten Sie \u00fcber unsere aktuelle Arbeitsweise noch verstehen?"
+    traineeDialogueTexts:
+    - "Nutzen Sie bereits eine CRM-Software, ja oder nein?"
+    - "Liegt Ihr Budget f\u00fcr dieses Thema \u00fcber 10.000 Euro?"
+    - "Mich w\u00fcrde interessieren, wie Sie Ihren Follow-up-Prozess aktuell organisieren."
+    - "M\u00f6chten Sie unsere Software kaufen?"
+  - questionId: CO-M04-Q02
+    dialogueContext: "Reagiere nat\u00fcrlich auf die Budget-Bedenken, ohne dass der Teilnehmer sofort in eine Rechtfertigung verf\u00e4llt. Frage danach beil\u00e4ufig: Wie w\u00fcrden Sie herausfinden, ob das Thema f\u00fcr uns trotzdem wichtig genug ist?"
+    traineeDialogueTexts:
+    - "Dann streiche ich das Thema f\u00fcr dieses Jahr und melde mich irgendwann wieder."
+    - "Auch ohne Budget sollten Sie sich heute f\u00fcr unsere L\u00f6sung entscheiden, damit Sie den Anschluss nicht verlieren."
+    - "Das verstehe ich. Was steht in Ihrer Budgetplanung aktuell im Vordergrund, und wo w\u00fcrde dieses Thema dabei stehen?"
+    - "Der Preis ist doch sehr g\u00fcnstig; Ihre Einsch\u00e4tzung kann eigentlich nicht stimmen."
+  - questionId: CO-M04-Q03
+    dialogueContext: "Reagiere nat\u00fcrlich darauf, ob der Teilnehmer dir wirklich zuh\u00f6rt. Frage danach beil\u00e4ufig: Was haben Sie aus meiner letzten Aussage \u00fcber unsere Situation mitgenommen?"
+    traineeDialogueTexts:
+    - "Ich bleibe bei meiner vorbereiteten Erkl\u00e4rung, damit ich den Gespr\u00e4chsleitfaden vollst\u00e4ndig einhalte."
+    - "Wenn ich Sie richtig verstanden habe, bereiten Ihnen vor allem die vielen manuellen Tabellen und der fehlende \u00dcberblick Schwierigkeiten."
+    - "Lassen Sie mich kurz ausreden, damit ich das Gespr\u00e4ch wieder in die geplante Richtung bringen kann."
+    - "Bevor Sie noch mehr erz\u00e4hlen, sollten wir zuerst \u00fcber den Preis sprechen."
+  - questionId: CO-M04-Q04
+    dialogueContext: "Reagiere nat\u00fcrlich auf den Umgang mit dir als erster Kontaktperson. Frage danach beil\u00e4ufig: Wie w\u00fcrden Sie vorgehen, wenn ich nicht die richtige Person f\u00fcr dieses Thema bin?"
+    traineeDialogueTexts:
+    - "Guten Tag, ich rufe aus unserem Software-Team an. Ich erkl\u00e4re Ihnen gern kurz, warum ich anrufe, und Sie entscheiden dann, ob das Thema weitergegeben werden sollte."
+    - "Sagen Sie am besten einfach, dass Sie mich dringend durchstellen m\u00fcssen, dann komme ich direkt zum Entscheider."
+    - "K\u00f6nnen Sie mir die private Telefonnummer des Entscheiders geben? Dann erreiche ich ihn schneller."
+    - "Ich brauche nur die Budget-Information des Unternehmens; mit dem Gatekeeper muss ich nicht \u00fcber den Gespr\u00e4chszweck sprechen."
+  - questionId: CO-M04-Q05
+    dialogueContext: "Reagiere nat\u00fcrlich auf die vorgeschlagene Dokumentation und den m\u00f6glichen n\u00e4chsten Schritt. Frage danach beil\u00e4ufig: Welche Information m\u00fcsste ein Kollege von Ihnen kennen, wenn er das Gespr\u00e4ch \u00fcbernimmt?"
+    traineeDialogueTexts:
+    - "Ich notiere nur die Dauer des Telefonats; die Einzelheiten kann ich mir sp\u00e4ter noch zusammenreimen."
+    - "Ich halte Ihre wichtigsten Bed\u00fcrfnisse, die Pain Points, den Ansprechpartner und den vereinbarten n\u00e4chsten Schritt fest, damit der \u00dcbergang reibungslos funktioniert."
+    - "Ich speichere nur die allgemeine Werbebotschaft, mit der wir Sie angesprochen haben."
+    - "Meine pers\u00f6nliche Einsch\u00e4tzung zum Prospect ist wichtiger als die konkreten Aussagen aus dem Gespr\u00e4ch."
+  - questionId: CO-M04-Q06
+    dialogueContext: "Reagiere nat\u00fcrlich auf die ge\u00e4u\u00dferte Sorge und zeige, welche Information dir noch fehlt. Frage danach beil\u00e4ufig: Wie w\u00fcrden Sie herausfinden, was hinter meinem Einwand tats\u00e4chlich steckt?"
+    traineeDialogueTexts:
+    - "Ihr Einwand hilft mir, die Priorit\u00e4ten hinter Ihrer Aussage besser zu verstehen. Darf ich kurz nachfragen, was Ihnen dabei am meisten Sorgen macht?"
+    - "Ich sehe in Ihrer Objection keinen Hinweis auf weitere Bed\u00fcrfnisse oder Priorit\u00e4ten; ich w\u00fcrde einfach mit meinem Pitch fortfahren."
+  - questionId: CO-M04-Q07
+    dialogueContext: "Reagiere nat\u00fcrlich auf die Zusammenfassung des Angebots und beende das Gespr\u00e4ch mit einer kurzen Nachfrage: Was w\u00e4re aus Ihrer Sicht der passende n\u00e4chste Schritt?"
+    traineeDialogueTexts:
+    - "Ich nutze den Cold Call, um Ihnen m\u00f6glichst viele Produktinformationen in einem langen Pitch vorzustellen."
+    - "Lassen Sie uns zuerst Ihre Situation verstehen. Danach kann ich die n\u00e4chsten Schritte an Ihrem tats\u00e4chlichen Bedarf ausrichten."

@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4549cc761c8952748aed4c13489b9771, type: 3}
+  m_Name: AI-CO-03
+  m_EditorClassIdentifier: Assembly-CSharp::AIDialogueScenario
+  module: {fileID: 11400000, guid: 752a52fbfd0ec3b44a914b584de12b12, type: 2}
+  scenarioId: AI-CO-03
+  scenarioContext: "Du kontaktierst einen Prospect f\xFCr eine Software zur Automatisierung
+    von Reports. Die Ansprechpartnerin hat gerade ein neues Reporting-Team aufgebaut.
+    Das Gespr\xE4ch behandelt den Aufbau einer kurzen ersten Nachricht: Er\xF6ffnung,
+    Betreff, Call-to-Action, Kundennutzen und Personalisierung."
+  customerPersona: "Name: Julia Neumann\nRolle: Head of Business Intelligence\nPers\xF6nlichkeit:
+    Effizient, neugierig und wenig geduldig mit langen Produktpr\xE4sentationen."
+  openingMessage: "\u201EIch habe nur kurz Zeit. K\xF6nnen Sie mir in einem Satz
+    erkl\xE4ren, warum Sie anrufen?\u201C"
+  questionContexts:
+  - questionId: CO-M03-Q01
+    dialogueContext: "Reagiere nat\u00fcrlich auf den Einstieg und entscheide aus Kundensicht, ob du weiter zuh\u00f6ren m\u00f6chtest. Frage danach beil\u00e4ufig: Wie w\u00fcrden Sie in einem kurzen Moment erkl\u00e4ren, warum Sie gerade mich anrufen?"
+    traineeDialogueTexts:
+    - "Bevor ich auf Ihr Team eingehe, erz\u00e4hle ich Ihnen kurz, wie unser Unternehmen entstanden ist."
+    - "Ich bin aus unserem Software-Team. Ich rufe an, weil Ihr neues Reporting-Team m\u00f6glicherweise weniger Zeit mit manuellen Auswertungen verbringen k\u00f6nnte."
+    - "Ich beginne direkt mit einer Liste aller Funktionen, damit Sie sehen, was unsere L\u00f6sung vollst\u00e4ndig kann."
+    - "Ich erkl\u00e4re Ihnen zuerst den vollst\u00e4ndigen Ablauf bis zu einem sp\u00e4teren Vertrag, damit von Anfang an alles klar ist."
+  - questionId: CO-M03-Q02
+    dialogueContext: "Reagiere nat\u00fcrlich auf die Wirkung des vorgeschlagenen Betreffs. Frage danach beil\u00e4ufig: Was w\u00fcrde mich in der Nachricht neugierig machen, ohne dass sie nach Werbung klingt?"
+    traineeDialogueTexts:
+    - "F\u00fcr den Betreff w\u00fcrde ich einen kurzen Bezug zu Ihrem neuen Reporting-Team und dem m\u00f6glichen Zeitgewinn w\u00e4hlen."
+    - "Ich w\u00fcrde einen Betreff mit m\u00f6glichst vielen Gro\u00dfbuchstaben und Ausrufezeichen verwenden, damit die Nachricht sofort auff\u00e4llt."
+    - "Unser Betreff k\u00f6nnte Dashboard, API, Benutzerrollen und automatische Reports gleichzeitig nennen."
+    - "Ich lasse den Betreff leer; der Inhalt der E-Mail sollte die Aufmerksamkeit allein auf sich ziehen."
+  - questionId: CO-M03-Q03
+    dialogueContext: "Reagiere nat\u00fcrlich auf den vorgeschlagenen n\u00e4chsten Schritt und deine begrenzte Zeit. Frage danach beil\u00e4ufig: Was genau sollte ich nach Ihrer Nachricht tun k\u00f6nnen?"
+    traineeDialogueTexts:
+    - "Wenn Sie \u00fcberzeugt sind, kaufen Sie die L\u00f6sung am besten jetzt, damit wir keine Zeit verlieren."
+    - "Bitte lesen Sie zuerst unser komplettes Handbuch, bevor wir weiter \u00fcber Ihre Situation sprechen."
+    - "Wenn das Thema f\u00fcr Sie interessant ist, k\u00f6nnten wir uns n\u00e4chste Woche 15 Minuten nehmen und gemeinsam pr\u00fcfen, ob es zu Ihrem Team passt."
+    - "Bitte leiten Sie diese Nachricht an alle Ihre Kollegen weiter, damit m\u00f6glichst viele davon erfahren."
+  - questionId: CO-M03-Q04
+    dialogueContext: "Reagiere nat\u00fcrlich auf die Verbindung zwischen Angebot und Arbeitsalltag. Frage danach beil\u00e4ufig: Woran w\u00fcrde sich dieser Vorteil bei uns im Alltag bemerkbar machen?"
+    traineeDialogueTexts:
+    - "Unsere Plattform enth\u00e4lt ein Dashboard, das Ihre Auswertungen \u00fcbersichtlich darstellt."
+    - "Wir bieten API-Zugriff, sodass Sie unsere technischen M\u00f6glichkeiten kennenlernen."
+    - "Sie erhalten mit unserer Software f\u00fcnf verschiedene Benutzerrollen."
+    - "Ihr Team k\u00f6nnte mit unserer L\u00f6sung den manuellen Aufwand bei der Auswertung reduzieren und schneller zu belastbaren Reports kommen."
+  - questionId: CO-M03-Q05
+    dialogueContext: "Reagiere nat\u00fcrlich darauf, wie gut die Ansprache zu deiner Situation passt. Frage danach beil\u00e4ufig: Was an unserer aktuellen Lage hat Sie zu dieser Formulierung gebracht?"
+    traineeDialogueTexts:
+    - "Ich verwende dieselbe Nachricht f\u00fcr alle Unternehmen und passe nur den Vornamen an."
+    - "Ich habe gesehen, dass Sie gerade ein Reporting-Team aufbauen. Deshalb verbinde ich diese Entwicklung mit einer m\u00f6glichen Entlastung bei Ihren Auswertungen."
+    - "Ich erw\u00e4hne Ihren Firmennamen in jedem Absatz, damit die Nachricht pers\u00f6nlich wirkt."
+    - "Bevor wir \u00fcber Ihre Situation sprechen, erz\u00e4hle ich ausf\u00fchrlich von unserem eigenen Unternehmen und seiner Geschichte."
+  - questionId: CO-M03-Q06
+    dialogueContext: "Reagiere nat\u00fcrlich auf die Verwendung eines Gespr\u00e4chsleitfadens. Frage danach beil\u00e4ufig: Wie w\u00fcrden Sie reagieren, wenn unser Gespr\u00e4ch ganz anders verl\u00e4uft als geplant?"
+    traineeDialogueTexts:
+    - "Ich lese mein Script Wort f\u00fcr Wort vor, damit kein vorbereiteter Satz ver\u00e4ndert wird."
+    - "Ich habe einen Leitfaden dabei, passe meine Formulierungen aber an Ihre Antworten und den tats\u00e4chlichen Gespr\u00e4chsverlauf an."
+  - questionId: CO-M03-Q07
+    dialogueContext: "Reagiere nat\u00fcrlich auf die Menge der vorgeschlagenen n\u00e4chsten Schritte. Beende das Gespr\u00e4ch mit einer kurzen Nachfrage: Was w\u00e4re f\u00fcr mich jetzt die eine einfachste M\u00f6glichkeit weiterzumachen?"
+    traineeDialogueTexts:
+    - "Ich schicke Ihnen gleich mehrere M\u00f6glichkeiten f\u00fcr den n\u00e4chsten Schritt, damit Sie eine gro\u00dfe Auswahl haben."
+    - "Als n\u00e4chsten Schritt schlage ich einen kurzen Austausch n\u00e4chste Woche vor; danach k\u00f6nnen wir gemeinsam entscheiden, ob mehr sinnvoll ist."

@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4549cc761c8952748aed4c13489b9771, type: 3}
+  m_Name: AI-CO-02
+  m_EditorClassIdentifier: Assembly-CSharp::AIDialogueScenario
+  module: {fileID: 11400000, guid: 5a40a77c91919994cb4258e2fe430890, type: 2}
+  scenarioId: AI-CO-02
+  scenarioContext: "Du verkaufst eine SaaS-L\xF6sung f\xFCr interne Prozesse und
+    Kundenverwaltung. Der Prospect ist ein wachsendes Unternehmen, das k\xFCrzlich
+    drei neue Niederlassungen er\xF6ffnet hat. Das Gespr\xE4ch f\xFChrt von der Auswahl
+    des passenden Kundentyps \xFCber Research und Ansprechpartner bis zur Dokumentation
+    im CRM."
+  customerPersona: "Name: Markus Vogel\nRolle: Leiter des Customer Operations Teams\nPers\xF6nlichkeit:
+    Analytisch und direkt. Er reagiert positiv auf konkrete Informationen, lehnt
+    aber oberfl\xE4chliche Personalisierung ab.\n"
+  openingMessage: "\u201ESie erw\xE4hnen unser Wachstum in Ihrer Nachricht. Was genau
+    hat das mit Ihrer Software zu tun?\u201C"
+  questionContexts:
+  - questionId: CO-M02-Q01
+    dialogueContext: "Reagiere nat\u00fcrlich auf die Beschreibung des passenden Kundentyps. Frage danach beil\u00e4ufig: Woran w\u00fcrden Sie bei einem Unternehmen wie unserem zuerst erkennen, dass ein Gespr\u00e4ch sinnvoll sein k\u00f6nnte?"
+    traineeDialogueTexts:
+    - "Ich beginne mit den Unternehmen, die bereits bei uns gekauft haben, weil wir deren Abl\u00e4ufe schon kennen."
+    - "Bei Ihnen schaue ich zuerst, ob Unternehmensgr\u00f6\u00dfe, Arbeitsweise und aktuelle Herausforderung zu der Unterst\u00fctzung passen, die wir anbieten."
+    - "Ich nehme unser allgemeines E-Mail-Template als Ausgangspunkt und ordne die Unternehmen danach ein."
+    - "F\u00fcr mich geh\u00f6rt ins Profil vor allem, wie viele Kontakte wir in diesem Monat noch erreichen m\u00fcssen."
+  - questionId: CO-M02-Q02
+    dialogueContext: "Reagiere nat\u00fcrlich auf den genannten Anlass und beziehe dich auf m\u00f6gliche Ver\u00e4nderungen in deinem Unternehmen. Frage danach beil\u00e4ufig: Welche Entwicklung bei uns w\u00e4re f\u00fcr Sie denn besonders interessant?"
+    traineeDialogueTexts:
+    - "Ihre neuen Niederlassungen sind mir aufgefallen. Wenn dadurch Abl\u00e4ufe oder Teams wachsen, k\u00f6nnte das ein guter Anlass sein, mit Ihnen ins Gespr\u00e4ch zu kommen."
+    - "Ich erinnere mich nur daran, dass Sie vor einigen Jahren unsere allgemeine Werbung gesehen haben; deshalb melde ich mich jetzt."
+    - "Unser internes Sales-Meeting wurde verschoben, daher dachte ich, ich rufe Sie heute an."
+    - "Ich habe mir f\u00fcr heute besonders viele Anrufe vorgenommen und wollte deshalb bei Ihnen anfangen."
+  - questionId: CO-M02-Q03
+    dialogueContext: "Reagiere nat\u00fcrlich darauf, wie der Teilnehmer den Ansprechpartner ausw\u00e4hlt. Frage danach beil\u00e4ufig: Mit wem w\u00fcrden Sie bei diesem Thema normalerweise zuerst sprechen?"
+    traineeDialogueTexts:
+    - "Ihr blaues Logo ist mir aufgefallen; daran w\u00fcrde ich meine pers\u00f6nliche Ansprache ausrichten."
+    - "Ich habe versucht, Ihre private Adresse herauszufinden, damit meine Nachricht pers\u00f6nlicher wirkt."
+    - "Da Sie f\u00fcr Customer Operations verantwortlich sind, spreche ich Sie an; Sie k\u00f6nnen die Abl\u00e4ufe in diesem Bereich vermutlich am besten einsch\u00e4tzen."
+    - "Ich habe gepr\u00fcft, wie viele Follower unser Sales-Mitarbeiter hat, und danach entschieden, wen wir kontaktieren."
+  - questionId: CO-M02-Q04
+    dialogueContext: "Reagiere nat\u00fcrlich auf die Art der Vorbereitung und darauf, wie pers\u00f6nlich sie wirkt. Frage danach beil\u00e4ufig: Welche Information \u00fcber unser Unternehmen w\u00fcrden Sie vor Ihrer Nachricht noch pr\u00fcfen?"
+    traineeDialogueTexts:
+    - "Ich habe mir auch Ihre privaten Social-Media-Beitr\u00e4ge angesehen, damit ich einen pers\u00f6nlichen Einstieg finde."
+    - "Ich habe gesehen, dass Sie mehrere Standorte aufgebaut haben. Deshalb m\u00f6chte ich pr\u00fcfen, ob unsere L\u00f6sung Sie bei den gewachsenen Abl\u00e4ufen unterst\u00fctzen kann."
+    - "Ich nehme die Nachricht, die wir einem anderen Unternehmen geschickt haben, und tausche nur den Namen aus."
+    - "Ihr Unternehmensname ist bekannt; deshalb steht Ihr Unternehmen bei mir ganz oben auf der Kontaktliste."
+  - questionId: CO-M02-Q05
+    dialogueContext: "Reagiere nat\u00fcrlich auf den Umgang mit den gesammelten Informationen. Frage danach beil\u00e4ufig: Und wie w\u00fcrden Sie daf\u00fcr sorgen, dass ein Kollege sp\u00e4ter noch nachvollziehen kann, was wir besprochen haben?"
+    traineeDialogueTexts:
+    - "Ich notiere mir nichts weiter; so kann ich beim n\u00e4chsten Prospect einfach dieselbe Nachricht verwenden."
+    - "Ich trage jede Information ins CRM ein und kann beim n\u00e4chsten Kontakt direkt darauf zur\u00fcckgreifen, ohne mich noch einmal mit Ihnen besch\u00e4ftigen zu m\u00fcssen."
+    - "Ich halte im CRM fest, was ich \u00fcber Ihre aktuelle Situation erfahren habe und welcher n\u00e4chste Schritt vereinbart wurde, damit mein Kollege daran ankn\u00fcpfen kann."
+    - "Ich pflege die Daten so ein, dass das CRM daraus direkt einen Vertrag f\u00fcr Sie ausl\u00f6sen kann."
+  - questionId: CO-M02-Q06
+    dialogueContext: "Reagiere nat\u00fcrlich auf den genannten Anlass und zeige, ob er f\u00fcr dich tats\u00e4chlich relevant w\u00e4re. Frage danach beil\u00e4ufig: Woran w\u00fcrden Sie merken, dass dieser Anlass f\u00fcr eine Kontaktaufnahme schon wieder vorbei ist?"
+    traineeDialogueTexts:
+    - "Ihre Expansion ist ein konkreter Anlass f\u00fcr mich, jetzt eine Nachricht zu schicken und den m\u00f6glichen Bedarf anzusprechen."
+    - "Auch wenn sich bei Ihnen gerade nichts ver\u00e4ndert, w\u00fcrde ich denselben Anlass f\u00fcr eine personalisierte Nachricht verwenden."
+  - questionId: CO-M02-Q07
+    dialogueContext: "Reagiere nat\u00fcrlich auf die Grenze zwischen pers\u00f6nlicher Vorbereitung und unangemessenen Details. Beende das Gespr\u00e4ch mit einer kurzen Nachfrage: Welche Information w\u00e4re f\u00fcr eine respektvolle Ansprache wirklich genug?"
+    traineeDialogueTexts:
+    - "Ich habe mir deshalb m\u00f6glichst viele private Details \u00fcber Sie zusammengesucht; je mehr ich wei\u00df, desto pers\u00f6nlicher kann ich schlie\u00dflich wirken."
+    - "Ich bleibe bei den gesch\u00e4ftlichen Informationen, die f\u00fcr Ihre Situation wichtig sind. Ihr Privatleben muss ich f\u00fcr eine gute Ansprache nicht kennen."

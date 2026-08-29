@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4549cc761c8952748aed4c13489b9771, type: 3}
-  m_Name: AI-CO-Scenario2
+  m_Name: AI-CO-02
   m_EditorClassIdentifier: Assembly-CSharp::AIDialogueScenario
   module: {fileID: 11400000, guid: 5a40a77c91919994cb4258e2fe430890, type: 2}
   scenarioId: AI-CO-02

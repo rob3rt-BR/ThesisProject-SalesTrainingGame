@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4549cc761c8952748aed4c13489b9771, type: 3}
+  m_Name: AI-UC-05
+  m_EditorClassIdentifier: Assembly-CSharp::AIDialogueScenario
+  module: {fileID: 11400000, guid: ee132f715b27e3846a18fee29d273262, type: 2}
+  scenarioId: AI-UC-05
+  scenarioContext: "Du betreust einen bestehenden SaaS-Kunden, der erfolgreich mit
+    dem aktuellen Produkt arbeitet. Ein Bundle aus Analytics-Modul und zus\xE4tzlichem
+    Support k\xF6nnte den Kunden bei der Expansion unterst\xFCtzen. Das Gespr\xE4ch
+    behandelt Post-Purchase-Angebote, AOV, Bundles, Zusammenarbeit zwischen Sales
+    und Customer Success sowie langfristige Kundenbindung."
+  customerPersona: "Name: Katharina Wolf\nRolle: Customer Success Managerin auf Kundenseite\nPers\xF6nlichkeit:
+    Kundenorientiert und datenbewusst. Sie m\xF6chte den langfristigen Nutzen vor
+    einer Kaufentscheidung verstehen."
+  openingMessage: "\u201ESie schlagen ein Bundle vor. Wie k\xF6nnen wir beurteilen,
+    ob es uns tats\xE4chlich hilft und nicht nur unseren Bestellwert erh\xF6ht?\u201C"
+  questionContexts:
+  - questionId: UC-M05-Q01
+    dialogueContext: "Reagiere nat\u00fcrlich auf das Zusatzangebot nach dem Kauf und beziehe dich auf deine ersten Erfahrungen mit dem Produkt. Frage danach beil\u00e4ufig: Was w\u00fcrden Sie aus unserer bisherigen Nutzung ableiten?"
+    traineeDialogueTexts:
+    - "Sie kennen unser Produkt bereits und k\u00f6nnen daher besser einsch\u00e4tzen, ob dieses zus\u00e4tzliche Angebot Ihre aktuelle Nutzung sinnvoll erweitert."
+    - "Da Sie bereits gekauft haben, darf ich Ihnen keine weiteren Fragen stellen; ich biete Ihnen einfach etwas Zus\u00e4tzliches an."
+    - "Ich w\u00fcrde Ihre urspr\u00fcngliche Bestellung nachtr\u00e4glich ausblenden, damit das Zusatzangebot st\u00e4rker im Vordergrund steht."
+    - "Mit diesem Angebot sind Sie automatisch verpflichtet, den Zusatzkauf abzuschlie\u00dfen."
+  - questionId: UC-M05-Q02
+    dialogueContext: "Reagiere nat\u00fcrlich auf die Erkl\u00e4rung des Bestellwerts. Frage danach beil\u00e4ufig: Woran w\u00fcrden Sie erkennen, dass ein gr\u00f6\u00dferes Paket f\u00fcr uns wirklich sinnvoll ist?"
+    traineeDialogueTexts:
+    - "Wenn wir uns ansehen, welchen Wert eine Bestellung durchschnittlich hat, sprechen wir \u00fcber den Average Order Value, kurz AOV."
+    - "Ich w\u00fcrde die Reply Rate verwenden, um den durchschnittlichen Wert Ihrer Bestellung zu beschreiben."
+    - "Als Kennzahl f\u00fcr den Bestellwert w\u00fcrde ich den Churn Reason heranziehen."
+    - "Der durchschnittliche Bestellwert l\u00e4sst sich mit der Time to First Contact messen."
+  - questionId: UC-M05-Q03
+    dialogueContext: "Reagiere nat\u00fcrlich auf die Beschreibung des Bundles und beziehe dich auf deine Arbeitsabl\u00e4ufe. Frage danach beil\u00e4ufig: Welche Kombination w\u00fcrde unseren Alltag tats\u00e4chlich vereinfachen?"
+    traineeDialogueTexts:
+    - "Ich fasse die f\u00fcr Sie passenden Produkte und Leistungen zu einem Bundle zusammen, damit die Auswahl leichter wird und ein gemeinsamer Nutzen entsteht."
+    - "Ich w\u00fcrde eine zuf\u00e4llige Liste unverbundener Produkte mit unterschiedlichen Preisen als Bundle anbieten."
+    - "Das Bundle ist f\u00fcr mich eine interne Aufgabenliste unseres Sales-Teams."
+    - "Ohne klar definierte Leistungen w\u00fcrde ich einen Vertrag trotzdem als Bundle bezeichnen."
+  - questionId: UC-M05-Q04
+    dialogueContext: "Reagiere nat\u00fcrlich auf die Zusammenarbeit der Teams und deine bisherige Erfahrung. Frage danach beil\u00e4ufig: Wie w\u00fcrden Sie sicherstellen, dass ein Angebot zu unseren tats\u00e4chlichen Zielen passt?"
+    traineeDialogueTexts:
+    - "Unser Customer-Success-Team kennt Ihre Nutzung und Ziele bereits besser; gemeinsam k\u00f6nnen wir deshalb einen passenden Zeitpunkt f\u00fcr ein Angebot finden."
+    - "Wenn Sales und Customer Success zusammenarbeiten, muss Sales aus meiner Sicht keine Kundeninformationen mehr dokumentieren."
+    - "Durch die Zusammenarbeit ersetzt Customer Success automatisch jede Sales-Aktivit\u00e4t."
+    - "Sobald wir zusammenarbeiten, erh\u00e4lt der Kunde aus meiner Sicht immer ein Upgrade."
+  - questionId: UC-M05-Q05
+    dialogueContext: "Reagiere nat\u00fcrlich auf die vorgeschlagenen Erfolgskriterien. Frage danach beil\u00e4ufig: Welche Ver\u00e4nderung w\u00fcrden Sie bei uns zuerst beobachten, um den Erfolg einzusch\u00e4tzen?"
+    traineeDialogueTexts:
+    - "Wenn der Umsatz steigt, w\u00e4re das f\u00fcr mich der einzige Ma\u00dfstab f\u00fcr ein erfolgreiches Zusatzangebot."
+    - "F\u00fcr mich w\u00e4re das Ergebnis erst dann gut, wenn zus\u00e4tzlicher Umsatz mit Kundennutzen, Zufriedenheit und langfristiger Retention zusammenpasst."
+    - "Ich z\u00e4hle nur, wie viele Add-ons wir angeboten haben, unabh\u00e4ngig davon, was beim Kunden passiert."
+    - "Wie schnell der Sales-Mitarbeiter das Angebot ausspricht, ist f\u00fcr mich die wichtigste Erfolgskennzahl."
+  - questionId: UC-M05-Q06
+    dialogueContext: "Reagiere nat\u00fcrlich auf die Bedeutung von Relevanz und mache deine Erwartung deutlich. Frage danach beil\u00e4ufig: Was w\u00e4re f\u00fcr Sie ein gutes Zeichen, dass ein weiterer Vorschlag wirklich zu uns passt?"
+    traineeDialogueTexts:
+    - "Dann biete ich einfach m\u00f6glichst viele Zusatzprodukte an; ihre Relevanz spielt dabei keine Rolle."
+    - "Mehr Angebote sind nicht automatisch besser. Entscheidend ist, ob sie f\u00fcr den jeweiligen Kunden wirklich relevant sind."
+  - questionId: UC-M05-Q07
+    dialogueContext: "Reagiere nat\u00fcrlich auf die Verbindung zwischen passenden Angeboten und Kundenbindung. Beende den Austausch mit einer kurzen Nachfrage: Wie w\u00fcrden Sie die Zusammenarbeit langfristig f\u00fcr uns wertvoll halten?"
+    traineeDialogueTexts:
+    - "Wenn ein Zusatzangebot zu Ihren Zielen passt und Ihnen langfristig hilft, kann es auch die Kundenbindung st\u00e4rken."
+    - "Auch ein relevantes Zusatzangebot tr\u00e4gt aus meiner Sicht nicht zur langfristigen Kundenbindung bei."

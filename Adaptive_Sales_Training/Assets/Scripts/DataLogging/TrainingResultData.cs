@@ -62,7 +62,6 @@ public class AIResponseLog
     public string model;
     public long totalResponseTimeMilliseconds;
 
-    public string traineeDialogueText;
     public string replyText;
 }
 

@@ -26,4 +26,6 @@ public class AIQuestionContext
     public string questionId;
     [TextArea(3, 8)]
     public string dialogueContext;
+
+    public List<string> traineeDialogueTexts = new();
 }
