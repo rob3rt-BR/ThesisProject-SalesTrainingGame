@@ -66,7 +66,6 @@ public class ModuleFlowController : MonoBehaviour
     private int currentQuestionIndex;
     private float remainingTime;
     private bool isQuestionActive;
-    private bool isScenarioModule;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -109,19 +108,13 @@ public class ModuleFlowController : MonoBehaviour
             return;
         }
 
-        // If any module except scenario module (last) => track timer and update timer text, Else => disable timer
-        if (!isScenarioModule)
-        {
-            remainingTime -= Time.unscaledDeltaTime;
-            timerText.text = $"Zeit: {Mathf.Max(remainingTime, 0f):0.0}";
+        // Track timer and update timer text
+        remainingTime -= Time.unscaledDeltaTime;
+        timerText.text = $"Zeit: {Mathf.Max(remainingTime, 0f):0.0}";
 
-            if (remainingTime <= 0f)
-            {
-                SelectAnswer(-1);
-            }
-        } else
+        if (remainingTime <= 0f)
         {
-            timerText.gameObject.SetActive(false);
+            SelectAnswer(-1);
         }
     }
 
@@ -137,12 +130,6 @@ public class ModuleFlowController : MonoBehaviour
         {
             FinishTopic();
             return;
-        }
-
-        // If index == last module in list => Now in scenario module
-        if (currentModuleIndex == topic.modules.Count - 1)
-        {
-            isScenarioModule = true;
         }
 
         MicroModule currentModule = topic.modules[currentModuleIndex];
@@ -309,8 +296,8 @@ public class ModuleFlowController : MonoBehaviour
         // Record currentModuleResult attributes (final) in currentTopicResult in TrainingSessionManager
         session.RecordCurrentModuleResult();
 
-        // If scenario module (last) => Go to final points screen (topic), Else => Go to current points screen (module)
-        if (isScenarioModule)
+        // If last module => Go to final points screen (topic), Else => Go to current points screen (module)
+        if (currentModuleIndex == topic.modules.Count - 1)
         {
             ShowFinalPointScreen();
         } else
