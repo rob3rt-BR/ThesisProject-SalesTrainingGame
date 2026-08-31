@@ -87,7 +87,7 @@ public sealed class OpenRouterService
         logger.LogInformation("AI finish reason for {QuestionId}: {FinishReason}", request.QuestionId, choice.FinishReason);
 
         string rawResultContent = openRouterResult.Choices[0].Message.Content;
-        string replyText = rawResultContent.Trim();
+        string replyText = RemoveReplyQuotationmarks(rawResultContent);
 
         logger.LogWarning("Raw result content for {QuestionId}: {Content}", request.QuestionId, rawResultContent);
 
@@ -103,7 +103,7 @@ public sealed class OpenRouterService
         "PromptTokens: {PromptTokens}, CompletionTokens: {CompletionTokens}, " +
         "ResponseTimeMs: {ResponseTimeMs}" +
         "TraineeDialogueText: {TraineeDialogueText}" +
-        "ReplyText: {ReplyText}",
+        "RawReplyText: {ReplyText}",
         openRouterResult.Model,
         request.ScenarioId,
         request.ModuleId,
@@ -112,7 +112,7 @@ public sealed class OpenRouterService
         usage?.CompletionTokens ?? 0,
         stopWatch.ElapsedMilliseconds,
         request.TraineeDialogueText,
-        replyText);
+        rawResultContent);
 
         return new DialogueResponse
         {
@@ -137,21 +137,27 @@ public sealed class OpenRouterService
         Übernimm nicht die Rolle eines Trainers.
 
         Reagiere natürlich und konkret auf die vorbereitete Aussage des Teilnehmers, ohne sie wörtlich zu wiederholen.
-        Beziehe dich auf die Kundenpersona und die aktuelle Situation.
+        Beziehe dich auf die aktuelle Situation und die Kundenpersona.
         Deine Reaktion darf positiv, zurückhaltend, irritiert oder kritisch ausfallen.
-        Stelle innerhalb dieser Reaktion keine weiteren Fragen und verwende keine rhetorischen Fragen.
 
-        Stelle anschließend höchstens eine kurze, beiläufige Frage, die sich aus dem aktuellen Dialogkontext ergibt.
-        Die Frage soll wie eine natürliche Kundennachfrage klingen, nicht wie eine Quiz- oder Lernfrage.
-        Falls keine sinnvolle Anschlussfrage vorhanden ist, beende die Reaktion ohne zusätzliche Frage.
+        Die Kundenreaktion darf ausschließlich aus Aussagen bestehen.
+        Stelle innerhalb dieser Reaktion keine zusätzlichen, rhetorischen oder klärenden Fragen.
+
+        Wenn der aktuelle Dialogkontext eine Überleitungsfrage vorsieht, muss deine Antwort genau eine kurze und natürliche Überleitungsfrage enthalten.
+        Diese Frage muss der letzte Satz der Antwort sein und darf nicht weggelassen werden.
+
+        Wenn der Dialogkontext keine Überleitungsfrage vorsieht, stelle überhaupt keine Frage.
 
         Erwähne keine Trainingsfragen, Antwortoptionen, Lernziele oder nächsten Module.
         Verrate keine richtige Antwort und bewerte weder die Aussage noch den Punktestand.
 
-        Gib ausschließlich die fertige Kundenreaktion als normalen Text zurück.
+        Halte die Antwort kurz.
+        Gib ausschließlich den fertigen Kundentext zurück.
         Setze den gesamten Text nicht in Anführungszeichen.
         Verwende keine Markdown-Formatierung und kein Präfix wie „Kunde:“.
         """;
+        // Stelle innerhalb dieser Reaktion keine zusätzlichen, rhetorischen oder klärenden Fragen und verwende dort kein Fragezeichen.
+        // Die gesamte Antwort darf höchstens ein Fragezeichen enthalten.
 
         string requestProperties = $"""
         Aktueller Szenariokontext: {request.ScenarioContext}
@@ -190,11 +196,14 @@ public sealed class OpenRouterService
         Aktueller Dialogkontext:
         {request.QuestionDialogueContext}
 
-        Vorbereitete Aussage des Teilnehmers:
+        Aussage des Teilnehmers:
         {request.TraineeDialogueText}
 
-        Reagiere als Kunde natürlich und konkret auf diese Aussage.
-        Führe das Gespräch mit höchstens einer passenden, beiläufigen Nachfrage weiter.
+        Reagiere als Kunde auf die Aussage.
+        Falls der Dialogkontext eine Überleitungsfrage vorsieht, stelle genau eine als letzten Satz.
+        Die Reaktion davor darf keine Frage enthalten.
+        Falls keine Überleitungsfrage vorgesehen ist, stelle keine Frage.
+        
         Gib nur den fertigen Kundentext zurück, ohne Anführungszeichen um die gesamte Antwort.
         """;
 
@@ -205,5 +214,16 @@ public sealed class OpenRouterService
         };
         messages.Add(userMessage);
         return messages;
+    }
+
+    private static string RemoveReplyQuotationmarks(string content)
+    {
+        string replyText = content.Trim();
+
+        if ((replyText.StartsWith("\"") && replyText.EndsWith("\"")) || (replyText.StartsWith("„") && replyText.EndsWith("“")))
+        {
+            replyText = replyText[1..^1].Trim();
+        }
+        return replyText;
     }
 }
