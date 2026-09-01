@@ -13,8 +13,8 @@ public class TrainingSessionManager : MonoBehaviour
     public string SessionId {get; private set;}
     public TrainingVersion Version {get; private set;}
     
-    public string SessionStart {get; private set;} // CEST (Central European Summer Time, UTC+2)
-    public string SessionEnd {get; private set;}
+    public string ParticipantStart {get; private set;}
+    public string ParticipantEnd {get; private set;}
 
     public List<TopicResult> TopicResults {get; private set;} = new();
     public SalesTopic SelectedTopic {get; private set;}
@@ -29,9 +29,7 @@ public class TrainingSessionManager : MonoBehaviour
     private int TotalCorrectAnswers;
     private float FinalAvgResponseTime;
 
-    private string SessionDataFinalPath;
-
-    private static int participantIdCounter = 0;
+    private string FinalTrainingDataPath;
 
     void Awake()
     {
@@ -49,7 +47,7 @@ public class TrainingSessionManager : MonoBehaviour
     #region Session Functions
     public void GenerateGlobalSessionID()
     {
-        SessionId = Guid.NewGuid().ToString();
+        SessionId = "S-" + Guid.NewGuid().ToString();
         Debug.Log($"Current global session ID: {SessionId}");
     }
 
@@ -63,10 +61,10 @@ public class TrainingSessionManager : MonoBehaviour
     {
         allTopics = requiredTopics;
 
-        ParticipantId = Guid.NewGuid().ToString(); // Cambiar ahorita con lo de internet
+        ParticipantId = "P-" + Guid.NewGuid().ToString(); // Cambiar ahorita con lo de internet
         // SessionId and Version already set previously
 
-        SessionStart = DateTime.Now.ToString(@"d/M/yyyy hh:mm:ss tt");
+        ParticipantStart = DateTime.Now.ToString(@"d/M/yyyy hh:mm:ss tt"); // Current local time => CEST (Central European Summer Time, UTC+2)
 
         // Reset important manager information trackers
         TopicResults.Clear();
@@ -81,9 +79,9 @@ public class TrainingSessionManager : MonoBehaviour
         TotalCorrectAnswers = 0;
         FinalAvgResponseTime = 0f;
 
-        SessionDataFinalPath = string.Empty;
+        FinalTrainingDataPath = string.Empty;
 
-        Debug.Log($"Participant {ParticipantId} started session at {SessionStart}.");
+        Debug.Log($"Participant {ParticipantId} started session at {ParticipantStart}.");
     }
 
     public void EndParticipantSession()
@@ -94,36 +92,36 @@ public class TrainingSessionManager : MonoBehaviour
             return;
         }
 
-        SessionEnd = DateTime.Now.ToString(@"d/M/yyyy hh:mm:ss tt");
+        ParticipantEnd = DateTime.Now.ToString(@"d/M/yyyy hh:mm:ss tt"); // Current local time => CEST (Central European Summer Time, UTC+2)
 
         TotalPoints = GetTotalPoints();
         TotalCorrectAnswers = GetTotalCorrectAnswers();
         FinalAvgResponseTime = GetFinalAvgResponseTime();
 
-        // Save final session data and record data path for later export
-        SessionDataFinalPath = SaveSessionDataFinal();
+        // Save final participant training data and record data path for later export
+        FinalTrainingDataPath = SaveFinalTrainingData();
 
-        Debug.Log($"Participant {ParticipantId} completed session at {SessionEnd}");
+        Debug.Log($"Participant {ParticipantId} completed session at {ParticipantEnd}");
     }
 
-    private string SaveSessionDataFinal()
+    private string SaveFinalTrainingData()
     {
         TrainingResultData saveData = CreateSaveData();
         
-        saveData.sessionEnd = SessionEnd;
+        saveData.participantEnd = ParticipantEnd;
         saveData.totalPoints = TotalPoints;
         saveData.totalCorrectAnswers = TotalCorrectAnswers;
         saveData.finalAvgResponseTime = FinalAvgResponseTime;
 
-        string folderPath = Path.Combine(Application.persistentDataPath, "Sessions");
+        string folderPath = Path.Combine(Application.persistentDataPath, "Sessions", $"Session_{SessionId}", "FinalTrainingData");
         Directory.CreateDirectory(folderPath);
 
-        string filePath = Path.Combine(folderPath, $"session_{SessionId}.json");
+        string filePath = Path.Combine(folderPath, $"{ParticipantId}.json");
         string json = JsonUtility.ToJson(saveData, true);
 
         File.WriteAllText(filePath, json);
 
-        Debug.Log($"Final participant session data saved to {filePath}.");
+        Debug.Log($"Final participant training data saved to {filePath}.");
 
         return filePath;
     }
@@ -135,8 +133,10 @@ public class TrainingSessionManager : MonoBehaviour
             participantId = ParticipantId,
             sessionId = SessionId,
             version = Version.ToString(),
-            sessionStart = SessionStart,
-            sessionEnd = string.Empty,
+
+            participantStart = ParticipantStart,
+            participantEnd = string.Empty,
+
             totalPoints = 0,
             totalCorrectAnswers = 0,
             finalAvgResponseTime = 0f,
@@ -145,25 +145,20 @@ public class TrainingSessionManager : MonoBehaviour
         return saveData;
     }
 
-    public void ExportSessionDataFinal()
+    public void ExportFinalTrainingData()
     {
-        string sourcePath = SessionDataFinalPath;
+        string sourcePath = FinalTrainingDataPath;
 
         string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        string exportFolder = Path.Combine(documentsPath, "SalesTrainingData", "Sessions");
+        string exportFolder = Path.Combine(documentsPath, "SalesTrainingData", "Sessions", $"Session_{SessionId}", "FinalTrainingData");
         Directory.CreateDirectory(exportFolder);
 
-        string destinationPath = Path.Combine(exportFolder, $"session_{SessionId}.json");
+        string destinationPath = Path.Combine(exportFolder, $"{ParticipantId}.json");
         File.Copy(sourcePath, destinationPath, overwrite: true);
         
-        Debug.Log($"Final participant session data exported to {destinationPath}");
+        Debug.Log($"Final participant training data exported to {destinationPath}");
     }
 
-    public int GetParticipantIdCounter()
-    {
-        participantIdCounter++;
-        return participantIdCounter;
-    }
 
     #endregion
 
@@ -199,7 +194,58 @@ public class TrainingSessionManager : MonoBehaviour
             Debug.LogWarning("Topic is already completed.");
             return;
         }
-        SelectedTopic = topic; // Set selected topic (on TopicMenuItem[topic]) => Pass later to ModuleFlowContoller
+        SelectedTopic = topic; // Set selected topic (on TopicMenuItem[topic]) => Pass later to ModuleFlowContoller AND AIDialogueController
+    }
+
+    public void RecordIntermediateResults()
+    {
+        if (!IsTopicCompleted(SelectedTopic))
+        {
+            Debug.LogWarning("Selected topic is not completed.");
+            return;
+        }
+
+        string currentParticipantEnd = DateTime.Now.ToString(@"d/M/yyyy hh:mm:ss tt");
+
+        int currentTotalPoints = GetCurrentTopicPoints();
+        int currentTotalCorrectAnswers = GetCurrentTopicCorrectAnswers();
+        float currentFinalAvgResponseTime = GetCurrentTopicAvgResponseTime();
+
+        // Save participant intermediate training data and export it directly to local storage directory
+        SaveAndExportIntermediateData(currentParticipantEnd, currentTotalPoints, currentTotalCorrectAnswers, currentFinalAvgResponseTime);
+
+        Debug.Log($"Participant {ParticipantId} completed {SelectedTopic.topicTitle} at {currentParticipantEnd}");
+    }
+
+    private void SaveAndExportIntermediateData(string currentParticipantEnd, int currentTotalPoints, int currentTotalCorrectAnswers, float currentFinalAvgResponseTime)
+    {
+        TrainingResultData saveData = CreateSaveData();
+
+        saveData.participantEnd = currentParticipantEnd;
+        saveData.totalPoints = currentTotalPoints;
+        saveData.totalCorrectAnswers = currentTotalCorrectAnswers;
+        saveData.finalAvgResponseTime = currentFinalAvgResponseTime;
+
+        // Save intermediate training data
+        string folderPath = Path.Combine(Application.persistentDataPath, "Sessions", $"Session_{SessionId}", "IntermediateTrainingData");
+        Directory.CreateDirectory(folderPath);
+
+        string filePath = Path.Combine(folderPath, $"{ParticipantId}.json");
+        string json = JsonUtility.ToJson(saveData, true);
+
+        File.WriteAllText(filePath, json);
+
+        Debug.Log($"Intermediate training data saved to {filePath}.");
+
+        // Export intermediate training data
+        string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        string exportFolder = Path.Combine(documentsPath, "SalesTrainingData", "Sessions", $"Session_{SessionId}", "IntermediateTrainingData");
+        Directory.CreateDirectory(exportFolder);
+
+        string destinationPath = Path.Combine(exportFolder, $"{ParticipantId}.json");
+        File.Copy(filePath, destinationPath, overwrite: true);
+        
+        Debug.Log($"Intermediate training data exported to {destinationPath}");
     }
 
     public bool AllTopicsCompleted()

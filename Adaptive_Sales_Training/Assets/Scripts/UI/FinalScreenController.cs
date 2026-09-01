@@ -30,7 +30,8 @@ public class FinalScreenController : MonoBehaviour
 
     public void ContinueToThanksScreen()
     {
-        session.ExportSessionDataFinal();
+        // Export final participant training data to predefined local storage directory
+        session.ExportFinalTrainingData();
         
         finalStatsScreen.SetActive(false);
         thanksScreen.SetActive(true);

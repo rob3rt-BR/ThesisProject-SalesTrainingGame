@@ -53,16 +53,22 @@ public class TopicMenuItem : MonoBehaviour
         session.BeginTopic(topic); // Initiate currentTopicResult in TraniningSessionManager
         session.SelectTopic(topic); // Set SelectedTopic as thisTopicMenuItem.topic
 
-        if (session.Version.Equals(TrainingVersion.AI))
+        if (session.Version.Equals(TrainingVersion.Traditional))
+        {
+            SceneManager.LoadScene("TrainingScene");
+            Debug.Log($"Loading TrainingScene with topic: \"{topic.topicTitle}\".");
+        } 
+        else if (session.Version.Equals(TrainingVersion.AI))
         {
             session.SetTopicDialogueScenarios(dialogueScenarios); // Set TopicDialogueScenarios as thisTopicMenuItem.dialogueScenarios (of selected topic)
 
             SceneManager.LoadScene("AITrainingScene");
             Debug.Log($"Loading AITrainingScene with topic: \"{topic.topicTitle}\".");
-        } else
+        } 
+        else
         {
-            SceneManager.LoadScene("TrainingScene");
-            Debug.Log($"Loading TrainingScene with topic: \"{topic.topicTitle}\".");
+            Debug.LogError("Undefined TrainingVersion.");
+            return;
         }
 
     }

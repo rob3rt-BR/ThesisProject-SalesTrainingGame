@@ -313,8 +313,8 @@ public class ModuleFlowController : MonoBehaviour
         // Set currentTopicResult.completed to true in TrainingSessionManager
         session.CompleteCurrentTopic();
 
-        // If all topics completed => End session, send respective values to local store and go to SessionResultsScene
-        // Else => return to TopicMenuScene for next topic
+        // If all topics completed => End participant session, send respective values to local store and go to SessionResultsScene
+        // Else => Record intermediate participant results (save and export), and return to TopicMenuScene for next topic
         if (session.AllTopicsCompleted())
         {
             session.EndParticipantSession();
@@ -322,6 +322,7 @@ public class ModuleFlowController : MonoBehaviour
             Debug.Log("Loading SessionResultsScene.");
         } else
         {
+            session.RecordIntermediateResults();
             SceneManager.LoadScene("TopicMenuScene");
             Debug.Log("Returning to TopicMenuScene.");
         }

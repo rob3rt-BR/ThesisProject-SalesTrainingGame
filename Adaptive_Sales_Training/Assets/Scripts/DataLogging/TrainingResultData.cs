@@ -9,8 +9,8 @@ public class TrainingResultData
     public string participantId;
     public string sessionId;
     public string version;
-    public string sessionStart;
-    public string sessionEnd;
+    public string participantStart;
+    public string participantEnd;
     public int totalPoints;
     public int totalCorrectAnswers;
     public float finalAvgResponseTime;

@@ -237,9 +237,15 @@ public class StartScreenController : MonoBehaviour
         if (trainingVersion.Equals(TrainingVersion.Traditional))
         {
             content = explainScreenContentTraditional;
-        } else
+        } 
+        else if (trainingVersion.Equals(TrainingVersion.AI))
         {
             content = explainScreenContentAI;
+        }
+        else
+        {
+            Debug.LogError("Undefined TrainingVersion.");
+            return;
         }
 
         if (content == null)
