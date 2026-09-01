@@ -292,7 +292,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -170}
+  m_AnchoredPosition: {x: 0, y: -150}
   m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &117123189
@@ -2190,7 +2190,7 @@ MonoBehaviour:
   sessionIdText: {fileID: 264174943}
   trainingModeSetText: {fileID: 1770297524}
   generateSessionIdButton: {fileID: 1674888791}
-  normalModeButton: {fileID: 942886320}
+  traditionalModeButton: {fileID: 942886320}
   aiModeButton: {fileID: 310073194}
   setModeButton: {fileID: 835460627}
   backToStartScreenButton: {fileID: 117123189}
@@ -2203,7 +2203,7 @@ MonoBehaviour:
   - {fileID: 404491459}
   continueButton: {fileID: 2100131996}
   backButton: {fileID: 1319095840}
-  explainScreenContentNormal: {fileID: 11400000, guid: 2be2433b36f62b3489c25cb47154ed87, type: 2}
+  explainScreenContentTraditional: {fileID: 11400000, guid: 2be2433b36f62b3489c25cb47154ed87, type: 2}
   explainScreenContentAI: {fileID: 11400000, guid: a62ec91593ba52e42b181287b86950ab, type: 2}
 --- !u!1 &483371321
 GameObject:
@@ -2241,7 +2241,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -170}
+  m_AnchoredPosition: {x: 0, y: -150}
   m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &483371323
@@ -3661,7 +3661,7 @@ GameObject:
   - component: {fileID: 942886321}
   - component: {fileID: 942886320}
   m_Layer: 5
-  m_Name: NormalModeButton
+  m_Name: TraditionalModeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4079,7 +4079,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 10}
+  m_AnchoredPosition: {x: 0, y: 30}
   m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1100032117
@@ -4265,7 +4265,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -80}
+  m_AnchoredPosition: {x: 0, y: -60}
   m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1224649924
