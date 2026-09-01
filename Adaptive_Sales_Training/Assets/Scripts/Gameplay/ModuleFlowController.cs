@@ -317,7 +317,7 @@ public class ModuleFlowController : MonoBehaviour
         // Else => return to TopicMenuScene for next topic
         if (session.AllTopicsCompleted())
         {
-            session.EndSession();
+            session.EndParticipantSession();
             SceneManager.LoadScene("SessionResultsScene");
             Debug.Log("Loading SessionResultsScene.");
         } else

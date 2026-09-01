@@ -14,17 +14,36 @@ public class StartScreenController : MonoBehaviour
     [SerializeField]
     private GameObject startScreen;
     [SerializeField]
-    private GameObject assignValuesScreen;
+    private GameObject assignTrainingModeScreen;
     [SerializeField]
     private GameObject explainScreen;
 
-    [Header("Assign Values UI")]
+    [Header("Assign Training Mode UI")]
     [SerializeField]
-    private TMP_Text participantIdText;
+    private GameObject passwordBox;
     [SerializeField]
-    private Button generateParticipantValuesButton;
+    private TMP_InputField passwordInputField;
     [SerializeField]
-    private Button continueToExplanationButton;
+    private TMP_Text wrongPasswordText;
+    [SerializeField]
+    private Button checkPasswortButton;
+
+    [SerializeField]
+    private GameObject assignTrainingModeElements;
+    [SerializeField]
+    private TMP_Text sessionIdText;
+    [SerializeField]
+    private TMP_Text trainingModeSetText;
+    [SerializeField]
+    private Button generateSessionIdButton;
+    [SerializeField]
+    private Button traditionalModeButton;
+    [SerializeField]
+    private Button aiModeButton;
+    [SerializeField]
+    private Button setModeButton;
+    [SerializeField]
+    private Button backToStartScreenButton;
 
     [Header("Explanation UI")]
     [SerializeField]
@@ -34,15 +53,15 @@ public class StartScreenController : MonoBehaviour
     [SerializeField]
     private Button backButton;
     [SerializeField]
-    private ExplainScreenContent explainScreenContentNormal;
+    private ExplainScreenContent explainScreenContentTraditional;
     [SerializeField]
     private ExplainScreenContent explainScreenContentAI;
+
+    private const string password = "PerroLocoST456+";
+    private string inputFieldText;
     
     private TrainingSessionManager session;
-    private string participantId;
     private TrainingVersion trainingVersion;
-
-    private int participantIdCounter;
 
     private int currentTextIndex = 0;
     private RectTransform continueButtonTrans;
@@ -58,11 +77,26 @@ public class StartScreenController : MonoBehaviour
             return;
         }
 
-        // On click => Generate participant ID and define training version based on that
-        generateParticipantValuesButton.onClick.AddListener(GenerateParticipantValues);
+        // On end edit => Store input from password input field in variable to later compare for password
+        passwordInputField.onEndEdit.AddListener(GetInput);
 
-        // On click => Show explanation screen and start session
-        continueToExplanationButton.onClick.AddListener(StartExplanation);
+        // On click => Check whether input text from input field equals predefined password
+        checkPasswortButton.onClick.AddListener(CheckPassword);
+
+        // On click => Go back to start screen from assign training value screen
+        backToStartScreenButton.onClick.AddListener(ReturnToStartScreen);
+
+        // On click => Generate session ID
+        generateSessionIdButton.onClick.AddListener(GenerateSessionID);
+
+        // On click => Select normal training mode
+        traditionalModeButton.onClick.AddListener(SelectTraditionalTrainingMode);
+
+        // On click => Select AI training mode
+        aiModeButton.onClick.AddListener(SelectAITrainingMode);
+
+        // On click => Set training mode and set explain screen content based on that
+        setModeButton.onClick.AddListener(SetTrainingMode);
 
         // On click => Go forward / back in texts
         continueButton.onClick.AddListener(ContinuePressed);
@@ -73,8 +107,24 @@ public class StartScreenController : MonoBehaviour
 
     public void StartGame()
     {
+        // IF global session ID AND training version NOT set => Return
+        if (session.SessionId == null && session.Version.Equals(TrainingVersion.Undefined))
+        {
+            Debug.LogWarning("Can't start game - No global session Id set and no training version specified.");
+            return;
+        }
+
+        // Start tracking participant training session
+        session.StartParticipantSession(allTopics);
+
         startScreen.SetActive(false);
-        assignValuesScreen.SetActive(true);
+        explainScreen.SetActive(true);
+    }
+
+    public void SetMode()
+    {
+        startScreen.SetActive(false);
+        assignTrainingModeScreen.SetActive(true);
     }
 
     public void QuitGame()
@@ -83,37 +133,102 @@ public class StartScreenController : MonoBehaviour
         Application.Quit();
     }
 
-    private void GenerateParticipantValues()
+    private void GetInput(string input)
     {
-        participantIdCounter = session.GetParticipantIdCounter();
-        participantId = $"P_{participantIdCounter}";
+        inputFieldText = input;
+    }
 
-        if (participantIdCounter % 2 == 0)
+    private void CheckPassword()
+    {
+        // IF input field text set AND equals to predefined password => Deactivate password box and show assignTrainingModel screen UI elements
+        // ELSE => Display wrong password text
+        if (inputFieldText != null && inputFieldText.Equals(password))
         {
-            trainingVersion = TrainingVersion.Traditional;
-            SetExplainScreenTextContent(explainScreenContentNormal);
+            passwordBox.SetActive(false);
+            backToStartScreenButton.interactable = false;
+            assignTrainingModeElements.SetActive(true);
         } else
         {
-            trainingVersion = TrainingVersion.AI;
-            SetExplainScreenTextContent(explainScreenContentAI);
+            wrongPasswordText.gameObject.SetActive(true);
+        }
+    }
+
+    private void ReturnToStartScreen()
+    {
+        // Reset assignTrainingMode screen UI elements for later reuse before returning to start screen
+        ResetAssignTrainingModeUI();
+
+        assignTrainingModeScreen.SetActive(false);
+        startScreen.SetActive(true);
+    }
+
+    private void ResetAssignTrainingModeUI()
+    {
+        // Reactivate password box and reset its internal values
+        passwordBox.SetActive(true);
+        wrongPasswordText.gameObject.SetActive(false);
+        passwordInputField.text = null;
+        inputFieldText = null;
+
+        // Reset text attributes and deactivate assignTrainingMode screen UI elements
+        sessionIdText.text = null;
+        trainingModeSetText.text = null;
+        assignTrainingModeElements.SetActive(false);
+    }
+
+    private void GenerateSessionID()
+    {
+        // Generate current global session ID internally in TrainingSessionManager => ONE session PER training version with X amount of participants
+        session.GenerateGlobalSessionID();
+
+        // Set text attribute of current global session ID
+        sessionIdText.text = session.SessionId;
+    }
+
+    private void SelectTraditionalTrainingMode()
+    {
+        traditionalModeButton.interactable = false;
+
+        trainingVersion = TrainingVersion.Traditional;
+
+        aiModeButton.interactable = true;
+    }
+
+    private void SelectAITrainingMode()
+    {
+        aiModeButton.interactable = false;
+
+        trainingVersion = TrainingVersion.AI;
+    
+        traditionalModeButton.interactable = true;
+    }
+
+    private void SetTrainingMode()
+    {
+        // Set current global session training version in TrainingSessionManager
+        session.SetGlobalSessionTrainingVersion(trainingVersion);
+
+        // Set text attribute of current global session training version
+        trainingModeSetText.text = session.Version.ToString();
+
+        // Set explain screen content of texts based on set training version
+        SetExplainScreenTextContent(trainingVersion);
+
+        backToStartScreenButton.interactable = true;
+    }
+
+    private void SetExplainScreenTextContent(TrainingVersion trainingVersion)
+    {
+        ExplainScreenContent content;
+
+        if (trainingVersion.Equals(TrainingVersion.Traditional))
+        {
+            content = explainScreenContentTraditional;
+        } else
+        {
+            content = explainScreenContentAI;
         }
 
-        participantIdText.text += $" {participantId}";
-
-        generateParticipantValuesButton.interactable = false;
-        continueToExplanationButton.interactable = true;
-    }
-
-    private void StartExplanation()
-    {
-        session.StartSession(participantId, trainingVersion, allTopics); // Setting temporal
-        
-        assignValuesScreen.SetActive(false);
-        explainScreen.SetActive(true);
-    }
-
-    private void SetExplainScreenTextContent(ExplainScreenContent content)
-    {
         if (content == null)
         {
             Debug.LogError("ExplainScreen is null");
@@ -176,8 +291,17 @@ public class StartScreenController : MonoBehaviour
 
     private void CleanUp()
     {
-        generateParticipantValuesButton.onClick.RemoveListener(GenerateParticipantValues);
-        continueToExplanationButton.onClick.RemoveListener(StartExplanation);
+        // Clenaup Assign Training Mode Screen
+        passwordInputField.onEndEdit.RemoveListener(GetInput);
+        checkPasswortButton.onClick.RemoveListener(CheckPassword);
+
+        backToStartScreenButton.onClick.RemoveListener(ReturnToStartScreen);
+        generateSessionIdButton.onClick.RemoveListener(GenerateSessionID);
+        traditionalModeButton.onClick.RemoveListener(SelectTraditionalTrainingMode);
+        aiModeButton.onClick.RemoveListener(SelectAITrainingMode);
+        setModeButton.onClick.RemoveListener(SetTrainingMode);
+
+        // Cleanup Explanation Screen
         continueButton.onClick.RemoveListener(ContinuePressed);
         backButton.onClick.RemoveListener(BackPressed);
     }

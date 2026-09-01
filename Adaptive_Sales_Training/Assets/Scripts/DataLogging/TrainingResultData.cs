@@ -67,6 +67,7 @@ public class AIResponseLog
 
 public enum TrainingVersion
 {
+    Undefined,
     Traditional,
     AI
 }

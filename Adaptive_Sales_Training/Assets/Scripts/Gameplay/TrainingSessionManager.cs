@@ -47,13 +47,24 @@ public class TrainingSessionManager : MonoBehaviour
     }
 
     #region Session Functions
-    public void StartSession(string participantId, TrainingVersion version, List<SalesTopic> requiredTopics)
+    public void GenerateGlobalSessionID()
+    {
+        SessionId = Guid.NewGuid().ToString();
+        Debug.Log($"Current global session ID: {SessionId}");
+    }
+
+    public void SetGlobalSessionTrainingVersion(TrainingVersion trainingVersion)
+    {
+        Version = trainingVersion;
+        Debug.Log($"Current global session training version set to: {Version}");
+    }
+
+    public void StartParticipantSession(List<SalesTopic> requiredTopics)
     {
         allTopics = requiredTopics;
 
-        ParticipantId = participantId;
-        Version = version;
-        SessionId = Guid.NewGuid().ToString(); // TODO: Check alternatives para SessionId
+        ParticipantId = Guid.NewGuid().ToString(); // Cambiar ahorita con lo de internet
+        // SessionId and Version already set previously
 
         SessionStart = DateTime.Now.ToString(@"d/M/yyyy hh:mm:ss tt");
 
@@ -72,14 +83,14 @@ public class TrainingSessionManager : MonoBehaviour
 
         SessionDataFinalPath = string.Empty;
 
-        Debug.Log($"Session {SessionId} started at {SessionStart}.");
+        Debug.Log($"Participant {ParticipantId} started session at {SessionStart}.");
     }
 
-    public void EndSession()
+    public void EndParticipantSession()
     {
         if (!AllTopicsCompleted())
         {
-            Debug.LogWarning("Session cannot end - not all topics completed.");
+            Debug.LogWarning("Participant session cannot end - not all topics completed.");
             return;
         }
 
@@ -89,10 +100,10 @@ public class TrainingSessionManager : MonoBehaviour
         TotalCorrectAnswers = GetTotalCorrectAnswers();
         FinalAvgResponseTime = GetFinalAvgResponseTime();
 
-        // Aqui export / upload final session data a database
+        // Save final session data and record data path for later export
         SessionDataFinalPath = SaveSessionDataFinal();
 
-        Debug.Log($"Session {SessionId} completed at {SessionEnd}");
+        Debug.Log($"Participant {ParticipantId} completed session at {SessionEnd}");
     }
 
     private string SaveSessionDataFinal()
@@ -112,7 +123,7 @@ public class TrainingSessionManager : MonoBehaviour
 
         File.WriteAllText(filePath, json);
 
-        Debug.Log($"Final session data saved to {filePath}.");
+        Debug.Log($"Final participant session data saved to {filePath}.");
 
         return filePath;
     }
@@ -145,7 +156,7 @@ public class TrainingSessionManager : MonoBehaviour
         string destinationPath = Path.Combine(exportFolder, $"session_{SessionId}.json");
         File.Copy(sourcePath, destinationPath, overwrite: true);
         
-        Debug.Log($"Final session data exported to {destinationPath}");
+        Debug.Log($"Final participant session data exported to {destinationPath}");
     }
 
     public int GetParticipantIdCounter()
