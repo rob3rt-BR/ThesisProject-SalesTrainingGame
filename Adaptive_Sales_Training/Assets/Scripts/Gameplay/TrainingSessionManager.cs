@@ -31,6 +31,8 @@ public class TrainingSessionManager : MonoBehaviour
 
     private string FinalTrainingDataPath;
 
+    private static System.Random random = new();
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -47,9 +49,11 @@ public class TrainingSessionManager : MonoBehaviour
     #region Session Functions
     public void GenerateGlobalSessionID()
     {
-        SessionId = "S-" + Guid.NewGuid().ToString();
+        SessionId = "S-" + NewGlobalSessionIDFromRandomDoubleLong();
         Debug.Log($"Current global session ID: {SessionId}");
     }
+
+    private string NewGlobalSessionIDFromRandomDoubleLong() => $"{random.Next():x}{random.Next():x}";
 
     public void SetGlobalSessionTrainingVersion(TrainingVersion trainingVersion)
     {
@@ -61,7 +65,7 @@ public class TrainingSessionManager : MonoBehaviour
     {
         allTopics = requiredTopics;
 
-        ParticipantId = "P-" + Guid.NewGuid().ToString(); // Cambiar ahorita con lo de internet
+        ParticipantId = "P-" + NewParticipantIDFromRandomInt();
         // SessionId and Version already set previously
 
         ParticipantStart = DateTime.Now.ToString(@"d/M/yyyy hh:mm:ss tt"); // Current local time => CEST (Central European Summer Time, UTC+2)
@@ -83,6 +87,8 @@ public class TrainingSessionManager : MonoBehaviour
 
         Debug.Log($"Participant {ParticipantId} started session at {ParticipantStart}.");
     }
+
+    private string NewParticipantIDFromRandomInt() => random.Next(int.MaxValue).ToString("x");
 
     public void EndParticipantSession()
     {

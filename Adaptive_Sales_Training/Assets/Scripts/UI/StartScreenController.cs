@@ -146,12 +146,6 @@ public class StartScreenController : MonoBehaviour
         {
             passwordBox.SetActive(false);
 
-            // Translate backToStartScreenButton by -20 units in the Y axis for clearer display
-            RectTransform backStartButtonTrans = backToStartScreenButton.gameObject.GetComponent<RectTransform>();
-            var newPos = backStartButtonTrans.anchoredPosition;
-            newPos.y -= 20;
-            backStartButtonTrans.anchoredPosition = newPos;
-
             backToStartScreenButton.interactable = false;
             assignTrainingModeElements.SetActive(true);
         } else
@@ -171,12 +165,6 @@ public class StartScreenController : MonoBehaviour
 
     private void ResetAssignTrainingModeUI()
     {
-        // Reset backToStartScreenButton to orginal position (+20 units in the Y axis)
-        RectTransform backStartButtonTrans = backToStartScreenButton.gameObject.GetComponent<RectTransform>();
-        var newPos = backStartButtonTrans.anchoredPosition;
-        newPos.y += 20;
-        backStartButtonTrans.anchoredPosition = newPos;
-
         // Reactivate password box and reset its internal values
         passwordBox.SetActive(true);
         wrongPasswordText.gameObject.SetActive(false);
