@@ -250,7 +250,7 @@ public class StartScreenController : MonoBehaviour
 
         for (int i = 0; i < texts.Count; i++)
         {
-            texts[i].GetComponent<TMP_Text>().text = content.texts[i];
+            texts[i].GetComponentInChildren<TMP_Text>().text = content.texts[i];
         }
     }
 
@@ -263,7 +263,7 @@ public class StartScreenController : MonoBehaviour
         if (currentTextIndex == 1)
         {
             var newPos = continueButtonTrans.anchoredPosition;
-            newPos.x += 130;
+            newPos.x += 60;
             continueButtonTrans.anchoredPosition = newPos;
             backButton.gameObject.SetActive(true);
         }
