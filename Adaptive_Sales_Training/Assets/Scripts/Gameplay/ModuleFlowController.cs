@@ -1,6 +1,7 @@
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -57,6 +58,10 @@ public class ModuleFlowController : MonoBehaviour
     private TMP_Text topicAvgResponseTimeText;
     [SerializeField]
     private Button finishTopicButton;
+
+    [Header("EventSystem")]
+    [SerializeField]
+    private EventSystem eventSystem;
 
     
     private readonly TrainingSessionManager session = TrainingSessionManager.Instance;
@@ -157,6 +162,9 @@ public class ModuleFlowController : MonoBehaviour
 
     private void ShowCurrentQuestion()
     {
+        // Deselect current answer button from last question
+        eventSystem.SetSelectedGameObject(null);
+
         MicroModule currentModule = topic.modules[currentModuleIndex];
 
         // If index outside question list range => Finish module

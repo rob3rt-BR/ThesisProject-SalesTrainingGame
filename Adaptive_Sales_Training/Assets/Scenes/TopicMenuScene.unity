@@ -953,10 +953,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7184955331665226582, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184955331665226582, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184955331665226582, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1597645717}
+    - target: {fileID: 7184955331665226582, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184955331665226582, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadAndStartTopic
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184955331665226582, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TopicMenuItem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184955331665226582, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8712347450625164883, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: topic
       value: 
       objectReference: {fileID: 11400000, guid: 5bc0d2740df22d14fb9cda9d6112eb82, type: 2}
+    - target: {fileID: 8712347450625164883, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: completedLabel
+      value: 
+      objectReference: {fileID: 1597645716}
     - target: {fileID: 8712347450625164883, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: dialogueScenarios.Array.size
       value: 5
@@ -991,6 +1023,22 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7094196473032800806, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
   m_PrefabInstance: {fileID: 1597645714}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1597645716 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1321349763514085814, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+  m_PrefabInstance: {fileID: 1597645714}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1597645717 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8712347450625164883, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+  m_PrefabInstance: {fileID: 1597645714}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c39e4adf54ee9044986914f52f14a7b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TopicMenuItem
 --- !u!1001 &4126099330443550405
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1087,10 +1135,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7184955331665226582, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184955331665226582, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184955331665226582, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4126099330443550407}
+    - target: {fileID: 7184955331665226582, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184955331665226582, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadAndStartTopic
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184955331665226582, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TopicMenuItem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184955331665226582, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8712347450625164883, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: topic
       value: 
       objectReference: {fileID: 11400000, guid: ad0f135467daae14480a0d9741cb1536, type: 2}
+    - target: {fileID: 8712347450625164883, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: completedLabel
+      value: 
+      objectReference: {fileID: 4126099330443550406}
     - target: {fileID: 8712347450625164883, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: dialogueScenarios.Array.size
       value: 5
@@ -1120,6 +1200,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+--- !u!1 &4126099330443550406 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1321349763514085814, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+  m_PrefabInstance: {fileID: 4126099330443550405}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4126099330443550407 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8712347450625164883, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+  m_PrefabInstance: {fileID: 4126099330443550405}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c39e4adf54ee9044986914f52f14a7b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TopicMenuItem
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
