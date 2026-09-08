@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum AnimateToDirection
@@ -22,6 +23,8 @@ public class AnimationController : MonoBehaviour
     [SerializeField]
     private float groupAnimationDuration = 0.5f;
 
+    public int CurrentTextIndex {get; private set;}
+
     void Start()
     {
         foreach (ElementAnimation animation in animations.Values)
@@ -41,7 +44,7 @@ public class AnimationController : MonoBehaviour
         return animations[element];
     }
 
-    #region StartScene Animation Coroutines
+    #region StartScene - Start Screen and AssignTrainingValues Screen Tranisition Animations
     public void AnimateScreenChange_StartToPasswordBox(GameObject welcomeTitle, GameObject startButton, GameObject lowerButtons, GameObject passwordBox, GameObject backButton, GameObject startScreen, GameObject assignTrainingModeScreen)
     {
         StartCoroutine(InsideOutStart_OutsideInPasswordBox(welcomeTitle, startButton, lowerButtons, passwordBox, backButton, startScreen, assignTrainingModeScreen));
@@ -392,5 +395,310 @@ public class AnimationController : MonoBehaviour
         lowerButtonsCanvasGrp.blocksRaycasts = true;
     }
 
+    #endregion
+
+    #region StartScene - Start Screen and Explain Screen Transition Animation
+
+    public void AnimateScreenChange_StartToExplain(GameObject welcomeTitle, GameObject startButton, GameObject lowerButtons, GameObject explainTitle, GameObject explainTexts, GameObject textNavButtons, GameObject startScreen, GameObject explainScreen)
+    {
+        StartCoroutine(InsideOutStart_OutsideInExplain(welcomeTitle, startButton, lowerButtons, explainTitle, explainTexts, textNavButtons, startScreen, explainScreen));
+    }
+
+    public IEnumerator InsideOutStart_OutsideInExplain(GameObject welcomeTitle, GameObject startButton, GameObject lowerButtons, GameObject explainTitle, GameObject explainTexts, GameObject textNavButtons, GameObject startScreen, GameObject explainScreen)
+    {
+        RectTransform welcomeTitleRect = welcomeTitle.GetComponent<RectTransform>();
+        RectTransform startButtonRect = startButton.GetComponent<RectTransform>();
+        RectTransform lowerButtonsRect = lowerButtons.GetComponent<RectTransform>();
+        RectTransform explainTitleRect = explainTitle.GetComponent<RectTransform>();
+        RectTransform explainTextsRect = explainTexts.GetComponent<RectTransform>();
+        RectTransform textNavButtonsRect = textNavButtons.GetComponent<RectTransform>();
+
+        CanvasGroup welcomeTitleCanvasGrp = welcomeTitle.GetComponent<CanvasGroup>();
+        CanvasGroup startButtonCanvasGrp = startButton.GetComponent<CanvasGroup>();
+        CanvasGroup lowerButtonsCanvasGrp = lowerButtons.GetComponent<CanvasGroup>();
+        CanvasGroup explainTitleCanvasGrp = explainTitle.GetComponent<CanvasGroup>();
+        CanvasGroup explainTextsCanvasGrp = explainTexts.GetComponent<CanvasGroup>();
+        CanvasGroup textNavButtonsCanvasGrp = textNavButtons.GetComponent<CanvasGroup>();
+        
+        Vector2 welcomeTitleCurrPos = welcomeTitleRect.anchoredPosition; 
+        Vector2 startButtonCurrPos = startButtonRect.anchoredPosition; 
+        Vector2 lowerButtonsCurrPos = lowerButtonsRect.anchoredPosition; 
+        Vector2 explainTitleCurrPos = explainTitleRect.anchoredPosition; 
+        Vector2 explainTextsCurrPos = explainTextsRect.anchoredPosition; 
+        Vector2 textNavButtonsCurrPos = textNavButtonsRect.anchoredPosition; 
+
+        Vector2 welcomeTitleTargetPos = welcomeTitleCurrPos + GetElementAnimation(welcomeTitle).GetOffset(AnimateToDirection.Top);
+        Vector2 startButtonTargetPos = startButtonCurrPos + GetElementAnimation(startButton).GetOffset(AnimateToDirection.Right);
+        Vector2 lowerButtonsTargetPos = lowerButtonsCurrPos + GetElementAnimation(lowerButtons).GetOffset(AnimateToDirection.Bottom);
+        Vector2 explainTitleTargetPos = explainTitleCurrPos + GetElementAnimation(explainTitle).GetOffset(AnimateToDirection.Bottom);
+        Vector2 explainTextsTargetPos = explainTextsCurrPos + GetElementAnimation(explainTexts).GetOffset(AnimateToDirection.Right);
+        Vector2 textNavButtonsTargetPos = textNavButtonsCurrPos + GetElementAnimation(textNavButtons).GetOffset(AnimateToDirection.Top);
+        
+        float elapsedTime = 0f;
+
+        while (elapsedTime < groupAnimationDuration)
+        {
+            float evaluationAtTime = groupEasingCurve.Evaluate(elapsedTime / groupAnimationDuration);
+
+            welcomeTitleRect.anchoredPosition = Vector2.Lerp(welcomeTitleCurrPos, welcomeTitleTargetPos, evaluationAtTime);
+            welcomeTitleCanvasGrp.alpha = Mathf.Lerp(1f, 0f, evaluationAtTime);
+            
+            startButtonRect.anchoredPosition = Vector2.Lerp(startButtonCurrPos, startButtonTargetPos, evaluationAtTime);
+            startButtonCanvasGrp.alpha = Mathf.Lerp(1f, 0f, evaluationAtTime);
+
+            lowerButtonsRect.anchoredPosition = Vector2.Lerp(lowerButtonsCurrPos, lowerButtonsTargetPos, evaluationAtTime);
+            lowerButtonsCanvasGrp.alpha = Mathf.Lerp(1f, 0f, evaluationAtTime);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        welcomeTitleRect.anchoredPosition = welcomeTitleTargetPos;
+        welcomeTitleCanvasGrp.alpha = 0;
+        welcomeTitleCanvasGrp.interactable = false;
+        welcomeTitleCanvasGrp.blocksRaycasts = false;
+        
+        startButtonRect.anchoredPosition = startButtonTargetPos;
+        startButtonCanvasGrp.alpha = 0;
+        startButtonCanvasGrp.interactable = false;
+        startButtonCanvasGrp.blocksRaycasts = false;
+        
+        lowerButtonsRect.anchoredPosition = lowerButtonsTargetPos;
+        lowerButtonsCanvasGrp.alpha = 0;
+        lowerButtonsCanvasGrp.interactable = false;
+        lowerButtonsCanvasGrp.blocksRaycasts = false;
+
+        startScreen.SetActive(false);
+        explainScreen.SetActive(true);
+
+        elapsedTime = 0f;
+
+        while (elapsedTime < groupAnimationDuration)
+        {
+            float evaluationAtTime = groupEasingCurve.Evaluate(elapsedTime / groupAnimationDuration);
+
+            explainTitleRect.anchoredPosition = Vector2.Lerp(explainTitleCurrPos, explainTitleTargetPos, evaluationAtTime);
+            explainTitleCanvasGrp.alpha = Mathf.Lerp(0f, 1f, evaluationAtTime);
+            
+            explainTextsRect.anchoredPosition = Vector2.Lerp(explainTextsCurrPos, explainTextsTargetPos, evaluationAtTime);
+            explainTextsCanvasGrp.alpha = Mathf.Lerp(0f, 1f, evaluationAtTime);
+
+            textNavButtonsRect.anchoredPosition = Vector2.Lerp(textNavButtonsCurrPos, textNavButtonsTargetPos, evaluationAtTime);
+            textNavButtonsCanvasGrp.alpha = Mathf.Lerp(0f, 1f, evaluationAtTime);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        explainTitleRect.anchoredPosition = explainTitleTargetPos;
+        explainTitleCanvasGrp.alpha = 1;
+        explainTitleCanvasGrp.interactable = true;
+        explainTitleCanvasGrp.blocksRaycasts = true;
+        
+        explainTextsRect.anchoredPosition = explainTextsTargetPos;
+        explainTextsCanvasGrp.alpha = 1;
+        explainTextsCanvasGrp.interactable = true;
+        explainTextsCanvasGrp.blocksRaycasts = true;
+        
+        textNavButtonsRect.anchoredPosition = textNavButtonsTargetPos;
+        textNavButtonsCanvasGrp.alpha = 1;
+        textNavButtonsCanvasGrp.interactable = true;
+        textNavButtonsCanvasGrp.blocksRaycasts = true;
+    }
+
+    #endregion
+
+    #region StartScene - Explain Screen Transition Animations
+    public void AnimateScreenChange_ExplainEnd(GameObject explainTitle, GameObject explainTexts, GameObject textNavButtons, GameObject explainScreen)
+    {
+        StartCoroutine(InsideoutExplain(explainTitle, explainTexts, textNavButtons, explainScreen));
+    }
+
+    private IEnumerator InsideoutExplain(GameObject explainTitle, GameObject explainTexts, GameObject textNavButtons, GameObject explainScreen)
+    {
+        RectTransform explainTitleRect = explainTitle.GetComponent<RectTransform>();
+        RectTransform explainTextsRect = explainTexts.GetComponent<RectTransform>();
+        RectTransform textNavButtonsRect = textNavButtons.GetComponent<RectTransform>();
+
+        CanvasGroup explainTitleCanvasGrp = explainTitle.GetComponent<CanvasGroup>();
+        CanvasGroup explainTextsCanvasGrp = explainTexts.GetComponent<CanvasGroup>();
+        CanvasGroup textNavButtonsCanvasGrp = textNavButtons.GetComponent<CanvasGroup>();
+        
+        Vector2 explainTitleCurrPos = explainTitleRect.anchoredPosition; 
+        Vector2 explainTextsCurrPos = explainTextsRect.anchoredPosition; 
+        Vector2 textNavButtonsCurrPos = textNavButtonsRect.anchoredPosition; 
+
+        Vector2 explainTitleTargetPos = explainTitleCurrPos + GetElementAnimation(explainTitle).GetOffset(AnimateToDirection.Top);
+        Vector2 explainTextsTargetPos = explainTextsCurrPos + GetElementAnimation(explainTexts).GetOffset(AnimateToDirection.Right);
+        Vector2 textNavButtonsTargetPos = textNavButtonsCurrPos + GetElementAnimation(textNavButtons).GetOffset(AnimateToDirection.Bottom);
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < groupAnimationDuration)
+        {
+            float evaluationAtTime = groupEasingCurve.Evaluate(elapsedTime / groupAnimationDuration);
+
+            explainTitleRect.anchoredPosition = Vector2.Lerp(explainTitleCurrPos, explainTitleTargetPos, evaluationAtTime);
+            explainTitleCanvasGrp.alpha = Mathf.Lerp(1f, 0f, evaluationAtTime);
+            
+            explainTextsRect.anchoredPosition = Vector2.Lerp(explainTextsCurrPos, explainTextsTargetPos, evaluationAtTime);
+            explainTextsCanvasGrp.alpha = Mathf.Lerp(1f, 0f, evaluationAtTime);
+
+            textNavButtonsRect.anchoredPosition = Vector2.Lerp(textNavButtonsCurrPos, textNavButtonsTargetPos, evaluationAtTime);
+            textNavButtonsCanvasGrp.alpha = Mathf.Lerp(1f, 0f, evaluationAtTime);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        explainTitleRect.anchoredPosition = explainTitleTargetPos;
+        explainTitleCanvasGrp.alpha = 0;
+        explainTitleCanvasGrp.interactable = false;
+        explainTitleCanvasGrp.blocksRaycasts = false;
+        
+        explainTextsRect.anchoredPosition = explainTextsTargetPos;
+        explainTextsCanvasGrp.alpha = 0;
+        explainTextsCanvasGrp.interactable = false;
+        explainTextsCanvasGrp.blocksRaycasts = false;
+        
+        textNavButtonsRect.anchoredPosition = textNavButtonsTargetPos;
+        textNavButtonsCanvasGrp.alpha = 0;
+        textNavButtonsCanvasGrp.interactable = false;
+        textNavButtonsCanvasGrp.blocksRaycasts = false;
+
+        explainScreen.SetActive(false);
+
+        SceneManager.LoadScene("TopicMenuScene");
+        Debug.Log("Loading TopicMenuScene.");
+    }
+
+    public void AnimateElementChange_TextFadeForward(GameObject explainTexts, List<GameObject> texts,  GameObject textNavButtons)
+    {
+        StartCoroutine(TextFadeForward(explainTexts, texts, textNavButtons));
+    }
+
+    private IEnumerator TextFadeForward(GameObject explainTexts, List<GameObject> texts, GameObject textNavButtons)
+    {
+        if (CurrentTextIndex == texts.Count - 1)
+        {
+            Debug.Log("First exiting Coroutine");
+            yield break;
+        }
+
+        CanvasGroup explainTextsCanvasGrp = explainTexts.GetComponent<CanvasGroup>();
+        CanvasGroup textNavButtonsCanvasGrp = textNavButtons.GetComponent<CanvasGroup>();
+
+        GameObject continueButton = textNavButtons.transform.Find("ContinueButton").gameObject;
+        GameObject backButton = textNavButtons.transform.Find("BackButton").gameObject;
+
+        textNavButtonsCanvasGrp.interactable = false;
+        textNavButtonsCanvasGrp.blocksRaycasts = false;
+        
+        float elapsedTime = 0f;
+
+        while (elapsedTime < groupAnimationDuration)
+        {
+            float evaluationAtTime = groupEasingCurve.Evaluate(elapsedTime / groupAnimationDuration);
+
+            explainTextsCanvasGrp.alpha = Mathf.Lerp(1f, 0f, evaluationAtTime);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        explainTextsCanvasGrp.alpha = 0;
+
+        texts[CurrentTextIndex].SetActive(false);
+
+        CurrentTextIndex++;
+
+        // If on second text => Translate continueButton to the right and enable backButton
+        if (CurrentTextIndex == 1)
+        {
+            var newPos = continueButton.GetComponent<RectTransform>().anchoredPosition;
+            newPos.x += 60;
+            continueButton.GetComponent<RectTransform>().anchoredPosition = newPos;
+            backButton.SetActive(true);
+        }
+        
+        texts[CurrentTextIndex].SetActive(true);
+
+        elapsedTime = 0f;
+
+        while (elapsedTime < groupAnimationDuration)
+        {
+            float evaluationAtTime = groupEasingCurve.Evaluate(elapsedTime / groupAnimationDuration);
+
+            explainTextsCanvasGrp.alpha = Mathf.Lerp(0f, 1f, evaluationAtTime);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        explainTextsCanvasGrp.alpha = 1;
+
+        textNavButtonsCanvasGrp.interactable = true;
+        textNavButtonsCanvasGrp.blocksRaycasts = true;
+
+    }
+
+    public void AnimateElementChange_TextFadeBackward(GameObject explainTexts, List<GameObject> texts,  GameObject textNavButtons)
+    {
+        StartCoroutine(TextFadeBackward(explainTexts, texts, textNavButtons));
+    }
+
+    private IEnumerator TextFadeBackward(GameObject explainTexts, List<GameObject> texts, GameObject textNavButtons)
+    {
+        CanvasGroup explainTextsCanvasGrp = explainTexts.GetComponent<CanvasGroup>();
+        CanvasGroup textNavButtonsCanvasGrp = textNavButtons.GetComponent<CanvasGroup>();
+
+        GameObject continueButton = textNavButtons.transform.Find("ContinueButton").gameObject;
+        GameObject backButton = textNavButtons.transform.Find("BackButton").gameObject;
+
+        textNavButtonsCanvasGrp.interactable = false;
+        textNavButtonsCanvasGrp.blocksRaycasts = false;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < groupAnimationDuration)
+        {
+            float evaluationAtTime = groupEasingCurve.Evaluate(elapsedTime / groupAnimationDuration);
+
+            explainTextsCanvasGrp.alpha = Mathf.Lerp(1f, 0f, evaluationAtTime);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        explainTextsCanvasGrp.alpha = 0;
+
+        texts[CurrentTextIndex].SetActive(false);
+
+        CurrentTextIndex--;
+
+        // If on first text again => Reset continueButton to center and disable backButton
+        if (CurrentTextIndex == 0)
+        {
+            var newPos = continueButton.GetComponent<RectTransform>().anchoredPosition;
+            newPos.x = 0;
+            continueButton.GetComponent<RectTransform>().anchoredPosition = newPos;
+            backButton.SetActive(false);
+        }
+        
+        texts[CurrentTextIndex].SetActive(true);
+
+        elapsedTime = 0f;
+
+        while (elapsedTime < groupAnimationDuration)
+        {
+            float evaluationAtTime = groupEasingCurve.Evaluate(elapsedTime / groupAnimationDuration);
+
+            explainTextsCanvasGrp.alpha = Mathf.Lerp(0f, 1f, evaluationAtTime);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        explainTextsCanvasGrp.alpha = 1;
+
+        textNavButtonsCanvasGrp.interactable = true;
+        textNavButtonsCanvasGrp.blocksRaycasts = true;
+    }
     #endregion
 }

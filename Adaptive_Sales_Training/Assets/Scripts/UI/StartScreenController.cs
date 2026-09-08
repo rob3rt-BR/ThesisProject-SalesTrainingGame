@@ -56,6 +56,12 @@ public class StartScreenController : MonoBehaviour
 
     [Header("Explanation UI")]
     [SerializeField]
+    private GameObject explainTitle;
+    [SerializeField]
+    private GameObject explainTexts;
+    [SerializeField]
+    private GameObject textNavButtons;
+    [SerializeField]
     private List<GameObject> texts;
     [SerializeField]
     private Button continueButton;
@@ -77,7 +83,7 @@ public class StartScreenController : MonoBehaviour
     private TrainingSessionManager session;
     private TrainingVersion trainingVersion;
 
-    private int currentTextIndex = 0;
+    // private int currentTextIndex = 0;
     private RectTransform continueButtonTrans;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -131,13 +137,21 @@ public class StartScreenController : MonoBehaviour
         // Start tracking participant training session
         session.StartParticipantSession(allTopics);
 
-        startScreen.SetActive(false);
-        explainScreen.SetActive(true);
+        // Animate screen change: start screen -> explain screen
+        animationController.AnimateScreenChange_StartToExplain(
+        welcomeTitle, 
+        startButton, 
+        lowerButtons, 
+        explainTitle, 
+        explainTexts, 
+        textNavButtons, 
+        startScreen, 
+        explainScreen);
     }
 
     public void SetMode()
     {
-        // Animate screen change start screen -> assignTrainMode screen (just password box)
+        // Animate screen change: start screen -> assignTrainMode screen (just password box)
         animationController.AnimateScreenChange_StartToPasswordBox(
         welcomeTitle, 
         startButton, 
@@ -161,7 +175,7 @@ public class StartScreenController : MonoBehaviour
 
     private void CheckPassword()
     {
-        // IF input field text set AND equals to predefined password => Animate element enable / disable of password box -> assignTrainingModeElements,
+        // IF input field text set AND equals to predefined password => Animate element enable / disable: password box -> assignTrainingModeElements,
         // and disable backToStartScreenButton interactable
         // ELSE => Display wrong password text
         if (inputFieldText != null && inputFieldText.Equals(password))
@@ -180,9 +194,9 @@ public class StartScreenController : MonoBehaviour
 
     private void ReturnToStartScreen()
     {
-        // IF entered training mode setup UI (Correct password) => Animate screen change assignTrainingMode screen (all UI elements) -> start screen, 
+        // IF entered training mode setup UI (Correct password) => Animate screen change: assignTrainingMode screen (all UI elements) -> start screen, 
         // and restart password box and assignTrainingModeElements active states
-        // ELSE => Animate screen change assignTrainingMode screen (just password box) -> start screen
+        // ELSE => Animate screen change: assignTrainingMode screen (just password box) -> start screen
         if (enteredTrainingModeUI)
         {
             animationController.AnimateScreenChange_TrainingModeElementsToStart(
@@ -306,44 +320,29 @@ public class StartScreenController : MonoBehaviour
 
     private void ContinuePressed()
     {
-        texts[currentTextIndex].SetActive(false);
-        currentTextIndex++;
-
-        // If on second text => Translate continueButton to the right and enable backButton
-        if (currentTextIndex == 1)
-        {
-            var newPos = continueButtonTrans.anchoredPosition;
-            newPos.x += 60;
-            continueButtonTrans.anchoredPosition = newPos;
-            backButton.gameObject.SetActive(true);
-        }
-
-        // If index outside texts range => Go to TopicMenuScene
-        if (currentTextIndex == texts.Count)
+        // If index in last texts => Cleanup and animation transition to next scene (TopicMenuScene)
+        if (animationController.CurrentTextIndex == texts.Count - 1)
         {
             CleanUp();
-            explainScreen.SetActive(false);
-            SceneManager.LoadScene("TopicMenuScene");
-            Debug.Log("Loading TopicMenuScene.");
+
+            // Animate screen change: explain screen -> end of StartScene and load TopicMenuScene
+            animationController.AnimateScreenChange_ExplainEnd(explainTitle, explainTexts, textNavButtons, explainScreen);
             return;
         }
-        texts[currentTextIndex].SetActive(true);
+        // Animate element change: current text -> next text (Forward)
+        animationController.AnimateElementChange_TextFadeForward(
+        explainTexts, 
+        texts, 
+        textNavButtons);
     }
 
     private void BackPressed()
     {
-        texts[currentTextIndex].SetActive(false);
-        currentTextIndex--;
-
-        // If on first text again => Reset continueButton to center and disable backButton
-        if (currentTextIndex == 0)
-        {
-            var newPos = continueButtonTrans.anchoredPosition;
-            newPos.x = 0;
-            continueButtonTrans.anchoredPosition = newPos;
-            backButton.gameObject.SetActive(false);
-        }
-        texts[currentTextIndex].SetActive(true);
+        // Animate element change: current text -> next text (Backwards)
+        animationController.AnimateElementChange_TextFadeBackward(
+        explainTexts, 
+        texts, 
+        textNavButtons);
     }
 
     private void CleanUp()
@@ -361,5 +360,7 @@ public class StartScreenController : MonoBehaviour
         // Cleanup Explanation Screen
         continueButton.onClick.RemoveListener(ContinuePressed);
         backButton.onClick.RemoveListener(BackPressed);
+
+        Debug.Log("Cleanup Completed");
     }
 }
