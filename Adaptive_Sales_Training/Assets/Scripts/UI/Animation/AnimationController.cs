@@ -22,6 +22,15 @@ public class AnimationController : MonoBehaviour
     [SerializeField]
     private float groupAnimationDuration = 0.5f;
 
+    void Start()
+    {
+        foreach (ElementAnimation animation in animations.Values)
+        {
+            animation.InitializeRectTransformPosition();
+            animation.InitializeOffsetPosition();
+        }
+    }
+
     private ElementAnimation GetElementAnimation(GameObject element)
     {
         if (animations == null || animations[element] == null)
@@ -32,6 +41,7 @@ public class AnimationController : MonoBehaviour
         return animations[element];
     }
 
+    #region StartScene Animation Coroutines
     public void AnimateScreenChange_StartToAssignTrainingMode(GameObject welcomeTitle, GameObject startButton, GameObject lowerButtons, GameObject passwordBox, GameObject backButton, GameObject startScreen, GameObject assignTrainingModeScreen)
     {
         StartCoroutine(InsideOutStart_OutsideInAssignTrainingMode(welcomeTitle, startButton, lowerButtons, passwordBox, backButton, startScreen, assignTrainingModeScreen));
@@ -225,4 +235,5 @@ public class AnimationController : MonoBehaviour
         startButtonCanvasGrp.blocksRaycasts = true;
         lowerButtonsCanvasGrp.blocksRaycasts = true;
     }
+    #endregion
 }
