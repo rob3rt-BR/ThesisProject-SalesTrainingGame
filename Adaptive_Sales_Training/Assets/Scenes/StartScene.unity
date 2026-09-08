@@ -1509,7 +1509,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 1917654218690932701, guid: 0fce7bb7a193cb044835bea8b61b3a66, type: 3}
     m_PressedSprite: {fileID: -8823573466675411108, guid: ccc698c01220d1a4199348dcd9d2eca7, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: -697676565333083181, guid: aabbb9996890bbc49a10c47df2d3ce0b, type: 3}
+    m_DisabledSprite: {fileID: -8823573466675411108, guid: c7618a064a16ad54fbd6a34a877560a7, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -1689,6 +1689,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 350994928}
+  - component: {fileID: 350994930}
+  - component: {fileID: 350994929}
   m_Layer: 5
   m_Name: AssignTrainigModeElements
   m_TagString: Untagged
@@ -1723,6 +1725,58 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 750, y: 410}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &350994929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350994927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
+  defineInitPosition: 1
+  extraInitialPosition: {x: 0, y: 430}
+  distanceToAnimate: {x: 100, y: 430}
+  easingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationDuration: 0.5
+--- !u!225 &350994930
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350994927}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &368804403
 GameObject:
   m_ObjectHideFlags: 0
@@ -2573,6 +2627,8 @@ MonoBehaviour:
     value: {fileID: 4501090882476617882}
   - key: {fileID: 117123187}
     value: {fileID: 117123192}
+  - key: {fileID: 350994927}
+    value: {fileID: 350994929}
   groupEasingCurve:
     serializedVersion: 2
     m_Curve:
@@ -3466,7 +3522,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 1917654218690932701, guid: 0fce7bb7a193cb044835bea8b61b3a66, type: 3}
     m_PressedSprite: {fileID: -8823573466675411108, guid: ccc698c01220d1a4199348dcd9d2eca7, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: -697676565333083181, guid: aabbb9996890bbc49a10c47df2d3ce0b, type: 3}
+    m_DisabledSprite: {fileID: -8823573466675411108, guid: c7618a064a16ad54fbd6a34a877560a7, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -3587,7 +3643,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 1917654218690932701, guid: 0fce7bb7a193cb044835bea8b61b3a66, type: 3}
     m_PressedSprite: {fileID: -8823573466675411108, guid: ccc698c01220d1a4199348dcd9d2eca7, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: -697676565333083181, guid: aabbb9996890bbc49a10c47df2d3ce0b, type: 3}
+    m_DisabledSprite: {fileID: -8823573466675411108, guid: c7618a064a16ad54fbd6a34a877560a7, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -5459,7 +5515,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 1917654218690932701, guid: 0fce7bb7a193cb044835bea8b61b3a66, type: 3}
     m_PressedSprite: {fileID: -8823573466675411108, guid: ccc698c01220d1a4199348dcd9d2eca7, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: -697676565333083181, guid: aabbb9996890bbc49a10c47df2d3ce0b, type: 3}
+    m_DisabledSprite: {fileID: -8823573466675411108, guid: c7618a064a16ad54fbd6a34a877560a7, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted

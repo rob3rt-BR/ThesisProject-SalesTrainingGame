@@ -8,12 +8,14 @@ public class ElementAnimation : MonoBehaviour
     private RectTransform elementRectTransform;
 
     [Header("Element Setup")]
+    [Space]
     [SerializeField]
     private bool defineInitPosition;
     [SerializeField]
     private Vector2 extraInitialPosition = new(0, 0);
     
     [Header("Animation Setup")]
+    [Space]
     [SerializeField]
     private Vector2 distanceToAnimate = new(100, 100);
     public AnimationCurve easingCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);

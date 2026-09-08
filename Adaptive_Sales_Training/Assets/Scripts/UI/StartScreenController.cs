@@ -72,6 +72,7 @@ public class StartScreenController : MonoBehaviour
 
     private const string password = "PerroLocoST456+";
     private string inputFieldText;
+    private bool enteredTrainingModeUI;
     
     private TrainingSessionManager session;
     private TrainingVersion trainingVersion;
@@ -136,7 +137,8 @@ public class StartScreenController : MonoBehaviour
 
     public void SetMode()
     {
-        animationController.AnimateScreenChange_StartToAssignTrainingMode(
+        // Animate screen change start screen -> assignTrainMode screen (just password box)
+        animationController.AnimateScreenChange_StartToPasswordBox(
         welcomeTitle, 
         startButton, 
         lowerButtons, 
@@ -159,14 +161,17 @@ public class StartScreenController : MonoBehaviour
 
     private void CheckPassword()
     {
-        // IF input field text set AND equals to predefined password => Deactivate password box and show assignTrainingModel screen UI elements
+        // IF input field text set AND equals to predefined password => Animate element enable / disable of password box -> assignTrainingModeElements,
+        // and disable backToStartScreenButton interactable
         // ELSE => Display wrong password text
         if (inputFieldText != null && inputFieldText.Equals(password))
         {
-            passwordBox.SetActive(false);
+            enteredTrainingModeUI = true;
 
-            backToStartScreenButton.interactable = false;
-            assignTrainingModeElements.SetActive(true);
+            animationController.AnimateElementEnable_CorrectPassword(
+            passwordBox, 
+            backToStartScreenButton.gameObject, 
+            assignTrainingModeElements);
         } else
         {
             wrongPasswordText.gameObject.SetActive(true);
@@ -175,31 +180,48 @@ public class StartScreenController : MonoBehaviour
 
     private void ReturnToStartScreen()
     {
-        // Reset assignTrainingMode screen UI elements for later reuse before returning to start screen
-        ResetAssignTrainingModeUI();
+        // IF entered training mode setup UI (Correct password) => Animate screen change assignTrainingMode screen (all UI elements) -> start screen, 
+        // and restart password box and assignTrainingModeElements active states
+        // ELSE => Animate screen change assignTrainingMode screen (just password box) -> start screen
+        if (enteredTrainingModeUI)
+        {
+            animationController.AnimateScreenChange_TrainingModeElementsToStart(
+            welcomeTitle, 
+            startButton, 
+            lowerButtons, 
+            backToStartScreenButton.gameObject, 
+            assignTrainingModeElements, 
+            startScreen, 
+            assignTrainingModeScreen);
+        } else
+        {
+            animationController.AnimateScreenChange_PasswordBoxToStart(
+            welcomeTitle, 
+            startButton, 
+            lowerButtons, 
+            passwordBox, 
+            backToStartScreenButton.gameObject, 
+            startScreen, 
+            assignTrainingModeScreen);
+        }
 
-        animationController.AnimateScreenChange_AssignTrainingModeToStart(
-        welcomeTitle, 
-        startButton, 
-        lowerButtons, 
-        passwordBox, 
-        backToStartScreenButton.gameObject, 
-        startScreen, 
-        assignTrainingModeScreen);
+        // Reset assignTrainingMode screen UI interal elements for later reuse
+        ResetAssignTrainingModeUI();
     }
 
     private void ResetAssignTrainingModeUI()
     {
-        // Reactivate password box and reset its internal values
-        passwordBox.SetActive(true);
+        // Reset password box internal values
         wrongPasswordText.gameObject.SetActive(false);
         passwordInputField.text = null;
         inputFieldText = null;
+        enteredTrainingModeUI = false;
 
-        // Reset text attributes and deactivate assignTrainingMode screen UI elements
+        // Reset text attributes of assignTrainingMode screen UI elements
         sessionIdText.text = null;
         trainingModeSetText.text = null;
-        assignTrainingModeElements.SetActive(false);
+        traditionalModeButton.interactable = true;
+        aiModeButton.interactable = true;
     }
 
     private void GenerateSessionID()
@@ -240,7 +262,10 @@ public class StartScreenController : MonoBehaviour
         // Set explain screen content of texts based on set training version
         SetExplainScreenTextContent(trainingVersion);
 
-        backToStartScreenButton.interactable = true;
+        // Enable backToStartScreenButton canvas group interactbale and blocksRayCasts properties
+        CanvasGroup backToStartScreenButtonCanvasGrp = backToStartScreenButton.GetComponent<CanvasGroup>();
+        backToStartScreenButtonCanvasGrp.interactable = true;
+        backToStartScreenButtonCanvasGrp.blocksRaycasts = true;
     }
 
     private void SetExplainScreenTextContent(TrainingVersion trainingVersion)
