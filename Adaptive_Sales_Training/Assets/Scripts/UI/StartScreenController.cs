@@ -18,7 +18,15 @@ public class StartScreenController : MonoBehaviour
     [SerializeField]
     private GameObject explainScreen;
 
-    [Header("Assign Training Mode UI")]
+    [Header("Start UI")]
+    [SerializeField]
+    private GameObject welcomeTitle;
+    [SerializeField]
+    private GameObject startButton;
+    [SerializeField]
+    private GameObject lowerButtons;
+
+    [Header("Password UI")]
     [SerializeField]
     private GameObject passwordBox;
     [SerializeField]
@@ -28,6 +36,7 @@ public class StartScreenController : MonoBehaviour
     [SerializeField]
     private Button checkPasswortButton;
 
+    [Header("Assign Training Mode UI")]
     [SerializeField]
     private GameObject assignTrainingModeElements;
     [SerializeField]
@@ -56,6 +65,10 @@ public class StartScreenController : MonoBehaviour
     private ExplainScreenContent explainScreenContentTraditional;
     [SerializeField]
     private ExplainScreenContent explainScreenContentAI;
+
+    [Header("Animation Controller")]
+    [SerializeField]
+    private AnimationController animationController;
 
     private const string password = "PerroLocoST456+";
     private string inputFieldText;
@@ -123,8 +136,14 @@ public class StartScreenController : MonoBehaviour
 
     public void SetMode()
     {
-        startScreen.SetActive(false);
-        assignTrainingModeScreen.SetActive(true);
+        animationController.AnimateScreenChange_StartToAssignTrainingMode(
+        welcomeTitle, 
+        startButton, 
+        lowerButtons, 
+        passwordBox, 
+        backToStartScreenButton.gameObject, 
+        startScreen, 
+        assignTrainingModeScreen);
     }
 
     public void QuitGame()
@@ -159,8 +178,14 @@ public class StartScreenController : MonoBehaviour
         // Reset assignTrainingMode screen UI elements for later reuse before returning to start screen
         ResetAssignTrainingModeUI();
 
-        assignTrainingModeScreen.SetActive(false);
-        startScreen.SetActive(true);
+        animationController.AnimateScreenChange_AssignTrainingModeToStart(
+        welcomeTitle, 
+        startButton, 
+        lowerButtons, 
+        passwordBox, 
+        backToStartScreenButton.gameObject, 
+        startScreen, 
+        assignTrainingModeScreen);
     }
 
     private void ResetAssignTrainingModeUI()
