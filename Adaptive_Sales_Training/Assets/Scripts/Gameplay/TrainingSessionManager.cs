@@ -317,7 +317,8 @@ public class TrainingSessionManager : MonoBehaviour
             return;
         }
         TopicDialogueScenarios.Clear(); // Clear topic dialogue scenarios before new topic
-        TopicDialogueScenarios = new(dialogueScenarios); // Set topic dialogue scenarios (on TopicMenuItem[topic]) => Pass later to AIDialogueContoller
+        TopicDialogueScenarios = new(dialogueScenarios); // Set topic dialogue scenarios (on TopicMenuScreenController for TopicMenuItem[topic]) => Pass later to AIDialogueContoller
+        Debug.Log($"AI dialogue scenarios set for current selected topic: \"{SelectedTopic.topicTitle}\"");
     }
 
     #endregion

@@ -331,22 +331,22 @@ PrefabInstance:
     - target: {fileID: 2603734842768449120, guid: 6cf656ca7dcdfc94d9d019643dd58dbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8712347450625164883}
+      objectReference: {fileID: 0}
     - target: {fileID: 2603734842768449120, guid: 6cf656ca7dcdfc94d9d019643dd58dbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2603734842768449120, guid: 6cf656ca7dcdfc94d9d019643dd58dbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadAndStartTopic
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2603734842768449120, guid: 6cf656ca7dcdfc94d9d019643dd58dbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TopicMenuItem, Assembly-CSharp
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2603734842768449120, guid: 6cf656ca7dcdfc94d9d019643dd58dbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7480892480859450974, guid: 6cf656ca7dcdfc94d9d019643dd58dbf, type: 3}
       propertyPath: m_Pivot.x

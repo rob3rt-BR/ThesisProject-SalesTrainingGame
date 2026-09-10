@@ -1045,6 +1045,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85116410}
     m_Modifications:
+    - target: {fileID: 287122853146055937, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 287122853146055937, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 72886033}
+    - target: {fileID: 287122853146055937, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadAndStartTopic
+      objectReference: {fileID: 0}
+    - target: {fileID: 287122853146055937, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TopicMenuScreenController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 287122853146055937, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1597645717}
+    - target: {fileID: 287122853146055937, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: TopicMenuItem, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1515425254913796732, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: m_text
       value: <Topic title>
@@ -1292,7 +1316,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  groupAnimationDuration: 0.5
+  groupAnimationDuration: 0.75
 --- !u!1001 &4126099330443550405
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1301,6 +1325,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85116410}
     m_Modifications:
+    - target: {fileID: 287122853146055937, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 287122853146055937, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 72886033}
+    - target: {fileID: 287122853146055937, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadAndStartTopic
+      objectReference: {fileID: 0}
+    - target: {fileID: 287122853146055937, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TopicMenuScreenController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 287122853146055937, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 4126099330443550407}
+    - target: {fileID: 287122853146055937, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: TopicMenuItem, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1515425254913796732, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: m_text
       value: <Topic title>

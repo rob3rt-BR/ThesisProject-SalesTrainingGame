@@ -586,6 +586,7 @@ public class AnimationController : MonoBehaviour
 
         explainScreen.SetActive(false);
 
+        // After ending animation => Load TopicMenuScene
         SceneManager.LoadScene("TopicMenuScene");
         Debug.Log("Loading TopicMenuScene.");
     }
@@ -777,6 +778,76 @@ public class AnimationController : MonoBehaviour
         topicsHolderCanvasGrp.alpha = 1;
         topicsHolderCanvasGrp.interactable = true;
         topicsHolderCanvasGrp.blocksRaycasts = true;
+    }
+    public void AnimateScreenChange_TopicMenuEnd(GameObject menuTitle, GameObject topicsBackground, GameObject topicsHolder, TrainingVersion version)
+    {
+        StartCoroutine(InsideOutTopicMenu(menuTitle, topicsBackground, topicsHolder, version));
+    }
+
+    private IEnumerator InsideOutTopicMenu(GameObject menuTitle, GameObject topicsBackground, GameObject topicsHolder, TrainingVersion version)
+    {
+        RectTransform menuTitleRect = menuTitle.GetComponent<RectTransform>();
+        RectTransform topicsHolderRect = topicsHolder.GetComponent<RectTransform>();
+
+        CanvasGroup menuTitleCanvasGrp = menuTitle.GetComponent<CanvasGroup>();
+        CanvasGroup topicsBackgroundCanvasGrp = topicsBackground.GetComponent<CanvasGroup>();
+        CanvasGroup topicsHolderCanvasGrp = topicsHolder.GetComponent<CanvasGroup>();
+
+        Vector2 menuTitleCurrPos = menuTitleRect.anchoredPosition;
+        Vector2 topicsHolderCurrPos = topicsHolderRect.anchoredPosition;
+        
+        // Elements leaving screen
+        Vector2 menuTitleTargetPos = menuTitleCurrPos + GetElementAnimation(menuTitle).GetLeaveOffset();
+        Vector2 topicsHolderTargetPos = topicsHolderCurrPos + GetElementAnimation(topicsHolder).GetLeaveOffset();
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < groupAnimationDuration)
+        {
+            float evaluationAtTime = groupEasingCurve.Evaluate(elapsedTime / groupAnimationDuration);
+
+            menuTitleRect.anchoredPosition = Vector2.Lerp(menuTitleCurrPos, menuTitleTargetPos, evaluationAtTime);
+            menuTitleCanvasGrp.alpha = Mathf.Lerp(1f, 0f, evaluationAtTime);
+            
+            topicsBackgroundCanvasGrp.alpha = Mathf.Lerp(1f, 0f, evaluationAtTime);
+
+            topicsHolderRect.anchoredPosition = Vector2.Lerp(topicsHolderCurrPos, topicsHolderTargetPos, evaluationAtTime);
+            topicsHolderCanvasGrp.alpha = Mathf.Lerp(1f, 0f, evaluationAtTime);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        menuTitleRect.anchoredPosition = menuTitleTargetPos;
+        menuTitleCanvasGrp.alpha = 0;
+        menuTitleCanvasGrp.interactable = false;
+        menuTitleCanvasGrp.blocksRaycasts = false;
+
+        topicsBackgroundCanvasGrp.alpha = 0;
+        topicsBackgroundCanvasGrp.interactable = false;
+        topicsBackgroundCanvasGrp.blocksRaycasts = false;
+        
+        topicsHolderRect.anchoredPosition = topicsHolderTargetPos;
+        topicsHolderCanvasGrp.alpha = 0;
+        topicsHolderCanvasGrp.interactable = false;
+        topicsHolderCanvasGrp.blocksRaycasts = false;
+
+        // After ending animation => Load (AI)TrainingScene based on set TrainingVersion (First check in TopicMenuScreenController)
+        if (version.Equals(TrainingVersion.Traditional))
+        {
+            SceneManager.LoadScene("TrainingScene");
+            Debug.Log($"Loading TrainingScene.");
+        } 
+        else if (version.Equals(TrainingVersion.AI))
+        {
+            SceneManager.LoadScene("AITrainingScene");
+            Debug.Log($"Loading AITrainingScene.");
+        }
+        else
+        {
+            Debug.LogError("Undefined TrainingVersion.");
+            yield break;
+        }
     }
 
     #endregion

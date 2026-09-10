@@ -36,40 +36,13 @@ public class TopicMenuItem : MonoBehaviour
         }
     }
 
-    public void LoadAndStartTopic()
+    public SalesTopic GetTopic()
     {
-        if (topic == null)
-        {
-            Debug.Log("No topic assigned.");
-            return;
-        }
+        return topic;
+    }
 
-        if (session.IsTopicCompleted(topic))
-        {
-            Debug.Log("Topic already completed.");
-            return;
-        }
-        
-        session.BeginTopic(topic); // Initiate currentTopicResult in TraniningSessionManager
-        session.SelectTopic(topic); // Set SelectedTopic as thisTopicMenuItem.topic
-
-        if (session.Version.Equals(TrainingVersion.Traditional))
-        {
-            SceneManager.LoadScene("TrainingScene");
-            Debug.Log($"Loading TrainingScene with topic: \"{topic.topicTitle}\".");
-        } 
-        else if (session.Version.Equals(TrainingVersion.AI))
-        {
-            session.SetTopicDialogueScenarios(dialogueScenarios); // Set TopicDialogueScenarios as thisTopicMenuItem.dialogueScenarios (of selected topic)
-
-            SceneManager.LoadScene("AITrainingScene");
-            Debug.Log($"Loading AITrainingScene with topic: \"{topic.topicTitle}\".");
-        } 
-        else
-        {
-            Debug.LogError("Undefined TrainingVersion.");
-            return;
-        }
-
+    public List<AIDialogueScenario> GetDialogueScenarios()
+    {
+        return dialogueScenarios;
     }
 }
