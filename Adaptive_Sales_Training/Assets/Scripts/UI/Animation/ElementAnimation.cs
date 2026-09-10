@@ -12,10 +12,14 @@ public class ElementAnimation : MonoBehaviour
     [SerializeField]
     private bool defineInitPosition;
     [SerializeField]
-    private Vector2 extraInitialPosition = new(0, 0);
+    private Vector2 initialOffsetPosition = new(0, 0);
     
     [Header("Animation Setup")]
     [Space]
+    [SerializeField]
+    private AnimateToDirection enterDirection;
+    [SerializeField]
+    private AnimateToDirection leaveDirection;
     [SerializeField]
     private Vector2 distanceToAnimate = new(100, 100);
     public AnimationCurve easingCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
@@ -33,7 +37,7 @@ public class ElementAnimation : MonoBehaviour
         elementRectTransform = gameObject.GetComponent<RectTransform>();
         if (defineInitPosition)
         {
-            elementRectTransform.anchoredPosition += extraInitialPosition;
+            elementRectTransform.anchoredPosition += initialOffsetPosition;
         }
     }
 
@@ -45,9 +49,20 @@ public class ElementAnimation : MonoBehaviour
         rightOffset = new (distanceToAnimate.x, 0);
     }
 
-    public Vector2 GetOffset(AnimateToDirection direction)
+    public Vector2 GetEnterOffset()
     {
-        return direction switch
+        return enterDirection switch
+        {
+            AnimateToDirection.Top => topOffset,
+            AnimateToDirection.Bottom => bottomOffset,
+            AnimateToDirection.Left => leftOffset,
+            AnimateToDirection.Right => rightOffset,
+            _ => Vector2.zero,
+        };
+    }
+    public Vector2 GetLeaveOffset()
+    {
+        return leaveDirection switch
         {
             AnimateToDirection.Top => topOffset,
             AnimateToDirection.Bottom => bottomOffset,
@@ -60,8 +75,8 @@ public class ElementAnimation : MonoBehaviour
     // |------------ Reference Code ------------|
 
     private CanvasGroup elementCanvasGroup;
-    private AnimateToDirection startDirection;
-    private AnimateToDirection endDirection;
+    private AnimateToDirection startDirectionDef;
+    private AnimateToDirection endDirectionDef;
     private Vector2 initialPosition;
     private Vector2 currentPosition;
     private bool isMoving;
@@ -113,10 +128,10 @@ public class ElementAnimation : MonoBehaviour
         Vector2 targetPosition;
         if (start)
         {
-            targetPosition = currentPosition + GetOffset(startDirection);
+            targetPosition = currentPosition + GetEnterOffset();
         } else
         {
-            targetPosition = currentPosition + GetOffset(endDirection);
+            targetPosition = currentPosition + GetLeaveOffset();
         }
 
         float elapsedTime = 0f;

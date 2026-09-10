@@ -171,7 +171,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
-  extraInitialPosition: {x: 0, y: -115}
+  initialOffsetPosition: {x: 0, y: -115}
+  enterDirection: 0
+  leaveDirection: 1
   distanceToAnimate: {x: 100, y: 115}
   easingCurve:
     serializedVersion: 2
@@ -483,7 +485,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
-  extraInitialPosition: {x: 0, y: -115}
+  initialOffsetPosition: {x: 0, y: -115}
+  enterDirection: 0
+  leaveDirection: 1
   distanceToAnimate: {x: 100, y: 115}
   easingCurve:
     serializedVersion: 2
@@ -1829,7 +1833,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
-  extraInitialPosition: {x: 0, y: 430}
+  initialOffsetPosition: {x: 0, y: 430}
+  enterDirection: 1
+  leaveDirection: 0
   distanceToAnimate: {x: 100, y: 430}
   easingCurve:
     serializedVersion: 2
@@ -2935,7 +2941,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 0
-  extraInitialPosition: {x: 0, y: 0}
+  initialOffsetPosition: {x: 0, y: 0}
+  enterDirection: 1
+  leaveDirection: 0
   distanceToAnimate: {x: 100, y: 180}
   easingCurve:
     serializedVersion: 2
@@ -3196,7 +3204,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
-  extraInitialPosition: {x: -75, y: 0}
+  initialOffsetPosition: {x: -75, y: 0}
+  enterDirection: 3
+  leaveDirection: 3
   distanceToAnimate: {x: 75, y: 100}
   easingCurve:
     serializedVersion: 2
@@ -3661,7 +3671,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
-  extraInitialPosition: {x: 0, y: 120}
+  initialOffsetPosition: {x: 0, y: 120}
+  enterDirection: 1
+  leaveDirection: 0
   distanceToAnimate: {x: 100, y: 120}
   easingCurve:
     serializedVersion: 2
@@ -4465,7 +4477,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 0
-  extraInitialPosition: {x: 0, y: 0}
+  initialOffsetPosition: {x: 0, y: 0}
+  enterDirection: 0
+  leaveDirection: 1
   distanceToAnimate: {x: 100, y: 120}
   easingCurve:
     serializedVersion: 2
@@ -5111,7 +5125,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 0
-  extraInitialPosition: {x: 0, y: 0}
+  initialOffsetPosition: {x: 0, y: 0}
+  enterDirection: 2
+  leaveDirection: 3
   distanceToAnimate: {x: 450, y: 100}
   easingCurve:
     serializedVersion: 2
@@ -7292,7 +7308,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
-  extraInitialPosition: {x: 0, y: 315}
+  initialOffsetPosition: {x: 0, y: 315}
+  enterDirection: 1
+  leaveDirection: 0
   distanceToAnimate: {x: 100, y: 315}
   easingCurve:
     serializedVersion: 2

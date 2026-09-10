@@ -119,6 +119,54 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &72886031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 72886032}
+  - component: {fileID: 72886033}
+  m_Layer: 0
+  m_Name: TopicMenuScreenController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &72886032
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72886031}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1000, y: 500, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &72886033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72886031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90645fcd8e2290440a98dd93daf7f9cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TopicMenuScreenController
+  menuTitle: {fileID: 872697778}
+  topicsBackground: {fileID: 1554343579}
+  topicsHolder: {fileID: 85116409}
+  animationController: {fileID: 1817364374}
 --- !u!1 &85116409
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,6 +177,8 @@ GameObject:
   m_Component:
   - component: {fileID: 85116410}
   - component: {fileID: 85116412}
+  - component: {fileID: 85116414}
+  - component: {fileID: 85116413}
   m_Layer: 5
   m_Name: Topics
   m_TagString: Untagged
@@ -148,15 +198,14 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1554343578}
   - {fileID: 659316889}
   - {fileID: 1597645715}
   m_Father: {fileID: 799334585}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 750, y: 410}
+  m_AnchoredPosition: {x: 0, y: -20}
+  m_SizeDelta: {x: 500, y: 230}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &85116412
 CanvasRenderer:
@@ -166,6 +215,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 85116409}
   m_CullTransparentMesh: 1
+--- !u!114 &85116413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85116409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
+  defineInitPosition: 1
+  initialOffsetPosition: {x: 0, y: -320}
+  enterDirection: 0
+  leaveDirection: 1
+  distanceToAnimate: {x: 100, y: 320}
+  easingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationDuration: 0.5
+--- !u!225 &85116414
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85116409}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &233202085
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,6 +689,7 @@ RectTransform:
   m_Children:
   - {fileID: 350887007}
   - {fileID: 872697779}
+  - {fileID: 1554343578}
   - {fileID: 85116410}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -604,9 +708,11 @@ GameObject:
   m_Component:
   - component: {fileID: 872697779}
   - component: {fileID: 872697781}
+  - component: {fileID: 872697783}
   - component: {fileID: 872697780}
+  - component: {fileID: 872697782}
   m_Layer: 5
-  m_Name: Title
+  m_Name: MenuTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -731,13 +837,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 872697778}
   m_CullTransparentMesh: 1
+--- !u!114 &872697782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872697778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
+  defineInitPosition: 1
+  initialOffsetPosition: {x: 0, y: 120}
+  enterDirection: 1
+  leaveDirection: 0
+  distanceToAnimate: {x: 100, y: 120}
+  easingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationDuration: 0.5
+--- !u!225 &872697783
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872697778}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1554343577
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 85116410}
+    m_TransformParent: {fileID: 799334585}
     m_Modifications:
     - target: {fileID: 748213795342202710, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
       propertyPath: m_Color.b
@@ -801,15 +961,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3493516919491773051, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3493516919491773051, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3493516919491773051, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3493516919491773051, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -850,13 +1010,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5316922238156215768, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1554343580}
   m_SourcePrefab: {fileID: 100100000, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
 --- !u!224 &1554343578 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3493516919491773051, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
   m_PrefabInstance: {fileID: 1554343577}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1554343579 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5316922238156215768, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
+  m_PrefabInstance: {fileID: 1554343577}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &1554343580
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554343579}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1597645714
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -939,7 +1119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7094196473032800806, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -70
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 7094196473032800806, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1039,6 +1219,80 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c39e4adf54ee9044986914f52f14a7b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TopicMenuItem
+--- !u!1 &1817364372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1817364373}
+  - component: {fileID: 1817364374}
+  m_Layer: 0
+  m_Name: AnimationController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1817364373
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817364372}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1000, y: 500, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1817364374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817364372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1df1e04f15e399439a65d9113addbe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationController
+  animations:
+  - key: {fileID: 872697778}
+    value: {fileID: 872697782}
+  - key: {fileID: 85116409}
+    value: {fileID: 85116413}
+  groupEasingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  groupAnimationDuration: 0.5
 --- !u!1001 &4126099330443550405
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1121,7 +1375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7094196473032800806, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7094196473032800806, guid: 73c1ad2f8eaccfc409bbcfe0402bb541, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1223,3 +1477,5 @@ SceneRoots:
   - {fileID: 624823745}
   - {fileID: 799334585}
   - {fileID: 233202088}
+  - {fileID: 72886032}
+  - {fileID: 1817364373}

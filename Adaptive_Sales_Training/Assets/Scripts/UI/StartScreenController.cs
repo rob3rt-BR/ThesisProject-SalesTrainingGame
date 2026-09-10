@@ -176,15 +176,19 @@ public class StartScreenController : MonoBehaviour
     private void CheckPassword()
     {
         // IF input field text set AND equals to predefined password => Animate element enable / disable: password box -> assignTrainingModeElements,
-        // and disable backToStartScreenButton interactable
+        // and disable backToStartScreenButton interactable and blocksRaycasts canvas group properties
         // ELSE => Display wrong password text
         if (inputFieldText != null && inputFieldText.Equals(password))
         {
             enteredTrainingModeUI = true;
 
+            // Disable backToStartScreenButton canvas group interactbale and blocksRayCasts properties
+            CanvasGroup backToStartScreenButtonCanvasGrp = backToStartScreenButton.GetComponent<CanvasGroup>();
+            backToStartScreenButtonCanvasGrp.interactable = false;
+            backToStartScreenButtonCanvasGrp.blocksRaycasts = false;
+
             animationController.AnimateElementEnable_CorrectPassword(
-            passwordBox, 
-            backToStartScreenButton.gameObject, 
+            passwordBox,  
             assignTrainingModeElements);
         } else
         {

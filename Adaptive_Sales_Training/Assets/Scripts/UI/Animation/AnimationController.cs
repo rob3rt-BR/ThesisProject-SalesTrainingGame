@@ -24,14 +24,20 @@ public class AnimationController : MonoBehaviour
     private float groupAnimationDuration = 0.5f;
 
     public int CurrentTextIndex {get; private set;}
+    
+    private static readonly WaitForSeconds waitForSeconds = new(1f);
 
-    void Start()
+    void Awake()
     {
         foreach (ElementAnimation animation in animations.Values)
         {
             animation.InitializeRectTransformPosition();
             animation.InitializeOffsetPosition();
         }
+    }
+
+    void Start()
+    {
     }
 
     private ElementAnimation GetElementAnimation(GameObject element)
@@ -70,11 +76,14 @@ public class AnimationController : MonoBehaviour
         Vector2 passwordBoxCurrPos = passwordBoxRect.anchoredPosition; 
         Vector2 backButtonCurrPos = backButtonRect.anchoredPosition; 
 
-        Vector2 welcomeTitleTargetPos = welcomeTitleCurrPos + GetElementAnimation(welcomeTitle).GetOffset(AnimateToDirection.Top);
-        Vector2 startButtonTargetPos = startButtonCurrPos + GetElementAnimation(startButton).GetOffset(AnimateToDirection.Right);
-        Vector2 lowerButtonsTargetPos = lowerButtonsCurrPos + GetElementAnimation(lowerButtons).GetOffset(AnimateToDirection.Bottom);
-        Vector2 passwordBoxTargetPos = passwordBoxCurrPos + GetElementAnimation(passwordBox).GetOffset(AnimateToDirection.Bottom);
-        Vector2 backButtonTargetPos = backButtonCurrPos + GetElementAnimation(backButton).GetOffset(AnimateToDirection.Top);
+        // Elements leaving screen
+        Vector2 welcomeTitleTargetPos = welcomeTitleCurrPos + GetElementAnimation(welcomeTitle).GetLeaveOffset();
+        Vector2 startButtonTargetPos = startButtonCurrPos + GetElementAnimation(startButton).GetLeaveOffset();
+        Vector2 lowerButtonsTargetPos = lowerButtonsCurrPos + GetElementAnimation(lowerButtons).GetLeaveOffset();
+
+        // Elements entering screen
+        Vector2 passwordBoxTargetPos = passwordBoxCurrPos + GetElementAnimation(passwordBox).GetEnterOffset();
+        Vector2 backButtonTargetPos = backButtonCurrPos + GetElementAnimation(backButton).GetEnterOffset();
 
         float elapsedTime = 0f;
 
@@ -166,11 +175,14 @@ public class AnimationController : MonoBehaviour
         Vector2 passwordBoxCurrPos = passwordBoxRect.anchoredPosition; 
         Vector2 backButtonCurrPos = backButtonRect.anchoredPosition; 
 
-        Vector2 welcomeTitleTargetPos = welcomeTitleCurrPos + GetElementAnimation(welcomeTitle).GetOffset(AnimateToDirection.Bottom);
-        Vector2 startButtonTargetPos = startButtonCurrPos + GetElementAnimation(startButton).GetOffset(AnimateToDirection.Left);
-        Vector2 lowerButtonsTargetPos = lowerButtonsCurrPos + GetElementAnimation(lowerButtons).GetOffset(AnimateToDirection.Top);
-        Vector2 passwordBoxTargetPos = passwordBoxCurrPos + GetElementAnimation(passwordBox).GetOffset(AnimateToDirection.Top);
-        Vector2 backButtonTargetPos = backButtonCurrPos + GetElementAnimation(backButton).GetOffset(AnimateToDirection.Bottom);
+        // Elements entering screen
+        Vector2 welcomeTitleTargetPos = welcomeTitleCurrPos + GetElementAnimation(welcomeTitle).GetEnterOffset();
+        Vector2 startButtonTargetPos = startButtonCurrPos + GetElementAnimation(startButton).GetEnterOffset();
+        Vector2 lowerButtonsTargetPos = lowerButtonsCurrPos + GetElementAnimation(lowerButtons).GetEnterOffset();
+
+        // Elements leaving screen
+        Vector2 passwordBoxTargetPos = passwordBoxCurrPos + GetElementAnimation(passwordBox).GetLeaveOffset();
+        Vector2 backButtonTargetPos = backButtonCurrPos + GetElementAnimation(backButton).GetLeaveOffset();
 
         float elapsedTime = 0f;
 
@@ -236,25 +248,27 @@ public class AnimationController : MonoBehaviour
         lowerButtonsCanvasGrp.blocksRaycasts = true;
     }
 
-    public void AnimateElementEnable_CorrectPassword(GameObject passwordBox, GameObject backButton, GameObject trainingModeElements)
+    public void AnimateElementEnable_CorrectPassword(GameObject passwordBox, GameObject trainingModeElements)
     {
-        StartCoroutine(InsideOutPasswordBox_OutsideInTrainingModeElements(passwordBox, backButton, trainingModeElements));
+        StartCoroutine(InsideOutPasswordBox_OutsideInTrainingModeElements(passwordBox, trainingModeElements));
     }
 
-    private IEnumerator InsideOutPasswordBox_OutsideInTrainingModeElements(GameObject passwordBox, GameObject backButton, GameObject trainingModeElements)
+    private IEnumerator InsideOutPasswordBox_OutsideInTrainingModeElements(GameObject passwordBox, GameObject trainingModeElements)
     {
         RectTransform passwordBoxRect = passwordBox.GetComponent<RectTransform>();
         RectTransform trainingModeElementsRect = trainingModeElements.GetComponent<RectTransform>();
 
         CanvasGroup passwordBoxCanvasGrp = passwordBox.GetComponent<CanvasGroup>();
-        CanvasGroup backButtonCanvasGrp = backButton.GetComponent<CanvasGroup>();
         CanvasGroup trainingModeElementsCanvasGrp = trainingModeElements.GetComponent<CanvasGroup>();
 
         Vector2 passwordBoxCurrPos = passwordBoxRect.anchoredPosition; 
         Vector2 trainingModeElementsCurrPos = trainingModeElementsRect.anchoredPosition; 
 
-        Vector2 passwordBoxTargetPos = passwordBoxCurrPos + GetElementAnimation(passwordBox).GetOffset(AnimateToDirection.Top);
-        Vector2 trainingModeElementsTargetPos = trainingModeElementsCurrPos + GetElementAnimation(trainingModeElements).GetOffset(AnimateToDirection.Bottom);
+        // Elements leaving screen
+        Vector2 passwordBoxTargetPos = passwordBoxCurrPos + GetElementAnimation(passwordBox).GetLeaveOffset();
+
+        // Elements entering screen
+        Vector2 trainingModeElementsTargetPos = trainingModeElementsCurrPos + GetElementAnimation(trainingModeElements).GetEnterOffset();
 
         float elapsedTime = 0f;
 
@@ -273,9 +287,6 @@ public class AnimationController : MonoBehaviour
         passwordBoxCanvasGrp.alpha = 0;
         passwordBoxCanvasGrp.interactable = false;
         passwordBoxCanvasGrp.blocksRaycasts = false;
-        
-        backButtonCanvasGrp.interactable = false;
-        backButtonCanvasGrp.blocksRaycasts = false;
 
         passwordBox.SetActive(false);
         trainingModeElements.SetActive(true);
@@ -324,11 +335,14 @@ public class AnimationController : MonoBehaviour
         Vector2 backButtonCurrPos = backButtonRect.anchoredPosition; 
         Vector2 trainingModeElementsCurrPos = trainingModeElementsRect.anchoredPosition; 
 
-        Vector2 welcomeTitleTargetPos = welcomeTitleCurrPos + GetElementAnimation(welcomeTitle).GetOffset(AnimateToDirection.Bottom);
-        Vector2 startButtonTargetPos = startButtonCurrPos + GetElementAnimation(startButton).GetOffset(AnimateToDirection.Left);
-        Vector2 lowerButtonsTargetPos = lowerButtonsCurrPos + GetElementAnimation(lowerButtons).GetOffset(AnimateToDirection.Top);
-        Vector2 backButtonTargetPos = backButtonCurrPos + GetElementAnimation(backButton).GetOffset(AnimateToDirection.Bottom);
-        Vector2 trainingModeElementsTargetPos = trainingModeElementsCurrPos + GetElementAnimation(trainingModeElements).GetOffset(AnimateToDirection.Top);
+        // Elements entering screen
+        Vector2 welcomeTitleTargetPos = welcomeTitleCurrPos + GetElementAnimation(welcomeTitle).GetEnterOffset();
+        Vector2 startButtonTargetPos = startButtonCurrPos + GetElementAnimation(startButton).GetEnterOffset();
+        Vector2 lowerButtonsTargetPos = lowerButtonsCurrPos + GetElementAnimation(lowerButtons).GetEnterOffset();
+
+        // Elements leaving screen
+        Vector2 backButtonTargetPos = backButtonCurrPos + GetElementAnimation(backButton).GetLeaveOffset();
+        Vector2 trainingModeElementsTargetPos = trainingModeElementsCurrPos + GetElementAnimation(trainingModeElements).GetLeaveOffset();
 
         float elapsedTime = 0f;
 
@@ -427,12 +441,15 @@ public class AnimationController : MonoBehaviour
         Vector2 explainTextsCurrPos = explainTextsRect.anchoredPosition; 
         Vector2 textNavButtonsCurrPos = textNavButtonsRect.anchoredPosition; 
 
-        Vector2 welcomeTitleTargetPos = welcomeTitleCurrPos + GetElementAnimation(welcomeTitle).GetOffset(AnimateToDirection.Top);
-        Vector2 startButtonTargetPos = startButtonCurrPos + GetElementAnimation(startButton).GetOffset(AnimateToDirection.Right);
-        Vector2 lowerButtonsTargetPos = lowerButtonsCurrPos + GetElementAnimation(lowerButtons).GetOffset(AnimateToDirection.Bottom);
-        Vector2 explainTitleTargetPos = explainTitleCurrPos + GetElementAnimation(explainTitle).GetOffset(AnimateToDirection.Bottom);
-        Vector2 explainTextsTargetPos = explainTextsCurrPos + GetElementAnimation(explainTexts).GetOffset(AnimateToDirection.Right);
-        Vector2 textNavButtonsTargetPos = textNavButtonsCurrPos + GetElementAnimation(textNavButtons).GetOffset(AnimateToDirection.Top);
+        // Elements leaving screen
+        Vector2 welcomeTitleTargetPos = welcomeTitleCurrPos + GetElementAnimation(welcomeTitle).GetLeaveOffset();
+        Vector2 startButtonTargetPos = startButtonCurrPos + GetElementAnimation(startButton).GetLeaveOffset();
+        Vector2 lowerButtonsTargetPos = lowerButtonsCurrPos + GetElementAnimation(lowerButtons).GetLeaveOffset();
+
+        // Elements entering screen
+        Vector2 explainTitleTargetPos = explainTitleCurrPos + GetElementAnimation(explainTitle).GetEnterOffset();
+        Vector2 explainTextsTargetPos = explainTextsCurrPos + GetElementAnimation(explainTexts).GetEnterOffset();
+        Vector2 textNavButtonsTargetPos = textNavButtonsCurrPos + GetElementAnimation(textNavButtons).GetEnterOffset();
         
         float elapsedTime = 0f;
 
@@ -528,9 +545,10 @@ public class AnimationController : MonoBehaviour
         Vector2 explainTextsCurrPos = explainTextsRect.anchoredPosition; 
         Vector2 textNavButtonsCurrPos = textNavButtonsRect.anchoredPosition; 
 
-        Vector2 explainTitleTargetPos = explainTitleCurrPos + GetElementAnimation(explainTitle).GetOffset(AnimateToDirection.Top);
-        Vector2 explainTextsTargetPos = explainTextsCurrPos + GetElementAnimation(explainTexts).GetOffset(AnimateToDirection.Right);
-        Vector2 textNavButtonsTargetPos = textNavButtonsCurrPos + GetElementAnimation(textNavButtons).GetOffset(AnimateToDirection.Bottom);
+        // Elements leaving screen
+        Vector2 explainTitleTargetPos = explainTitleCurrPos + GetElementAnimation(explainTitle).GetLeaveOffset();
+        Vector2 explainTextsTargetPos = explainTextsCurrPos + GetElementAnimation(explainTexts).GetLeaveOffset();
+        Vector2 textNavButtonsTargetPos = textNavButtonsCurrPos + GetElementAnimation(textNavButtons).GetLeaveOffset();
 
         float elapsedTime = 0f;
 
@@ -700,5 +718,66 @@ public class AnimationController : MonoBehaviour
         textNavButtonsCanvasGrp.interactable = true;
         textNavButtonsCanvasGrp.blocksRaycasts = true;
     }
+    #endregion 
+
+    #region TopicMenuScene - Element Animations
+
+    public void AnimateScreenChange_TopicMenuStart(GameObject menuTitle, GameObject topicsBackground, GameObject topicsHolder)
+    {
+        StartCoroutine(OutsideInTopicMenu(menuTitle, topicsBackground, topicsHolder));
+    }
+
+    private IEnumerator OutsideInTopicMenu(GameObject menuTitle, GameObject topicsBackground, GameObject topicsHolder)
+    {
+        RectTransform menuTitleRect = menuTitle.GetComponent<RectTransform>();
+        RectTransform topicsHolderRect = topicsHolder.GetComponent<RectTransform>();
+
+        CanvasGroup menuTitleCanvasGrp = menuTitle.GetComponent<CanvasGroup>();
+        CanvasGroup topicsBackgroundCanvasGrp = topicsBackground.GetComponent<CanvasGroup>();
+        CanvasGroup topicsHolderCanvasGrp = topicsHolder.GetComponent<CanvasGroup>();
+
+        Vector2 menuTitleCurrPos = menuTitleRect.anchoredPosition;
+        Vector2 topicsHolderCurrPos = topicsHolderRect.anchoredPosition;
+        
+        // Elements entering screen
+        Vector2 menuTitleTargetPos = menuTitleCurrPos + GetElementAnimation(menuTitle).GetEnterOffset();
+        Vector2 topicsHolderTargetPos = topicsHolderCurrPos + GetElementAnimation(topicsHolder).GetEnterOffset();
+
+        // Wait a couple of seconds after scene change before starting animations
+        yield return waitForSeconds;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < groupAnimationDuration)
+        {
+            float evaluationAtTime = groupEasingCurve.Evaluate(elapsedTime / groupAnimationDuration);
+
+            menuTitleRect.anchoredPosition = Vector2.Lerp(menuTitleCurrPos, menuTitleTargetPos, evaluationAtTime);
+            menuTitleCanvasGrp.alpha = Mathf.Lerp(0f, 1f, evaluationAtTime);
+            
+            topicsBackgroundCanvasGrp.alpha = Mathf.Lerp(0f, 1f, evaluationAtTime);
+
+            topicsHolderRect.anchoredPosition = Vector2.Lerp(topicsHolderCurrPos, topicsHolderTargetPos, evaluationAtTime);
+            topicsHolderCanvasGrp.alpha = Mathf.Lerp(0f, 1f, evaluationAtTime);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        menuTitleRect.anchoredPosition = menuTitleTargetPos;
+        menuTitleCanvasGrp.alpha = 1;
+        menuTitleCanvasGrp.interactable = true;
+        menuTitleCanvasGrp.blocksRaycasts = true;
+
+        topicsBackgroundCanvasGrp.alpha = 1;
+        topicsBackgroundCanvasGrp.interactable = true;
+        topicsBackgroundCanvasGrp.blocksRaycasts = true;
+        
+        topicsHolderRect.anchoredPosition = topicsHolderTargetPos;
+        topicsHolderCanvasGrp.alpha = 1;
+        topicsHolderCanvasGrp.interactable = true;
+        topicsHolderCanvasGrp.blocksRaycasts = true;
+    }
+
     #endregion
 }
