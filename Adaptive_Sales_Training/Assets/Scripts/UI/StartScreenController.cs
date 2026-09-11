@@ -14,6 +14,8 @@ public class StartScreenController : MonoBehaviour
     [SerializeField]
     private GameObject startScreen;
     [SerializeField]
+    private GameObject passwordScreen;
+    [SerializeField]
     private GameObject assignTrainingModeScreen;
     [SerializeField]
     private GameObject explainScreen;
@@ -35,6 +37,8 @@ public class StartScreenController : MonoBehaviour
     private TMP_Text wrongPasswordText;
     [SerializeField]
     private Button checkPasswortButton;
+    [SerializeField]
+    private Button pswdBackButton;
 
     [Header("Assign Training Mode UI")]
     [SerializeField]
@@ -83,8 +87,56 @@ public class StartScreenController : MonoBehaviour
     private TrainingSessionManager session;
     private TrainingVersion trainingVersion;
 
-    // private int currentTextIndex = 0;
-    private RectTransform continueButtonTrans;
+
+    private enum ScreenState
+    {
+        Undefined,
+        Start,
+        Password,
+        AssignTrainingValues,
+        Explain,
+        End
+    }
+
+    private ScreenState currentState = ScreenState.Start;
+    private ScreenState prevState = ScreenState.Undefined;
+
+    private bool CanEnterState(ScreenState nextState)
+    {
+        if (currentState == ScreenState.Start)
+        {
+            return nextState == ScreenState.Password || nextState == ScreenState.Explain;
+        }
+        if (currentState == ScreenState.Password)
+        {
+            return nextState == ScreenState.Start || nextState == ScreenState.AssignTrainingValues;
+        }
+        if (currentState == ScreenState.AssignTrainingValues)
+        {
+            return nextState == ScreenState.Start;
+        }
+        if (currentState == ScreenState.Explain)
+        {
+            return nextState == ScreenState.End;
+        }
+        return false;
+    }
+
+    private bool TryChangeState(ScreenState nextState)
+    {
+        if (!CanEnterState(nextState))
+        {
+            return false;
+        }
+        prevState = currentState;
+        currentState = nextState;
+        return true;
+    }
+
+    private List<ElementAnimation> startScreenElements;
+    private List<ElementAnimation> passwordScreenElements;
+    private List<ElementAnimation> assignTrainingValuesScreenElements;
+    private List<ElementAnimation> explainScreenElements;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -103,8 +155,8 @@ public class StartScreenController : MonoBehaviour
         // On click => Check whether input text from input field equals predefined password
         checkPasswortButton.onClick.AddListener(CheckPassword);
 
-        // On click => Go back to start screen from assign training value screen
-        backToStartScreenButton.onClick.AddListener(ReturnToStartScreen);
+        // On click => Go back to start screen from password screen
+        pswdBackButton.onClick.AddListener(PswdReturnToStartScreen);
 
         // On click => Generate session ID
         generateSessionIdButton.onClick.AddListener(GenerateSessionID);
@@ -118,12 +170,56 @@ public class StartScreenController : MonoBehaviour
         // On click => Set training mode and set explain screen content based on that
         setModeButton.onClick.AddListener(SetTrainingMode);
 
+        // On click => Go back to start screen from assign training value screen
+        backToStartScreenButton.onClick.AddListener(ReturnToStartScreen);
+
         // On click => Go forward / back in texts
         continueButton.onClick.AddListener(ContinuePressed);
         backButton.onClick.AddListener(BackPressed);
 
-        continueButtonTrans = continueButton.gameObject.GetComponent<RectTransform>();
+        ElementAnimation welcomeTitleElement = animationController.GetElementAnimation(welcomeTitle);
+        ElementAnimation startButtonElement = animationController.GetElementAnimation(startButton);
+        ElementAnimation lowerButtonsElement = animationController.GetElementAnimation(lowerButtons);
+
+        startScreenElements = new() {welcomeTitleElement, startButtonElement, lowerButtonsElement};
+        
+        ElementAnimation passwordBoxElement = animationController.GetElementAnimation(passwordBox);
+        ElementAnimation pswdBackButtonElement = animationController.GetElementAnimation(pswdBackButton.gameObject);
+
+        passwordScreenElements = new() {passwordBoxElement, pswdBackButtonElement};
     }
+
+    /*
+    void Update()
+    {
+        
+        if (stateChange)
+        {
+            if (currentState == ScreenState.Password)
+            {
+                animationController.AnimateScreenChange_StartToPasswordBoxNoCoroutine(
+                welcomeTitle, 
+                startButton, 
+                lowerButtons, 
+                passwordBox, 
+                backToStartScreenButton.gameObject, 
+                startScreen, 
+                assignTrainingModeScreen);
+            }
+            if (currentState == ScreenState.Start && prevState == ScreenState.Password)
+            {
+                animationController.AnimateScreenChange_PasswordBoxToStartNoCoroutine(
+                welcomeTitle, 
+                startButton, 
+                lowerButtons, 
+                passwordBox, 
+                backToStartScreenButton.gameObject, 
+                startScreen, 
+                assignTrainingModeScreen);
+            }
+            stateChange = false;
+        }
+    }*/
 
     public void StartGame()
     {
@@ -151,15 +247,18 @@ public class StartScreenController : MonoBehaviour
 
     public void SetMode()
     {
-        // Animate screen change: start screen -> assignTrainMode screen (just password box)
-        animationController.AnimateScreenChange_StartToPasswordBox(
+        // Animate screen change: start screen -> password screen
+        animationController.StartScreenChange(startScreenElements, passwordScreenElements, startScreen, passwordScreen);
+
+        // stateChange = TryChangeState(ScreenState.Password);
+        /*animationController.AnimateScreenChange_StartToPasswordBox(
         welcomeTitle, 
         startButton, 
         lowerButtons, 
         passwordBox, 
         backToStartScreenButton.gameObject, 
         startScreen, 
-        assignTrainingModeScreen);
+        assignTrainingModeScreen);*/
     }
 
     public void QuitGame()
@@ -180,6 +279,7 @@ public class StartScreenController : MonoBehaviour
         // ELSE => Display wrong password text
         if (inputFieldText != null && inputFieldText.Equals(password))
         {
+            // TODO: CAMBIAR BIEN ESTO
             enteredTrainingModeUI = true;
 
             // Disable backToStartScreenButton canvas group interactbale and blocksRayCasts properties
@@ -196,38 +296,40 @@ public class StartScreenController : MonoBehaviour
         }
     }
 
-    private void ReturnToStartScreen()
+    private void PswdReturnToStartScreen()
     {
-        // IF entered training mode setup UI (Correct password) => Animate screen change: assignTrainingMode screen (all UI elements) -> start screen, 
-        // and restart password box and assignTrainingModeElements active states
-        // ELSE => Animate screen change: assignTrainingMode screen (just password box) -> start screen
-        if (enteredTrainingModeUI)
-        {
-            animationController.AnimateScreenChange_TrainingModeElementsToStart(
-            welcomeTitle, 
-            startButton, 
-            lowerButtons, 
-            backToStartScreenButton.gameObject, 
-            assignTrainingModeElements, 
-            startScreen, 
-            assignTrainingModeScreen);
-        } else
-        {
-            animationController.AnimateScreenChange_PasswordBoxToStart(
+        // Animate screen change: password screen -> start screen
+        animationController.StartScreenChange(passwordScreenElements, startScreenElements, passwordScreen, startScreen);
+        
+        // stateChange = TryChangeState(ScreenState.Start);
+            /*animationController.AnimateScreenChange_PasswordBoxToStart(
             welcomeTitle, 
             startButton, 
             lowerButtons, 
             passwordBox, 
             backToStartScreenButton.gameObject, 
             startScreen, 
-            assignTrainingModeScreen);
-        }
-
-        // Reset assignTrainingMode screen UI interal elements for later reuse
-        ResetAssignTrainingModeUI();
+            assignTrainingModeScreen);*/
     }
 
-    private void ResetAssignTrainingModeUI()
+    private void ReturnToStartScreen()
+    {
+        // Animate screen change: assignTrainingMode screen -> start screen, 
+        // and restart password box and assignTrainingModeElements active states
+        animationController.AnimateScreenChange_TrainingModeElementsToStart(
+        welcomeTitle, 
+        startButton, 
+        lowerButtons, 
+        backToStartScreenButton.gameObject, 
+        assignTrainingModeElements, 
+        startScreen, 
+        assignTrainingModeScreen);
+
+        // Reset password screen and assignTrainingMode screen UI interal elements for later reuse
+        ResetPasswordAndAssignTrainingModeUI();
+    }
+
+    private void ResetPasswordAndAssignTrainingModeUI()
     {
         // Reset password box internal values
         wrongPasswordText.gameObject.SetActive(false);
@@ -354,12 +456,13 @@ public class StartScreenController : MonoBehaviour
         // Clenaup Assign Training Mode Screen
         passwordInputField.onEndEdit.RemoveListener(GetInput);
         checkPasswortButton.onClick.RemoveListener(CheckPassword);
+        pswdBackButton.onClick.RemoveListener(PswdReturnToStartScreen);
 
-        backToStartScreenButton.onClick.RemoveListener(ReturnToStartScreen);
         generateSessionIdButton.onClick.RemoveListener(GenerateSessionID);
         traditionalModeButton.onClick.RemoveListener(SelectTraditionalTrainingMode);
         aiModeButton.onClick.RemoveListener(SelectAITrainingMode);
         setModeButton.onClick.RemoveListener(SetTrainingMode);
+        backToStartScreenButton.onClick.RemoveListener(ReturnToStartScreen);
 
         // Cleanup Explanation Screen
         continueButton.onClick.RemoveListener(ContinuePressed);

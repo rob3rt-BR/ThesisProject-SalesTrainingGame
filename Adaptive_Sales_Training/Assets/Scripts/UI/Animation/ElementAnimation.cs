@@ -5,14 +5,31 @@ using UnityEngine.UI;
 
 public class ElementAnimation : MonoBehaviour
 {
-    private RectTransform elementRectTransform;
-
     [Header("Element Setup")]
     [Space]
     [SerializeField]
     private bool defineInitPosition;
     [SerializeField]
     private Vector2 initialOffsetPosition = new(0, 0);
+
+    [HideInInspector]
+    public RectTransform rectTransform;
+    [HideInInspector]
+    public CanvasGroup canvasGroup;
+    [HideInInspector]
+    public Vector2 enterPosition;
+    [HideInInspector]
+    public Vector2 leavePosition;
+    [HideInInspector]
+    public Vector2 screenPosition;
+
+    private enum AnimateToDirection
+    {
+        Top,
+        Bottom,
+        Left,
+        Right
+    }
     
     [Header("Animation Setup")]
     [Space]
@@ -32,13 +49,17 @@ public class ElementAnimation : MonoBehaviour
     private Vector2 rightOffset;
 
 
-    public void InitializeRectTransformPosition()
+    public void InitializeElement()
     {
-        elementRectTransform = gameObject.GetComponent<RectTransform>();
+        rectTransform = gameObject.GetComponent<RectTransform>();
+
+        /*
         if (defineInitPosition)
         {
-            elementRectTransform.anchoredPosition += initialOffsetPosition;
-        }
+            rectTransform.anchoredPosition += initialOffsetPosition;
+        }*/
+
+        canvasGroup = gameObject.GetComponent<CanvasGroup>();
     }
 
     public void InitializeOffsetPosition()
@@ -70,94 +91,5 @@ public class ElementAnimation : MonoBehaviour
             AnimateToDirection.Right => rightOffset,
             _ => Vector2.zero,
         };
-    }
-
-    // |------------ Reference Code ------------|
-
-    private CanvasGroup elementCanvasGroup;
-    private AnimateToDirection startDirectionDef;
-    private AnimateToDirection endDirectionDef;
-    private Vector2 initialPosition;
-    private Vector2 currentPosition;
-    private bool isMoving;
-    private Coroutine animateElementCoroutine;
-
-    public void StartElementMovement()
-    {
-        if (isMoving)
-        {
-            return;
-        }
-
-        isMoving = true;
-
-        if (animateElementCoroutine != null)
-        {
-            StopCoroutine(animateElementCoroutine);
-        }
-
-        animateElementCoroutine = StartCoroutine(AnimateElementMovementDef(true));
-    }
-
-    public void EndElementMovement()
-    {
-        if (!isMoving)
-        {
-            return;
-        }
-
-        isMoving = false;
-
-        if (animateElementCoroutine != null)
-        {
-            StopCoroutine(animateElementCoroutine);
-        }
-
-        animateElementCoroutine = StartCoroutine(AnimateElementMovementDef(false));
-    }
-
-    private IEnumerator AnimateElementMovementDef(bool start)
-    {
-        if (start)
-        {
-            gameObject.SetActive(true);
-        }
-
-        currentPosition = elementRectTransform.anchoredPosition;
-
-        Vector2 targetPosition;
-        if (start)
-        {
-            targetPosition = currentPosition + GetEnterOffset();
-        } else
-        {
-            targetPosition = currentPosition + GetLeaveOffset();
-        }
-
-        float elapsedTime = 0f;
-
-        while (elapsedTime < animationDuration)
-        {
-            float evaluationAtTime = easingCurve.Evaluate(elapsedTime / animationDuration);
-
-            elementRectTransform.anchoredPosition = Vector2.Lerp(currentPosition, targetPosition, evaluationAtTime);
-
-            elementCanvasGroup.alpha = start ? Mathf.Lerp(0f, 1f, evaluationAtTime) : Mathf.Lerp(1f, 0f, evaluationAtTime);
-
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        elementRectTransform.anchoredPosition = targetPosition;
-
-        elementCanvasGroup.alpha = start ? 1 : 0;
-        elementCanvasGroup.interactable = start;
-        elementCanvasGroup.blocksRaycasts = start;
-
-        if (!start)
-        {
-            gameObject.SetActive(false);
-            elementRectTransform.anchoredPosition = initialPosition;
-        }
     }
 }

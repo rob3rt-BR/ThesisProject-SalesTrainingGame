@@ -5,14 +5,6 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public enum AnimateToDirection
-{
-    Top,
-    Bottom,
-    Left,
-    Right
-}
-
 public class AnimationController : MonoBehaviour
 {
     [SerializeField]
@@ -27,11 +19,30 @@ public class AnimationController : MonoBehaviour
     
     private static readonly WaitForSeconds waitForSeconds = new(1f);
 
+    private enum TransitionPhase
+    {
+        None,
+        Leaving,
+        Entering
+    }
+
+    [Range(0.1f, 5f)]
+    [SerializeField]
+    private float groupAnimationDurationNoCoroutine = 0.5f;
+    private float elapsedTimeNoCoroutine = 0f;
+    private TransitionPhase transitionPhase = TransitionPhase.None;
+
+    private List<ElementAnimation> currentTransitionElements;
+    private List<ElementAnimation> nextTransitionElements;
+
+    private GameObject currentTransitionScreen;
+    private GameObject nextTransitionScreen;
+
     void Awake()
     {
         foreach (ElementAnimation animation in animations.Values)
         {
-            animation.InitializeRectTransformPosition();
+            animation.InitializeElement();
             animation.InitializeOffsetPosition();
         }
     }
@@ -40,7 +51,16 @@ public class AnimationController : MonoBehaviour
     {
     }
 
-    private ElementAnimation GetElementAnimation(GameObject element)
+    void Update()
+    {
+        if (transitionPhase == TransitionPhase.None)
+        {
+            return;
+        }
+        UpdateTransition();
+    }
+
+    public ElementAnimation GetElementAnimation(GameObject element)
     {
         if (animations == null || animations[element] == null)
         {
@@ -50,7 +70,217 @@ public class AnimationController : MonoBehaviour
         return animations[element];
     }
 
+    public void StartScreenChange(List<ElementAnimation> currentElements, List<ElementAnimation> nextElements, GameObject currentScreen, GameObject nextScreen)
+    {
+        PrepareLeaveAnimation(currentElements);
+        PrepareEnterAnimation(nextElements);
+
+        nextScreen.SetActive(true);
+
+        elapsedTimeNoCoroutine = 0f;
+
+        currentTransitionElements = currentElements;
+        nextTransitionElements = nextElements;
+
+        currentTransitionScreen = currentScreen;
+        nextTransitionScreen = nextScreen;
+
+        transitionPhase = TransitionPhase.Leaving;
+    }
+
+    private void UpdateTransition()
+    {
+        elapsedTimeNoCoroutine += Time.deltaTime;
+
+        float normalizedTime = Mathf.Clamp01(elapsedTimeNoCoroutine / groupAnimationDurationNoCoroutine);
+        float evaluationTime = groupEasingCurve.Evaluate(normalizedTime);
+
+        if (transitionPhase == TransitionPhase.Leaving)
+        {
+            foreach (ElementAnimation element in currentTransitionElements)
+            {
+                AnimateElement(element, evaluationTime, false);
+            }
+
+            if (normalizedTime >= 1f)
+            {
+                FinishLeaving();
+
+                elapsedTimeNoCoroutine = 0f;
+                transitionPhase = TransitionPhase.Entering;
+            }
+        } 
+        else if (transitionPhase == TransitionPhase.Entering)
+        {
+            foreach (ElementAnimation element in nextTransitionElements)
+            {
+                AnimateElement(element, evaluationTime, true);
+            }
+
+            if (normalizedTime >= 1f)
+            {
+                FinishEntering();
+
+                transitionPhase = TransitionPhase.None;
+            }
+        }
+    }
+
+    private void AnimateElement(ElementAnimation element, float evaluationTime, bool entering)
+    {
+        Vector2 startPosition;
+        Vector2 targetPosition;
+
+        if (entering)
+        {
+            startPosition = element.enterPosition;
+            targetPosition = element.screenPosition;
+        }
+        else
+        {
+            startPosition = element.screenPosition;
+            targetPosition = element.leavePosition;
+        }
+
+        element.rectTransform.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, evaluationTime);
+
+        element.canvasGroup.alpha = entering? Mathf.Lerp(0f, 1f, evaluationTime) : Mathf.Lerp(1f, 0f, evaluationTime);
+    }
+
+    private void PrepareEnterAnimation(List<ElementAnimation> elements)
+    {
+        foreach (ElementAnimation element in elements)
+        {
+            element.screenPosition = element.rectTransform.anchoredPosition;
+            element.enterPosition = element.screenPosition + element.GetEnterOffset();
+
+            element.rectTransform.anchoredPosition = element.enterPosition;
+
+            element.canvasGroup.alpha = 0f;
+        }
+    }
+    private void PrepareLeaveAnimation(List<ElementAnimation> elements)
+    {
+        foreach (ElementAnimation element in elements)
+        {
+            element.screenPosition = element.rectTransform.anchoredPosition;
+            element.leavePosition = element.screenPosition + element.GetLeaveOffset();
+        }
+    }
+
+    private void FinishEntering()
+    {
+        foreach (ElementAnimation element in nextTransitionElements)
+        {
+            element.rectTransform.anchoredPosition = element.screenPosition;
+
+            element.canvasGroup.alpha = 1f;
+            element.canvasGroup.interactable = true;
+            element.canvasGroup.blocksRaycasts = true;
+        }
+    }
+
+    private void FinishLeaving()
+    {
+        foreach (ElementAnimation element in currentTransitionElements)
+        {
+            element.rectTransform.anchoredPosition = element.leavePosition;
+
+            element.canvasGroup.alpha = 0f;
+            element.canvasGroup.interactable = false;
+            element.canvasGroup.blocksRaycasts = false;
+        }
+
+        currentTransitionScreen.SetActive(false);
+    }
+
     #region StartScene - Start Screen and AssignTrainingValues Screen Tranisition Animations
+    public void AnimateScreenChange_StartToPasswordBoxNoCoroutine(GameObject welcomeTitle, GameObject startButton, GameObject lowerButtons, GameObject passwordBox, GameObject backButton, GameObject startScreen, GameObject assignTrainingModeScreen)
+    {
+        RectTransform welcomeTitleRect = welcomeTitle.GetComponent<RectTransform>();
+        RectTransform startButtonRect = startButton.GetComponent<RectTransform>();
+        RectTransform lowerButtonsRect = lowerButtons.GetComponent<RectTransform>();
+        RectTransform passwordBoxRect = passwordBox.GetComponent<RectTransform>();
+        RectTransform backButtonRect = backButton.GetComponent<RectTransform>();
+
+        CanvasGroup welcomeTitleCanvasGrp = welcomeTitle.GetComponent<CanvasGroup>();
+        CanvasGroup startButtonCanvasGrp = startButton.GetComponent<CanvasGroup>();
+        CanvasGroup lowerButtonsCanvasGrp = lowerButtons.GetComponent<CanvasGroup>();
+        CanvasGroup passwordBoxCanvasGrp = passwordBox.GetComponent<CanvasGroup>();
+        CanvasGroup backButtonCanvasGrp = backButton.GetComponent<CanvasGroup>();
+        
+        Vector2 welcomeTitleCurrPos = welcomeTitleRect.anchoredPosition; 
+        Vector2 startButtonCurrPos = startButtonRect.anchoredPosition; 
+        Vector2 lowerButtonsCurrPos = lowerButtonsRect.anchoredPosition; 
+        Vector2 passwordBoxCurrPos = passwordBoxRect.anchoredPosition; 
+        Vector2 backButtonCurrPos = backButtonRect.anchoredPosition; 
+
+        // Elements leaving screen
+        Vector2 welcomeTitleTargetPos = welcomeTitleCurrPos + GetElementAnimation(welcomeTitle).GetLeaveOffset();
+        Vector2 startButtonTargetPos = startButtonCurrPos + GetElementAnimation(startButton).GetLeaveOffset();
+        Vector2 lowerButtonsTargetPos = lowerButtonsCurrPos + GetElementAnimation(lowerButtons).GetLeaveOffset();
+
+        // Elements entering screen
+        Vector2 passwordBoxTargetPos = passwordBoxCurrPos + GetElementAnimation(passwordBox).GetEnterOffset();
+        Vector2 backButtonTargetPos = backButtonCurrPos + GetElementAnimation(backButton).GetEnterOffset();
+
+        elapsedTimeNoCoroutine += Time.deltaTime;
+
+        float normalizedTime = Mathf.Clamp01(elapsedTimeNoCoroutine / groupAnimationDurationNoCoroutine);
+        float evaluationAtTime = groupEasingCurve.Evaluate(normalizedTime);
+        
+        welcomeTitleRect.anchoredPosition = Vector2.Lerp(welcomeTitleCurrPos, welcomeTitleTargetPos, evaluationAtTime);
+        welcomeTitleCanvasGrp.alpha = Mathf.Lerp(1f, 0f, evaluationAtTime);
+        
+        startButtonRect.anchoredPosition = Vector2.Lerp(startButtonCurrPos, startButtonTargetPos, evaluationAtTime);
+        startButtonCanvasGrp.alpha = Mathf.Lerp(1f, 0f, evaluationAtTime);
+        
+        lowerButtonsRect.anchoredPosition = Vector2.Lerp(lowerButtonsCurrPos, lowerButtonsTargetPos, evaluationAtTime);
+        lowerButtonsCanvasGrp.alpha = Mathf.Lerp(1f, 0f, evaluationAtTime);
+        
+                
+        welcomeTitleRect.anchoredPosition = welcomeTitleTargetPos;
+        welcomeTitleCanvasGrp.alpha = 0;
+        welcomeTitleCanvasGrp.interactable = false;
+        welcomeTitleCanvasGrp.blocksRaycasts = false;
+        
+        startButtonRect.anchoredPosition = startButtonTargetPos;
+        startButtonCanvasGrp.alpha = 0;
+        startButtonCanvasGrp.interactable = false;
+        startButtonCanvasGrp.blocksRaycasts = false;
+        
+        lowerButtonsRect.anchoredPosition = lowerButtonsTargetPos;
+        lowerButtonsCanvasGrp.alpha = 0;
+        lowerButtonsCanvasGrp.interactable = false;
+        lowerButtonsCanvasGrp.blocksRaycasts = false;
+
+        startScreen.SetActive(false);
+        assignTrainingModeScreen.SetActive(true);
+        passwordBox.SetActive(true);
+
+        elapsedTimeNoCoroutine = 0f;
+        elapsedTimeNoCoroutine += Time.deltaTime;
+
+        normalizedTime = Mathf.Clamp01(elapsedTimeNoCoroutine / groupAnimationDurationNoCoroutine);
+        evaluationAtTime = groupEasingCurve.Evaluate(normalizedTime);
+            
+        passwordBoxRect.anchoredPosition = Vector2.Lerp(passwordBoxCurrPos, passwordBoxTargetPos, evaluationAtTime);
+        passwordBoxCanvasGrp.alpha = Mathf.Lerp(0f, 1f, evaluationAtTime);
+        
+        backButtonRect.anchoredPosition = Vector2.Lerp(backButtonCurrPos, backButtonTargetPos, evaluationAtTime);
+        backButtonCanvasGrp.alpha = Mathf.Lerp(0f, 1f, evaluationAtTime);
+
+        passwordBoxRect.anchoredPosition = passwordBoxTargetPos;
+        passwordBoxCanvasGrp.alpha = 1;
+        passwordBoxCanvasGrp.interactable = true;
+        passwordBoxCanvasGrp.blocksRaycasts = true;
+        
+        backButtonRect.anchoredPosition = backButtonTargetPos;
+        backButtonCanvasGrp.alpha = 1;
+        backButtonCanvasGrp.interactable = true;
+        backButtonCanvasGrp.blocksRaycasts = true;
+    }
+
     public void AnimateScreenChange_StartToPasswordBox(GameObject welcomeTitle, GameObject startButton, GameObject lowerButtons, GameObject passwordBox, GameObject backButton, GameObject startScreen, GameObject assignTrainingModeScreen)
     {
         StartCoroutine(InsideOutStart_OutsideInPasswordBox(welcomeTitle, startButton, lowerButtons, passwordBox, backButton, startScreen, assignTrainingModeScreen));
@@ -148,6 +378,97 @@ public class AnimationController : MonoBehaviour
         backButtonCanvasGrp.alpha = 1;
         backButtonCanvasGrp.interactable = true;
         backButtonCanvasGrp.blocksRaycasts = true;
+    }
+
+    public void AnimateScreenChange_PasswordBoxToStartNoCoroutine(GameObject welcomeTitle, GameObject startButton, GameObject lowerButtons, GameObject passwordBox, GameObject backButton, GameObject startScreen, GameObject assignTrainingModeScreen)
+    {
+        RectTransform welcomeTitleRect = welcomeTitle.GetComponent<RectTransform>();
+        RectTransform startButtonRect = startButton.GetComponent<RectTransform>();
+        RectTransform lowerButtonsRect = lowerButtons.GetComponent<RectTransform>();
+        RectTransform passwordBoxRect = passwordBox.GetComponent<RectTransform>();
+        RectTransform backButtonRect = backButton.GetComponent<RectTransform>();
+
+        CanvasGroup welcomeTitleCanvasGrp = welcomeTitle.GetComponent<CanvasGroup>();
+        CanvasGroup startButtonCanvasGrp = startButton.GetComponent<CanvasGroup>();
+        CanvasGroup lowerButtonsCanvasGrp = lowerButtons.GetComponent<CanvasGroup>();
+        CanvasGroup passwordBoxCanvasGrp = passwordBox.GetComponent<CanvasGroup>();
+        CanvasGroup backButtonCanvasGrp = backButton.GetComponent<CanvasGroup>();
+        
+        Vector2 welcomeTitleCurrPos = welcomeTitleRect.anchoredPosition; 
+        Vector2 startButtonCurrPos = startButtonRect.anchoredPosition; 
+        Vector2 lowerButtonsCurrPos = lowerButtonsRect.anchoredPosition; 
+        Vector2 passwordBoxCurrPos = passwordBoxRect.anchoredPosition; 
+        Vector2 backButtonCurrPos = backButtonRect.anchoredPosition; 
+
+        // Elements entering screen
+        Vector2 welcomeTitleTargetPos = welcomeTitleCurrPos + GetElementAnimation(welcomeTitle).GetEnterOffset();
+        Vector2 startButtonTargetPos = startButtonCurrPos + GetElementAnimation(startButton).GetEnterOffset();
+        Vector2 lowerButtonsTargetPos = lowerButtonsCurrPos + GetElementAnimation(lowerButtons).GetEnterOffset();
+
+        // Elements leaving screen
+        Vector2 passwordBoxTargetPos = passwordBoxCurrPos + GetElementAnimation(passwordBox).GetLeaveOffset();
+        Vector2 backButtonTargetPos = backButtonCurrPos + GetElementAnimation(backButton).GetLeaveOffset();
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < groupAnimationDuration)
+        {
+            float evaluationAtTime = groupEasingCurve.Evaluate(elapsedTime / groupAnimationDuration);
+
+            passwordBoxRect.anchoredPosition = Vector2.Lerp(passwordBoxCurrPos, passwordBoxTargetPos, evaluationAtTime);
+            passwordBoxCanvasGrp.alpha = Mathf.Lerp(1f, 0f, evaluationAtTime);
+            
+            backButtonRect.anchoredPosition = Vector2.Lerp(backButtonCurrPos, backButtonTargetPos, evaluationAtTime);
+            backButtonCanvasGrp.alpha = Mathf.Lerp(1f, 0f, evaluationAtTime);
+
+            elapsedTime += Time.deltaTime;
+        }
+
+        passwordBoxRect.anchoredPosition = passwordBoxTargetPos;
+        passwordBoxCanvasGrp.alpha = 0;
+        passwordBoxCanvasGrp.interactable = false;
+        backButtonCanvasGrp.blocksRaycasts = false;
+
+        backButtonRect.anchoredPosition = backButtonTargetPos;
+        backButtonCanvasGrp.alpha = 0;
+        backButtonCanvasGrp.interactable = false;
+        passwordBoxCanvasGrp.blocksRaycasts = false;
+
+        assignTrainingModeScreen.SetActive(false);
+        startScreen.SetActive(true);
+
+        elapsedTime = 0f;
+
+        while (elapsedTime < groupAnimationDuration)
+        {
+            float evaluationAtTime = groupEasingCurve.Evaluate(elapsedTime / groupAnimationDuration);
+
+            welcomeTitleRect.anchoredPosition = Vector2.Lerp(welcomeTitleCurrPos, welcomeTitleTargetPos, evaluationAtTime);
+            welcomeTitleCanvasGrp.alpha = Mathf.Lerp(0f, 1f, evaluationAtTime);
+            
+            startButtonRect.anchoredPosition = Vector2.Lerp(startButtonCurrPos, startButtonTargetPos, evaluationAtTime);
+            startButtonCanvasGrp.alpha = Mathf.Lerp(0f, 1f, evaluationAtTime);
+            
+            lowerButtonsRect.anchoredPosition = Vector2.Lerp(lowerButtonsCurrPos, lowerButtonsTargetPos, evaluationAtTime);
+            lowerButtonsCanvasGrp.alpha = Mathf.Lerp(0f, 1f, evaluationAtTime);
+
+            elapsedTime += Time.deltaTime;
+        }
+
+        welcomeTitleRect.anchoredPosition = welcomeTitleTargetPos;
+        welcomeTitleCanvasGrp.alpha = 1;
+        welcomeTitleCanvasGrp.interactable = true;
+        welcomeTitleCanvasGrp.blocksRaycasts = true;
+        
+        startButtonRect.anchoredPosition = startButtonTargetPos;
+        startButtonCanvasGrp.alpha = 1;
+        startButtonCanvasGrp.interactable = true;
+        startButtonCanvasGrp.blocksRaycasts = true;
+        
+        lowerButtonsRect.anchoredPosition = lowerButtonsTargetPos;
+        lowerButtonsCanvasGrp.alpha = 1;
+        lowerButtonsCanvasGrp.interactable =true;
+        lowerButtonsCanvasGrp.blocksRaycasts = true;
     }
 
     public void AnimateScreenChange_PasswordBoxToStart(GameObject welcomeTitle, GameObject startButton, GameObject lowerButtons, GameObject passwordBox, GameObject backButton, GameObject startScreen, GameObject assignTrainingModeScreen)
