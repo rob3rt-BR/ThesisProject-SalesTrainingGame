@@ -88,51 +88,6 @@ public class StartScreenController : MonoBehaviour
     private TrainingVersion trainingVersion;
 
 
-    private enum ScreenState
-    {
-        Undefined,
-        Start,
-        Password,
-        AssignTrainingValues,
-        Explain,
-        End
-    }
-
-    private ScreenState currentState = ScreenState.Start;
-    private ScreenState prevState = ScreenState.Undefined;
-
-    private bool CanEnterState(ScreenState nextState)
-    {
-        if (currentState == ScreenState.Start)
-        {
-            return nextState == ScreenState.Password || nextState == ScreenState.Explain;
-        }
-        if (currentState == ScreenState.Password)
-        {
-            return nextState == ScreenState.Start || nextState == ScreenState.AssignTrainingValues;
-        }
-        if (currentState == ScreenState.AssignTrainingValues)
-        {
-            return nextState == ScreenState.Start;
-        }
-        if (currentState == ScreenState.Explain)
-        {
-            return nextState == ScreenState.End;
-        }
-        return false;
-    }
-
-    private bool TryChangeState(ScreenState nextState)
-    {
-        if (!CanEnterState(nextState))
-        {
-            return false;
-        }
-        prevState = currentState;
-        currentState = nextState;
-        return true;
-    }
-
     private List<ElementAnimation> startScreenElements;
     private List<ElementAnimation> passwordScreenElements;
     private List<ElementAnimation> assignTrainingValuesScreenElements;
@@ -189,38 +144,6 @@ public class StartScreenController : MonoBehaviour
         passwordScreenElements = new() {passwordBoxElement, pswdBackButtonElement};
     }
 
-    /*
-    void Update()
-    {
-        
-        if (stateChange)
-        {
-            if (currentState == ScreenState.Password)
-            {
-                animationController.AnimateScreenChange_StartToPasswordBoxNoCoroutine(
-                welcomeTitle, 
-                startButton, 
-                lowerButtons, 
-                passwordBox, 
-                backToStartScreenButton.gameObject, 
-                startScreen, 
-                assignTrainingModeScreen);
-            }
-            if (currentState == ScreenState.Start && prevState == ScreenState.Password)
-            {
-                animationController.AnimateScreenChange_PasswordBoxToStartNoCoroutine(
-                welcomeTitle, 
-                startButton, 
-                lowerButtons, 
-                passwordBox, 
-                backToStartScreenButton.gameObject, 
-                startScreen, 
-                assignTrainingModeScreen);
-            }
-            stateChange = false;
-        }
-    }*/
-
     public void StartGame()
     {
         // IF global session ID AND training version NOT set => Return
@@ -249,16 +172,6 @@ public class StartScreenController : MonoBehaviour
     {
         // Animate screen change: start screen -> password screen
         animationController.StartScreenChange(startScreenElements, passwordScreenElements, startScreen, passwordScreen);
-
-        // stateChange = TryChangeState(ScreenState.Password);
-        /*animationController.AnimateScreenChange_StartToPasswordBox(
-        welcomeTitle, 
-        startButton, 
-        lowerButtons, 
-        passwordBox, 
-        backToStartScreenButton.gameObject, 
-        startScreen, 
-        assignTrainingModeScreen);*/
     }
 
     public void QuitGame()
@@ -300,16 +213,6 @@ public class StartScreenController : MonoBehaviour
     {
         // Animate screen change: password screen -> start screen
         animationController.StartScreenChange(passwordScreenElements, startScreenElements, passwordScreen, startScreen);
-        
-        // stateChange = TryChangeState(ScreenState.Start);
-            /*animationController.AnimateScreenChange_PasswordBoxToStart(
-            welcomeTitle, 
-            startButton, 
-            lowerButtons, 
-            passwordBox, 
-            backToStartScreenButton.gameObject, 
-            startScreen, 
-            assignTrainingModeScreen);*/
     }
 
     private void ReturnToStartScreen()

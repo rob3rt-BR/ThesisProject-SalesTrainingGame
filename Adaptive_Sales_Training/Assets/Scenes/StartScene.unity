@@ -496,7 +496,7 @@ MonoBehaviour:
   enterPosition: {x: 0, y: 0}
   leavePosition: {x: 0, y: 0}
   screenPosition: {x: 0, y: 0}
-  enterDirection: 0
+  enterDirection: 1
   leaveDirection: 1
   distanceToAnimate: {x: 100, y: 115}
   easingCurve:
@@ -1575,7 +1575,7 @@ MonoBehaviour:
   enterPosition: {x: 0, y: 0}
   leavePosition: {x: 0, y: 0}
   screenPosition: {x: 0, y: 0}
-  enterDirection: 1
+  enterDirection: 0
   leaveDirection: 0
   distanceToAnimate: {x: 100, y: 430}
   easingCurve:

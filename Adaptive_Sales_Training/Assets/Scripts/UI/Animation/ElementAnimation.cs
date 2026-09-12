@@ -17,11 +17,9 @@ public class ElementAnimation : MonoBehaviour
     [HideInInspector]
     public CanvasGroup canvasGroup;
     [HideInInspector]
-    public Vector2 enterPosition;
+    public Vector2 currentPosition;
     [HideInInspector]
-    public Vector2 leavePosition;
-    [HideInInspector]
-    public Vector2 screenPosition;
+    public Vector2 targetPosition;
 
     private enum AnimateToDirection
     {
@@ -52,12 +50,11 @@ public class ElementAnimation : MonoBehaviour
     public void InitializeElement()
     {
         rectTransform = gameObject.GetComponent<RectTransform>();
-
-        /*
+        
         if (defineInitPosition)
         {
             rectTransform.anchoredPosition += initialOffsetPosition;
-        }*/
+        }
 
         canvasGroup = gameObject.GetComponent<CanvasGroup>();
     }
@@ -91,5 +88,10 @@ public class ElementAnimation : MonoBehaviour
             AnimateToDirection.Right => rightOffset,
             _ => Vector2.zero,
         };
+    }
+
+    public Vector2 GetInititalOffset()
+    {
+        return initialOffsetPosition;
     }
 }
