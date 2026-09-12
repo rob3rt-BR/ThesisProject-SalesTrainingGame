@@ -34,9 +34,12 @@ public class AnimationController : MonoBehaviour
 
     private List<ElementAnimation> currentTransitionElements;
     private List<ElementAnimation> nextTransitionElements;
-
     private GameObject currentTransitionScreen;
     private GameObject nextTransitionScreen;
+
+    private CanvasGroup currentElementCanvasGrp;
+    private bool enableCurrentCanvasGrp;
+    private bool afterTransitionEnable;
 
     void Awake()
     {
@@ -53,11 +56,10 @@ public class AnimationController : MonoBehaviour
 
     void Update()
     {
-        if (transitionPhase == TransitionPhase.None)
+        if (transitionPhase != TransitionPhase.None)
         {
-            return;
+            UpdateTransition();
         }
-        UpdateTransition();
     }
 
     public ElementAnimation GetElementAnimation(GameObject element)
@@ -70,7 +72,7 @@ public class AnimationController : MonoBehaviour
         return animations[element];
     }
 
-    public void StartScreenChange(List<ElementAnimation> currentElements, List<ElementAnimation> nextElements, GameObject currentScreen, GameObject nextScreen)
+    public void AnimateScreenChange(List<ElementAnimation> currentElements, List<ElementAnimation> nextElements, GameObject currentScreen, GameObject nextScreen)
     {
         PrepareAnimation(currentElements, false);
         PrepareAnimation(nextElements, true);
@@ -122,6 +124,13 @@ public class AnimationController : MonoBehaviour
                 FinishAnimation(nextTransitionElements, true);
 
                 transitionPhase = TransitionPhase.None;
+
+                if (afterTransitionEnable)
+                {
+                    afterTransitionEnable = false;
+
+                    UpdateElementInteractionAfterTransition();
+                }
             }
         }
     }
@@ -212,6 +221,20 @@ public class AnimationController : MonoBehaviour
         }
 
         currentTransitionScreen.SetActive(false);
+    }
+
+    public void EnableElementInteractionAfterTransition(CanvasGroup elementCanvasGrp, bool enable)
+    {
+        afterTransitionEnable = true;
+
+        currentElementCanvasGrp = elementCanvasGrp;
+        enableCurrentCanvasGrp = enable;
+    }
+
+    private void UpdateElementInteractionAfterTransition()
+    {
+        currentElementCanvasGrp.interactable = enableCurrentCanvasGrp;
+        currentElementCanvasGrp.blocksRaycasts = enableCurrentCanvasGrp;
     }
 
     #region StartScene - Start Screen and AssignTrainingValues Screen Tranisition Animations

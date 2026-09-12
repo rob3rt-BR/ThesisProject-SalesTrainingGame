@@ -42,7 +42,7 @@ public class StartScreenController : MonoBehaviour
 
     [Header("Assign Training Mode UI")]
     [SerializeField]
-    private GameObject assignTrainingModeElements;
+    private GameObject assignTrainingModeGroup;
     [SerializeField]
     private TMP_Text sessionIdText;
     [SerializeField]
@@ -56,7 +56,8 @@ public class StartScreenController : MonoBehaviour
     [SerializeField]
     private Button setModeButton;
     [SerializeField]
-    private Button backToStartScreenButton;
+    private Button backToStartButton;
+
 
     [Header("Explanation UI")]
     [SerializeField]
@@ -82,16 +83,16 @@ public class StartScreenController : MonoBehaviour
 
     private const string password = "PerroLocoST456+";
     private string inputFieldText;
-    private bool enteredTrainingModeUI;
     
     private TrainingSessionManager session;
     private TrainingVersion trainingVersion;
 
-
     private List<ElementAnimation> startScreenElements;
     private List<ElementAnimation> passwordScreenElements;
-    private List<ElementAnimation> assignTrainingValuesScreenElements;
+    private List<ElementAnimation> assignTrainingModeScreenElements;
     private List<ElementAnimation> explainScreenElements;
+
+    private CanvasGroup backToStartButtonCanvasGrp;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -126,22 +127,46 @@ public class StartScreenController : MonoBehaviour
         setModeButton.onClick.AddListener(SetTrainingMode);
 
         // On click => Go back to start screen from assign training value screen
-        backToStartScreenButton.onClick.AddListener(ReturnToStartScreen);
+        backToStartButton.onClick.AddListener(ReturnToStartScreen);
 
         // On click => Go forward / back in texts
         continueButton.onClick.AddListener(ContinuePressed);
         backButton.onClick.AddListener(BackPressed);
 
+        // Initialize backToStartButton canvas group component
+        backToStartButtonCanvasGrp = backToStartButton.GetComponent<CanvasGroup>();
+
+        // Initialize ElementAnimation objects of each element per UI screen
+        InitializeElementAnimationGroups();
+    }
+
+    private void InitializeElementAnimationGroups()
+    {
+        // Start screen elements
         ElementAnimation welcomeTitleElement = animationController.GetElementAnimation(welcomeTitle);
         ElementAnimation startButtonElement = animationController.GetElementAnimation(startButton);
         ElementAnimation lowerButtonsElement = animationController.GetElementAnimation(lowerButtons);
 
         startScreenElements = new() {welcomeTitleElement, startButtonElement, lowerButtonsElement};
         
+        // Password screen elements
         ElementAnimation passwordBoxElement = animationController.GetElementAnimation(passwordBox);
         ElementAnimation pswdBackButtonElement = animationController.GetElementAnimation(pswdBackButton.gameObject);
 
         passwordScreenElements = new() {passwordBoxElement, pswdBackButtonElement};
+
+        // Assign training values screen elements
+        ElementAnimation assignTrainingModeGroupElement = animationController.GetElementAnimation(assignTrainingModeGroup);
+        ElementAnimation backToStartButtonElement = animationController.GetElementAnimation(backToStartButton.gameObject);
+
+        assignTrainingModeScreenElements = new() {assignTrainingModeGroupElement, backToStartButtonElement};
+
+        // Assign explian screen elements
+        ElementAnimation explainTitleElement = animationController.GetElementAnimation(explainTitle);
+        ElementAnimation explainTextsElement = animationController.GetElementAnimation(explainTexts);
+        ElementAnimation textNavButtonsElement = animationController.GetElementAnimation(textNavButtons);
+
+        explainScreenElements = new() {explainTitleElement, explainTextsElement, textNavButtonsElement};
     }
 
     public void StartGame()
@@ -157,21 +182,13 @@ public class StartScreenController : MonoBehaviour
         session.StartParticipantSession(allTopics);
 
         // Animate screen change: start screen -> explain screen
-        animationController.AnimateScreenChange_StartToExplain(
-        welcomeTitle, 
-        startButton, 
-        lowerButtons, 
-        explainTitle, 
-        explainTexts, 
-        textNavButtons, 
-        startScreen, 
-        explainScreen);
+        animationController.AnimateScreenChange(startScreenElements, explainScreenElements, startScreen, explainScreen);
     }
 
     public void SetMode()
     {
         // Animate screen change: start screen -> password screen
-        animationController.StartScreenChange(startScreenElements, passwordScreenElements, startScreen, passwordScreen);
+        animationController.AnimateScreenChange(startScreenElements, passwordScreenElements, startScreen, passwordScreen);
     }
 
     public void QuitGame()
@@ -187,23 +204,15 @@ public class StartScreenController : MonoBehaviour
 
     private void CheckPassword()
     {
-        // IF input field text set AND equals to predefined password => Animate element enable / disable: password box -> assignTrainingModeElements,
-        // and disable backToStartScreenButton interactable and blocksRaycasts canvas group properties
+        // IF input field text set AND equals to predefined password => Animate screen change: password screen -> assignTrainingMode screen,
+        // and disable backToStartButton canvas group interactbale and blocksRayCasts properties
         // ELSE => Display wrong password text
         if (inputFieldText != null && inputFieldText.Equals(password))
         {
-            // TODO: CAMBIAR BIEN ESTO
-            enteredTrainingModeUI = true;
-
-            // Disable backToStartScreenButton canvas group interactbale and blocksRayCasts properties
-            CanvasGroup backToStartScreenButtonCanvasGrp = backToStartScreenButton.GetComponent<CanvasGroup>();
-            backToStartScreenButtonCanvasGrp.interactable = false;
-            backToStartScreenButtonCanvasGrp.blocksRaycasts = false;
-
-            animationController.AnimateElementEnable_CorrectPassword(
-            passwordBox,  
-            assignTrainingModeElements);
-        } else
+            animationController.AnimateScreenChange(passwordScreenElements, assignTrainingModeScreenElements, passwordScreen, assignTrainingModeScreen);
+            animationController.EnableElementInteractionAfterTransition(backToStartButtonCanvasGrp, false);
+        } 
+        else
         {
             wrongPasswordText.gameObject.SetActive(true);
         }
@@ -212,33 +221,24 @@ public class StartScreenController : MonoBehaviour
     private void PswdReturnToStartScreen()
     {
         // Animate screen change: password screen -> start screen
-        animationController.StartScreenChange(passwordScreenElements, startScreenElements, passwordScreen, startScreen);
+        animationController.AnimateScreenChange(passwordScreenElements, startScreenElements, passwordScreen, startScreen);
     }
 
     private void ReturnToStartScreen()
     {
         // Animate screen change: assignTrainingMode screen -> start screen, 
-        // and restart password box and assignTrainingModeElements active states
-        animationController.AnimateScreenChange_TrainingModeElementsToStart(
-        welcomeTitle, 
-        startButton, 
-        lowerButtons, 
-        backToStartScreenButton.gameObject, 
-        assignTrainingModeElements, 
-        startScreen, 
-        assignTrainingModeScreen);
+        animationController.AnimateScreenChange(assignTrainingModeScreenElements, startScreenElements, assignTrainingModeScreen, startScreen);
 
         // Reset password screen and assignTrainingMode screen UI interal elements for later reuse
-        ResetPasswordAndAssignTrainingModeUI();
+        ResetPasswordAndAssignTrainingModeGroupUI();
     }
 
-    private void ResetPasswordAndAssignTrainingModeUI()
+    private void ResetPasswordAndAssignTrainingModeGroupUI()
     {
         // Reset password box internal values
         wrongPasswordText.gameObject.SetActive(false);
         passwordInputField.text = null;
         inputFieldText = null;
-        enteredTrainingModeUI = false;
 
         // Reset text attributes of assignTrainingMode screen UI elements
         sessionIdText.text = null;
@@ -286,9 +286,8 @@ public class StartScreenController : MonoBehaviour
         SetExplainScreenTextContent(trainingVersion);
 
         // Enable backToStartScreenButton canvas group interactbale and blocksRayCasts properties
-        CanvasGroup backToStartScreenButtonCanvasGrp = backToStartScreenButton.GetComponent<CanvasGroup>();
-        backToStartScreenButtonCanvasGrp.interactable = true;
-        backToStartScreenButtonCanvasGrp.blocksRaycasts = true;
+        backToStartButtonCanvasGrp.interactable = true;
+        backToStartButtonCanvasGrp.blocksRaycasts = true;
     }
 
     private void SetExplainScreenTextContent(TrainingVersion trainingVersion)
@@ -365,7 +364,7 @@ public class StartScreenController : MonoBehaviour
         traditionalModeButton.onClick.RemoveListener(SelectTraditionalTrainingMode);
         aiModeButton.onClick.RemoveListener(SelectAITrainingMode);
         setModeButton.onClick.RemoveListener(SetTrainingMode);
-        backToStartScreenButton.onClick.RemoveListener(ReturnToStartScreen);
+        backToStartButton.onClick.RemoveListener(ReturnToStartScreen);
 
         // Cleanup Explanation Screen
         continueButton.onClick.RemoveListener(ContinuePressed);

@@ -174,9 +174,8 @@ MonoBehaviour:
   initialOffsetPosition: {x: 0, y: -115}
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
-  enterPosition: {x: 0, y: 0}
-  leavePosition: {x: 0, y: 0}
-  screenPosition: {x: 0, y: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
   enterDirection: 0
   leaveDirection: 1
   distanceToAnimate: {x: 100, y: 115}
@@ -370,7 +369,7 @@ GameObject:
   - component: {fileID: 117123189}
   - component: {fileID: 117123192}
   m_Layer: 5
-  m_Name: ATVSBackButton
+  m_Name: ReturnStartBackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -493,10 +492,9 @@ MonoBehaviour:
   initialOffsetPosition: {x: 0, y: -115}
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
-  enterPosition: {x: 0, y: 0}
-  leavePosition: {x: 0, y: 0}
-  screenPosition: {x: 0, y: 0}
-  enterDirection: 1
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  enterDirection: 0
   leaveDirection: 1
   distanceToAnimate: {x: 100, y: 115}
   easingCurve:
@@ -1528,7 +1526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &350994928
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1572,10 +1570,9 @@ MonoBehaviour:
   initialOffsetPosition: {x: 0, y: 430}
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
-  enterPosition: {x: 0, y: 0}
-  leavePosition: {x: 0, y: 0}
-  screenPosition: {x: 0, y: 0}
-  enterDirection: 0
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  enterDirection: 1
   leaveDirection: 0
   distanceToAnimate: {x: 100, y: 430}
   easingCurve:
@@ -2046,9 +2043,8 @@ MonoBehaviour:
   initialOffsetPosition: {x: 0, y: 315}
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
-  enterPosition: {x: 0, y: 0}
-  leavePosition: {x: 0, y: 0}
-  screenPosition: {x: 0, y: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
   enterDirection: 1
   leaveDirection: 0
   distanceToAnimate: {x: 100, y: 315}
@@ -2285,14 +2281,14 @@ MonoBehaviour:
   wrongPasswordText: {fileID: 1308909691}
   checkPasswortButton: {fileID: 142152326}
   pswdBackButton: {fileID: 1765077340}
-  assignTrainingModeElements: {fileID: 350994927}
+  assignTrainingModeGroup: {fileID: 350994927}
   sessionIdText: {fileID: 264174943}
   trainingModeSetText: {fileID: 1770297524}
   generateSessionIdButton: {fileID: 1674888791}
   traditionalModeButton: {fileID: 942886320}
   aiModeButton: {fileID: 310073194}
   setModeButton: {fileID: 835460627}
-  backToStartScreenButton: {fileID: 117123189}
+  backToStartButton: {fileID: 117123189}
   explainTitle: {fileID: 830855148}
   explainTexts: {fileID: 695250280}
   textNavButtons: {fileID: 5815465}
@@ -2838,9 +2834,8 @@ MonoBehaviour:
   initialOffsetPosition: {x: 0, y: 0}
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
-  enterPosition: {x: 0, y: 0}
-  leavePosition: {x: 0, y: 0}
-  screenPosition: {x: 0, y: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
   enterDirection: 1
   leaveDirection: 0
   distanceToAnimate: {x: 100, y: 180}
@@ -3065,9 +3060,8 @@ MonoBehaviour:
   initialOffsetPosition: {x: -75, y: 0}
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
-  enterPosition: {x: 0, y: 0}
-  leavePosition: {x: 0, y: 0}
-  screenPosition: {x: 0, y: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
   enterDirection: 3
   leaveDirection: 3
   distanceToAnimate: {x: 75, y: 100}
@@ -3400,9 +3394,8 @@ MonoBehaviour:
   initialOffsetPosition: {x: 0, y: 120}
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
-  enterPosition: {x: 0, y: 0}
-  leavePosition: {x: 0, y: 0}
-  screenPosition: {x: 0, y: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
   enterDirection: 1
   leaveDirection: 0
   distanceToAnimate: {x: 100, y: 120}
@@ -4435,9 +4428,8 @@ MonoBehaviour:
   initialOffsetPosition: {x: 0, y: 0}
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
-  enterPosition: {x: 0, y: 0}
-  leavePosition: {x: 0, y: 0}
-  screenPosition: {x: 0, y: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
   enterDirection: 0
   leaveDirection: 1
   distanceToAnimate: {x: 100, y: 120}
@@ -5226,9 +5218,8 @@ MonoBehaviour:
   initialOffsetPosition: {x: 0, y: 0}
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
-  enterPosition: {x: 0, y: 0}
-  leavePosition: {x: 0, y: 0}
-  screenPosition: {x: 0, y: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
   enterDirection: 2
   leaveDirection: 3
   distanceToAnimate: {x: 450, y: 100}
@@ -6376,7 +6367,7 @@ GameObject:
   - component: {fileID: 1765077340}
   - component: {fileID: 1765077339}
   m_Layer: 5
-  m_Name: PSBackButton
+  m_Name: PswdBackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6417,9 +6408,8 @@ MonoBehaviour:
   initialOffsetPosition: {x: 0, y: -115}
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
-  enterPosition: {x: 0, y: 0}
-  leavePosition: {x: 0, y: 0}
-  screenPosition: {x: 0, y: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
   enterDirection: 0
   leaveDirection: 1
   distanceToAnimate: {x: 100, y: 115}
