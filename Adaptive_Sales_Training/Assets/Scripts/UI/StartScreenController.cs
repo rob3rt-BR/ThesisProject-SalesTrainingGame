@@ -83,6 +83,11 @@ public class StartScreenController : MonoBehaviour
 
     private const string password = "PerroLocoST456+";
     private string inputFieldText;
+
+    private CanvasGroup backToStartButtonCanvasGrp;
+
+    private int currentTextIndex;
+    private RectTransform continueButtonRect;
     
     private TrainingSessionManager session;
     private TrainingVersion trainingVersion;
@@ -92,7 +97,6 @@ public class StartScreenController : MonoBehaviour
     private List<ElementAnimation> assignTrainingModeScreenElements;
     private List<ElementAnimation> explainScreenElements;
 
-    private CanvasGroup backToStartButtonCanvasGrp;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -135,6 +139,10 @@ public class StartScreenController : MonoBehaviour
 
         // Initialize backToStartButton canvas group component
         backToStartButtonCanvasGrp = backToStartButton.GetComponent<CanvasGroup>();
+
+        continueButtonRect = continueButton.GetComponent<RectTransform>();
+
+        currentTextIndex = 0;
 
         // Initialize ElementAnimation objects of each element per UI screen
         InitializeElementAnimationGroups();
@@ -210,7 +218,7 @@ public class StartScreenController : MonoBehaviour
         if (inputFieldText != null && inputFieldText.Equals(password))
         {
             animationController.AnimateScreenChange(passwordScreenElements, assignTrainingModeScreenElements, passwordScreen, assignTrainingModeScreen);
-            animationController.EnableElementInteractionAfterTransition(backToStartButtonCanvasGrp, false);
+            animationController.EnableElementInteractionPostAnimation(backToStartButton.gameObject, false);
         } 
         else
         {
@@ -328,29 +336,40 @@ public class StartScreenController : MonoBehaviour
 
     private void ContinuePressed()
     {
-        // If index in last texts => Cleanup and animation transition to next scene (TopicMenuScene)
-        if (animationController.CurrentTextIndex == texts.Count - 1)
+        // If on second text => Translate continueButton to the right and enable backButton
+        if (currentTextIndex == 0)
+        {
+            var newPos = continueButtonRect.anchoredPosition;
+            newPos.x += 60;
+            continueButtonRect.anchoredPosition = newPos;
+            backButton.gameObject.SetActive(true);
+        }
+        // If index in last text => Cleanup and animation transition to next scene (TopicMenuScene)
+        if (currentTextIndex == texts.Count - 1)
         {
             CleanUp();
 
             // Animate screen change: explain screen -> end of StartScene and load TopicMenuScene
-            animationController.AnimateScreenChange_ExplainEnd(explainTitle, explainTexts, textNavButtons, explainScreen);
+            animationController.AnimateSceneEnd(explainScreenElements, "TopicMenuScene");
             return;
         }
+
         // Animate element change: current text -> next text (Forward)
-        animationController.AnimateElementChange_TextFadeForward(
-        explainTexts, 
-        texts, 
-        textNavButtons);
+        currentTextIndex = animationController.AnimateExplainTextChange(explainTexts, texts, currentTextIndex, true);
     }
 
     private void BackPressed()
     {
+        if (currentTextIndex == 1)
+        {
+            var newPos = continueButtonRect.anchoredPosition;
+            newPos.x = 0;
+            continueButtonRect.anchoredPosition = newPos;
+            backButton.gameObject.SetActive(false);
+        }
+
         // Animate element change: current text -> next text (Backwards)
-        animationController.AnimateElementChange_TextFadeBackward(
-        explainTexts, 
-        texts, 
-        textNavButtons);
+        currentTextIndex = animationController.AnimateExplainTextChange(explainTexts, texts, currentTextIndex, false);
     }
 
     private void CleanUp()
