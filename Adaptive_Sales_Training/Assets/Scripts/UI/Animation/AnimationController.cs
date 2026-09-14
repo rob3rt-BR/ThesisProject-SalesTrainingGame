@@ -265,31 +265,6 @@ public class AnimationController : MonoBehaviour
     }
     #endregion
 
-    #region Post Animation Element Property Manipulation
-
-    public void EnableElementInteraction(GameObject elementObject, bool enableStart, bool preAnimation = false, bool postAnimation = false)
-    {
-        if (preAnimation)
-        {
-            preAnimationEnable = true;
-            preEnableComplementElement = enableStart;
-        } 
-        if (postAnimation)
-        {
-            postAnimationEnable = true;
-            postEnableComplementElement = !enableStart;
-        }
-
-        complementElementAnimation = GetElementAnimation(elementObject);
-    }
-
-    private void UpdateElementInteraction(ElementAnimation element, bool preAnimation)
-    {
-        element.canvasGroup.interactable = preAnimation? preEnableComplementElement : postEnableComplementElement;
-        element.canvasGroup.blocksRaycasts = preAnimation? preEnableComplementElement : postEnableComplementElement;
-    }
-    #endregion
-
     #region Scene Change Animations
 
     public void AnimateSceneStart(List<ElementAnimation> currentElements)
@@ -339,6 +314,31 @@ public class AnimationController : MonoBehaviour
         yield return waitForSeconds;
 
         transitionPhase = TransitionPhase.StartingScene;
+    }
+    #endregion
+
+    #region Post Animation Element Property Manipulation
+
+    public void EnableElementInteraction(GameObject elementObject, bool enableStart, bool preAnimation = false, bool postAnimation = false)
+    {
+        if (preAnimation)
+        {
+            preAnimationEnable = true;
+            preEnableComplementElement = enableStart;
+        } 
+        if (postAnimation)
+        {
+            postAnimationEnable = true;
+            postEnableComplementElement = !enableStart;
+        }
+
+        complementElementAnimation = GetElementAnimation(elementObject);
+    }
+
+    private void UpdateElementInteraction(ElementAnimation element, bool preAnimation)
+    {
+        element.canvasGroup.interactable = preAnimation? preEnableComplementElement : postEnableComplementElement;
+        element.canvasGroup.blocksRaycasts = preAnimation? preEnableComplementElement : postEnableComplementElement;
     }
     #endregion
 

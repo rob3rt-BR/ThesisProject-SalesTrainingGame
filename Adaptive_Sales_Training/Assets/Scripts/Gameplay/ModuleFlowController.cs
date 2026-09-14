@@ -59,6 +59,10 @@ public class ModuleFlowController : MonoBehaviour
     [SerializeField]
     private Button finishTopicButton;
 
+    [Header("Animation Controller")]
+    [SerializeField]
+    private AnimationController animationController;
+
     [Header("EventSystem")]
     [SerializeField]
     private EventSystem eventSystem;

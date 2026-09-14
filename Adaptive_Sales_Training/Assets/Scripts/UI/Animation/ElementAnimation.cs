@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -11,11 +12,15 @@ public class ElementAnimation : MonoBehaviour
     private bool defineInitPosition;
     [SerializeField]
     private Vector2 initialOffsetPosition = new(0, 0);
+    [SerializeField]
+    private bool hasTextComponent;
 
     [HideInInspector]
     public RectTransform rectTransform;
     [HideInInspector]
     public CanvasGroup canvasGroup;
+    [HideInInspector]
+    public TMP_Text textComponent;
     [HideInInspector]
     public Vector2 currentPosition;
     [HideInInspector]
@@ -55,8 +60,13 @@ public class ElementAnimation : MonoBehaviour
         {
             rectTransform.anchoredPosition += initialOffsetPosition;
         }
-
         canvasGroup = gameObject.GetComponent<CanvasGroup>();
+
+        if (hasTextComponent)
+        {
+            textComponent = gameObject.GetComponent<TMP_Text>();
+        }
+
     }
 
     public void InitializeOffsetPosition()
