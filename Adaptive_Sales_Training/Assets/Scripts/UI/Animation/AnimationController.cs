@@ -38,6 +38,9 @@ public class AnimationController : MonoBehaviour
 
     private List<ElementAnimation> complementTransitionElements;
     private bool displayStats;
+    private int pointsHolder;
+    private int correctAnswersHolder;
+    private float avgResponseTimeHolder;
 
     private ElementAnimation currentElementAnimation;
     private ElementAnimation nextElementAnimation;
@@ -401,13 +404,17 @@ public class AnimationController : MonoBehaviour
     }
     #endregion
 
-    public void AnimateStatsDisplay(List<ElementAnimation> statsElements)
+    public void AnimateStatsDisplay(List<ElementAnimation> statsElements, int points, int correctAnswers, float avgResponseTime = 0f)
     {
         PrepareAnimation(statsElements, true);
 
         displayStats = true;
 
         complementTransitionElements = statsElements;
+
+        pointsHolder = points;
+        correctAnswersHolder = correctAnswers;
+        avgResponseTimeHolder = avgResponseTime;
     }
 
     private IEnumerator DisplayStats(List<ElementAnimation> statsElements)
@@ -423,14 +430,60 @@ public class AnimationController : MonoBehaviour
                 float normalizedTime = Mathf.Clamp01(elapsedTimeLocal / groupAnimationDuration);
                 float evaluationTimeLocal = groupEasingCurve.Evaluate(normalizedTime);
 
-                AnimateElement(element, evaluationTimeLocal, true);
+                AnimateStatsElement(element, evaluationTimeLocal, element.GetHasTextComponent());
                 elapsedTimeLocal += Time.deltaTime;
                 yield return null;
             }
-            // FinishAnimation(statsElements, true);
+            FinishDisplayStats(statsElements);
         }
     }
 
+    private void AnimateStatsElement(ElementAnimation element, float evaluationTime, bool hasTextComponent)
+    {
+        if (hasTextComponent)
+        {
+            switch (element.GetTextComponentType())
+            {
+                case ElementAnimation.TextComponentType.Points:
+                    {
+                        
+                    } 
+                break;
+                case ElementAnimation.TextComponentType.CorrectAnswers:
+                    {
+                        
+                    } 
+                break;
+                case ElementAnimation.TextComponentType.AvgResponseTime:
+                    {
+                        
+                    } 
+                break;
+            }
+        } else
+        {
+            Vector2 currentPosition = element.currentPosition;
+            Vector2 targetPosition = element.targetPosition;
+
+            element.rectTransform.anchoredPosition = Vector2.Lerp(currentPosition, targetPosition, evaluationTime);
+
+            element.canvasGroup.alpha = Mathf.Lerp(0f, 1f, evaluationTime);
+        }
+    }
+
+    private void FinishDisplayStats(List<ElementAnimation> elements)
+    {
+        foreach (ElementAnimation element in elements)
+        {
+            element.rectTransform.anchoredPosition = element.targetPosition;
+
+            element.canvasGroup.alpha = 1f;
+            element.canvasGroup.interactable = true;
+            element.canvasGroup.blocksRaycasts = true;
+        }
+    }
+
+    #region External Helper functions
     public List<ElementAnimation> CombinePointScreenElementsLists(List<ElementAnimation> pointScreenElements, List<ElementAnimation> pointStatsElements)
     {
         List<ElementAnimation> combinedList = new(pointScreenElements);
@@ -448,4 +501,5 @@ public class AnimationController : MonoBehaviour
             element.RestartToOriginalPosition();
         }
     }
+    #endregion
 }

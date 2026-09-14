@@ -371,8 +371,11 @@ public class ModuleFlowController : MonoBehaviour
         pointsText.text = currentModulePoints.ToString();
         correctAnswersText.text = $"{currentModuleCorrectAnswers} / {currentModule.questions.Count}";
 
-        // questionScreen.SetActive(false);
-        // currentPointScreen.SetActive(true);
+        // Animate screen change: question screen -> current point screen
+        animationController.AnimateScreenChange(questionScreenElements, currentPointScreenElements, questionScreen, currentPointScreen);
+            
+        // Animate current stats display (one line of text at a time)
+        animationController.AnimateStatsDisplay(currentStatsElements, currentModulePoints, currentModuleCorrectAnswers);
     }
 
     private void ShowFinalPointScreen()
@@ -388,8 +391,11 @@ public class ModuleFlowController : MonoBehaviour
         topicCorrectAnsText.text = $"{topicCorrectAnswers} / {topicTotalQuestions}";
         topicAvgResponseTimeText.text = topicAvgResponseTime.ToString("0.0") + "s";
 
-        // questionScreen.SetActive(false);
-        // finalPointScreen.SetActive(true);
+        // Animate screen change: question screen -> final point screen
+        animationController.AnimateScreenChange(questionScreenElements, finalPointScreenElements, questionScreen, finalPointScreen);
+        
+        // Animate final stats display (one line of text at a time)
+        animationController.AnimateStatsDisplay(finalStatsElements, topicTotalPoints, topicCorrectAnswers, topicAvgResponseTime);
     }
 
     private void ContinueToNextModule()
@@ -423,28 +429,16 @@ public class ModuleFlowController : MonoBehaviour
         if (currentModuleIndex == topic.modules.Count - 1)
         {
             ShowFinalPointScreen();
-
-            // Animate screen change: question screen -> final point screen
-            animationController.AnimateScreenChange(questionScreenElements, finalPointScreenElements, questionScreen, finalPointScreen);
-
-            // Animate final stats display (one line of text at a time)
-            animationController.AnimateStatsDisplay(finalStatsElements);
         } 
         else
         {
-            ShowPointScreen();
-
             if (currentModuleIndex > 0 && currentModuleIndex < topic.modules.Count - 1)
             {
                 // Restart current point stats elements to original position for correct animation position and direction
                 animationController.RestartPointStatsElementsPosition(currentStatsElements);
             }
 
-            // Animate screen change: question screen -> current point screen
-            animationController.AnimateScreenChange(questionScreenElements, currentPointScreenElements, questionScreen, currentPointScreen);
-            
-            // Animate current stats display (one line of text at a time)
-            animationController.AnimateStatsDisplay(currentStatsElements);
+            ShowPointScreen();
         }
     }
 

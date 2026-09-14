@@ -14,6 +14,16 @@ public class ElementAnimation : MonoBehaviour
     private Vector2 initialOffsetPosition = new(0, 0);
     [SerializeField]
     private bool hasTextComponent;
+    [SerializeField]
+    private TextComponentType textComponentType;
+
+    public enum TextComponentType
+    {
+        None,
+        Points,
+        CorrectAnswers,
+        AvgResponseTime
+    }
 
     [HideInInspector]
     public RectTransform rectTransform;
@@ -103,6 +113,16 @@ public class ElementAnimation : MonoBehaviour
             AnimateToDirection.Right => rightOffset,
             _ => Vector2.zero,
         };
+    }
+
+    public bool GetHasTextComponent()
+    {
+        return hasTextComponent;
+    }
+
+    public TextComponentType GetTextComponentType()
+    {
+        return textComponentType;
     }
 
     public void RestartToOriginalPosition()
