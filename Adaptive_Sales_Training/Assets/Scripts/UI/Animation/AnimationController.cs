@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,6 +41,7 @@ public class AnimationController : MonoBehaviour
     private bool displayStats;
     private int pointsHolder;
     private int correctAnswersHolder;
+    private int totalQuestionsHolder;
     private float avgResponseTimeHolder;
 
     private ElementAnimation currentElementAnimation;
@@ -404,9 +406,9 @@ public class AnimationController : MonoBehaviour
     }
     #endregion
 
-    public void AnimateStatsDisplay(List<ElementAnimation> statsElements, int points, int correctAnswers, float avgResponseTime = 0f)
+    public void AnimateStatsDisplay(List<ElementAnimation> statsElements, int points, int correctAnswers, int totalQuestions, float avgResponseTime = 0f)
     {
-        PrepareAnimation(statsElements, true);
+        PrepareStatsDisplayAnimation(statsElements);
 
         displayStats = true;
 
@@ -414,14 +416,35 @@ public class AnimationController : MonoBehaviour
 
         pointsHolder = points;
         correctAnswersHolder = correctAnswers;
+        totalQuestionsHolder = totalQuestions;
+
         avgResponseTimeHolder = avgResponseTime;
+    }
+
+    private void PrepareStatsDisplayAnimation(List<ElementAnimation> elements)
+    {
+        foreach (ElementAnimation element in elements)
+        {
+            if (element.HasTextComponent())
+            {
+                element.textComponent.text = "";
+                element.canvasGroup.alpha = 1f;
+            } else
+            {
+                element.currentPosition = element.rectTransform.anchoredPosition;
+
+                Vector2 offSetType = element.GetEnterOffset();
+                element.targetPosition = element.currentPosition + offSetType;
+
+                element.canvasGroup.alpha = 0f;
+            }
+        }
     }
 
     private IEnumerator DisplayStats(List<ElementAnimation> statsElements)
     {
         yield return waitForSeconds;
 
-        
         foreach (ElementAnimation element in statsElements)
         {
             float elapsedTimeLocal = 0f;
@@ -430,11 +453,13 @@ public class AnimationController : MonoBehaviour
                 float normalizedTime = Mathf.Clamp01(elapsedTimeLocal / groupAnimationDuration);
                 float evaluationTimeLocal = groupEasingCurve.Evaluate(normalizedTime);
 
-                AnimateStatsElement(element, evaluationTimeLocal, element.GetHasTextComponent());
+                AnimateStatsElement(element, evaluationTimeLocal, element.HasTextComponent());
+
                 elapsedTimeLocal += Time.deltaTime;
                 yield return null;
             }
-            FinishDisplayStats(statsElements);
+            FinishDisplayStats(element);
+            yield return waitForSeconds;
         }
     }
 
@@ -442,25 +467,30 @@ public class AnimationController : MonoBehaviour
     {
         if (hasTextComponent)
         {
+            string textToDisplay;
             switch (element.GetTextComponentType())
             {
                 case ElementAnimation.TextComponentType.Points:
                     {
-                        
+                        textToDisplay = Mathf.RoundToInt(Mathf.Lerp(0f, pointsHolder, evaluationTime)).ToString();
+                        element.textComponent.text = textToDisplay;
                     } 
                 break;
                 case ElementAnimation.TextComponentType.CorrectAnswers:
                     {
-                        
+                        textToDisplay = $"{Mathf.RoundToInt(Mathf.Lerp(0f, correctAnswersHolder, evaluationTime))} / {totalQuestionsHolder}";
+                        element.textComponent.text = textToDisplay;
                     } 
                 break;
                 case ElementAnimation.TextComponentType.AvgResponseTime:
                     {
-                        
+                        textToDisplay = Mathf.Lerp(0f, avgResponseTimeHolder, evaluationTime).ToString("0.0") + "s";
+                        element.textComponent.text = textToDisplay;
                     } 
                 break;
             }
-        } else
+        }
+        else
         {
             Vector2 currentPosition = element.currentPosition;
             Vector2 targetPosition = element.targetPosition;
@@ -471,9 +501,34 @@ public class AnimationController : MonoBehaviour
         }
     }
 
-    private void FinishDisplayStats(List<ElementAnimation> elements)
+    private void FinishDisplayStats(ElementAnimation element)
     {
-        foreach (ElementAnimation element in elements)
+        if (element.HasTextComponent())
+        {
+            string textToDisplay;
+            switch (element.GetTextComponentType())
+            {
+                case ElementAnimation.TextComponentType.Points:
+                    {
+                        textToDisplay = pointsHolder.ToString();
+                        element.textComponent.text = textToDisplay;
+                    } 
+                break;
+                case ElementAnimation.TextComponentType.CorrectAnswers:
+                    {
+                        textToDisplay = $"{correctAnswersHolder} / {totalQuestionsHolder}";
+                        element.textComponent.text = textToDisplay;
+                    } 
+                break;
+                case ElementAnimation.TextComponentType.AvgResponseTime:
+                    {
+                        textToDisplay = avgResponseTimeHolder.ToString("0.0") + "s";
+                        element.textComponent.text = textToDisplay;
+                    } 
+                break;
+            }
+        }
+        else
         {
             element.rectTransform.anchoredPosition = element.targetPosition;
 

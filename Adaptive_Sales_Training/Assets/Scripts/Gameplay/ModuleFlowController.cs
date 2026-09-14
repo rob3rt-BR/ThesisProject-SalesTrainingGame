@@ -365,17 +365,18 @@ public class ModuleFlowController : MonoBehaviour
 
         int currentModulePoints = session.GetCurrentModulePoints();
         int currentModuleCorrectAnswers = session.GetCurrentModuleCorrectAnswers();
+        int currentModuleTotalQuestions = currentModule.questions.Count;
 
         // Set text attributes in points screen
-        moduleTitleEnd.text = currentModule.moduleTitle;
-        pointsText.text = currentModulePoints.ToString();
-        correctAnswersText.text = $"{currentModuleCorrectAnswers} / {currentModule.questions.Count}";
+        //moduleTitleEnd.text = currentModule.moduleTitle;
+        //pointsText.text = currentModulePoints.ToString();
+        //correctAnswersText.text = $"{currentModuleCorrectAnswers} / {currentModule.questions.Count}";
 
         // Animate screen change: question screen -> current point screen
         animationController.AnimateScreenChange(questionScreenElements, currentPointScreenElements, questionScreen, currentPointScreen);
             
         // Animate current stats display (one line of text at a time)
-        animationController.AnimateStatsDisplay(currentStatsElements, currentModulePoints, currentModuleCorrectAnswers);
+        animationController.AnimateStatsDisplay(currentStatsElements, currentModulePoints, currentModuleCorrectAnswers, currentModuleTotalQuestions);
     }
 
     private void ShowFinalPointScreen()
@@ -386,16 +387,16 @@ public class ModuleFlowController : MonoBehaviour
         float topicAvgResponseTime = session.GetCurrentTopicAvgResponseTime();
 
         // Set text attributes on final points screen (topic)
-        topicCompletedText.text = topic.topicTitle + " geschafft!";
-        finalPointsText.text = topicTotalPoints.ToString();
-        topicCorrectAnsText.text = $"{topicCorrectAnswers} / {topicTotalQuestions}";
-        topicAvgResponseTimeText.text = topicAvgResponseTime.ToString("0.0") + "s";
+        //topicCompletedText.text = topic.topicTitle + " geschafft!";
+        //finalPointsText.text = topicTotalPoints.ToString();
+        //topicCorrectAnsText.text = $"{topicCorrectAnswers} / {topicTotalQuestions}";
+        //topicAvgResponseTimeText.text = topicAvgResponseTime.ToString("0.0") + "s";
 
         // Animate screen change: question screen -> final point screen
         animationController.AnimateScreenChange(questionScreenElements, finalPointScreenElements, questionScreen, finalPointScreen);
         
         // Animate final stats display (one line of text at a time)
-        animationController.AnimateStatsDisplay(finalStatsElements, topicTotalPoints, topicCorrectAnswers, topicAvgResponseTime);
+        animationController.AnimateStatsDisplay(finalStatsElements, topicTotalPoints, topicCorrectAnswers, topicTotalQuestions, topicAvgResponseTime);
     }
 
     private void ContinueToNextModule()

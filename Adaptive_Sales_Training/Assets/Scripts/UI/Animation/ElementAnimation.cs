@@ -115,7 +115,7 @@ public class ElementAnimation : MonoBehaviour
         };
     }
 
-    public bool GetHasTextComponent()
+    public bool HasTextComponent()
     {
         return hasTextComponent;
     }
