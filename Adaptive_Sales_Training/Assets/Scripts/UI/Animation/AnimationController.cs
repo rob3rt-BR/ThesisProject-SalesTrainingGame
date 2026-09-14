@@ -26,7 +26,9 @@ public class AnimationController : MonoBehaviour
         StartingScene,
         EndingScene,
         FadeOut,
-        FadeIn
+        FadeIn,
+        StartingStats,
+        EndingStats
     }
 
     private TransitionPhase transitionPhase = TransitionPhase.None;
@@ -35,6 +37,9 @@ public class AnimationController : MonoBehaviour
     private List<ElementAnimation> nextTransitionElements;
     private GameObject currentTransitionScreen;
     private GameObject nextTransitionScreen;
+
+    private List<ElementAnimation> complementTransitionElements;
+    private bool displayStats;
 
     private ElementAnimation currentElementAnimation;
     private ElementAnimation nextElementAnimation;
@@ -154,6 +159,12 @@ public class AnimationController : MonoBehaviour
                     postAnimationEnable = false;
 
                     UpdateElementInteraction(complementElementAnimation, false);
+                }
+
+                // IF displayStats set (call to AnimateStatsDisplay()) => Start coroutine to display one line of text at a time
+                if (displayStats)
+                {
+                    StartCoroutine(DisplayStats(complementTransitionElements));
                 }
 
                 transitionPhase = TransitionPhase.None;
@@ -389,4 +400,34 @@ public class AnimationController : MonoBehaviour
         }
     }
     #endregion
+
+    public void AnimateStatsDisplay(List<ElementAnimation> statsElements)
+    {
+        PrepareAnimation(statsElements, true);
+
+        displayStats = true;
+
+        complementTransitionElements = statsElements;
+    }
+
+    private IEnumerator DisplayStats(List<ElementAnimation> statsElements)
+    {
+        yield return waitForSeconds;
+
+        
+        foreach (ElementAnimation element in statsElements)
+        {
+            float elapsedTimeLocal = 0f;
+            while (elapsedTimeLocal < groupAnimationDuration)
+            {
+                float normalizedTime = Mathf.Clamp01(elapsedTimeLocal / groupAnimationDuration);
+                float evaluationTimeLocal = groupEasingCurve.Evaluate(normalizedTime);
+
+                AnimateElement(element, evaluationTimeLocal, true);
+                elapsedTimeLocal += Time.deltaTime;
+                yield return null;
+            }
+            // FinishAnimation(statsElements, true);
+        }
+    }
 }

@@ -263,6 +263,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 2
   leaveDirection: 3
   distanceToAnimate: {x: 160, y: 100}
@@ -462,6 +463,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 3
   leaveDirection: 3
   distanceToAnimate: {x: 25, y: 100}
@@ -661,6 +663,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 3
   leaveDirection: 3
   distanceToAnimate: {x: 25, y: 100}
@@ -844,8 +847,9 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
-  enterDirection: 0
-  leaveDirection: 0
+  originalPosition: {x: 0, y: 0}
+  enterDirection: 2
+  leaveDirection: 3
   distanceToAnimate: {x: 290, y: 100}
   easingCurve:
     serializedVersion: 2
@@ -1049,6 +1053,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 3
   leaveDirection: 3
   distanceToAnimate: {x: 75, y: 100}
@@ -1240,17 +1245,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
-  defineInitPosition: 0
-  initialOffsetPosition: {x: 0, y: 0}
+  defineInitPosition: 1
+  initialOffsetPosition: {x: -25, y: 0}
   hasTextComponent: 1
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
-  enterDirection: 0
-  leaveDirection: 0
-  distanceToAnimate: {x: 100, y: 100}
+  originalPosition: {x: 0, y: 0}
+  enterDirection: 3
+  leaveDirection: 3
+  distanceToAnimate: {x: 25, y: 100}
   easingCurve:
     serializedVersion: 2
     m_Curve:
@@ -1302,7 +1308,7 @@ GameObject:
   - component: {fileID: 287866055}
   - component: {fileID: 287866057}
   m_Layer: 5
-  m_Name: CurrPointsTitle
+  m_Name: CurrentPointsTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1447,6 +1453,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 1
   leaveDirection: 0
   distanceToAnimate: {x: 100, y: 110}
@@ -2100,6 +2107,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 3
   leaveDirection: 3
   distanceToAnimate: {x: 25, y: 100}
@@ -2284,6 +2292,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 2
   leaveDirection: 3
   distanceToAnimate: {x: 120, y: 100}
@@ -2475,17 +2484,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
-  defineInitPosition: 0
-  initialOffsetPosition: {x: 0, y: 0}
+  defineInitPosition: 1
+  initialOffsetPosition: {x: -25, y: 0}
   hasTextComponent: 1
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
-  enterDirection: 0
-  leaveDirection: 0
-  distanceToAnimate: {x: 100, y: 100}
+  originalPosition: {x: 0, y: 0}
+  enterDirection: 3
+  leaveDirection: 3
+  distanceToAnimate: {x: 25, y: 100}
   easingCurve:
     serializedVersion: 2
     m_Curve:
@@ -2683,13 +2693,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModuleFlowController
   infoScreen: {fileID: 1852956646}
   questionScreen: {fileID: 772528683}
-  pointScreen: {fileID: 393749582}
+  currentPointScreen: {fileID: 393749582}
   finalPointScreen: {fileID: 1112223403}
   moduleTitle: {fileID: 1104103315}
+  infoTextHolder: {fileID: 184520319}
   infoText: {fileID: 352792098}
   startQuestionsButton: {fileID: 451569630}
-  questionText: {fileID: 1177937956}
   questionCounterText: {fileID: 874345284}
+  questionTextHolder: {fileID: 827843995}
+  questionText: {fileID: 1177937956}
   timerText: {fileID: 1290485492}
   answerButtons:
   - {fileID: 760671051}
@@ -2702,15 +2714,20 @@ MonoBehaviour:
   - {fileID: 840274643}
   - {fileID: 368190859}
   moduleTitleEnd: {fileID: 287866055}
+  currentStatsBackground: {fileID: 910801123}
+  pointsTitle: {fileID: 1478448295}
   pointsText: {fileID: 515054756}
+  correctAnswersTitle: {fileID: 129826595}
   correctAnswersText: {fileID: 238365354}
+  qRoundCompleteText: {fileID: 1642504332}
   continueButton: {fileID: 758406543}
   topicCompletedText: {fileID: 1979124615}
+  finalStatsBackground: {fileID: 929095394}
   finalPointsText: {fileID: 1183723682}
   topicCorrectAnsText: {fileID: 1430477141}
   topicAvgResponseTimeText: {fileID: 1164491882}
   finishTopicButton: {fileID: 13046825}
-  animationController: {fileID: 0}
+  animationController: {fileID: 1712295702}
   eventSystem: {fileID: 1276461026}
 --- !u!1001 &758406541
 PrefabInstance:
@@ -2856,6 +2873,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 2
   leaveDirection: 3
   distanceToAnimate: {x: 160, y: 100}
@@ -3039,6 +3057,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 3
   leaveDirection: 2
   distanceToAnimate: {x: 290, y: 100}
@@ -3330,7 +3349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5316922238156215768, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
       propertyPath: m_Name
-      value: QBackground
+      value: QuestionBox
       objectReference: {fileID: 0}
     - target: {fileID: 5390661628241245326, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
       propertyPath: m_Color.b
@@ -3388,6 +3407,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 3
   leaveDirection: 3
   distanceToAnimate: {x: 125, y: 100}
@@ -3724,6 +3744,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 1
   leaveDirection: 0
   distanceToAnimate: {x: 100, y: 80}
@@ -4003,7 +4024,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5316922238156215768, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
       propertyPath: m_Name
-      value: CurrPointsBackground
+      value: CurrStatsBackground
       objectReference: {fileID: 0}
     - target: {fileID: 5390661628241245326, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
       propertyPath: m_Color.b
@@ -4058,6 +4079,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 0
   leaveDirection: 1
   distanceToAnimate: {x: 100, y: 125}
@@ -4255,6 +4277,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 0
   leaveDirection: 1
   distanceToAnimate: {x: 100, y: 125}
@@ -4575,6 +4598,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 1
   leaveDirection: 0
   distanceToAnimate: {x: 100, y: 150}
@@ -4774,6 +4798,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 1
   leaveDirection: 0
   distanceToAnimate: {x: 100, y: 110}
@@ -5017,6 +5042,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 0
   leaveDirection: 0
   distanceToAnimate: {x: 100, y: 100}
@@ -5353,6 +5379,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 0
   leaveDirection: 0
   distanceToAnimate: {x: 100, y: 100}
@@ -5768,6 +5795,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 0
   leaveDirection: 0
   distanceToAnimate: {x: 100, y: 100}
@@ -5967,6 +5995,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 3
   leaveDirection: 3
   distanceToAnimate: {x: 25, y: 100}
@@ -6150,6 +6179,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 0
   leaveDirection: 1
   distanceToAnimate: {x: 100, y: 150}
@@ -6349,6 +6379,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 3
   leaveDirection: 3
   distanceToAnimate: {x: 25, y: 100}
@@ -6548,6 +6579,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 3
   leaveDirection: 3
   distanceToAnimate: {x: 25, y: 100}
@@ -6906,6 +6938,7 @@ MonoBehaviour:
   textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 1
   leaveDirection: 0
   distanceToAnimate: {x: 100, y: 110}

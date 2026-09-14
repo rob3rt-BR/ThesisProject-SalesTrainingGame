@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -13,7 +14,7 @@ public class ModuleFlowController : MonoBehaviour
     [SerializeField]
     private GameObject questionScreen;
     [SerializeField]
-    private GameObject pointScreen;
+    private GameObject currentPointScreen;
     [SerializeField]
     private GameObject finalPointScreen;
 
@@ -21,15 +22,19 @@ public class ModuleFlowController : MonoBehaviour
     [SerializeField]
     private TMP_Text moduleTitle;
     [SerializeField]
+    private GameObject infoTextHolder;
+    [SerializeField]
     private TMP_Text infoText;
     [SerializeField]
     private Button startQuestionsButton;
 
     [Header("Question UI")]
     [SerializeField]
-    private TMP_Text questionText;
-    [SerializeField]
     private TMP_Text questionCounterText;
+    [SerializeField]
+    private GameObject questionTextHolder;
+    [SerializeField]
+    private TMP_Text questionText;
     [SerializeField]
     private TMP_Text timerText;
     [SerializeField]
@@ -41,15 +46,25 @@ public class ModuleFlowController : MonoBehaviour
     [SerializeField]
     private TMP_Text moduleTitleEnd;
     [SerializeField]
+    private GameObject currentStatsBackground;
+    [SerializeField]
+    private GameObject pointsTitle;
+    [SerializeField]
     private TMP_Text pointsText;
     [SerializeField]
+    private GameObject correctAnswersTitle;
+    [SerializeField]
     private TMP_Text correctAnswersText;
+    [SerializeField]
+    private GameObject qRoundCompleteText;
     [SerializeField]
     private Button continueButton;
 
     [Header("Final Points UI")]
     [SerializeField]
     private TMP_Text topicCompletedText;
+    [SerializeField]
+    private GameObject finalStatsBackground;
     [SerializeField]
     private TMP_Text finalPointsText;
     [SerializeField]
@@ -67,7 +82,12 @@ public class ModuleFlowController : MonoBehaviour
     [SerializeField]
     private EventSystem eventSystem;
 
-    
+    private List<ElementAnimation> infoScreenElements;
+    private List<ElementAnimation> questionScreenElements;
+    private List<ElementAnimation> currentPointsScreenElements;
+    private List<ElementAnimation> currentStatsElements;
+    private List<ElementAnimation> finalPointsScreenElements;
+
     private readonly TrainingSessionManager session = TrainingSessionManager.Instance;
 
     private SalesTopic topic;
@@ -106,7 +126,61 @@ public class ModuleFlowController : MonoBehaviour
 
         currentModuleIndex = 0;
 
+
+        // Initialize ElementAnimation objects of each element per UI screen
+        InitializeElementAnimationGroups();
+
         SetInfoScreen();
+    }
+
+    private void InitializeElementAnimationGroups()
+    {
+        // Info screen elements
+        ElementAnimation infoTitleElement = animationController.GetElementAnimation(moduleTitle.gameObject);
+        ElementAnimation infoTextBoxElement = animationController.GetElementAnimation(infoTextHolder);
+        ElementAnimation startQuestionsButtonElement = animationController.GetElementAnimation(startQuestionsButton.gameObject);
+
+        infoScreenElements = new() {infoTitleElement, infoTextBoxElement, startQuestionsButtonElement};
+
+        // Questions screen elements
+        ElementAnimation questionsCounterElement = animationController.GetElementAnimation(questionCounterText.gameObject);
+        ElementAnimation questionTextHolderElement = animationController.GetElementAnimation(questionTextHolder);
+
+        questionScreenElements = new() {questionsCounterElement, questionTextHolderElement};
+        
+        foreach (Button currentbutton in answerButtons)
+        {
+            ElementAnimation currentButtonElement = animationController.GetElementAnimation(currentbutton.gameObject);
+            questionScreenElements.Add(currentButtonElement);
+        }
+
+        // Current points screen elements
+        ElementAnimation currStatsTitleElement = animationController.GetElementAnimation(moduleTitleEnd.gameObject);
+        ElementAnimation currStatsBackgroundElement = animationController.GetElementAnimation(currentStatsBackground);
+        ElementAnimation continueButtonElement = animationController.GetElementAnimation(continueButton.gameObject);
+
+        currentPointsScreenElements = new() {currStatsTitleElement, currStatsBackgroundElement, continueButtonElement};
+
+        // Current stats elements
+        ElementAnimation pointsTitleElement = animationController.GetElementAnimation(pointsTitle);
+        ElementAnimation pointsTextElement = animationController.GetElementAnimation(pointsText.gameObject);
+        ElementAnimation correctAnswersTitleElement = animationController.GetElementAnimation(correctAnswersTitle);
+        ElementAnimation correctAnswersTextElement = animationController.GetElementAnimation(correctAnswersText.gameObject);
+        ElementAnimation qRoundCompleteTextElement = animationController.GetElementAnimation(qRoundCompleteText);
+
+        currentStatsElements = new() {pointsTitleElement, pointsTextElement, correctAnswersTitleElement, correctAnswersTextElement, qRoundCompleteTextElement};
+
+        // Final points screen elements
+        ElementAnimation finalStatsTitleElement = animationController.GetElementAnimation(topicCompletedText.gameObject);
+        ElementAnimation finalStatsBackgroundElement = animationController.GetElementAnimation(finalStatsBackground);
+        // ElementAnimation finalPointsTitleElement = animationController.GetElementAnimation(finalPointsTitle);
+        // ElementAnimation finalPointsTextElement = animationController.GetElementAnimation(pointsText.gameObject);
+        // ElementAnimation finalCorrectAnswersTitleElement = animationController.GetElementAnimation(correctAnswersTitle);
+        // ElementAnimation finalCorrectAnswersTextElement = animationController.GetElementAnimation(correctAnswersText.gameObject);
+        // ElementAnimation finalAvgResponseTimeTitleElement = animationController.GetElementAnimation(qRoundCompleteText);
+        ElementAnimation finishTopicButtonElement = animationController.GetElementAnimation(finishTopicButton.gameObject);
+
+        finalPointsScreenElements = new() {finalStatsTitleElement, finalStatsBackgroundElement, finishTopicButtonElement};
     }
 
     // Update is called once per frame
@@ -134,6 +208,21 @@ public class ModuleFlowController : MonoBehaviour
             return;
         }
 
+        if (currentModuleIndex == 0)
+        {
+            // Animate scene start: start of Training Scene with info screen
+            animationController.AnimateSceneStart(infoScreenElements);
+        }
+        
+        if (currentModuleIndex > 0 && currentModuleIndex < topic.modules.Count)
+        {
+            ElementAnimation infoTextBoxElement = animationController.GetElementAnimation(infoTextHolder);
+            infoTextBoxElement.RestartToOriginalPosition();
+
+            // Animate screen change: current point screen -> info screen
+            animationController.AnimateScreenChange(currentPointsScreenElements, infoScreenElements, currentPointScreen, infoScreen);
+        }
+
         // If index outside module list range => Finish topic
         if (currentModuleIndex >= topic.modules.Count)
         {
@@ -150,16 +239,19 @@ public class ModuleFlowController : MonoBehaviour
         moduleTitle.text = currentModule.moduleTitle;
         infoText.text = currentModule.moduleText;
 
-        pointScreen.SetActive(false);
-        infoScreen.SetActive(true);
+        // currentPointScreen.SetActive(false);
+        // infoScreen.SetActive(true);
     }
 
     private void StartQuestionSequence()
     {
         currentQuestionIndex = 0;
 
-        infoScreen.SetActive(false);
-        questionScreen.SetActive(true);
+        // infoScreen.SetActive(false);
+        // questionScreen.SetActive(true);
+
+        // Animate screen change: info screen -> question screen
+        animationController.AnimateScreenChange(infoScreenElements, questionScreenElements, infoScreen, questionScreen);
 
         ShowCurrentQuestion();   
     }
@@ -260,8 +352,8 @@ public class ModuleFlowController : MonoBehaviour
         pointsText.text = currentModulePoints.ToString();
         correctAnswersText.text = $"{currentModuleCorrectAnswers} / {currentModule.questions.Count}";
 
-        questionScreen.SetActive(false);
-        pointScreen.SetActive(true);
+        // questionScreen.SetActive(false);
+        // currentPointScreen.SetActive(true);
     }
 
     private void ShowFinalPointScreen()
@@ -277,8 +369,8 @@ public class ModuleFlowController : MonoBehaviour
         topicCorrectAnsText.text = $"{topicCorrectAnswers} / {topicTotalQuestions}";
         topicAvgResponseTimeText.text = topicAvgResponseTime.ToString("0.0") + "s";
 
-        questionScreen.SetActive(false);
-        finalPointScreen.SetActive(true);
+        // questionScreen.SetActive(false);
+        // finalPointScreen.SetActive(true);
     }
 
     private void ContinueToNextModule()
@@ -312,9 +404,19 @@ public class ModuleFlowController : MonoBehaviour
         if (currentModuleIndex == topic.modules.Count - 1)
         {
             ShowFinalPointScreen();
-        } else
+
+            // Animate screen change: question screen -> final point screen
+            animationController.AnimateScreenChange(questionScreenElements, finalPointsScreenElements, questionScreen, finalPointScreen);
+        } 
+        else
         {
             ShowPointScreen();
+
+            // Animate screen change: question screen -> current point screen
+            animationController.AnimateScreenChange(questionScreenElements, currentPointsScreenElements, questionScreen, currentPointScreen);
+            
+            // Animate stats display (one line of text at a time)
+            animationController.AnimateStatsDisplay(currentStatsElements);
         }
     }
 
@@ -335,8 +437,11 @@ public class ModuleFlowController : MonoBehaviour
         } else
         {
             session.RecordIntermediateResults();
-            SceneManager.LoadScene("TopicMenuScene");
+
+            // Animate screen change: final point screen -> end of TrainingScene and load TopicMenuScene
+            animationController.AnimateSceneEnd(finalPointsScreenElements, "TopicMenuScene");
             Debug.Log("Returning to TopicMenuScene.");
         }
+        return;
     }
 }

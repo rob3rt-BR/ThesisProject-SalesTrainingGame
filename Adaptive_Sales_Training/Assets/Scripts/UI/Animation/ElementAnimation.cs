@@ -26,6 +26,9 @@ public class ElementAnimation : MonoBehaviour
     [HideInInspector]
     public Vector2 targetPosition;
 
+    [HideInInspector]
+    public Vector2 originalPosition;
+
     private enum AnimateToDirection
     {
         Top,
@@ -60,6 +63,8 @@ public class ElementAnimation : MonoBehaviour
         {
             rectTransform.anchoredPosition += initialOffsetPosition;
         }
+        originalPosition = rectTransform.anchoredPosition;
+
         canvasGroup = gameObject.GetComponent<CanvasGroup>();
 
         if (hasTextComponent)
@@ -98,6 +103,11 @@ public class ElementAnimation : MonoBehaviour
             AnimateToDirection.Right => rightOffset,
             _ => Vector2.zero,
         };
+    }
+
+    public void RestartToOriginalPosition()
+    {
+        rectTransform.anchoredPosition = originalPosition;
     }
 
     public Vector2 GetInititalOffset()
