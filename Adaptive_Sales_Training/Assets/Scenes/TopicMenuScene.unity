@@ -229,6 +229,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
   initialOffsetPosition: {x: 0, y: -320}
+  rectTransform: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
   enterDirection: 0
   leaveDirection: 1
   distanceToAnimate: {x: 100, y: 320}
@@ -851,6 +855,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
   initialOffsetPosition: {x: 0, y: 120}
+  rectTransform: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
   enterDirection: 1
   leaveDirection: 0
   distanceToAnimate: {x: 100, y: 120}
@@ -1014,6 +1022,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5316922238156215768, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
       insertIndex: 2
       addedObject: {fileID: 1554343580}
+    - targetCorrespondingSourceObject: {fileID: 5316922238156215768, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1554343581}
   m_SourcePrefab: {fileID: 100100000, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
 --- !u!224 &1554343578 stripped
 RectTransform:
@@ -1037,6 +1048,52 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1554343581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554343579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
+  defineInitPosition: 1
+  initialOffsetPosition: {x: -75, y: 0}
+  rectTransform: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  enterDirection: 3
+  leaveDirection: 3
+  distanceToAnimate: {x: 75, y: 100}
+  easingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationDuration: 0.5
 --- !u!1001 &1597645714
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1292,6 +1349,8 @@ MonoBehaviour:
     value: {fileID: 872697782}
   - key: {fileID: 85116409}
     value: {fileID: 85116413}
+  - key: {fileID: 1554343579}
+    value: {fileID: 1554343581}
   groupEasingCurve:
     serializedVersion: 2
     m_Curve:
@@ -1317,6 +1376,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   groupAnimationDuration: 0.75
+  groupAnimationDurationNoCoroutine: 0.75
 --- !u!1001 &4126099330443550405
 PrefabInstance:
   m_ObjectHideFlags: 0

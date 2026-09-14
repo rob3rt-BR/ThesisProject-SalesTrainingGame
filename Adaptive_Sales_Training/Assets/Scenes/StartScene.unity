@@ -2831,7 +2831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 0
-  initialOffsetPosition: {x: 0, y: 0}
+  initialOffsetPosition: {x: 0, y: 180}
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   currentPosition: {x: 0, y: 0}
@@ -4425,7 +4425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 0
-  initialOffsetPosition: {x: 0, y: 0}
+  initialOffsetPosition: {x: 0, y: -120}
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   currentPosition: {x: 0, y: 0}
@@ -5215,7 +5215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 0
-  initialOffsetPosition: {x: 0, y: 0}
+  initialOffsetPosition: {x: 450, y: 0}
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   currentPosition: {x: 0, y: 0}
