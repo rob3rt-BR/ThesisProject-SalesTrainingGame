@@ -217,8 +217,8 @@ public class StartScreenController : MonoBehaviour
         // ELSE => Display wrong password text
         if (inputFieldText != null && inputFieldText.Equals(password))
         {
+            animationController.EnableElementInteraction(backToStartButton.gameObject, enableStart:true, postAnimation: true);
             animationController.AnimateScreenChange(passwordScreenElements, assignTrainingModeScreenElements, passwordScreen, assignTrainingModeScreen);
-            animationController.EnableElementInteractionPostAnimation(backToStartButton.gameObject, false);
         } 
         else
         {
@@ -353,7 +353,8 @@ public class StartScreenController : MonoBehaviour
             animationController.AnimateSceneEnd(explainScreenElements, "TopicMenuScene");
             return;
         }
-
+        animationController.EnableElementInteraction(textNavButtons, enableStart:false, preAnimation:true, postAnimation: true);
+        
         // Animate element change: current text -> next text (Forward)
         currentTextIndex = animationController.AnimateExplainTextChange(explainTexts, texts, currentTextIndex, true);
     }
@@ -367,7 +368,8 @@ public class StartScreenController : MonoBehaviour
             continueButtonRect.anchoredPosition = newPos;
             backButton.gameObject.SetActive(false);
         }
-
+        animationController.EnableElementInteraction(textNavButtons, enableStart:false, preAnimation:true, postAnimation: true);
+        
         // Animate element change: current text -> next text (Backwards)
         currentTextIndex = animationController.AnimateExplainTextChange(explainTexts, texts, currentTextIndex, false);
     }

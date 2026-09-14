@@ -1061,14 +1061,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
-  initialOffsetPosition: {x: -75, y: 0}
+  initialOffsetPosition: {x: 0, y: -45}
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
-  enterDirection: 3
-  leaveDirection: 3
-  distanceToAnimate: {x: 75, y: 100}
+  enterDirection: 0
+  leaveDirection: 0
+  distanceToAnimate: {x: 100, y: 45}
   easingCurve:
     serializedVersion: 2
     m_Curve:
@@ -1375,8 +1375,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  groupAnimationDuration: 0.75
-  groupAnimationDurationNoCoroutine: 0.75
+  groupAnimationDuration: 0.5
 --- !u!1001 &4126099330443550405
 PrefabInstance:
   m_ObjectHideFlags: 0

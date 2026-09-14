@@ -11,10 +11,11 @@ public class AnimationController : MonoBehaviour
     private Dictionary<GameObject, ElementAnimation> animations;
     [SerializeField]
     private AnimationCurve groupEasingCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
-    [Range(0, 1f)]
+    [Range(0.1f, 5f)]
     [SerializeField]
     private float groupAnimationDuration = 0.5f;
     
+    private float elapsedTime = 0f;
     private static readonly WaitForSeconds waitForSeconds = new(1.25f);
 
     private enum TransitionPhase
@@ -28,10 +29,6 @@ public class AnimationController : MonoBehaviour
         FadeIn
     }
 
-    [Range(0.1f, 5f)]
-    [SerializeField]
-    private float groupAnimationDurationNoCoroutine = 0.5f;
-    private float elapsedTimeNoCoroutine = 0f;
     private TransitionPhase transitionPhase = TransitionPhase.None;
 
     private List<ElementAnimation> currentTransitionElements;
@@ -43,8 +40,12 @@ public class AnimationController : MonoBehaviour
     private ElementAnimation nextElementAnimation;
     private GameObject currentElement;
     private GameObject nextElement;
-    private bool enableCurrentElement;
-    private bool postTransitionEnable;
+
+    private ElementAnimation complementElementAnimation;
+    private bool preEnableComplementElement;
+    private bool postEnableComplementElement;
+    private bool preAnimationEnable;
+    private bool postAnimationEnable;
 
     private string sceneToLoadName;
 
@@ -78,9 +79,9 @@ public class AnimationController : MonoBehaviour
 
     private void UpdateTransition()
     {
-        elapsedTimeNoCoroutine += Time.deltaTime;
+        elapsedTime += Time.deltaTime;
 
-        float normalizedTime = Mathf.Clamp01(elapsedTimeNoCoroutine / groupAnimationDurationNoCoroutine);
+        float normalizedTime = Mathf.Clamp01(elapsedTime / groupAnimationDuration);
         float evaluationTime = groupEasingCurve.Evaluate(normalizedTime);
 
         if (transitionPhase == TransitionPhase.StartingScene)
@@ -113,6 +114,15 @@ public class AnimationController : MonoBehaviour
         }
         else if (transitionPhase == TransitionPhase.Leaving)
         {
+            // IF preAnimationEnable set (call to EnableElementInteraction(element, preAnimation = true))
+            // => Update element interaction properties
+            if (preAnimationEnable)
+            {
+                preAnimationEnable = false;
+
+                UpdateElementInteraction(complementElementAnimation, true);
+            }
+
             foreach (ElementAnimation element in currentTransitionElements)
             {
                 AnimateElement(element, evaluationTime, false);
@@ -122,7 +132,7 @@ public class AnimationController : MonoBehaviour
             {
                 FinishAnimation(currentTransitionElements, false);
 
-                elapsedTimeNoCoroutine = 0f;
+                elapsedTime = 0f;
                 transitionPhase = TransitionPhase.Entering;
             }
         } 
@@ -137,27 +147,36 @@ public class AnimationController : MonoBehaviour
             {
                 FinishAnimation(nextTransitionElements, true);
 
-                transitionPhase = TransitionPhase.None;
-
-                // IF afterTransitionEnable set (call to EnableElementInteractionAfterTransition(element))
-                // => Run post transition element interaction update
-                if (postTransitionEnable)
+                // IF postAnimationEnable set (call to EnableElementInteraction(element, preAnimation = false))
+                // => Update element interaction properties
+                if (postAnimationEnable)
                 {
-                    postTransitionEnable = false;
+                    postAnimationEnable = false;
 
-                    UpdateElementInteractionPostAnimation(currentElementAnimation);
+                    UpdateElementInteraction(complementElementAnimation, false);
                 }
+
+                transitionPhase = TransitionPhase.None;
             }
         }
         else if (transitionPhase == TransitionPhase.FadeOut)
         {
+            // IF preAnimationEnable set (call to EnableElementInteraction(element, preAnimation = true))
+            // => Update element interaction properties
+            if (preAnimationEnable)
+            {
+                preAnimationEnable = false;
+
+                UpdateElementInteraction(complementElementAnimation, true);
+            }
+
             AnimateElementFade(currentElementAnimation, evaluationTime, false);
 
             if (normalizedTime >= 1f)
             {
                 FinishElementFade(currentElementAnimation, false);
 
-                elapsedTimeNoCoroutine = 0f;
+                elapsedTime = 0f;
                 transitionPhase = TransitionPhase.FadeIn;
             }
         } 
@@ -168,6 +187,15 @@ public class AnimationController : MonoBehaviour
             if (normalizedTime >= 1f)
             {
                 FinishElementFade(currentElementAnimation, true);
+
+                // IF postAnimationEnable set (call to EnableElementInteraction(element, preAnimation = false))
+                // => Update element interaction properties
+                if (postAnimationEnable)
+                {
+                    postAnimationEnable = false;
+
+                    UpdateElementInteraction(complementElementAnimation, false);
+                }
 
                 transitionPhase = TransitionPhase.None;
             }
@@ -182,7 +210,7 @@ public class AnimationController : MonoBehaviour
 
         nextScreen.SetActive(true);
 
-        elapsedTimeNoCoroutine = 0f;
+        elapsedTime = 0f;
 
         currentTransitionElements = currentElements;
         nextTransitionElements = nextElements;
@@ -238,18 +266,27 @@ public class AnimationController : MonoBehaviour
     #endregion
 
     #region Post Animation Element Property Manipulation
-    public void EnableElementInteractionPostAnimation(GameObject elementObject, bool enable)
-    {
-        postTransitionEnable = true;
 
-        currentElementAnimation = GetElementAnimation(elementObject);
-        enableCurrentElement = enable;
+    public void EnableElementInteraction(GameObject elementObject, bool enableStart, bool preAnimation = false, bool postAnimation = false)
+    {
+        if (preAnimation)
+        {
+            preAnimationEnable = true;
+            preEnableComplementElement = enableStart;
+        } 
+        if (postAnimation)
+        {
+            postAnimationEnable = true;
+            postEnableComplementElement = !enableStart;
+        }
+
+        complementElementAnimation = GetElementAnimation(elementObject);
     }
 
-    private void UpdateElementInteractionPostAnimation(ElementAnimation element)
+    private void UpdateElementInteraction(ElementAnimation element, bool preAnimation)
     {
-        element.canvasGroup.interactable = enableCurrentElement;
-        element.canvasGroup.blocksRaycasts = enableCurrentElement;
+        element.canvasGroup.interactable = preAnimation? preEnableComplementElement : postEnableComplementElement;
+        element.canvasGroup.blocksRaycasts = preAnimation? preEnableComplementElement : postEnableComplementElement;
     }
     #endregion
 
@@ -259,7 +296,7 @@ public class AnimationController : MonoBehaviour
     {
         PrepareAnimation(currentElements, true);
 
-        elapsedTimeNoCoroutine = 0f;
+        elapsedTime = 0f;
 
         currentTransitionElements = currentElements;
 
@@ -270,7 +307,7 @@ public class AnimationController : MonoBehaviour
     {
         PrepareAnimation(currentElements, false);
 
-        elapsedTimeNoCoroutine = 0f;
+        elapsedTime = 0f;
 
         currentTransitionElements = currentElements;
         sceneToLoadName = nextSceneName;
@@ -309,7 +346,7 @@ public class AnimationController : MonoBehaviour
     public void AnimateFadeChange(GameObject elementObject)
     {
         currentElementAnimation = GetElementAnimation(elementObject);
-        elapsedTimeNoCoroutine = 0f;
+        elapsedTime = 0f;
 
         transitionPhase = TransitionPhase.FadeOut;
 
@@ -326,7 +363,7 @@ public class AnimationController : MonoBehaviour
     public int AnimateExplainTextChange(GameObject explainTexts, List<GameObject> texts, int currentTextIndex, bool forward)
     {
         currentElementAnimation = GetElementAnimation(explainTexts);
-        elapsedTimeNoCoroutine = 0f;
+        elapsedTime = 0f;
 
         transitionPhase = TransitionPhase.FadeOut;
 
