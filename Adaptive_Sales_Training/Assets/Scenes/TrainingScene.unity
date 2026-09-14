@@ -2723,8 +2723,11 @@ MonoBehaviour:
   continueButton: {fileID: 758406543}
   topicCompletedText: {fileID: 1979124615}
   finalStatsBackground: {fileID: 929095394}
+  finalPointsTitle: {fileID: 1556525650}
   finalPointsText: {fileID: 1183723682}
+  topicCorrectAnsTitle: {fileID: 417319380}
   topicCorrectAnsText: {fileID: 1430477141}
+  topicAvgResponseTimeTitle: {fileID: 47562767}
   topicAvgResponseTimeText: {fileID: 1164491882}
   finishTopicButton: {fileID: 13046825}
   animationController: {fileID: 1712295702}
@@ -6790,6 +6793,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1979124614}
   - component: {fileID: 1979124616}
+  - component: {fileID: 1979124618}
   - component: {fileID: 1979124615}
   - component: {fileID: 1979124617}
   m_Layer: 5
@@ -6967,6 +6971,18 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   animationDuration: 0.5
+--- !u!225 &1979124618
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979124613}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

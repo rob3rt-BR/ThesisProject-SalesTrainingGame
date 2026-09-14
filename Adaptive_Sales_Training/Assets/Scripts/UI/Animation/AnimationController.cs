@@ -27,8 +27,6 @@ public class AnimationController : MonoBehaviour
         EndingScene,
         FadeOut,
         FadeIn,
-        StartingStats,
-        EndingStats
     }
 
     private TransitionPhase transitionPhase = TransitionPhase.None;
@@ -164,6 +162,8 @@ public class AnimationController : MonoBehaviour
                 // IF displayStats set (call to AnimateStatsDisplay()) => Start coroutine to display one line of text at a time
                 if (displayStats)
                 {
+                    displayStats = false;
+
                     StartCoroutine(DisplayStats(complementTransitionElements));
                 }
 
@@ -428,6 +428,24 @@ public class AnimationController : MonoBehaviour
                 yield return null;
             }
             // FinishAnimation(statsElements, true);
+        }
+    }
+
+    public List<ElementAnimation> CombinePointScreenElementsLists(List<ElementAnimation> pointScreenElements, List<ElementAnimation> pointStatsElements)
+    {
+        List<ElementAnimation> combinedList = new(pointScreenElements);
+        foreach (ElementAnimation element in pointStatsElements)
+        {
+            combinedList.Add(element);
+        }
+        return combinedList;
+    }
+
+    public void RestartPointStatsElementsPosition(List<ElementAnimation> pointStatsElements)
+    {
+        foreach (ElementAnimation element in pointStatsElements)
+        {
+            element.RestartToOriginalPosition();
         }
     }
 }

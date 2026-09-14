@@ -66,9 +66,15 @@ public class ModuleFlowController : MonoBehaviour
     [SerializeField]
     private GameObject finalStatsBackground;
     [SerializeField]
+    private GameObject finalPointsTitle;
+    [SerializeField]
     private TMP_Text finalPointsText;
     [SerializeField]
+    private GameObject topicCorrectAnsTitle;
+    [SerializeField]
     private TMP_Text topicCorrectAnsText;
+    [SerializeField]
+    private GameObject topicAvgResponseTimeTitle;
     [SerializeField]
     private TMP_Text topicAvgResponseTimeText;
     [SerializeField]
@@ -84,9 +90,10 @@ public class ModuleFlowController : MonoBehaviour
 
     private List<ElementAnimation> infoScreenElements;
     private List<ElementAnimation> questionScreenElements;
-    private List<ElementAnimation> currentPointsScreenElements;
+    private List<ElementAnimation> currentPointScreenElements;
     private List<ElementAnimation> currentStatsElements;
-    private List<ElementAnimation> finalPointsScreenElements;
+    private List<ElementAnimation> finalPointScreenElements;
+    private List<ElementAnimation> finalStatsElements;
 
     private readonly TrainingSessionManager session = TrainingSessionManager.Instance;
 
@@ -159,9 +166,9 @@ public class ModuleFlowController : MonoBehaviour
         ElementAnimation currStatsBackgroundElement = animationController.GetElementAnimation(currentStatsBackground);
         ElementAnimation continueButtonElement = animationController.GetElementAnimation(continueButton.gameObject);
 
-        currentPointsScreenElements = new() {currStatsTitleElement, currStatsBackgroundElement, continueButtonElement};
+        currentPointScreenElements = new() {currStatsTitleElement, currStatsBackgroundElement, continueButtonElement};
 
-        // Current stats elements
+        // Current points screen stats elements
         ElementAnimation pointsTitleElement = animationController.GetElementAnimation(pointsTitle);
         ElementAnimation pointsTextElement = animationController.GetElementAnimation(pointsText.gameObject);
         ElementAnimation correctAnswersTitleElement = animationController.GetElementAnimation(correctAnswersTitle);
@@ -173,14 +180,19 @@ public class ModuleFlowController : MonoBehaviour
         // Final points screen elements
         ElementAnimation finalStatsTitleElement = animationController.GetElementAnimation(topicCompletedText.gameObject);
         ElementAnimation finalStatsBackgroundElement = animationController.GetElementAnimation(finalStatsBackground);
-        // ElementAnimation finalPointsTitleElement = animationController.GetElementAnimation(finalPointsTitle);
-        // ElementAnimation finalPointsTextElement = animationController.GetElementAnimation(pointsText.gameObject);
-        // ElementAnimation finalCorrectAnswersTitleElement = animationController.GetElementAnimation(correctAnswersTitle);
-        // ElementAnimation finalCorrectAnswersTextElement = animationController.GetElementAnimation(correctAnswersText.gameObject);
-        // ElementAnimation finalAvgResponseTimeTitleElement = animationController.GetElementAnimation(qRoundCompleteText);
         ElementAnimation finishTopicButtonElement = animationController.GetElementAnimation(finishTopicButton.gameObject);
 
-        finalPointsScreenElements = new() {finalStatsTitleElement, finalStatsBackgroundElement, finishTopicButtonElement};
+        finalPointScreenElements = new() {finalStatsTitleElement, finalStatsBackgroundElement, finishTopicButtonElement};
+
+        // Final points screen stats elements
+        ElementAnimation finalPointsTitleElement = animationController.GetElementAnimation(finalPointsTitle);
+        ElementAnimation finalPointsTextElement = animationController.GetElementAnimation(finalPointsText.gameObject);
+        ElementAnimation finalCorrectAnswersTitleElement = animationController.GetElementAnimation(topicCorrectAnsTitle);
+        ElementAnimation finalCorrectAnswersTextElement = animationController.GetElementAnimation(topicCorrectAnsText.gameObject);
+        ElementAnimation finalAvgResponseTimeTitleElement = animationController.GetElementAnimation(topicAvgResponseTimeTitle);
+        ElementAnimation finalAvgResponseTimeTextElement = animationController.GetElementAnimation(topicAvgResponseTimeText.gameObject);
+
+        finalStatsElements = new() {finalPointsTitleElement, finalPointsTextElement, finalCorrectAnswersTitleElement, finalCorrectAnswersTextElement, finalAvgResponseTimeTitleElement, finalAvgResponseTimeTextElement};
     }
 
     // Update is called once per frame
@@ -216,11 +228,18 @@ public class ModuleFlowController : MonoBehaviour
         
         if (currentModuleIndex > 0 && currentModuleIndex < topic.modules.Count)
         {
+            // Restart infoTextBox element to original position for correct animation position and direction
             ElementAnimation infoTextBoxElement = animationController.GetElementAnimation(infoTextHolder);
             infoTextBoxElement.RestartToOriginalPosition();
 
+            // Restart questionTextHolder element to original position for correct animation position and direction
+            ElementAnimation questionTextHolderElement = animationController.GetElementAnimation(questionTextHolder);
+            questionTextHolderElement.RestartToOriginalPosition();
+
+            List<ElementAnimation> allCurrentPointScreenElements = animationController.CombinePointScreenElementsLists(currentPointScreenElements, currentStatsElements);
+
             // Animate screen change: current point screen -> info screen
-            animationController.AnimateScreenChange(currentPointsScreenElements, infoScreenElements, currentPointScreen, infoScreen);
+            animationController.AnimateScreenChange(allCurrentPointScreenElements, infoScreenElements, currentPointScreen, infoScreen);
         }
 
         // If index outside module list range => Finish topic
@@ -406,16 +425,25 @@ public class ModuleFlowController : MonoBehaviour
             ShowFinalPointScreen();
 
             // Animate screen change: question screen -> final point screen
-            animationController.AnimateScreenChange(questionScreenElements, finalPointsScreenElements, questionScreen, finalPointScreen);
+            animationController.AnimateScreenChange(questionScreenElements, finalPointScreenElements, questionScreen, finalPointScreen);
+
+            // Animate final stats display (one line of text at a time)
+            animationController.AnimateStatsDisplay(finalStatsElements);
         } 
         else
         {
             ShowPointScreen();
 
+            if (currentModuleIndex > 0 && currentModuleIndex < topic.modules.Count - 1)
+            {
+                // Restart current point stats elements to original position for correct animation position and direction
+                animationController.RestartPointStatsElementsPosition(currentStatsElements);
+            }
+
             // Animate screen change: question screen -> current point screen
-            animationController.AnimateScreenChange(questionScreenElements, currentPointsScreenElements, questionScreen, currentPointScreen);
+            animationController.AnimateScreenChange(questionScreenElements, currentPointScreenElements, questionScreen, currentPointScreen);
             
-            // Animate stats display (one line of text at a time)
+            // Animate current stats display (one line of text at a time)
             animationController.AnimateStatsDisplay(currentStatsElements);
         }
     }
@@ -432,14 +460,18 @@ public class ModuleFlowController : MonoBehaviour
         if (session.AllTopicsCompleted())
         {
             session.EndParticipantSession();
-            SceneManager.LoadScene("SessionResultsScene");
+
+            List<ElementAnimation> allFinalPointScreenElements = animationController.CombinePointScreenElementsLists(finalPointScreenElements, finalStatsElements);
+            
+            // Animate screen change: final point screen -> end of TrainingScene and load SessionResultsScene
+            animationController.AnimateSceneEnd(allFinalPointScreenElements, "SessionResultsScene");
             Debug.Log("Loading SessionResultsScene.");
         } else
         {
             session.RecordIntermediateResults();
 
             // Animate screen change: final point screen -> end of TrainingScene and load TopicMenuScene
-            animationController.AnimateSceneEnd(finalPointsScreenElements, "TopicMenuScene");
+            animationController.AnimateSceneEnd(finalPointScreenElements, "TopicMenuScene");
             Debug.Log("Returning to TopicMenuScene.");
         }
         return;
