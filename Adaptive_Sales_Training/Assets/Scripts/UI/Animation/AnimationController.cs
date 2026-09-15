@@ -28,8 +28,6 @@ public class AnimationController : MonoBehaviour
         EndingScene,
         FadeOut,
         FadeIn,
-        QuestionsAILeaving,
-        DialogueAIEntering,
         LoadIndicatorLeave
     }
 
@@ -221,7 +219,7 @@ public class AnimationController : MonoBehaviour
         }
         else if (transitionPhase == TransitionPhase.LoadIndicatorLeave)
         {
-            AnimateElement(complementElementAnimation, evaluationTime, false);
+            AnimateElementFade(complementElementAnimation, evaluationTime, false);
 
             if (normalizedTime >= 1f)
             {
@@ -555,23 +553,6 @@ public class AnimationController : MonoBehaviour
     #endregion
 
     #region AITrainingScene - Questions To Dialogue Screen Change
-    public void AnimateQuestionToDialogueScreenChange(List<ElementAnimation> currentElements, List<ElementAnimation> nextElements, GameObject currentScreen, GameObject nextScreen)
-    {
-        PrepareAnimation(currentElements, false);
-        PrepareAnimation(nextElements, true);
-
-        nextScreen.SetActive(true);
-
-        elapsedTime = 0f;
-
-        currentTransitionElements = currentElements;
-        nextTransitionElements = nextElements;
-
-        currentTransitionScreen = currentScreen;
-        nextTransitionScreen = nextScreen;
-
-        transitionPhase = TransitionPhase.QuestionsAILeaving;
-    }
 
     public void AnimateLoadingIndicatorLeave(GameObject loadingIndicator)
     {
@@ -584,8 +565,6 @@ public class AnimationController : MonoBehaviour
 
     private void FinishLoadingIndicatorLeave(ElementAnimation loadingIndicatorElement)
     {
-        loadingIndicatorElement.rectTransform.anchoredPosition = loadingIndicatorElement.targetPosition;
-
         loadingIndicatorElement.canvasGroup.alpha = 0f;
         loadingIndicatorElement.canvasGroup.interactable = false;
         loadingIndicatorElement.canvasGroup.blocksRaycasts = false;

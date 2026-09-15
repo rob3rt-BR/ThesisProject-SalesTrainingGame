@@ -359,6 +359,9 @@ public class ModuleFlowController : MonoBehaviour
         int currentModuleCorrectAnswers = session.GetCurrentModuleCorrectAnswers();
         int currentModuleTotalQuestions = currentModule.questions.Count;
 
+         // Set title text attribute
+        moduleTitleEnd.text = currentModule.moduleTitle;
+
         // Animate screen change: question screen -> current point screen
         animationController.AnimateScreenChange(questionScreenElements, currentPointScreenElements, questionScreen, currentPointScreen);
             
@@ -372,6 +375,9 @@ public class ModuleFlowController : MonoBehaviour
         int topicCorrectAnswers = session.GetCurrentTopicCorrectAnswers();
         int topicTotalQuestions = topic.modules.Sum(m => m.questions.Count);
         float topicAvgResponseTime = session.GetCurrentTopicAvgResponseTime();
+
+        // Set title text attribute
+        topicCompletedText.text = session.SelectedTopic.topicTitle;
 
         // Animate screen change: question screen -> final point screen
         animationController.AnimateScreenChange(questionScreenElements, finalPointScreenElements, questionScreen, finalPointScreen);

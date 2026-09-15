@@ -4455,7 +4455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
-  initialOffsetPosition: {x: -75, y: 0}
+  initialOffsetPosition: {x: 75, y: 0}
   hasTextComponent: 0
   textComponentType: 0
   rectTransform: {fileID: 0}
