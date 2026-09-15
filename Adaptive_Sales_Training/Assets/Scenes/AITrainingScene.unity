@@ -3987,7 +3987,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0}
   originalPosition: {x: 0, y: 0}
   enterDirection: 3
-  leaveDirection: 3
+  leaveDirection: 2
   distanceToAnimate: {x: 75, y: 100}
   easingCurve:
     serializedVersion: 2
@@ -4835,7 +4835,7 @@ MonoBehaviour:
   topicAvgResponseTimeText: {fileID: 1767559964}
   finishTopicButton: {fileID: 56176553}
   backendUrl: http://localhost:5065/api/dialogue
-  animationController: {fileID: 0}
+  animationController: {fileID: 897362692}
   eventSystem: {fileID: 1276461026}
 --- !u!1 &1276461024
 GameObject:
@@ -5462,7 +5462,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0}
   originalPosition: {x: 0, y: 0}
   enterDirection: 0
-  leaveDirection: 0
+  leaveDirection: 1
   distanceToAnimate: {x: 100, y: 45}
   easingCurve:
     serializedVersion: 2
@@ -7652,7 +7652,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0}
   originalPosition: {x: 0, y: 0}
   enterDirection: 2
-  leaveDirection: 2
+  leaveDirection: 3
   distanceToAnimate: {x: 75, y: 100}
   easingCurve:
     serializedVersion: 2

@@ -343,6 +343,12 @@ public class AIDialogueController : MonoBehaviour
         // For NON FIRST module start => enable start question button again
         // startQuestionsButton.gameObject.SetActive(true);
 
+        ElementAnimation traineeDialogueTextElement = animationController.GetElementAnimation(traineeDialogueText.gameObject);
+        ElementAnimation loadingIndicatorElement = animationController.GetElementAnimation(loadingIndicator);
+
+        traineeDialogueTextElement.canvasGroup.alpha = 0f;
+        loadingIndicatorElement.canvasGroup.alpha = 0f;
+
         // Animate screen change: info screen -> dialogue screen (PRE questions)
         animationController.AnimateScreenChange(infoScreenElements, dialogueScreenElementsPre, infoScreen, dialogueScreen);
 

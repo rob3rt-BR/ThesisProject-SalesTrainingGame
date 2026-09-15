@@ -37,6 +37,10 @@ public sealed class OpenRouterService
             messages,
             max_tokens = maxTokens,
             temperature,
+            reasoning = new
+            {
+                effort = "none"
+            },
             provider = new
             {
                 allow_fallbacks = true
@@ -87,14 +91,14 @@ public sealed class OpenRouterService
         logger.LogInformation("AI finish reason for {QuestionId}: {FinishReason}", request.QuestionId, choice.FinishReason);
 
         string rawResultContent = openRouterResult.Choices[0].Message.Content;
-        string replyText = RemoveReplyQuotationmarks(rawResultContent);
-
         logger.LogWarning("Raw result content for {QuestionId}: {Content}", request.QuestionId, rawResultContent);
 
-        if (string.IsNullOrWhiteSpace(replyText))
+        if (string.IsNullOrWhiteSpace(rawResultContent))
         {
             throw new InvalidOperationException("The AI returned an empty customer response.");
         }
+
+        string replyText = RemoveReplyQuotationmarks(rawResultContent);
 
         OpenRouterUsage? usage = openRouterResult.Usage;
 
