@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,13 +18,15 @@ public class AIDialogueController : MonoBehaviour
     [SerializeField]
     private GameObject questionScreen;
     [SerializeField]
-    private GameObject pointScreen;
+    private GameObject currentPointScreen;
     [SerializeField]
     private GameObject finalPointScreen;
 
     [Header("Information UI")]
     [SerializeField]
     private TMP_Text moduleTitle;
+    [SerializeField]
+    private GameObject infoTextHolder;
     [SerializeField]
     private TMP_Text infoText;
     [SerializeField]
@@ -33,9 +36,11 @@ public class AIDialogueController : MonoBehaviour
     [SerializeField]
     private TMP_Text dialogueTitle;
     [SerializeField]
+    private GameObject dialogueBoxBackground;
+    [SerializeField]
     private TMP_Text traineeDialogueText;
     [SerializeField]
-    private TMP_Text dialogueText;
+    private TMP_Text aiResponseText;
     [SerializeField]
     private GameObject loadingIndicator;
     [SerializeField]
@@ -45,9 +50,11 @@ public class AIDialogueController : MonoBehaviour
 
     [Header("Question UI")]
     [SerializeField]
-    private TMP_Text questionText;
-    [SerializeField]
     private TMP_Text questionCounterText;
+    [SerializeField]
+    private GameObject questionTextHolder;
+    [SerializeField]
+    private TMP_Text questionText;
     [SerializeField]
     private TMP_Text timerText;
     [SerializeField]
@@ -59,9 +66,17 @@ public class AIDialogueController : MonoBehaviour
     [SerializeField]
     private TMP_Text moduleTitleEnd;
     [SerializeField]
+    private GameObject currentStatsBackground;
+    [SerializeField]
+    private GameObject pointsTitle;
+    [SerializeField]
     private TMP_Text pointsText;
     [SerializeField]
+    private GameObject correctAnswersTitle;
+    [SerializeField]
     private TMP_Text correctAnswersText;
+    [SerializeField]
+    private GameObject qRoundCompleteText;
     [SerializeField]
     private Button continueButton;
 
@@ -69,9 +84,17 @@ public class AIDialogueController : MonoBehaviour
     [SerializeField]
     private TMP_Text topicCompletedText;
     [SerializeField]
+    private GameObject finalStatsBackground;
+    [SerializeField]
+    private GameObject finalPointsTitle;
+    [SerializeField]
     private TMP_Text finalPointsText;
     [SerializeField]
+    private GameObject topicCorrectAnsTitle;
+    [SerializeField]
     private TMP_Text topicCorrectAnsText;
+    [SerializeField]
+    private GameObject topicAvgResponseTimeTitle;
     [SerializeField]
     private TMP_Text topicAvgResponseTimeText;
     [SerializeField]
@@ -80,6 +103,22 @@ public class AIDialogueController : MonoBehaviour
     [Header("Backend")]
     [SerializeField]
     private string backendUrl = "http://localhost:5065/api/dialogue";
+    
+    [Header("Animation Controller")]
+    [SerializeField]
+    private AnimationController animationController;
+
+    [Header("EventSystem")]
+    [SerializeField]
+    private EventSystem eventSystem;
+
+    private List<ElementAnimation> infoScreenElements;
+    private List<ElementAnimation> dialogueScreenElements;
+    private List<ElementAnimation> questionScreenElements;
+    private List<ElementAnimation> currentPointScreenElements;
+    private List<ElementAnimation> currentStatsElements;
+    private List<ElementAnimation> finalPointScreenElements;
+    private List<ElementAnimation> finalStatsElements;
 
     private readonly TrainingSessionManager session = TrainingSessionManager.Instance;
 
@@ -137,7 +176,76 @@ public class AIDialogueController : MonoBehaviour
 
         currentModuleIndex = 0;
 
+        // Initialize ElementAnimation objects of each element per UI screen
+        InitializeElementAnimationGroups();
+
         SetInfoScreen();
+    }
+
+    private void InitializeElementAnimationGroups()
+    {
+        // Info screen elements
+        ElementAnimation infoTitleElement = animationController.GetElementAnimation(moduleTitle.gameObject);
+        ElementAnimation infoTextBoxElement = animationController.GetElementAnimation(infoTextHolder);
+        ElementAnimation startDialogueButtonElement = animationController.GetElementAnimation(startDialogueButton.gameObject);
+
+        infoScreenElements = new() {infoTitleElement, infoTextBoxElement, startDialogueButtonElement};
+
+        // Dialogue screen elements
+        ElementAnimation dialogueTitleElement = animationController.GetElementAnimation(dialogueTitle.gameObject);
+        ElementAnimation dialogueBoxBackgroundElement = animationController.GetElementAnimation(dialogueBoxBackground);
+        ElementAnimation traineeDialogueTextElement = animationController.GetElementAnimation(traineeDialogueText.gameObject);
+        ElementAnimation aiResponseTextElement = animationController.GetElementAnimation(aiResponseText.gameObject);
+        ElementAnimation loadingIndicatorElement = animationController.GetElementAnimation(loadingIndicator);
+        ElementAnimation startQuestionsButtonElement = animationController.GetElementAnimation(startQuestionsButton.gameObject);
+        ElementAnimation nextQuestionButtonElement = animationController.GetElementAnimation(nextQuestionButton.gameObject);
+
+        dialogueScreenElements = new() {dialogueTitleElement, dialogueBoxBackgroundElement, traineeDialogueTextElement, aiResponseTextElement, loadingIndicatorElement, startQuestionsButtonElement, nextQuestionButtonElement};
+
+        // Questions screen elements
+        ElementAnimation questionsCounterElement = animationController.GetElementAnimation(questionCounterText.gameObject);
+        ElementAnimation questionTextHolderElement = animationController.GetElementAnimation(questionTextHolder);
+
+        questionScreenElements = new() {questionsCounterElement, questionTextHolderElement};
+        
+        foreach (Button currentbutton in answerButtons)
+        {
+            ElementAnimation currentButtonElement = animationController.GetElementAnimation(currentbutton.gameObject);
+            questionScreenElements.Add(currentButtonElement);
+        }
+
+        // Current points screen elements
+        ElementAnimation currStatsTitleElement = animationController.GetElementAnimation(moduleTitleEnd.gameObject);
+        ElementAnimation currStatsBackgroundElement = animationController.GetElementAnimation(currentStatsBackground);
+        ElementAnimation continueButtonElement = animationController.GetElementAnimation(continueButton.gameObject);
+
+        currentPointScreenElements = new() {currStatsTitleElement, currStatsBackgroundElement, continueButtonElement};
+
+        // Current points screen stats elements
+        ElementAnimation pointsTitleElement = animationController.GetElementAnimation(pointsTitle);
+        ElementAnimation pointsTextElement = animationController.GetElementAnimation(pointsText.gameObject);
+        ElementAnimation correctAnswersTitleElement = animationController.GetElementAnimation(correctAnswersTitle);
+        ElementAnimation correctAnswersTextElement = animationController.GetElementAnimation(correctAnswersText.gameObject);
+        ElementAnimation qRoundCompleteTextElement = animationController.GetElementAnimation(qRoundCompleteText);
+
+        currentStatsElements = new() {pointsTitleElement, pointsTextElement, correctAnswersTitleElement, correctAnswersTextElement, qRoundCompleteTextElement};
+
+        // Final points screen elements
+        ElementAnimation finalStatsTitleElement = animationController.GetElementAnimation(topicCompletedText.gameObject);
+        ElementAnimation finalStatsBackgroundElement = animationController.GetElementAnimation(finalStatsBackground);
+        ElementAnimation finishTopicButtonElement = animationController.GetElementAnimation(finishTopicButton.gameObject);
+
+        finalPointScreenElements = new() {finalStatsTitleElement, finalStatsBackgroundElement, finishTopicButtonElement};
+
+        // Final points screen stats elements
+        ElementAnimation finalPointsTitleElement = animationController.GetElementAnimation(finalPointsTitle);
+        ElementAnimation finalPointsTextElement = animationController.GetElementAnimation(finalPointsText.gameObject);
+        ElementAnimation finalCorrectAnswersTitleElement = animationController.GetElementAnimation(topicCorrectAnsTitle);
+        ElementAnimation finalCorrectAnswersTextElement = animationController.GetElementAnimation(topicCorrectAnsText.gameObject);
+        ElementAnimation finalAvgResponseTimeTitleElement = animationController.GetElementAnimation(topicAvgResponseTimeTitle);
+        ElementAnimation finalAvgResponseTimeTextElement = animationController.GetElementAnimation(topicAvgResponseTimeText.gameObject);
+
+        finalStatsElements = new() {finalPointsTitleElement, finalPointsTextElement, finalCorrectAnswersTitleElement, finalCorrectAnswersTextElement, finalAvgResponseTimeTitleElement, finalAvgResponseTimeTextElement};
     }
 
     void Update()
@@ -171,6 +279,28 @@ public class AIDialogueController : MonoBehaviour
             return;
         }
 
+        if (currentModuleIndex == 0)
+        {
+            // Animate scene start: start of Training Scene with info screen
+            animationController.AnimateSceneStart(infoScreenElements);
+        }
+        
+        if (currentModuleIndex > 0 && currentModuleIndex < topic.modules.Count)
+        {
+            // Restart infoTextBox element to original position for correct animation position and direction
+            ElementAnimation infoTextBoxElement = animationController.GetElementAnimation(infoTextHolder);
+            infoTextBoxElement.RestartToOriginalPosition();
+
+            // Restart questionTextHolder element to original position for correct animation position and direction
+            ElementAnimation questionTextHolderElement = animationController.GetElementAnimation(questionTextHolder);
+            questionTextHolderElement.RestartToOriginalPosition();
+
+            List<ElementAnimation> allCurrentPointScreenElements = animationController.CombinePointScreenElementsLists(currentPointScreenElements, currentStatsElements);
+
+            // Animate screen change: current point screen -> info screen
+            animationController.AnimateScreenChange(allCurrentPointScreenElements, infoScreenElements, currentPointScreen, infoScreen);
+        }
+
         MicroModule currentModule = topic.modules[currentModuleIndex];
 
         // Initiate currentModuleResult in TrainingSessionManager
@@ -179,9 +309,6 @@ public class AIDialogueController : MonoBehaviour
         // Set text attributes in info screen
         moduleTitle.text = currentModule.moduleTitle;
         infoText.text = currentModule.moduleText;
-
-        pointScreen.SetActive(false);
-        infoScreen.SetActive(true);
     }
     public void StartDialogue()
     {
@@ -205,13 +332,16 @@ public class AIDialogueController : MonoBehaviour
 
         // Set text attributes in dialogue screen => display opening message in textbox
         dialogueTitle.text = currentDialogueScenario.module.moduleTitle;
-        dialogueText.text = currentDialogueScenario.openingMessage;
+        aiResponseText.text = currentDialogueScenario.openingMessage;
         
-        infoScreen.SetActive(false);
-        dialogueScreen.SetActive(true);
+        // infoScreen.SetActive(false);
+        // dialogueScreen.SetActive(true);
 
         // For NON FIRST module start => enable start question button again
         startQuestionsButton.gameObject.SetActive(true);
+
+        // Animate screen change: info screen -> dialogue screen
+        animationController.AnimateScreenChange(infoScreenElements, dialogueScreenElements, infoScreen, dialogueScreen);
     }
 
     private void StartQuestionSequence()
@@ -221,14 +351,17 @@ public class AIDialogueController : MonoBehaviour
         // For FIRST module start => disable start question button to NOT interfere later with next question button
         startQuestionsButton.gameObject.SetActive(false);
 
-        dialogueScreen.SetActive(false);
-        questionScreen.SetActive(true);
+        // Animate screen change: dialogue screen -> question screen
+        animationController.AnimateScreenChange(dialogueScreenElements, questionScreenElements, dialogueScreen, questionScreen);
 
         ShowCurrentQuestion();
     }
 
     private void ShowCurrentQuestion()
     {
+        // Deselect current answer button from last question
+        eventSystem.SetSelectedGameObject(null);
+
         MicroModule currentModule = topic.modules[currentModuleIndex];
 
         // If index outside question list range => Finish module
@@ -324,6 +457,7 @@ public class AIDialogueController : MonoBehaviour
         StartCoroutine(RequestDialogueResponse(module, question, selectedAnswerIndex));
     }
 
+    // TODO: Agregarle transition question screen -> dialogue screen
     private IEnumerator RequestDialogueResponse(MicroModule module, ModuleQuestion question, int selectedAnswerIndex)
     {
         questionScreen.SetActive(false);
@@ -405,7 +539,7 @@ public class AIDialogueController : MonoBehaviour
         if (webRequest.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError($"Dialogue request failed: {webRequest.error}");
-            dialogueText.text = "Dialogue currently unavailable.";
+            aiResponseText.text = "Dialogue currently unavailable.";
             yield break;
         }
 
@@ -450,7 +584,7 @@ public class AIDialogueController : MonoBehaviour
 
         // Set text attribute in dialogue screen => display trainee dialogue and AI response message in textbox
         traineeDialogueText.text = requestData.traineeDialogueText;
-        dialogueText.text = responseData.replyText;
+        aiResponseText.text = responseData.replyText;
 
         dialogueScreen.SetActive(true);
 
@@ -464,14 +598,13 @@ public class AIDialogueController : MonoBehaviour
 
         int currentModulePoints = session.GetCurrentModulePoints();
         int currentModuleCorrectAnswers = session.GetCurrentModuleCorrectAnswers();
+        int currentModuleTotalQuestions = currentModule.questions.Count;
 
-        // Set text attributes in points screen
-        moduleTitleEnd.text = currentModule.moduleTitle;
-        pointsText.text = currentModulePoints.ToString();
-        correctAnswersText.text = $"{currentModuleCorrectAnswers} / {currentModule.questions.Count}";
-
-        questionScreen.SetActive(false);
-        pointScreen.SetActive(true);
+        // Animate screen change: dialogue screen -> current point screen
+        animationController.AnimateScreenChange(dialogueScreenElements, currentPointScreenElements, dialogueScreen, currentPointScreen);
+            
+        // Animate current stats display (one line of text at a time)
+        animationController.AnimateStatsDisplay(currentStatsElements, currentModulePoints, currentModuleCorrectAnswers, currentModuleTotalQuestions);
     }
 
     private void ShowFinalPointScreen()
@@ -481,21 +614,21 @@ public class AIDialogueController : MonoBehaviour
         int topicTotalQuestions = topic.modules.Sum(m => m.questions.Count);
         float topicAvgResponseTime = session.GetCurrentTopicAvgResponseTime();
 
-        // Set text attributes on final points screen (topic)
-        topicCompletedText.text = topic.topicTitle + " geschafft!";
-        finalPointsText.text = topicTotalPoints.ToString();
-        topicCorrectAnsText.text = $"{topicCorrectAnswers} / {topicTotalQuestions}";
-        topicAvgResponseTimeText.text = topicAvgResponseTime.ToString("0.0") + "s";
-
-        questionScreen.SetActive(false);
-        finalPointScreen.SetActive(true);
+        // Animate screen change: dialogue screen -> final point screen
+        animationController.AnimateScreenChange(dialogueScreenElements, finalPointScreenElements, dialogueScreen, finalPointScreen);
+        
+        // Animate final stats display (one line of text at a time)
+        animationController.AnimateStatsDisplay(finalStatsElements, topicTotalPoints, topicCorrectAnswers, topicTotalQuestions, topicAvgResponseTime);
     }
 
 
     private void ContinueToNextQuestion()
     {
-        dialogueScreen.SetActive(false);
-        questionScreen.SetActive(true);
+        // dialogueScreen.SetActive(false);
+        // questionScreen.SetActive(true);
+
+        // Animate screen change: dialogue screen -> question screen
+        animationController.AnimateScreenChange(dialogueScreenElements, questionScreenElements, dialogueScreen, questionScreen);
         
         currentQuestionIndex++;
         ShowCurrentQuestion();
@@ -537,8 +670,15 @@ public class AIDialogueController : MonoBehaviour
         if (currentModuleIndex == topic.modules.Count - 1)
         {
             ShowFinalPointScreen();
-        } else
+        }
+        else
         {
+            if (currentModuleIndex > 0 && currentModuleIndex < topic.modules.Count - 1)
+            {
+                // Restart current point stats elements to original position for correct animation position and direction
+                animationController.RestartPointStatsElementsPosition(currentStatsElements);
+            }
+
             ShowPointScreen();
         }
     }
@@ -554,12 +694,18 @@ public class AIDialogueController : MonoBehaviour
         if (session.AllTopicsCompleted())
         {
             session.EndParticipantSession();
-            SceneManager.LoadScene("SessionResultsScene");
+
+            List<ElementAnimation> allFinalPointScreenElements = animationController.CombinePointScreenElementsLists(finalPointScreenElements, finalStatsElements);
+            
+            // Animate screen change: final point screen -> end of TrainingScene and load SessionResultsScene
+            animationController.AnimateSceneEnd(allFinalPointScreenElements, "SessionResultsScene");
             Debug.Log("Loading SessionResultsScene.");
         } else
         {
             session.RecordIntermediateResults();
-            SceneManager.LoadScene("TopicMenuScene");
+
+            // Animate screen change: final point screen -> end of TrainingScene and load TopicMenuScene
+            animationController.AnimateSceneEnd(finalPointScreenElements, "TopicMenuScene");
             Debug.Log("Returning to TopicMenuScene.");
         }
     }

@@ -220,6 +220,13 @@ public class ModuleFlowController : MonoBehaviour
             return;
         }
 
+        // If index outside module list range => Finish topic
+        if (currentModuleIndex >= topic.modules.Count)
+        {
+            FinishTopic();
+            return;
+        }
+
         if (currentModuleIndex == 0)
         {
             // Animate scene start: start of Training Scene with info screen
@@ -242,13 +249,6 @@ public class ModuleFlowController : MonoBehaviour
             animationController.AnimateScreenChange(allCurrentPointScreenElements, infoScreenElements, currentPointScreen, infoScreen);
         }
 
-        // If index outside module list range => Finish topic
-        if (currentModuleIndex >= topic.modules.Count)
-        {
-            FinishTopic();
-            return;
-        }
-
         MicroModule currentModule = topic.modules[currentModuleIndex];
 
         // Initiate currentModuleResult in TrainingSessionManager
@@ -257,17 +257,11 @@ public class ModuleFlowController : MonoBehaviour
         // Set text attributes in info screen
         moduleTitle.text = currentModule.moduleTitle;
         infoText.text = currentModule.moduleText;
-
-        // currentPointScreen.SetActive(false);
-        // infoScreen.SetActive(true);
     }
 
     private void StartQuestionSequence()
     {
         currentQuestionIndex = 0;
-
-        // infoScreen.SetActive(false);
-        // questionScreen.SetActive(true);
 
         // Animate screen change: info screen -> question screen
         animationController.AnimateScreenChange(infoScreenElements, questionScreenElements, infoScreen, questionScreen);
@@ -320,8 +314,6 @@ public class ModuleFlowController : MonoBehaviour
             return;
         }
 
-        isQuestionActive = false;
-
         MicroModule currentModule = topic.modules[currentModuleIndex];
         ModuleQuestion currentQuestion = currentModule.questions[currentQuestionIndex];
 
@@ -354,6 +346,8 @@ public class ModuleFlowController : MonoBehaviour
 
         // Record question result in currentModuleResult from TrainingSessionManager
         session.RecordQuestionResult(currentQuestionResult);
+
+        isQuestionActive = false;
         
         currentQuestionIndex++;
         ShowCurrentQuestion();
@@ -366,11 +360,6 @@ public class ModuleFlowController : MonoBehaviour
         int currentModulePoints = session.GetCurrentModulePoints();
         int currentModuleCorrectAnswers = session.GetCurrentModuleCorrectAnswers();
         int currentModuleTotalQuestions = currentModule.questions.Count;
-
-        // Set text attributes in points screen
-        //moduleTitleEnd.text = currentModule.moduleTitle;
-        //pointsText.text = currentModulePoints.ToString();
-        //correctAnswersText.text = $"{currentModuleCorrectAnswers} / {currentModule.questions.Count}";
 
         // Animate screen change: question screen -> current point screen
         animationController.AnimateScreenChange(questionScreenElements, currentPointScreenElements, questionScreen, currentPointScreen);
@@ -385,12 +374,6 @@ public class ModuleFlowController : MonoBehaviour
         int topicCorrectAnswers = session.GetCurrentTopicCorrectAnswers();
         int topicTotalQuestions = topic.modules.Sum(m => m.questions.Count);
         float topicAvgResponseTime = session.GetCurrentTopicAvgResponseTime();
-
-        // Set text attributes on final points screen (topic)
-        //topicCompletedText.text = topic.topicTitle + " geschafft!";
-        //finalPointsText.text = topicTotalPoints.ToString();
-        //topicCorrectAnsText.text = $"{topicCorrectAnswers} / {topicTotalQuestions}";
-        //topicAvgResponseTimeText.text = topicAvgResponseTime.ToString("0.0") + "s";
 
         // Animate screen change: question screen -> final point screen
         animationController.AnimateScreenChange(questionScreenElements, finalPointScreenElements, questionScreen, finalPointScreen);
