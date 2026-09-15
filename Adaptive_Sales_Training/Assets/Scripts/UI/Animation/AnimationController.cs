@@ -28,6 +28,9 @@ public class AnimationController : MonoBehaviour
         EndingScene,
         FadeOut,
         FadeIn,
+        QuestionsAILeaving,
+        DialogueAIEntering,
+        LoadIndicatorLeave
     }
 
     private TransitionPhase transitionPhase = TransitionPhase.None;
@@ -212,6 +215,17 @@ public class AnimationController : MonoBehaviour
 
                     UpdateElementInteraction(complementElementAnimation, false);
                 }
+
+                transitionPhase = TransitionPhase.None;
+            }
+        }
+        else if (transitionPhase == TransitionPhase.LoadIndicatorLeave)
+        {
+            AnimateElement(complementElementAnimation, evaluationTime, false);
+
+            if (normalizedTime >= 1f)
+            {
+                FinishLoadingIndicatorLeave(complementElementAnimation);
 
                 transitionPhase = TransitionPhase.None;
             }
@@ -406,6 +420,7 @@ public class AnimationController : MonoBehaviour
     }
     #endregion
 
+    #region Stats Display Animation
     public void AnimateStatsDisplay(List<ElementAnimation> statsElements, int points, int correctAnswers, int totalQuestions, float avgResponseTime = 0f)
     {
         PrepareStatsDisplayAnimation(statsElements);
@@ -537,6 +552,46 @@ public class AnimationController : MonoBehaviour
             element.canvasGroup.blocksRaycasts = true;
         }
     }
+    #endregion
+
+    #region AITrainingScene - Questions To Dialogue Screen Change
+    public void AnimateQuestionToDialogueScreenChange(List<ElementAnimation> currentElements, List<ElementAnimation> nextElements, GameObject currentScreen, GameObject nextScreen)
+    {
+        PrepareAnimation(currentElements, false);
+        PrepareAnimation(nextElements, true);
+
+        nextScreen.SetActive(true);
+
+        elapsedTime = 0f;
+
+        currentTransitionElements = currentElements;
+        nextTransitionElements = nextElements;
+
+        currentTransitionScreen = currentScreen;
+        nextTransitionScreen = nextScreen;
+
+        transitionPhase = TransitionPhase.QuestionsAILeaving;
+    }
+
+    public void AnimateLoadingIndicatorLeave(GameObject loadingIndicator)
+    {
+        elapsedTime = 0f;
+
+        complementElementAnimation = GetElementAnimation(loadingIndicator);
+
+        transitionPhase = TransitionPhase.LoadIndicatorLeave;
+    }
+
+    private void FinishLoadingIndicatorLeave(ElementAnimation loadingIndicatorElement)
+    {
+        loadingIndicatorElement.rectTransform.anchoredPosition = loadingIndicatorElement.targetPosition;
+
+        loadingIndicatorElement.canvasGroup.alpha = 0f;
+        loadingIndicatorElement.canvasGroup.interactable = false;
+        loadingIndicatorElement.canvasGroup.blocksRaycasts = false;
+    }
+
+    #endregion
 
     #region External Helper functions
     public List<ElementAnimation> CombinePointScreenElementsLists(List<ElementAnimation> pointScreenElements, List<ElementAnimation> pointStatsElements)
@@ -547,6 +602,11 @@ public class AnimationController : MonoBehaviour
             combinedList.Add(element);
         }
         return combinedList;
+    }
+
+    public void RestartElementToOriginalPosition(GameObject elementObj)
+    {
+        GetElementAnimation(elementObj).RestartToOriginalPosition();
     }
 
     public void RestartPointStatsElementsPosition(List<ElementAnimation> pointStatsElements)

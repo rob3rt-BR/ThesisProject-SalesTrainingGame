@@ -113,7 +113,8 @@ public class AIDialogueController : MonoBehaviour
     private EventSystem eventSystem;
 
     private List<ElementAnimation> infoScreenElements;
-    private List<ElementAnimation> dialogueScreenElements;
+    private List<ElementAnimation> dialogueScreenElementsPre;
+    private List<ElementAnimation> dialogueScreenElementsPost;
     private List<ElementAnimation> questionScreenElements;
     private List<ElementAnimation> currentPointScreenElements;
     private List<ElementAnimation> currentStatsElements;
@@ -191,7 +192,7 @@ public class AIDialogueController : MonoBehaviour
 
         infoScreenElements = new() {infoTitleElement, infoTextBoxElement, startDialogueButtonElement};
 
-        // Dialogue screen elements
+        // Dialogue screen elements 
         ElementAnimation dialogueTitleElement = animationController.GetElementAnimation(dialogueTitle.gameObject);
         ElementAnimation dialogueBoxBackgroundElement = animationController.GetElementAnimation(dialogueBoxBackground);
         ElementAnimation traineeDialogueTextElement = animationController.GetElementAnimation(traineeDialogueText.gameObject);
@@ -200,7 +201,11 @@ public class AIDialogueController : MonoBehaviour
         ElementAnimation startQuestionsButtonElement = animationController.GetElementAnimation(startQuestionsButton.gameObject);
         ElementAnimation nextQuestionButtonElement = animationController.GetElementAnimation(nextQuestionButton.gameObject);
 
-        dialogueScreenElements = new() {dialogueTitleElement, dialogueBoxBackgroundElement, traineeDialogueTextElement, aiResponseTextElement, loadingIndicatorElement, startQuestionsButtonElement, nextQuestionButtonElement};
+        // Dialogue screen elements PRE questions list
+        dialogueScreenElementsPre = new() {dialogueTitleElement, dialogueBoxBackgroundElement, aiResponseTextElement, startQuestionsButtonElement};
+        
+        // Dialogue screen elements POST questions list
+        dialogueScreenElementsPost = new() {dialogueTitleElement, dialogueBoxBackgroundElement, traineeDialogueTextElement, aiResponseTextElement, loadingIndicatorElement, nextQuestionButtonElement};
 
         // Questions screen elements
         ElementAnimation questionsCounterElement = animationController.GetElementAnimation(questionCounterText.gameObject);
@@ -288,12 +293,10 @@ public class AIDialogueController : MonoBehaviour
         if (currentModuleIndex > 0 && currentModuleIndex < topic.modules.Count)
         {
             // Restart infoTextBox element to original position for correct animation position and direction
-            ElementAnimation infoTextBoxElement = animationController.GetElementAnimation(infoTextHolder);
-            infoTextBoxElement.RestartToOriginalPosition();
+            animationController.RestartElementToOriginalPosition(infoTextHolder);
 
             // Restart questionTextHolder element to original position for correct animation position and direction
-            ElementAnimation questionTextHolderElement = animationController.GetElementAnimation(questionTextHolder);
-            questionTextHolderElement.RestartToOriginalPosition();
+            animationController.RestartElementToOriginalPosition(questionTextHolder);
 
             List<ElementAnimation> allCurrentPointScreenElements = animationController.CombinePointScreenElementsLists(currentPointScreenElements, currentStatsElements);
 
@@ -338,10 +341,12 @@ public class AIDialogueController : MonoBehaviour
         // dialogueScreen.SetActive(true);
 
         // For NON FIRST module start => enable start question button again
-        startQuestionsButton.gameObject.SetActive(true);
+        // startQuestionsButton.gameObject.SetActive(true);
 
-        // Animate screen change: info screen -> dialogue screen
-        animationController.AnimateScreenChange(infoScreenElements, dialogueScreenElements, infoScreen, dialogueScreen);
+        // Animate screen change: info screen -> dialogue screen (PRE questions)
+        animationController.AnimateScreenChange(infoScreenElements, dialogueScreenElementsPre, infoScreen, dialogueScreen);
+
+        // TODO: Aqui animate opening message de AI
     }
 
     private void StartQuestionSequence()
@@ -351,8 +356,8 @@ public class AIDialogueController : MonoBehaviour
         // For FIRST module start => disable start question button to NOT interfere later with next question button
         startQuestionsButton.gameObject.SetActive(false);
 
-        // Animate screen change: dialogue screen -> question screen
-        animationController.AnimateScreenChange(dialogueScreenElements, questionScreenElements, dialogueScreen, questionScreen);
+        // Animate screen change: dialogue screen (PRE questions) -> question screen
+        animationController.AnimateScreenChange(dialogueScreenElementsPre, questionScreenElements, dialogueScreen, questionScreen);
 
         ShowCurrentQuestion();
     }
@@ -370,6 +375,19 @@ public class AIDialogueController : MonoBehaviour
             FinishModule();
             return;
         }
+
+        if (currentQuestionIndex > 0 && currentQuestionIndex < currentModule.questions.Count)
+        {
+            // Restart loadingIndicator element to original position for correct animation position and direction
+            animationController.RestartElementToOriginalPosition(loadingIndicator);
+
+            // Restart questionTextHolder element to original position for correct animation position and direction
+            animationController.RestartElementToOriginalPosition(questionTextHolder);
+
+            // Animate screen change: dialogue screen (POST question) -> question screen
+            animationController.AnimateScreenChange(dialogueScreenElementsPost, questionScreenElements, dialogueScreen, questionScreen);
+        }
+
 
         ModuleQuestion currentQuestion = currentModule.questions[currentQuestionIndex];
 
@@ -435,6 +453,15 @@ public class AIDialogueController : MonoBehaviour
         session.RecordQuestionResult(currentQuestionResult);
         
         isQuestionActive = false;
+
+        // Set text attribute in dialogue screen => display trainee dialogue in textbox
+        AIDialogueScenario currentDialogueScenario = dialogueScenarios[currentModuleIndex];
+        AIQuestionContext currentQuestionContext = currentDialogueScenario.questionContexts[currentQuestionIndex];
+
+        traineeDialogueText.text = currentQuestionContext.traineeDialogueTexts[selectedAnswerIndex];
+
+        // Animate screen change: question screen -> dialogue screen (POST questions)
+        animationController.AnimateScreenChange(questionScreenElements, dialogueScreenElementsPost, questionScreen, dialogueScreen);
         
         // Submit answer to AI and start coroutine of requesting AI response
         SubmitAnswerToAI(currentModule, currentQuestion, selectedAnswerIndex);
@@ -460,10 +487,10 @@ public class AIDialogueController : MonoBehaviour
     // TODO: Agregarle transition question screen -> dialogue screen
     private IEnumerator RequestDialogueResponse(MicroModule module, ModuleQuestion question, int selectedAnswerIndex)
     {
-        questionScreen.SetActive(false);
+        // questionScreen.SetActive(false);
 
         requestInProgress = true;
-        loadingIndicator.SetActive(true);
+        // loadingIndicator.SetActive(true);
 
         AIDialogueScenario currentDialogueScenario = dialogueScenarios[currentModuleIndex];
 
@@ -533,7 +560,9 @@ public class AIDialogueController : MonoBehaviour
         long totalResponseTimeMilliseconds = stopWatch.ElapsedMilliseconds;
 
         requestInProgress = false;
-        loadingIndicator.SetActive(false);
+        // loadingIndicator.SetActive(false);
+
+        animationController.AnimateLoadingIndicatorLeave(loadingIndicator);
 
         // If web request result NOT successful => Failed and break coroutine
         if (webRequest.result != UnityWebRequest.Result.Success)
@@ -583,13 +612,13 @@ public class AIDialogueController : MonoBehaviour
         currentConversationHistory.Add(currentAIResponseMessage);
 
         // Set text attribute in dialogue screen => display trainee dialogue and AI response message in textbox
-        traineeDialogueText.text = requestData.traineeDialogueText;
+        // traineeDialogueText.text = requestData.traineeDialogueText;
         aiResponseText.text = responseData.replyText;
 
-        dialogueScreen.SetActive(true);
+        // dialogueScreen.SetActive(true);
 
         // Enable next question button to continue
-        nextQuestionButton.gameObject.SetActive(true);
+        // nextQuestionButton.gameObject.SetActive(true);
     }
 
     private void ShowPointScreen()
@@ -600,8 +629,8 @@ public class AIDialogueController : MonoBehaviour
         int currentModuleCorrectAnswers = session.GetCurrentModuleCorrectAnswers();
         int currentModuleTotalQuestions = currentModule.questions.Count;
 
-        // Animate screen change: dialogue screen -> current point screen
-        animationController.AnimateScreenChange(dialogueScreenElements, currentPointScreenElements, dialogueScreen, currentPointScreen);
+        // Animate screen change: dialogue screen (POST questions) -> current point screen
+        animationController.AnimateScreenChange(dialogueScreenElementsPost, currentPointScreenElements, dialogueScreen, currentPointScreen);
             
         // Animate current stats display (one line of text at a time)
         animationController.AnimateStatsDisplay(currentStatsElements, currentModulePoints, currentModuleCorrectAnswers, currentModuleTotalQuestions);
@@ -614,8 +643,8 @@ public class AIDialogueController : MonoBehaviour
         int topicTotalQuestions = topic.modules.Sum(m => m.questions.Count);
         float topicAvgResponseTime = session.GetCurrentTopicAvgResponseTime();
 
-        // Animate screen change: dialogue screen -> final point screen
-        animationController.AnimateScreenChange(dialogueScreenElements, finalPointScreenElements, dialogueScreen, finalPointScreen);
+        // Animate screen change: dialogue screen (POST questions) -> final point screen
+        animationController.AnimateScreenChange(dialogueScreenElementsPost, finalPointScreenElements, dialogueScreen, finalPointScreen);
         
         // Animate final stats display (one line of text at a time)
         animationController.AnimateStatsDisplay(finalStatsElements, topicTotalPoints, topicCorrectAnswers, topicTotalQuestions, topicAvgResponseTime);
@@ -626,9 +655,6 @@ public class AIDialogueController : MonoBehaviour
     {
         // dialogueScreen.SetActive(false);
         // questionScreen.SetActive(true);
-
-        // Animate screen change: dialogue screen -> question screen
-        animationController.AnimateScreenChange(dialogueScreenElements, questionScreenElements, dialogueScreen, questionScreen);
         
         currentQuestionIndex++;
         ShowCurrentQuestion();
@@ -637,7 +663,7 @@ public class AIDialogueController : MonoBehaviour
     private void ContinueToNextModule()
     {
         // Disable next question button to NOT intervene with start question button at the beginning of next module
-        nextQuestionButton.gameObject.SetActive(false);
+        // nextQuestionButton.gameObject.SetActive(false);
 
         currentModuleIndex++;
         SetInfoScreen();

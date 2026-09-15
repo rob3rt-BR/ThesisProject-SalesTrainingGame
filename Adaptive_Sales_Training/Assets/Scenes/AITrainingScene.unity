@@ -4383,7 +4383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1123512188
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4464,7 +4464,7 @@ MonoBehaviour:
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
   originalPosition: {x: 0, y: 0}
-  enterDirection: 3
+  enterDirection: 2
   leaveDirection: 3
   distanceToAnimate: {x: 75, y: 100}
   easingCurve:
@@ -4720,7 +4720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1246374572
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6739,7 +6739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8685049297318313015, guid: 728d4589888e87d489165dcf0089072f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7051,7 +7051,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1799048124
 RectTransform:
   m_ObjectHideFlags: 0

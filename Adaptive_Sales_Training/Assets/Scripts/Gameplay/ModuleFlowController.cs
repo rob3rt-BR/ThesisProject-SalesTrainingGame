@@ -236,12 +236,10 @@ public class ModuleFlowController : MonoBehaviour
         if (currentModuleIndex > 0 && currentModuleIndex < topic.modules.Count)
         {
             // Restart infoTextBox element to original position for correct animation position and direction
-            ElementAnimation infoTextBoxElement = animationController.GetElementAnimation(infoTextHolder);
-            infoTextBoxElement.RestartToOriginalPosition();
+            animationController.RestartElementToOriginalPosition(infoTextHolder);
 
             // Restart questionTextHolder element to original position for correct animation position and direction
-            ElementAnimation questionTextHolderElement = animationController.GetElementAnimation(questionTextHolder);
-            questionTextHolderElement.RestartToOriginalPosition();
+            animationController.RestartElementToOriginalPosition(questionTextHolder);
 
             List<ElementAnimation> allCurrentPointScreenElements = animationController.CombinePointScreenElementsLists(currentPointScreenElements, currentStatsElements);
 
