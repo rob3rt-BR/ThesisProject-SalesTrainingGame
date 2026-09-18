@@ -167,8 +167,8 @@ public class AIDialogueController : MonoBehaviour
         // On click of continue button (point screen) => Go to next module info screen
         continueButton.onClick.AddListener(ContinueToNextModule);
 
-        // On click (just 1 time at the end) of finish button (final point screen) => Go to SetInfoScreen() edge case => FinishTopic()
-        finishTopicButton.onClick.AddListener(ContinueToNextModule);
+        // On click (just 1 time at the end) of finish button (final point screen) => Exit TrainigScene of current topic
+        finishTopicButton.onClick.AddListener(ExitTopicTraining);
 
         // On click of answerButton[i] (question screen) => select an answer with a designated index
         for (int i = 0; i < answerButtons.Length; i++)
@@ -637,37 +637,28 @@ public class AIDialogueController : MonoBehaviour
 
     private void ShowPointScreen()
     {
-        MicroModule currentModule = topic.modules[currentModuleIndex];
-
-        int currentModulePoints = session.GetCurrentModulePoints();
-        int currentModuleCorrectAnswers = session.GetCurrentModuleCorrectAnswers();
-        int currentModuleTotalQuestions = currentModule.questions.Count;
-
         // Set title text attribute
-        moduleTitleEnd.text = currentModule.moduleTitle;
+        moduleTitleEnd.text = session.GetCurrentModuleResult().moduleTitle;
 
         // Animate screen change: dialogue screen (POST questions) -> current point screen
         animationController.AnimateScreenChange(dialogueScreenElementsPost, currentPointScreenElements, dialogueScreen, currentPointScreen);
             
         // Animate current stats display (one line of text at a time)
-        animationController.AnimateStatsDisplay(currentStatsElements, currentModulePoints, currentModuleCorrectAnswers, currentModuleTotalQuestions);
+        animationController.AnimateModuleStatsDisplay(currentStatsElements, session.GetCurrentModuleResult());
     }
 
     private void ShowFinalPointScreen()
     {
-        int topicTotalPoints = session.GetCurrentTopicPoints();
-        int topicCorrectAnswers = session.GetCurrentTopicCorrectAnswers();
-        int topicTotalQuestions = topic.modules.Sum(m => m.questions.Count);
-        float topicAvgResponseTime = session.GetCurrentTopicAvgResponseTime();
-
         // Set title text attribute
-        topicCompletedText.text = session.SelectedTopic.topicTitle;
+        topicCompletedText.text = session.GetCurrentTopicResult().topicTitle;
 
-        // Animate screen change: dialogue screen (POST questions) -> final point screen
-        animationController.AnimateScreenChange(dialogueScreenElementsPost, finalPointScreenElements, dialogueScreen, finalPointScreen);
+        List<ElementAnimation> allCurrentPointScreenElements = animationController.CombinePointScreenElementsLists(currentPointScreenElements, currentStatsElements);
+
+        // Animate screen change: current point screen (last) -> final point screen
+        animationController.AnimateScreenChange(allCurrentPointScreenElements, finalPointScreenElements, currentPointScreen, finalPointScreen);
         
         // Animate final stats display (one line of text at a time)
-        animationController.AnimateStatsDisplay(finalStatsElements, topicTotalPoints, topicCorrectAnswers, topicTotalQuestions, topicAvgResponseTime);
+        animationController.AnimateTopicStatsDisplay(finalStatsElements, session.GetCurrentTopicResult());
     }
 
 
@@ -712,47 +703,48 @@ public class AIDialogueController : MonoBehaviour
         // Record currentModuleResult attributes (final) in currentTopicResult in TrainingSessionManager
         session.RecordCurrentModuleResult();
 
-        // If last module => Go to final points screen (topic), Else => Go to current points screen (module)
-        if (currentModuleIndex == topic.modules.Count - 1)
+        if (currentModuleIndex > 0 && currentModuleIndex < topic.modules.Count)
         {
-            ShowFinalPointScreen();
+            // Restart current point stats elements to original position for correct animation position and direction
+            animationController.RestartPointStatsElementsPosition(currentStatsElements);
         }
-        else
-        {
-            if (currentModuleIndex > 0 && currentModuleIndex < topic.modules.Count - 1)
-            {
-                // Restart current point stats elements to original position for correct animation position and direction
-                animationController.RestartPointStatsElementsPosition(currentStatsElements);
-            }
 
-            ShowPointScreen();
-        }
+        // Go to current points screen (module)
+        ShowPointScreen();
     }
     private void FinishTopic()
     {
-        CleanUp();
-
         // Set currentTopicResult.completed to true in TrainingSessionManager
         session.CompleteCurrentTopic();
+
+        // Go to final points screen (topic)
+        ShowFinalPointScreen();
+    }
+
+    private void ExitTopicTraining()
+    {
+        CleanUp();
+
+        List<ElementAnimation> allFinalPointScreenElements = animationController.CombinePointScreenElementsLists(finalPointScreenElements, finalStatsElements);
 
         // If all topics completed => End participant session, send respective values to local store and go to SessionResultsScene
         // Else => Record intermediate participant results (save and export), and return to TopicMenuScene for next topic
         if (session.AllTopicsCompleted())
         {
             session.EndParticipantSession();
-
-            List<ElementAnimation> allFinalPointScreenElements = animationController.CombinePointScreenElementsLists(finalPointScreenElements, finalStatsElements);
             
             // Animate screen change: final point screen -> end of TrainingScene and load SessionResultsScene
             animationController.AnimateSceneEnd(allFinalPointScreenElements, "SessionResultsScene");
             Debug.Log("Loading SessionResultsScene.");
-        } else
+        } 
+        else
         {
             session.RecordIntermediateResults();
 
             // Animate screen change: final point screen -> end of TrainingScene and load TopicMenuScene
-            animationController.AnimateSceneEnd(finalPointScreenElements, "TopicMenuScene");
+            animationController.AnimateSceneEnd(allFinalPointScreenElements, "TopicMenuScene");
             Debug.Log("Returning to TopicMenuScene.");
         }
+        return;
     }
 }

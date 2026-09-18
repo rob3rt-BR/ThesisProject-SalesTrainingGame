@@ -273,6 +273,11 @@ public class TrainingSessionManager : MonoBehaviour
         currentTopicResult.completed = true;
     }
 
+    public TopicResult GetCurrentTopicResult()
+    {
+        return currentTopicResult;
+    }
+
     public int GetCurrentTopicPoints()
     {
         if (currentTopicResult == null)
@@ -362,6 +367,11 @@ public class TrainingSessionManager : MonoBehaviour
         }
         currentTopicResult.points += currentModuleResult.points; // Add current module points (final) to current topic points
         currentTopicResult.correctAnswers += currentModuleResult.correctAnswers; // Add current module correct answers (final) to current topic correct answers
+    }
+
+    public ModuleResult GetCurrentModuleResult()
+    {
+        return currentModuleResult;
     }
 
     public int GetCurrentModulePoints()

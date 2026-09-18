@@ -229,10 +229,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
   initialOffsetPosition: {x: 0, y: -320}
+  hasTextComponent: 0
+  textComponentType: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
+  textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 0
   leaveDirection: 1
   distanceToAnimate: {x: 100, y: 320}
@@ -855,10 +859,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
   initialOffsetPosition: {x: 0, y: 120}
+  hasTextComponent: 0
+  textComponentType: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
+  textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 1
   leaveDirection: 0
   distanceToAnimate: {x: 100, y: 120}
@@ -1062,12 +1070,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
   initialOffsetPosition: {x: 0, y: -45}
+  hasTextComponent: 0
+  textComponentType: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
+  textComponent: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
   enterDirection: 0
-  leaveDirection: 0
+  leaveDirection: 1
   distanceToAnimate: {x: 100, y: 45}
   easingCurve:
     serializedVersion: 2

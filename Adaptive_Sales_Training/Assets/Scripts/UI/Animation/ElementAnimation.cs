@@ -22,7 +22,9 @@ public class ElementAnimation : MonoBehaviour
         None,
         Points,
         CorrectAnswers,
-        AvgResponseTime
+        AvgResponseTime,
+        ResultsTopicPoints,
+        ResultsTotalPoints
     }
 
     [HideInInspector]

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -40,10 +41,16 @@ public class AnimationController : MonoBehaviour
 
     private List<ElementAnimation> complementTransitionElements;
     private bool displayStats;
+    private bool isTopicStats;
     private int pointsHolder;
     private int correctAnswersHolder;
     private int totalQuestionsHolder;
     private float avgResponseTimeHolder;
+
+    private TopicResult currentTopicResult;
+    private ModuleResult currentModuleResult;
+
+    private List<TopicResult> currentTopicResults;
 
     private ElementAnimation currentElementAnimation;
     private ElementAnimation nextElementAnimation;
@@ -57,6 +64,7 @@ public class AnimationController : MonoBehaviour
     private bool postAnimationEnable;
 
     private string sceneToLoadName;
+    private Coroutine activeCoroutine;
 
     void Awake()
     {
@@ -170,7 +178,12 @@ public class AnimationController : MonoBehaviour
                 {
                     displayStats = false;
 
-                    StartCoroutine(DisplayStats(complementTransitionElements));
+                    if (activeCoroutine != null)
+                    {
+                        StopCoroutine(activeCoroutine);
+                    }
+
+                    activeCoroutine = StartCoroutine(DisplayStats(complementTransitionElements));
                 }
 
                 transitionPhase = TransitionPhase.None;
@@ -427,11 +440,35 @@ public class AnimationController : MonoBehaviour
 
         complementTransitionElements = statsElements;
 
-        pointsHolder = points;
-        correctAnswersHolder = correctAnswers;
-        totalQuestionsHolder = totalQuestions;
+        //pointsHolder = points;
+        //correctAnswersHolder = correctAnswers;
+        //totalQuestionsHolder = totalQuestions;
 
-        avgResponseTimeHolder = avgResponseTime;
+        //avgResponseTimeHolder = avgResponseTime;
+    }
+
+    public void AnimateModuleStatsDisplay(List<ElementAnimation> statsElements, ModuleResult moduleResult)
+    {
+        PrepareStatsDisplayAnimation(statsElements);
+
+        displayStats = true;
+        isTopicStats = false;
+
+        complementTransitionElements = statsElements;
+
+        currentModuleResult = moduleResult;
+    }
+
+    public void AnimateTopicStatsDisplay(List<ElementAnimation> statsElements, TopicResult topicResult)
+    {
+        PrepareStatsDisplayAnimation(statsElements);
+
+        displayStats = true;
+        isTopicStats = true;
+
+        complementTransitionElements = statsElements;
+
+        currentTopicResult = topicResult;
     }
 
     private void PrepareStatsDisplayAnimation(List<ElementAnimation> elements)
@@ -466,13 +503,163 @@ public class AnimationController : MonoBehaviour
                 float normalizedTime = Mathf.Clamp01(elapsedTimeLocal / groupAnimationDuration);
                 float evaluationTimeLocal = groupEasingCurve.Evaluate(normalizedTime);
 
-                AnimateStatsElement(element, evaluationTimeLocal, element.HasTextComponent());
+                if (isTopicStats)
+                {
+                    AnimateTopicStatsElement(element, evaluationTimeLocal, element.HasTextComponent());
+                }
+                else
+                {
+                    AnimateModuleStatsElement(element, evaluationTimeLocal, element.HasTextComponent());
+                }
 
                 elapsedTimeLocal += Time.deltaTime;
                 yield return null;
             }
-            FinishDisplayStats(element);
+            if (isTopicStats)
+            {
+                FinishDisplayTopicStats(element);
+            }
+            else
+            {
+                FinishDisplayModuleStats(element);
+            }
             yield return waitForSeconds;
+        }
+    }
+
+    private void AnimateModuleStatsElement(ElementAnimation element, float evaluationTime, bool hasTextComponent)
+    {
+        if (hasTextComponent)
+        {
+            string textToDisplay = "";
+            switch (element.GetTextComponentType())
+            {
+                case ElementAnimation.TextComponentType.Points:
+                    {
+                        textToDisplay = Mathf.RoundToInt(Mathf.Lerp(0f, currentModuleResult.points, evaluationTime)).ToString();
+                    } 
+                break;
+                case ElementAnimation.TextComponentType.CorrectAnswers:
+                    {
+                        int totalCorrectAnswers = currentModuleResult.questionResults.Count;
+                        textToDisplay = $"{Mathf.RoundToInt(Mathf.Lerp(0f, currentModuleResult.correctAnswers, evaluationTime))} / {totalCorrectAnswers}";
+                    } 
+                break;
+            }
+            element.textComponent.text = textToDisplay;
+        }
+        else
+        {
+            Vector2 currentPosition = element.currentPosition;
+            Vector2 targetPosition = element.targetPosition;
+
+            element.rectTransform.anchoredPosition = Vector2.Lerp(currentPosition, targetPosition, evaluationTime);
+
+            element.canvasGroup.alpha = Mathf.Lerp(0f, 1f, evaluationTime);
+        }
+    }
+
+    private void FinishDisplayModuleStats(ElementAnimation element)
+    {
+        if (element.HasTextComponent())
+        {
+            string textToDisplay = "";
+            switch (element.GetTextComponentType())
+            {
+                case ElementAnimation.TextComponentType.Points:
+                    {
+                        textToDisplay = currentModuleResult.points.ToString();
+                    } 
+                break;
+                case ElementAnimation.TextComponentType.CorrectAnswers:
+                    {
+                        int totalCorrectAnswers = currentModuleResult.questionResults.Count;
+                        textToDisplay = $"{currentModuleResult.correctAnswers} / {totalCorrectAnswers}";
+                    } 
+                break;
+            }
+            element.textComponent.text = textToDisplay;
+        }
+        else
+        {
+            element.rectTransform.anchoredPosition = element.targetPosition;
+
+            element.canvasGroup.alpha = 1f;
+            element.canvasGroup.interactable = true;
+            element.canvasGroup.blocksRaycasts = true;
+        }
+    }
+
+    private void AnimateTopicStatsElement(ElementAnimation element, float evaluationTime, bool hasTextComponent)
+    {
+        if (hasTextComponent)
+        {
+            string textToDisplay = "";
+            switch (element.GetTextComponentType())
+            {
+                case ElementAnimation.TextComponentType.Points:
+                    {
+                        textToDisplay = Mathf.RoundToInt(Mathf.Lerp(0f, currentTopicResult.points, evaluationTime)).ToString();
+                    } 
+                break;
+                case ElementAnimation.TextComponentType.CorrectAnswers:
+                    {
+                        int totalCorrectAnswers = currentTopicResult.moduleResults.Sum(m => m.questionResults.Count);
+                        textToDisplay = $"{Mathf.RoundToInt(Mathf.Lerp(0f, currentTopicResult.correctAnswers, evaluationTime))} / {totalCorrectAnswers}";
+                    } 
+                break;
+                case ElementAnimation.TextComponentType.AvgResponseTime:
+                    {
+                        textToDisplay = Mathf.Lerp(0f, currentTopicResult.avgResponseTime, evaluationTime).ToString("0.0") + "s";
+                    }
+                break;
+            }
+            element.textComponent.text = textToDisplay;
+        }
+        else
+        {
+            Vector2 currentPosition = element.currentPosition;
+            Vector2 targetPosition = element.targetPosition;
+
+            element.rectTransform.anchoredPosition = Vector2.Lerp(currentPosition, targetPosition, evaluationTime);
+
+            element.canvasGroup.alpha = Mathf.Lerp(0f, 1f, evaluationTime);
+        }
+    }
+
+    private void FinishDisplayTopicStats(ElementAnimation element)
+    {
+        if (element.HasTextComponent())
+        {
+            string textToDisplay = "";
+            switch (element.GetTextComponentType())
+            {
+                case ElementAnimation.TextComponentType.Points:
+                    {
+                        textToDisplay = currentTopicResult.points.ToString();
+                    } 
+                break;
+                case ElementAnimation.TextComponentType.CorrectAnswers:
+                    {
+                        int totalCorrectAnswers = currentTopicResult.moduleResults.Sum(m => m.questionResults.Count);
+                        textToDisplay = $"{currentTopicResult.correctAnswers} / {totalCorrectAnswers}";
+                    } 
+                break;
+                case ElementAnimation.TextComponentType.AvgResponseTime:
+                    {
+                       textToDisplay = currentTopicResult.avgResponseTime.ToString("0.0") + "s";
+                    }
+                break;
+            }
+            element.textComponent.text = textToDisplay;
+        }
+        else
+        {
+            element.rectTransform.anchoredPosition = element.targetPosition;
+
+            element.canvasGroup.alpha = 1f;
+            element.canvasGroup.interactable = true;
+            element.canvasGroup.blocksRaycasts = true;
         }
     }
 
