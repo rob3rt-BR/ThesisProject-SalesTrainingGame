@@ -13,11 +13,11 @@ public class ElementAnimation : MonoBehaviour
     [SerializeField]
     private Vector2 initialOffsetPosition = new(0, 0);
     [SerializeField]
-    private bool hasTextComponent;
+    private bool hasValueText;
     [SerializeField]
-    private TextComponentType textComponentType;
+    private ValueTextType valueTextType;
 
-    public enum TextComponentType
+    public enum ValueTextType
     {
         None,
         Points,
@@ -79,7 +79,7 @@ public class ElementAnimation : MonoBehaviour
 
         canvasGroup = gameObject.GetComponent<CanvasGroup>();
 
-        if (hasTextComponent)
+        if (hasValueText)
         {
             textComponent = gameObject.GetComponent<TMP_Text>();
         }
@@ -117,14 +117,14 @@ public class ElementAnimation : MonoBehaviour
         };
     }
 
-    public bool HasTextComponent()
+    public bool HasValueText()
     {
-        return hasTextComponent;
+        return hasValueText;
     }
 
-    public TextComponentType GetTextComponentType()
+    public ValueTextType GetValueTextType()
     {
-        return textComponentType;
+        return valueTextType;
     }
 
     public void RestartToOriginalPosition()

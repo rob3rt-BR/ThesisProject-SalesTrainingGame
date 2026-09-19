@@ -18,6 +18,9 @@ public class FinalScreenController : MonoBehaviour
     [SerializeField]
     private TMP_Text avgResponseTimeText;
 
+    [Header("Animation Controller")]
+    private AnimationController animationController;
+
     private readonly TrainingSessionManager session = TrainingSessionManager.Instance;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -26,6 +29,8 @@ public class FinalScreenController : MonoBehaviour
         finalPointsText.text = session.TotalPointsText();
         correctAnswersText.text = session.TotalCorrectAnswersText();
         avgResponseTimeText.text = session.FinalAvgResponseTimeText();
+
+        // animationController.AnimateSceneStart();
     }
 
     public void ContinueToThanksScreen()

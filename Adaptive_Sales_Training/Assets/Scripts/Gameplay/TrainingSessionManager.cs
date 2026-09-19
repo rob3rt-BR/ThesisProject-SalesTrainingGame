@@ -16,6 +16,7 @@ public class TrainingSessionManager : MonoBehaviour
     public string ParticipantStart {get; private set;}
     public string ParticipantEnd {get; private set;}
 
+    public TrainingResultData FinalTrainingData {get; private set;}
     public List<TopicResult> TopicResults {get; private set;} = new();
     public SalesTopic SelectedTopic {get; private set;}
 
@@ -24,10 +25,6 @@ public class TrainingSessionManager : MonoBehaviour
     private List<SalesTopic> allTopics;
     private TopicResult currentTopicResult;
     private ModuleResult currentModuleResult;
-
-    private int TotalPoints;
-    private int TotalCorrectAnswers;
-    private float FinalAvgResponseTime;
 
     private string FinalTrainingDataPath;
 
@@ -71,6 +68,8 @@ public class TrainingSessionManager : MonoBehaviour
         ParticipantStart = DateTime.Now.ToString(@"d/M/yyyy hh:mm:ss tt"); // Current local time => CEST (Central European Summer Time, UTC+2)
 
         // Reset important manager information trackers
+        FinalTrainingData = null;
+
         TopicResults.Clear();
         SelectedTopic = null;
 
@@ -78,10 +77,6 @@ public class TrainingSessionManager : MonoBehaviour
 
         currentTopicResult = null;
         currentModuleResult = null;
-
-        TotalPoints = 0;
-        TotalCorrectAnswers = 0;
-        FinalAvgResponseTime = 0f;
 
         FinalTrainingDataPath = string.Empty;
 
@@ -100,10 +95,6 @@ public class TrainingSessionManager : MonoBehaviour
 
         ParticipantEnd = DateTime.Now.ToString(@"d/M/yyyy hh:mm:ss tt"); // Current local time => CEST (Central European Summer Time, UTC+2)
 
-        TotalPoints = GetTotalPoints();
-        TotalCorrectAnswers = GetTotalCorrectAnswers();
-        FinalAvgResponseTime = GetFinalAvgResponseTime();
-
         // Save final participant training data and record data path for later export
         FinalTrainingDataPath = SaveFinalTrainingData();
 
@@ -115,9 +106,11 @@ public class TrainingSessionManager : MonoBehaviour
         TrainingResultData saveData = CreateSaveData();
         
         saveData.participantEnd = ParticipantEnd;
-        saveData.totalPoints = TotalPoints;
-        saveData.totalCorrectAnswers = TotalCorrectAnswers;
-        saveData.finalAvgResponseTime = FinalAvgResponseTime;
+        saveData.totalPoints = GetTotalPoints();
+        saveData.totalCorrectAnswers = GetTotalCorrectAnswers();
+        saveData.finalAvgResponseTime = GetFinalAvgResponseTime();
+
+        FinalTrainingData = saveData;
 
         string folderPath = Path.Combine(Application.persistentDataPath, "Sessions", $"Session_{SessionId}", "FinalTrainingData");
         Directory.CreateDirectory(folderPath);
@@ -460,7 +453,7 @@ public class TrainingSessionManager : MonoBehaviour
     {
         StringBuilder statsText = new();
         TopicResults.ForEach(t => statsText.AppendLine($"\"{t.topicTitle}\" Punkte: {t.points}"));
-        statsText.AppendLine($"Gesamtpunktzahl: {TotalPoints}");
+        statsText.AppendLine($"Gesamtpunktzahl: {GetTotalPoints()}");
         return statsText.ToString();
     }
 
@@ -468,12 +461,12 @@ public class TrainingSessionManager : MonoBehaviour
     {
         static int moduleTotalQuestion(ModuleResult m) => m.questionResults.Count;
         int totalQuestions = TopicResults.Sum(t => t.moduleResults.Sum(moduleTotalQuestion));
-        return $"{TotalCorrectAnswers} / {totalQuestions}";
+        return $"{GetTotalCorrectAnswers()} / {totalQuestions}";
     }
 
     public string FinalAvgResponseTimeText()
     {
-        return $"{FinalAvgResponseTime:0.0}s";
+        return $"{GetFinalAvgResponseTime():0.0}s";
     }
     #endregion
 }
