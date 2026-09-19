@@ -331,7 +331,7 @@ public class AnimationController : MonoBehaviour
 
         currentTransitionElements = currentElements;
 
-        StartCoroutine(WaitTimeInSceneStart());
+        activeCoroutine = StartCoroutine(WaitTimeInSceneStart());
     }
 
     public void AnimateSceneEnd(List<ElementAnimation> currentElements, string nextSceneName) 

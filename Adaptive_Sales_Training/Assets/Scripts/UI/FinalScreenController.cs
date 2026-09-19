@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class FinalScreenController : MonoBehaviour
 {
@@ -12,39 +14,93 @@ public class FinalScreenController : MonoBehaviour
 
     [Header("Final Results UI")]
     [SerializeField]
+    private GameObject finalResultsTitle;
+    [SerializeField]
+    private GameObject finalResultsBackground;
+    [SerializeField]
+    private GameObject finalPointsTitle;
+    [SerializeField]
     private TMP_Text finalPointsText;
     [SerializeField]
-    private TMP_Text correctAnswersText;
+    private GameObject finalCorrectAnswersTitle;
     [SerializeField]
-    private TMP_Text avgResponseTimeText;
+    private TMP_Text finalCorrectAnswersText;
+    [SerializeField]
+    private GameObject finalAvgResponseTimeTitle;
+    [SerializeField]
+    private TMP_Text finalAvgResponseTimeText;
+    [SerializeField]
+    private GameObject continueButton;
+
+    [Header("Thanks UI")]
+    [SerializeField]
+    private GameObject thxText;
+    [SerializeField]
+    private GameObject finishTrainingButton;
 
     [Header("Animation Controller")]
     private AnimationController animationController;
+
+    private List<ElementAnimation> finalResultsScreenElements;
+    private List<ElementAnimation> finalStatsElements;
+    private List<ElementAnimation> thanksScreenElements;
 
     private readonly TrainingSessionManager session = TrainingSessionManager.Instance;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        finalPointsText.text = session.TotalPointsText();
-        correctAnswersText.text = session.TotalCorrectAnswersText();
-        avgResponseTimeText.text = session.FinalAvgResponseTimeText();
+        // Initialize ElementAnimation objects of each element per UI screen
+        InitializeElementAnimationGroups();
 
-        // animationController.AnimateSceneStart();
+        // Animate scene start: start of SessionResultsScene
+        animationController.AnimateSceneStart(finalResultsScreenElements);
+
+        // Animate final results stats display (one line of text at a time)
+        animationController.AnimateFinalStatsDisplay(finalStatsElements, session.FinalTrainingData);
+    }
+
+    private void InitializeElementAnimationGroups()
+    {
+        // Final results screen elements
+        ElementAnimation finalResultsTitleElement = animationController.GetElementAnimation(finalResultsTitle);
+        ElementAnimation finalResultsBackgroundElement = animationController.GetElementAnimation(finalResultsBackground);
+        ElementAnimation continueButtonElement = animationController.GetElementAnimation(continueButton);
+
+        finalResultsScreenElements = new() {finalResultsTitleElement, finalResultsBackgroundElement, continueButtonElement};
+
+        // Final result screen stats elements
+        ElementAnimation finalPointsTitleElement = animationController.GetElementAnimation(finalPointsTitle);
+        ElementAnimation finalPointsTextElement = animationController.GetElementAnimation(finalPointsText.gameObject);
+        ElementAnimation finalCorrectAnsTitleElement = animationController.GetElementAnimation(finalCorrectAnswersTitle);
+        ElementAnimation finalCorrectAnsTextElement = animationController.GetElementAnimation(finalCorrectAnswersText.gameObject);
+        ElementAnimation finalAvgRespTimeTitleElement = animationController.GetElementAnimation(finalAvgResponseTimeTitle);
+        ElementAnimation finalAvgRespTimeTextElement = animationController.GetElementAnimation(finalAvgResponseTimeText.gameObject);
+
+        finalStatsElements = new() {finalPointsTitleElement, finalPointsTextElement, finalCorrectAnsTitleElement, finalCorrectAnsTextElement, finalAvgRespTimeTitleElement, finalAvgRespTimeTextElement};
+    
+        // Thanks screen elemens
+        ElementAnimation thxTextElement = animationController.GetElementAnimation(thxText);
+        ElementAnimation finishTrainingElement = animationController.GetElementAnimation(finishTrainingButton);
+
+        thanksScreenElements = new() {thxTextElement, finishTrainingElement};
     }
 
     public void ContinueToThanksScreen()
     {
         // Export final participant training data to predefined local storage directory
         session.ExportFinalTrainingData();
-        
-        finalStatsScreen.SetActive(false);
-        thanksScreen.SetActive(true);
+
+        List<ElementAnimation> allFinalResultsScreenElements = animationController.CombinePointScreenElementsLists(finalResultsScreenElements, finalStatsElements);
+
+        // Animate sceeen change: final results screen -> thanks screen
+        animationController.AnimateScreenChange(allFinalResultsScreenElements, thanksScreenElements, finalStatsScreen, thanksScreen);
     }
 
     public void EndTrainingSession()
     {
-        SceneManager.LoadScene("StartScene");
+        // Animate screen change: thanks screen -> end of SessionResultsScene and load StartScene
+        animationController.AnimateSceneEnd(thanksScreenElements, "StartScene");
         Debug.Log("Returning to StartScene.");
     }
 }
