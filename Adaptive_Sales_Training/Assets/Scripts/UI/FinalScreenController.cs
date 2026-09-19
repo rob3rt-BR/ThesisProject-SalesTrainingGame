@@ -20,6 +20,10 @@ public class FinalScreenController : MonoBehaviour
     [SerializeField]
     private GameObject finalPointsTitle;
     [SerializeField]
+    private TMP_Text topic1FinalPointsText;
+    [SerializeField]
+    private TMP_Text topic2FinalPointsText;
+    [SerializeField]
     private TMP_Text finalPointsText;
     [SerializeField]
     private GameObject finalCorrectAnswersTitle;
@@ -39,6 +43,7 @@ public class FinalScreenController : MonoBehaviour
     private GameObject finishTrainingButton;
 
     [Header("Animation Controller")]
+    [SerializeField]
     private AnimationController animationController;
 
     private List<ElementAnimation> finalResultsScreenElements;
@@ -71,13 +76,15 @@ public class FinalScreenController : MonoBehaviour
 
         // Final result screen stats elements
         ElementAnimation finalPointsTitleElement = animationController.GetElementAnimation(finalPointsTitle);
+        ElementAnimation topic1FinalPointsTextElement = animationController.GetElementAnimation(topic1FinalPointsText.gameObject);
+        ElementAnimation topic2FinalointsTextElement = animationController.GetElementAnimation(topic2FinalPointsText.gameObject);
         ElementAnimation finalPointsTextElement = animationController.GetElementAnimation(finalPointsText.gameObject);
         ElementAnimation finalCorrectAnsTitleElement = animationController.GetElementAnimation(finalCorrectAnswersTitle);
         ElementAnimation finalCorrectAnsTextElement = animationController.GetElementAnimation(finalCorrectAnswersText.gameObject);
         ElementAnimation finalAvgRespTimeTitleElement = animationController.GetElementAnimation(finalAvgResponseTimeTitle);
         ElementAnimation finalAvgRespTimeTextElement = animationController.GetElementAnimation(finalAvgResponseTimeText.gameObject);
 
-        finalStatsElements = new() {finalPointsTitleElement, finalPointsTextElement, finalCorrectAnsTitleElement, finalCorrectAnsTextElement, finalAvgRespTimeTitleElement, finalAvgRespTimeTextElement};
+        finalStatsElements = new() {finalPointsTitleElement, topic1FinalPointsTextElement, topic2FinalointsTextElement, finalPointsTextElement, finalCorrectAnsTitleElement, finalCorrectAnsTextElement, finalAvgRespTimeTitleElement, finalAvgRespTimeTextElement};
     
         // Thanks screen elemens
         ElementAnimation thxTextElement = animationController.GetElementAnimation(thxText);
