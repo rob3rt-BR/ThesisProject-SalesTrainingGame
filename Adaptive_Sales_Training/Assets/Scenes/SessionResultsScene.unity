@@ -238,7 +238,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5316922238156215768, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 51239870}
+    - targetCorrespondingSourceObject: {fileID: 5316922238156215768, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 51239871}
   m_SourcePrefab: {fileID: 100100000, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
 --- !u!224 &51239868 stripped
 RectTransform:
@@ -250,6 +256,68 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5316922238156215768, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
   m_PrefabInstance: {fileID: 51239867}
   m_PrefabAsset: {fileID: 0}
+--- !u!225 &51239870
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51239869}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &51239871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51239869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
+  defineInitPosition: 1
+  initialOffsetPosition: {x: 0, y: -125}
+  hasValueText: 0
+  valueTextType: 0
+  rectTransform: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  textComponent: {fileID: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  enterDirection: 0
+  leaveDirection: 1
+  distanceToAnimate: {x: 100, y: 125}
+  easingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationDuration: 0.5
 --- !u!1 &181449876
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +328,9 @@ GameObject:
   m_Component:
   - component: {fileID: 181449877}
   - component: {fileID: 181449879}
+  - component: {fileID: 181449880}
   - component: {fileID: 181449878}
+  - component: {fileID: 181449881}
   m_Layer: 5
   m_Name: FinalTitle
   m_TagString: Untagged
@@ -387,6 +457,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181449876}
   m_CullTransparentMesh: 1
+--- !u!225 &181449880
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181449876}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &181449881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181449876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
+  defineInitPosition: 1
+  initialOffsetPosition: {x: 0, y: 110}
+  hasValueText: 0
+  valueTextType: 0
+  rectTransform: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  textComponent: {fileID: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  enterDirection: 1
+  leaveDirection: 0
+  distanceToAnimate: {x: 100, y: 110}
+  easingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationDuration: 0.5
 --- !u!1 &289591226
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,7 +529,9 @@ GameObject:
   m_Component:
   - component: {fileID: 289591227}
   - component: {fileID: 289591229}
+  - component: {fileID: 289591230}
   - component: {fileID: 289591228}
+  - component: {fileID: 289591231}
   m_Layer: 5
   m_Name: CorrectAnswersText
   m_TagString: Untagged
@@ -524,6 +658,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289591226}
   m_CullTransparentMesh: 1
+--- !u!225 &289591230
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289591226}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &289591231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289591226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
+  defineInitPosition: 0
+  initialOffsetPosition: {x: 0, y: 0}
+  hasValueText: 1
+  valueTextType: 2
+  rectTransform: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  textComponent: {fileID: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  enterDirection: 3
+  leaveDirection: 3
+  distanceToAnimate: {x: 100, y: 100}
+  easingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationDuration: 0.5
 --- !u!1001 &375421395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -650,7 +846,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7480892480859450974, guid: 6cf656ca7dcdfc94d9d019643dd58dbf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1367436829}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2143070624474375804, guid: 6cf656ca7dcdfc94d9d019643dd58dbf, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 375421399}
+    - targetCorrespondingSourceObject: {fileID: 2143070624474375804, guid: 6cf656ca7dcdfc94d9d019643dd58dbf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 375421398}
   m_SourcePrefab: {fileID: 100100000, guid: 6cf656ca7dcdfc94d9d019643dd58dbf, type: 3}
 --- !u!224 &375421396 stripped
 RectTransform:
@@ -662,6 +864,68 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2143070624474375804, guid: 6cf656ca7dcdfc94d9d019643dd58dbf, type: 3}
   m_PrefabInstance: {fileID: 375421395}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &375421398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375421397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
+  defineInitPosition: 1
+  initialOffsetPosition: {x: 0, y: -170}
+  hasValueText: 0
+  valueTextType: 0
+  rectTransform: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  textComponent: {fileID: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  enterDirection: 0
+  leaveDirection: 1
+  distanceToAnimate: {x: 100, y: 170}
+  easingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationDuration: 0.5
+--- !u!225 &375421399
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375421397}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &382002297
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,7 +970,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1df1e04f15e399439a65d9113addbe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationController
-  animations: []
+  animations:
+  - key: {fileID: 181449876}
+    value: {fileID: 181449881}
+  - key: {fileID: 51239869}
+    value: {fileID: 51239871}
+  - key: {fileID: 375421397}
+    value: {fileID: 375421398}
+  - key: {fileID: 1634734398}
+    value: {fileID: 1634734399}
+  - key: {fileID: 861799004}
+    value: {fileID: 861799006}
+  - key: {fileID: 593720864}
+    value: {fileID: 593720869}
+  - key: {fileID: 1429465338}
+    value: {fileID: 1429465343}
+  - key: {fileID: 289591226}
+    value: {fileID: 289591231}
+  - key: {fileID: 1983192514}
+    value: {fileID: 1983192519}
+  - key: {fileID: 1764680507}
+    value: {fileID: 1764680512}
+  - key: {fileID: 1259370145}
+    value: {fileID: 1259370150}
+  - key: {fileID: 2127056549}
+    value: {fileID: 2127056554}
+  - key: {fileID: 868535547}
+    value: {fileID: 868535552}
   groupEasingCurve:
     serializedVersion: 2
     m_Curve:
@@ -976,7 +1266,9 @@ GameObject:
   m_Component:
   - component: {fileID: 593720865}
   - component: {fileID: 593720867}
+  - component: {fileID: 593720868}
   - component: {fileID: 593720866}
+  - component: {fileID: 593720869}
   m_Layer: 5
   m_Name: AverageRespTimeText
   m_TagString: Untagged
@@ -1103,6 +1395,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593720864}
   m_CullTransparentMesh: 1
+--- !u!225 &593720868
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593720864}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &593720869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593720864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
+  defineInitPosition: 0
+  initialOffsetPosition: {x: 0, y: 0}
+  hasValueText: 1
+  valueTextType: 3
+  rectTransform: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  textComponent: {fileID: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  enterDirection: 3
+  leaveDirection: 3
+  distanceToAnimate: {x: 100, y: 100}
+  easingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationDuration: 0.5
 --- !u!1 &600039514
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,7 +1822,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8685049297318313015, guid: 728d4589888e87d489165dcf0089072f, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 861799005}
+    - targetCorrespondingSourceObject: {fileID: 8685049297318313015, guid: 728d4589888e87d489165dcf0089072f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 861799006}
   m_SourcePrefab: {fileID: 100100000, guid: 728d4589888e87d489165dcf0089072f, type: 3}
 --- !u!224 &861799003 stripped
 RectTransform:
@@ -1480,6 +1840,68 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8685049297318313015, guid: 728d4589888e87d489165dcf0089072f, type: 3}
   m_PrefabInstance: {fileID: 861799002}
   m_PrefabAsset: {fileID: 0}
+--- !u!225 &861799005
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861799004}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &861799006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861799004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
+  defineInitPosition: 1
+  initialOffsetPosition: {x: 160, y: 0}
+  hasValueText: 0
+  valueTextType: 0
+  rectTransform: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  textComponent: {fileID: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  enterDirection: 2
+  leaveDirection: 3
+  distanceToAnimate: {x: 160, y: 100}
+  easingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationDuration: 0.5
 --- !u!1 &868535547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,7 +1912,9 @@ GameObject:
   m_Component:
   - component: {fileID: 868535548}
   - component: {fileID: 868535550}
+  - component: {fileID: 868535551}
   - component: {fileID: 868535549}
+  - component: {fileID: 868535552}
   m_Layer: 5
   m_Name: PointsTitle
   m_TagString: Untagged
@@ -1617,6 +2041,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868535547}
   m_CullTransparentMesh: 1
+--- !u!225 &868535551
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868535547}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &868535552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868535547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
+  defineInitPosition: 1
+  initialOffsetPosition: {x: -25, y: 0}
+  hasValueText: 0
+  valueTextType: 0
+  rectTransform: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  textComponent: {fileID: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  enterDirection: 3
+  leaveDirection: 3
+  distanceToAnimate: {x: 25, y: 100}
+  easingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationDuration: 0.5
 --- !u!1001 &1006446357
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1854,7 +2340,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1259370146}
   - component: {fileID: 1259370148}
+  - component: {fileID: 1259370149}
   - component: {fileID: 1259370147}
+  - component: {fileID: 1259370150}
   m_Layer: 5
   m_Name: Topic2FinalPointsText
   m_TagString: Untagged
@@ -1981,6 +2469,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1259370145}
   m_CullTransparentMesh: 1
+--- !u!225 &1259370149
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259370145}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &1259370150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259370145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
+  defineInitPosition: 0
+  initialOffsetPosition: {x: 0, y: 0}
+  hasValueText: 1
+  valueTextType: 4
+  rectTransform: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  textComponent: {fileID: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  enterDirection: 3
+  leaveDirection: 3
+  distanceToAnimate: {x: 100, y: 100}
+  easingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationDuration: 0.5
 --- !u!1 &1367436828
 GameObject:
   m_ObjectHideFlags: 0
@@ -2128,7 +2678,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1429465339}
   - component: {fileID: 1429465341}
+  - component: {fileID: 1429465342}
   - component: {fileID: 1429465340}
+  - component: {fileID: 1429465343}
   m_Layer: 5
   m_Name: AverageRespTimeTitle
   m_TagString: Untagged
@@ -2255,6 +2807,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1429465338}
   m_CullTransparentMesh: 1
+--- !u!225 &1429465342
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429465338}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &1429465343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429465338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
+  defineInitPosition: 1
+  initialOffsetPosition: {x: -25, y: 0}
+  hasValueText: 0
+  valueTextType: 0
+  rectTransform: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  textComponent: {fileID: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  enterDirection: 3
+  leaveDirection: 3
+  distanceToAnimate: {x: 25, y: 100}
+  easingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationDuration: 0.5
 --- !u!1001 &1634734396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2377,7 +2991,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3493516919491773051, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
       insertIndex: -1
       addedObject: {fileID: 600039515}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5316922238156215768, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1634734400}
+    - targetCorrespondingSourceObject: {fileID: 5316922238156215768, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1634734399}
   m_SourcePrefab: {fileID: 100100000, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
 --- !u!224 &1634734397 stripped
 RectTransform:
@@ -2389,6 +3009,68 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5316922238156215768, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
   m_PrefabInstance: {fileID: 1634734396}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1634734399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634734398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
+  defineInitPosition: 1
+  initialOffsetPosition: {x: 0, y: -75}
+  hasValueText: 0
+  valueTextType: 0
+  rectTransform: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  textComponent: {fileID: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  enterDirection: 0
+  leaveDirection: 0
+  distanceToAnimate: {x: 100, y: 75}
+  easingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationDuration: 0.5
+--- !u!225 &1634734400
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634734398}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1764680507
 GameObject:
   m_ObjectHideFlags: 0
@@ -2399,7 +3081,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1764680508}
   - component: {fileID: 1764680510}
+  - component: {fileID: 1764680511}
   - component: {fileID: 1764680509}
+  - component: {fileID: 1764680512}
   m_Layer: 5
   m_Name: FinalPointsText
   m_TagString: Untagged
@@ -2526,6 +3210,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764680507}
   m_CullTransparentMesh: 1
+--- !u!225 &1764680511
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764680507}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &1764680512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764680507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
+  defineInitPosition: 0
+  initialOffsetPosition: {x: 0, y: 0}
+  hasValueText: 1
+  valueTextType: 5
+  rectTransform: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  textComponent: {fileID: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  enterDirection: 3
+  leaveDirection: 3
+  distanceToAnimate: {x: 100, y: 100}
+  easingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationDuration: 0.5
 --- !u!1 &1983192514
 GameObject:
   m_ObjectHideFlags: 0
@@ -2536,7 +3282,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1983192515}
   - component: {fileID: 1983192517}
+  - component: {fileID: 1983192518}
   - component: {fileID: 1983192516}
+  - component: {fileID: 1983192519}
   m_Layer: 5
   m_Name: CorrectAnswersTitle
   m_TagString: Untagged
@@ -2663,6 +3411,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983192514}
   m_CullTransparentMesh: 1
+--- !u!225 &1983192518
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983192514}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &1983192519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983192514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
+  defineInitPosition: 1
+  initialOffsetPosition: {x: -25, y: 0}
+  hasValueText: 0
+  valueTextType: 0
+  rectTransform: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  textComponent: {fileID: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  enterDirection: 3
+  leaveDirection: 3
+  distanceToAnimate: {x: 25, y: 100}
+  easingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationDuration: 0.5
 --- !u!1 &2127056549
 GameObject:
   m_ObjectHideFlags: 0
@@ -2673,7 +3483,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2127056550}
   - component: {fileID: 2127056552}
+  - component: {fileID: 2127056553}
   - component: {fileID: 2127056551}
+  - component: {fileID: 2127056554}
   m_Layer: 5
   m_Name: Topic1FinalPointsText
   m_TagString: Untagged
@@ -2800,6 +3612,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2127056549}
   m_CullTransparentMesh: 1
+--- !u!225 &2127056553
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127056549}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &2127056554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127056549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8cb0b840dd8924b9d4ad1105806917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
+  defineInitPosition: 0
+  initialOffsetPosition: {x: 0, y: 0}
+  hasValueText: 1
+  valueTextType: 4
+  rectTransform: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  textComponent: {fileID: 0}
+  currentPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  enterDirection: 3
+  leaveDirection: 3
+  distanceToAnimate: {x: 100, y: 100}
+  easingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationDuration: 0.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
