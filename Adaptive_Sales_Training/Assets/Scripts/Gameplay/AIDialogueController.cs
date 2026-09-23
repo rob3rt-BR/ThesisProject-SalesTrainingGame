@@ -50,6 +50,8 @@ public class AIDialogueController : MonoBehaviour
 
     [Header("Question UI")]
     [SerializeField]
+    private GameObject qCounterAndTimer;
+    [SerializeField]
     private TMP_Text questionCounterText;
     [SerializeField]
     private GameObject questionTextHolder;
@@ -211,10 +213,10 @@ public class AIDialogueController : MonoBehaviour
         dialogueScreenElementsPost = new() {dialogueTitleElement, dialogueBoxBackgroundElement, traineeDialogueTextElement, aiResponseTextElement, nextQuestionButtonElement};
 
         // Questions screen elements
-        ElementAnimation questionsCounterElement = animationController.GetElementAnimation(questionCounterText.gameObject);
+        ElementAnimation qCounterAndTimerElement = animationController.GetElementAnimation(qCounterAndTimer);
         ElementAnimation questionTextHolderElement = animationController.GetElementAnimation(questionTextHolder);
 
-        questionScreenElements = new() {questionsCounterElement, questionTextHolderElement};
+        questionScreenElements = new() {qCounterAndTimerElement, questionTextHolderElement};
         
         foreach (Button currentbutton in answerButtons)
         {
@@ -263,13 +265,16 @@ public class AIDialogueController : MonoBehaviour
             return;
         }
 
-        // Track timer and update timer text
-        remainingTime -= Time.unscaledDeltaTime;
-        timerText.text = $"Zeit: {Mathf.Max(remainingTime, 0f):0.0}";
-
-        if (remainingTime <= 0f)
+        if (animationController.IsCurrentTransitionPhaseNone())
         {
-            SelectAnswer(-1);
+            // Track timer and update timer text
+            remainingTime -= Time.unscaledDeltaTime;
+            timerText.text = $"Zeit: {Mathf.Max(remainingTime, 0f):0.0}";
+
+            if (remainingTime <= 0f)
+            {
+                SelectAnswer(-1);
+            }    
         }
     }
 
@@ -339,12 +344,6 @@ public class AIDialogueController : MonoBehaviour
         // Set text attributes in dialogue screen => display opening message in textbox
         dialogueTitle.text = currentDialogueScenario.module.moduleTitle;
         aiResponseText.text = currentDialogueScenario.openingMessage;
-        
-        // infoScreen.SetActive(false);
-        // dialogueScreen.SetActive(true);
-
-        // For NON FIRST module start => enable start question button again
-        // startQuestionsButton.gameObject.SetActive(true);
 
         traineeDialogueTextElement.canvasGroup.alpha = 0f;
         loadingIndicatorElement.canvasGroup.alpha = 0f;
@@ -358,9 +357,7 @@ public class AIDialogueController : MonoBehaviour
     private void StartQuestionSequence()
     {
         currentQuestionIndex = 0;
-
-        // For FIRST module start => disable start question button to NOT interfere later with next question button
-        startQuestionsButton.gameObject.SetActive(false);
+        timerText.text = "Zeit: 0.0";
 
         // Animate screen change: dialogue screen (PRE questions) -> question screen
         animationController.AnimateScreenChange(dialogueScreenElementsPre, questionScreenElements, dialogueScreen, questionScreen);
@@ -400,7 +397,6 @@ public class AIDialogueController : MonoBehaviour
 
         // Set timer
         remainingTime = currentQuestion.timeLimitSeconds;
-        isQuestionActive = true;
 
         // Activate buttons based on available answers
         for (int i = 0; i < answerButtons.Length; i++)
@@ -414,6 +410,8 @@ public class AIDialogueController : MonoBehaviour
                 answerButtonsText[i].text = currentQuestion.answerOptions[i];
             }
         }
+
+        isQuestionActive = true;
     }
 
     private void SelectAnswer(int selectedAnswerIndex)
@@ -426,9 +424,9 @@ public class AIDialogueController : MonoBehaviour
         MicroModule currentModule = topic.modules[currentModuleIndex];
         ModuleQuestion currentQuestion = currentModule.questions[currentQuestionIndex];
 
-        float responseTime = currentQuestion.timeLimitSeconds - remainingTime;
         bool isCorrect = selectedAnswerIndex >= 0 && selectedAnswerIndex == currentQuestion.correctAnswerIndex;
         bool timedOut = selectedAnswerIndex < 0;
+        float responseTime = currentQuestion.timeLimitSeconds - remainingTime;
         int pointsAwarded = 0;
 
         // If answer correct => Calculate speed bonus points and add points to current module points
@@ -460,6 +458,15 @@ public class AIDialogueController : MonoBehaviour
         // Set text attribute in dialogue screen => display trainee dialogue in textbox
         AIDialogueScenario currentDialogueScenario = dialogueScenarios[currentModuleIndex];
         AIQuestionContext currentQuestionContext = currentDialogueScenario.questionContexts[currentQuestionIndex];
+
+        if (timedOut)
+        {
+            selectedAnswerIndex = currentQuestion.correctAnswerIndex switch
+            {
+                0 => 1,
+                _ => currentQuestion.correctAnswerIndex - 1,
+            };
+        }
 
         traineeDialogueText.text = currentQuestionContext.traineeDialogueTexts[selectedAnswerIndex];
 
@@ -493,13 +500,9 @@ public class AIDialogueController : MonoBehaviour
         StartCoroutine(RequestDialogueResponse(module, question, selectedAnswerIndex));
     }
 
-    // TODO: Agregarle transition question screen -> dialogue screen
     private IEnumerator RequestDialogueResponse(MicroModule module, ModuleQuestion question, int selectedAnswerIndex)
     {
-        // questionScreen.SetActive(false);
-
         requestInProgress = true;
-        // loadingIndicator.SetActive(true);
 
         AIDialogueScenario currentDialogueScenario = dialogueScenarios[currentModuleIndex];
 
@@ -569,14 +572,6 @@ public class AIDialogueController : MonoBehaviour
         long totalResponseTimeMilliseconds = stopWatch.ElapsedMilliseconds;
 
         requestInProgress = false;
-        // loadingIndicator.SetActive(false);
-
-        // Animate loadingIndicator fadeout
-        animationController.AnimateLoadingIndicatorLeave(loadingIndicator);
-
-        // Remove loadingIndicatorElement before transitioning back to question screen => NOT animate loadingIndicatorElement
-        bool loadingIndicatorRemoved = dialogueScreenElementsPost.Remove(loadingIndicatorElement);
-        Debug.Log(loadingIndicatorRemoved);
 
         // If web request result NOT successful => Failed and break coroutine
         if (webRequest.result != UnityWebRequest.Result.Success)
@@ -626,13 +621,13 @@ public class AIDialogueController : MonoBehaviour
         currentConversationHistory.Add(currentAIResponseMessage);
 
         // Set text attribute in dialogue screen => display trainee dialogue and AI response message in textbox
-        // traineeDialogueText.text = requestData.traineeDialogueText;
         aiResponseText.text = responseData.replyText;
 
-        // dialogueScreen.SetActive(true);
+        // Animate loadingIndicator fadeout
+        animationController.AnimateLoadingIndicatorLeave(loadingIndicator);
 
-        // Enable next question button to continue
-        // nextQuestionButton.gameObject.SetActive(true);
+        // Remove loadingIndicatorElement before transitioning back to question screen => NOT animate loadingIndicatorElement
+        dialogueScreenElementsPost.Remove(loadingIndicatorElement);
     }
 
     private void ShowPointScreen()
@@ -663,19 +658,13 @@ public class AIDialogueController : MonoBehaviour
 
 
     private void ContinueToNextQuestion()
-    {
-        // dialogueScreen.SetActive(false);
-        // questionScreen.SetActive(true);
-        
+    {   
         currentQuestionIndex++;
         ShowCurrentQuestion();
     }
 
     private void ContinueToNextModule()
     {
-        // Disable next question button to NOT intervene with start question button at the beginning of next module
-        // nextQuestionButton.gameObject.SetActive(false);
-
         currentModuleIndex++;
         SetInfoScreen();
     }

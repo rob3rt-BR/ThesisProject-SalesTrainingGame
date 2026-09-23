@@ -30,6 +30,8 @@ public class ModuleFlowController : MonoBehaviour
 
     [Header("Question UI")]
     [SerializeField]
+    private GameObject qCounterAndTimer;
+    [SerializeField]
     private TMP_Text questionCounterText;
     [SerializeField]
     private GameObject questionTextHolder;
@@ -150,10 +152,10 @@ public class ModuleFlowController : MonoBehaviour
         infoScreenElements = new() {infoTitleElement, infoTextBoxElement, startQuestionsButtonElement};
 
         // Questions screen elements
-        ElementAnimation questionsCounterElement = animationController.GetElementAnimation(questionCounterText.gameObject);
+        ElementAnimation qCounterAndTimerElement = animationController.GetElementAnimation(qCounterAndTimer);
         ElementAnimation questionTextHolderElement = animationController.GetElementAnimation(questionTextHolder);
 
-        questionScreenElements = new() {questionsCounterElement, questionTextHolderElement};
+        questionScreenElements = new() {qCounterAndTimerElement, questionTextHolderElement};
         
         foreach (Button currentbutton in answerButtons)
         {
@@ -203,13 +205,16 @@ public class ModuleFlowController : MonoBehaviour
             return;
         }
 
-        // Track timer and update timer text
-        remainingTime -= Time.unscaledDeltaTime;
-        timerText.text = $"Zeit: {Mathf.Max(remainingTime, 0f):0.0}";
-
-        if (remainingTime <= 0f)
+        if (animationController.IsCurrentTransitionPhaseNone())
         {
-            SelectAnswer(-1);
+            // Track timer and update timer text
+            remainingTime -= Time.unscaledDeltaTime;
+            timerText.text = $"Zeit: {Mathf.Max(remainingTime, 0f):0.0}";
+
+            if (remainingTime <= 0f)
+            {
+                SelectAnswer(-1);
+            }    
         }
     }
 
@@ -260,6 +265,7 @@ public class ModuleFlowController : MonoBehaviour
     private void StartQuestionSequence()
     {
         currentQuestionIndex = 0;
+        timerText.text = "Zeit: 0.0";
 
         // Animate screen change: info screen -> question screen
         animationController.AnimateScreenChange(infoScreenElements, questionScreenElements, infoScreen, questionScreen);
@@ -289,7 +295,6 @@ public class ModuleFlowController : MonoBehaviour
 
         // Set timer
         remainingTime = currentQuestion.timeLimitSeconds;
-        isQuestionActive = true;
 
         // Activate buttons based on available answers
         for (int i = 0; i < answerButtons.Length; i++)
@@ -303,6 +308,8 @@ public class ModuleFlowController : MonoBehaviour
                 answerButtonsText[i].text = currentQuestion.answerOptions[i];
             }
         }
+
+        isQuestionActive = true;
     }
 
     private void SelectAnswer(int selectedAnswerIndex)
@@ -315,9 +322,9 @@ public class ModuleFlowController : MonoBehaviour
         MicroModule currentModule = topic.modules[currentModuleIndex];
         ModuleQuestion currentQuestion = currentModule.questions[currentQuestionIndex];
 
-        float responseTime = currentQuestion.timeLimitSeconds - remainingTime;
         bool isCorrect = selectedAnswerIndex >= 0 && selectedAnswerIndex == currentQuestion.correctAnswerIndex;
         bool timedOut = selectedAnswerIndex < 0;
+        float responseTime = currentQuestion.timeLimitSeconds - remainingTime;
         int pointsAwarded = 0;
 
         // If answer correct => Calculate speed bonus points and add points to current module points

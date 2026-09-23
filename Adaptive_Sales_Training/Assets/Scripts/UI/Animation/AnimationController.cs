@@ -779,6 +779,11 @@ public class AnimationController : MonoBehaviour
         return combinedList;
     }
 
+    public bool IsCurrentTransitionPhaseNone()
+    {
+        return transitionPhase == TransitionPhase.None;
+    }
+
     public void RestartElementToOriginalPosition(GameObject elementObj)
     {
         GetElementAnimation(elementObj).RestartToOriginalPosition();
