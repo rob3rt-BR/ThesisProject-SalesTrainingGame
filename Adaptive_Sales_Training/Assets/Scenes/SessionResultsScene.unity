@@ -282,7 +282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
   initialOffsetPosition: {x: 0, y: -125}
-  hasValueText: 0
+  hasInteractiveText: 0
   valueTextType: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
@@ -483,7 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
   initialOffsetPosition: {x: 0, y: 110}
-  hasValueText: 0
+  hasInteractiveText: 0
   valueTextType: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
@@ -684,7 +684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 0
   initialOffsetPosition: {x: 0, y: 0}
-  hasValueText: 1
+  hasInteractiveText: 1
   valueTextType: 2
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
@@ -878,7 +878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
   initialOffsetPosition: {x: 0, y: -170}
-  hasValueText: 0
+  hasInteractiveText: 0
   valueTextType: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
@@ -1421,7 +1421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 0
   initialOffsetPosition: {x: 0, y: 0}
-  hasValueText: 1
+  hasInteractiveText: 1
   valueTextType: 3
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
@@ -1866,7 +1866,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
   initialOffsetPosition: {x: 160, y: 0}
-  hasValueText: 0
+  hasInteractiveText: 0
   valueTextType: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
@@ -2067,7 +2067,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
   initialOffsetPosition: {x: -25, y: 0}
-  hasValueText: 0
+  hasInteractiveText: 0
   valueTextType: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
@@ -2495,7 +2495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 0
   initialOffsetPosition: {x: 0, y: 0}
-  hasValueText: 1
+  hasInteractiveText: 1
   valueTextType: 4
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
@@ -2833,7 +2833,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
   initialOffsetPosition: {x: -25, y: 0}
-  hasValueText: 0
+  hasInteractiveText: 0
   valueTextType: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
@@ -3023,7 +3023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
   initialOffsetPosition: {x: 0, y: -75}
-  hasValueText: 0
+  hasInteractiveText: 0
   valueTextType: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
@@ -3236,7 +3236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 0
   initialOffsetPosition: {x: 0, y: 0}
-  hasValueText: 1
+  hasInteractiveText: 1
   valueTextType: 5
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
@@ -3437,7 +3437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 1
   initialOffsetPosition: {x: -25, y: 0}
-  hasValueText: 0
+  hasInteractiveText: 0
   valueTextType: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
@@ -3638,7 +3638,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ElementAnimation
   defineInitPosition: 0
   initialOffsetPosition: {x: 0, y: 0}
-  hasValueText: 1
+  hasInteractiveText: 1
   valueTextType: 4
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}

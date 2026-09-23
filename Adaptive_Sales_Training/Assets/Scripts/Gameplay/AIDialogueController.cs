@@ -141,6 +141,7 @@ public class AIDialogueController : MonoBehaviour
     private List<AIDialogueScenario> dialogueScenarios;
     private List<DialogueMessage> currentConversationHistory = new();
     private bool requestInProgress;
+    private static readonly WaitForSeconds waitForSeconds = new(3f);
 
     void Start()
     {
@@ -479,6 +480,7 @@ public class AIDialogueController : MonoBehaviour
         }
 
         traineeDialogueText.text = currentQuestionContext.traineeDialogueTexts[selectedAnswerIndex];
+        aiResponseText.text = "";
 
         // Restart loadingIndicator element to original position for correct animation position and direction
         animationController.RestartElementToOriginalPosition(loadingIndicator);
@@ -632,6 +634,8 @@ public class AIDialogueController : MonoBehaviour
 
         // Set text attribute in dialogue screen => display trainee dialogue and AI response message in textbox
         aiResponseText.text = responseData.replyText;
+
+        yield return waitForSeconds;
 
         // Animate loadingIndicator fadeout
         animationController.AnimateLoadingIndicatorLeave(loadingIndicator);

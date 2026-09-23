@@ -32,7 +32,7 @@ public class AnimationController : MonoBehaviour
         FadeOut,
         FadeIn,
         AnswerIndicatorFade,
-        LoadIndicatorLeave
+        LoadIndicatorLeave,
     }
 
     private TransitionPhase transitionPhase = TransitionPhase.None;
@@ -530,7 +530,7 @@ public class AnimationController : MonoBehaviour
     {
         foreach (ElementAnimation element in elements)
         {
-            if (element.HasValueText())
+            if (element.HasInteractiveText())
             {
                 element.textComponent.text = "";
                 element.canvasGroup.alpha = 1f;
@@ -560,7 +560,7 @@ public class AnimationController : MonoBehaviour
                 float normalizedTime = Mathf.Clamp01(elapsedTimeLocal / groupAnimationDuration);
                 float evaluationTimeLocal = groupEasingCurve.Evaluate(normalizedTime);
 
-                if (element.HasValueText())
+                if (element.HasInteractiveText())
                 {
                     switch (statsType)
                     {
@@ -590,7 +590,7 @@ public class AnimationController : MonoBehaviour
                 yield return null;
             }
 
-            if (element.HasValueText())
+            if (element.HasInteractiveText())
             {
                 switch (statsType)
                 {

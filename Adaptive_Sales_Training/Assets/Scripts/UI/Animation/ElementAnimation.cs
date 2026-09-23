@@ -13,7 +13,7 @@ public class ElementAnimation : MonoBehaviour
     [SerializeField]
     private Vector2 initialOffsetPosition = new(0, 0);
     [SerializeField]
-    private bool hasValueText;
+    private bool hasInteractiveText;
     [SerializeField]
     private ValueTextType valueTextType;
 
@@ -79,7 +79,7 @@ public class ElementAnimation : MonoBehaviour
 
         canvasGroup = gameObject.GetComponent<CanvasGroup>();
 
-        if (hasValueText)
+        if (hasInteractiveText)
         {
             textComponent = gameObject.GetComponent<TMP_Text>();
         }
@@ -117,9 +117,9 @@ public class ElementAnimation : MonoBehaviour
         };
     }
 
-    public bool HasValueText()
+    public bool HasInteractiveText()
     {
-        return hasValueText;
+        return hasInteractiveText;
     }
 
     public ValueTextType GetValueTextType()
