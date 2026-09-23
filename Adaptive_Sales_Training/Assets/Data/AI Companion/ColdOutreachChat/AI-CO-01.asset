@@ -14,60 +14,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AIDialogueScenario
   module: {fileID: 11400000, guid: 2b520aeb0eaad0b4780aec3345a6879d, type: 2}
   scenarioId: AI-CO-01
-  scenarioContext: "Du arbeitest als Sales Development Representative f\xFCr eine
-    Software, die mittelst\xE4ndische Unternehmen bei der Verwaltung von Angeboten
-    und Kundenkontakten unterst\xFCtzt. Du f\xFChrst ein erstes Gespr\xE4ch mit einem
-    Prospect, zu dem bisher keine Gesch\xE4ftsbeziehung besteht. Das Gespr\xE4ch
-    soll schrittweise von der Bedeutung von Cold Outreach bis zu einem respektvollen
-    n\xE4chsten Schritt f\xFChren."
-  customerPersona: "Name: Sabine Keller\nRolle: Operations Managerin eines mittelst\xE4ndischen
-    Unternehmens\nPers\xF6nlichkeit: H\xF6flich, aber vorsichtig und zeitlich stark
-    ausgelastet.\nSie m\xF6chte schnell erkennen, ob ein Gespr\xE4ch relevant ist."
-  openingMessage: "\u201EGuten Tag. Sie haben ungef\xE4hr zwei Minuten. Worum geht
-    es genau?\u201C"
+  scenarioContext: "Du arbeitest als Sales Development Representative f\xFCr eine Software, die mittelst\xE4ndische Unternehmen bei der Verwaltung von Angeboten und Kundenkontakten unterst\xFCtzt. Du f\xFChrst ein erstes Gespr\xE4ch mit einem Prospect, zu dem bisher keine Gesch\xE4ftsbeziehung besteht. Das Gespr\xE4ch soll schrittweise von der Bedeutung von Cold Outreach bis zu einem respektvollen n\xE4chsten Schritt f\xFChren."
+  customerPersona: "Name: Sabine Keller\nRolle: Operations Managerin eines mittelst\xE4ndischen Unternehmens\nPers\xF6nlichkeit: H\xF6flich, aber vorsichtig und zeitlich stark ausgelastet.\nSie m\xF6chte schnell erkennen, ob ein Gespr\xE4ch relevant ist."
+  openingMessage: "\u201EGuten Tag. Sie haben ungef\xE4hr zwei Minuten. Worum geht es genau?\u201C"
   questionContexts:
   - questionId: CO-M01-Q01
-    dialogueContext: "Reagiere nat\u00fcrlich auf die Aussage des Teilnehmers aus Sicht einer vorsichtigen Operations Managerin. Frage danach beil\u00e4ufig: Was m\u00f6chten Sie mit diesem ersten Kontakt konkret erreichen?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die Aussage des Teilnehmers aus Sicht einer vorsichtigen Operations Managerin. Frage danach beil\xE4ufig: Was m\xF6chten Sie mit diesem ersten Kontakt konkret erreichen?"
     traineeDialogueTexts:
-    - "Guten Tag Frau Keller, ich melde mich wegen Ihres offenen Support-Falls. Wenn wir schon im Austausch sind, w\u00fcrde ich gern auch \u00fcber die Vertragsverl\u00e4ngerung sprechen."
-    - "Guten Tag Frau Keller, wir hatten bisher noch keinen Kontakt. Ich melde mich, weil ich eine m\u00f6gliche Herausforderung in Ihrem Bereich ansprechen und erst einmal pr\u00fcfen m\u00f6chte, ob sie f\u00fcr Sie relevant ist."
-    - "Ihr Vertrag verl\u00e4ngert sich zum Monatsende automatisch; ich wollte Sie nur kurz dar\u00fcber informieren."
-    - "Ich habe Ihre Kontaktdaten gerade an unser Sales-Team weitergeleitet. Ein Kollege \u00fcbernimmt den Kontakt in K\u00fcrze."
+    - "Guten Tag Frau Keller, ich melde mich wegen Ihres offenen Support-Falls. Wenn wir schon im Austausch sind, w\xFCrde ich gern auch \xFCber die Vertragsverl\xE4ngerung sprechen."
+    - "Guten Tag Frau Keller, wir hatten bisher noch keinen Kontakt. Ich melde mich, weil ich eine m\xF6gliche Herausforderung in Ihrem Bereich ansprechen und erst einmal pr\xFCfen m\xF6chte, ob sie f\xFCr Sie relevant ist."
+    - "Ihr Vertrag verl\xE4ngert sich zum Monatsende automatisch; ich wollte Sie nur kurz dar\xFCber informieren."
+    - "Ich habe Ihre Kontaktdaten gerade an unser Sales-Team weitergeleitet. Ein Kollege \xFCbernimmt den Kontakt in K\xFCrze."
   - questionId: CO-M01-Q02
-    dialogueContext: "Reagiere nat\u00fcrlich auf die Aussage des Teilnehmers und zeige, ob du dich ernst genommen oder zu stark gedr\u00e4ngt f\u00fchlst. Frage danach beil\u00e4ufig: Woran w\u00fcrde ich denn erkennen, welchen konkreten Nutzen Ihr Angebot f\u00fcr uns h\u00e4tte?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die Aussage des Teilnehmers und zeige, ob du dich ernst genommen oder zu stark gedr\xE4ngt f\xFChlst. Frage danach beil\xE4ufig: Woran w\xFCrde ich denn erkennen, welchen konkreten Nutzen Ihr Angebot f\xFCr uns h\xE4tte?"
     traineeDialogueTexts:
-    - "Wenn unsere L\u00f6sung zu Ihrem Team passt, k\u00f6nnen wir die Entscheidung heute direkt festmachen."
-    - "Mir geht es zun\u00e4chst darum, Ihre Situation kurz zu verstehen. Wenn das Thema f\u00fcr Sie relevant ist, k\u00f6nnen wir danach gemeinsam einen passenden n\u00e4chsten Schritt vereinbaren."
-    - "Ich habe eine komplette Produktpr\u00e4sentation vorbereitet und w\u00fcrde Ihnen jetzt gern jede Funktion im Detail zeigen."
-    - "Ich habe mir Ihren Namen angesehen und entscheide danach, ob sich ein weiterer Kontakt f\u00fcr uns lohnt."
+    - "Wenn unsere L\xF6sung zu Ihrem Team passt, k\xF6nnen wir die Entscheidung heute direkt festmachen."
+    - "Ich habe eine komplette Produktpr\xE4sentation vorbereitet und w\xFCrde Ihnen jetzt gern jede Funktion im Detail zeigen."
+    - "Ich habe mir Ihren Namen angesehen und entscheide danach, ob sich ein weiterer Kontakt f\xFCr uns lohnt."
+    - "Mir geht es zun\xE4chst darum, Ihre Situation kurz zu verstehen. Wenn das Thema f\xFCr Sie relevant ist, k\xF6nnen wir danach gemeinsam einen passenden n\xE4chsten Schritt vereinbaren."
   - questionId: CO-M01-Q03
-    dialogueContext: "Reagiere nat\u00fcrlich auf den genannten Nutzen und beziehe dich auf den Arbeitsalltag des Kunden. Frage danach beil\u00e4ufig: Was hat Sie gerade auf unsere Situation aufmerksam gemacht?"
+    dialogueContext: "Reagiere nat\xFCrlich auf den genannten Nutzen und beziehe dich auf den Arbeitsalltag des Kunden. Frage danach beil\xE4ufig: Was hat Sie gerade auf unsere Situation aufmerksam gemacht?"
     traineeDialogueTexts:
-    - "Unsere Software bringt \u00fcber 80 Funktionen mit; ich kann Ihnen gern erkl\u00e4ren, welche davon verf\u00fcgbar sind."
-    - "Wir sind seit zehn Jahren am Markt und haben in dieser Zeit viel Erfahrung mit solchen Teams gesammelt."
-    - "Wenn bei Ihnen viele Angebote manuell erstellt werden, kann unsere L\u00f6sung den Aufwand sp\u00fcrbar reduzieren und Ihrem Team Zeit f\u00fcr wichtigere Aufgaben geben."
-    - "Ich habe Ihnen unser gesamtes Produktportfolio zusammengestellt, damit Sie sich einen vollst\u00e4ndigen \u00dcberblick verschaffen k\u00f6nnen."
+    - "Unsere Software bringt \xFCber 80 Funktionen mit; ich kann Ihnen gern erkl\xE4ren, welche davon verf\xFCgbar sind."
+    - Wir sind seit zehn Jahren am Markt und haben in dieser Zeit viel Erfahrung mit solchen Teams gesammelt.
+    - "Wenn bei Ihnen viele Angebote manuell erstellt werden, kann unsere L\xF6sung den Aufwand sp\xFCrbar reduzieren und Ihrem Team Zeit f\xFCr wichtigere Aufgaben geben."
+    - "Ich habe Ihnen unser gesamtes Produktportfolio zusammengestellt, damit Sie sich einen vollst\xE4ndigen \xDCberblick verschaffen k\xF6nnen."
   - questionId: CO-M01-Q04
-    dialogueContext: "Reagiere nat\u00fcrlich darauf, ob die Ansprache pers\u00f6nlich und relevant wirkt. Frage danach beil\u00e4ufig: Wie w\u00fcrden Sie mich am besten erreichen, ohne dass es im Tagesgesch\u00e4ft untergeht?"
+    dialogueContext: "Reagiere nat\xFCrlich darauf, ob die Ansprache pers\xF6nlich und relevant wirkt. Frage danach beil\xE4ufig: Wie w\xFCrden Sie mich am besten erreichen, ohne dass es im Tagesgesch\xE4ft untergeht?"
     traineeDialogueTexts:
-    - "Unsere L\u00f6sung hilft Unternehmen aller Gr\u00f6\u00dfen und Branchen, ihre Abl\u00e4ufe zu verbessern."
-    - "Mir ist aufgefallen, dass Ihr Team viele Kundenkontakte verwaltet. Genau dort k\u00f6nnte unsere L\u00f6sung einen Teil des manuellen Aufwands abnehmen."
-    - "Ich k\u00f6nnte Ihnen gleich die wichtigsten Funktionen aufz\u00e4hlen, damit Sie sehen, was alles enthalten ist."
-    - "Wenn Sie sich heute entscheiden, kann ich Ihnen einen besonders hohen Einstiegsrabatt anbieten."
+    - "Unsere L\xF6sung hilft Unternehmen aller Gr\xF6\xDFen und Branchen, ihre Abl\xE4ufe zu verbessern."
+    - "Mir ist aufgefallen, dass Ihr Team viele Kundenkontakte verwaltet. Genau dort k\xF6nnte unsere L\xF6sung einen Teil des manuellen Aufwands abnehmen."
+    - "Ich k\xF6nnte Ihnen gleich die wichtigsten Funktionen aufz\xE4hlen, damit Sie sehen, was alles enthalten ist."
+    - Wenn Sie sich heute entscheiden, kann ich Ihnen einen besonders hohen Einstiegsrabatt anbieten.
   - questionId: CO-M01-Q05
-    dialogueContext: "Reagiere nat\u00fcrlich auf den vorgeschlagenen Kontaktweg und deine zeitliche Auslastung. Frage danach beil\u00e4ufig: Geht es bei Ihrem Anruf schon um eine Entscheidung, oder was w\u00e4re der n\u00e4chste sinnvolle Schritt?"
+    dialogueContext: "Reagiere nat\xFCrlich auf den vorgeschlagenen Kontaktweg und deine zeitliche Auslastung. Frage danach beil\xE4ufig: Geht es bei Ihrem Anruf schon um eine Entscheidung, oder was w\xE4re der n\xE4chste sinnvolle Schritt?"
     traineeDialogueTexts:
-    - "Ich rufe grunds\u00e4tzlich lieber an; am Telefon kann ich mein Anliegen aus meiner Sicht am besten erkl\u00e4ren."
-    - "Ich schicke Ihnen einfach eine E-Mail, weil das f\u00fcr mich der schnellste Weg ist."
-    - "Ich telefoniere pers\u00f6nlich am liebsten und w\u00fcrde deshalb diesen Kanal w\u00e4hlen."
-    - "Da Sie heute nur wenig Zeit haben, halte ich den Einstieg kurz und schlage Ihnen nur dann einen Termin vor, wenn das Thema f\u00fcr Sie wirklich passt."
+    - "Da Sie heute nur wenig Zeit haben, halte ich den Einstieg kurz und schlage Ihnen nur dann einen Termin vor, wenn das Thema f\xFCr Sie wirklich passt."
+    - "Ich rufe grunds\xE4tzlich lieber an; am Telefon kann ich mein Anliegen aus meiner Sicht am besten erkl\xE4ren."
+    - "Ich schicke Ihnen einfach eine E-Mail, weil das f\xFCr mich der schnellste Weg ist."
+    - "Ich telefoniere pers\xF6nlich am liebsten und w\xFCrde deshalb diesen Kanal w\xE4hlen."
   - questionId: CO-M01-Q06
-    dialogueContext: "Reagiere nat\u00fcrlich darauf, ob der Teilnehmer Druck auf eine sofortige Entscheidung aus\u00fcbt. Frage danach beil\u00e4ufig: Wie stellen Sie sicher, dass ich mich nicht zu etwas gedr\u00e4ngt f\u00fchle?"
+    dialogueContext: "Reagiere nat\xFCrlich darauf, ob der Teilnehmer Druck auf eine sofortige Entscheidung aus\xFCbt. Frage danach beil\xE4ufig: Wie stellen Sie sicher, dass ich mich nicht zu etwas gedr\xE4ngt f\xFChle?"
     traineeDialogueTexts:
-    - "Lassen Sie uns den Kauf heute direkt abschlie\u00dfen; dann ist die Sache f\u00fcr beide Seiten erledigt."
-    - "Heute m\u00f6chte ich erst verstehen, ob wir \u00fcberhaupt ein relevantes Thema f\u00fcr Sie haben. \u00dcber einen Kauf m\u00fcssen wir jetzt noch nicht sprechen."
+    - "Lassen Sie uns den Kauf heute direkt abschlie\xDFen; dann ist die Sache f\xFCr beide Seiten erledigt."
+    - "Heute m\xF6chte ich erst verstehen, ob wir \xFCberhaupt ein relevantes Thema f\xFCr Sie haben. \xDCber einen Kauf m\xFCssen wir jetzt noch nicht sprechen."
   - questionId: CO-M01-Q07
-    dialogueContext: "Reagiere nat\u00fcrlich auf die Haltung des Teilnehmers und beende das erste Gespr\u00e4ch mit einer kurzen, glaubw\u00fcrdigen Nachfrage: Was schlagen Sie als n\u00e4chsten Schritt vor?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die Haltung des Teilnehmers und beende das Gespr\xE4ch."
     traineeDialogueTexts:
-    - "Wenn das Thema f\u00fcr Sie nicht passt, sage ich Ihnen das offen und beende die Ansprache. Ihre Zeit m\u00f6chte ich nicht unn\u00f6tig beanspruchen."
-    - "Ich versende die Nachricht einfach weiter, auch wenn sie keinen Bezug zu Ihrem Unternehmen hat; vielleicht reagieren Sie irgendwann."
+    - "Wenn das Thema f\xFCr Sie nicht passt, sage ich Ihnen das offen und beende die Ansprache. Ihre Zeit m\xF6chte ich nicht unn\xF6tig beanspruchen."
+    - Ich versende die Nachricht einfach weiter, auch wenn sie keinen Bezug zu Ihrem Unternehmen hat; vielleicht reagieren Sie irgendwann.

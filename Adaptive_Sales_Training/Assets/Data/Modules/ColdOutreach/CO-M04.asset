@@ -14,37 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MicroModule
   moduleId: CO-M04
   moduleTitle: Discovery und Objections
-  moduleText: "Cold Outreach ist auch eine Form von Discovery. Statt ein Gespr\xE4ch
-    zu dominieren, sollte der Sales-Mitarbeiter offene Fragen stellen, aufmerksam
-    zuh\xF6ren und die Situation des Prospects besser verstehen.\nObjections sind
-    normale Reaktionen. Aussagen wie \u201EWir haben kein Budget\u201C, \u201EWir
-    nutzen bereits eine L\xF6sung\u201C oder \u201EIch habe keine Zeit\u201C k\xF6nnen
-    Hinweise auf Priorit\xE4ten, Timing oder aktuelle Probleme enthalten.\nEine gute
-    Reaktion besteht nicht darin, jeden Einwand sofort zu widerlegen. Besser ist
-    es, die Sorge anzuerkennen, mit einer offenen Frage mehr Informationen zu gewinnen
-    und nur dann einen n\xE4chsten Schritt vorzuschlagen, wenn dieser f\xFCr den
-    Prospect sinnvoll ist."
+  moduleText: "Cold Outreach ist auch eine Form von Discovery. Statt ein Gespr\xE4ch zu dominieren, sollte der Sales-Mitarbeiter offene Fragen stellen, aufmerksam zuh\xF6ren und die Situation des Prospects besser verstehen.\nObjections sind normale Reaktionen. Aussagen wie \u201EWir haben kein Budget\u201C, \u201EWir nutzen bereits eine L\xF6sung\u201C oder \u201EIch habe keine Zeit\u201C k\xF6nnen Hinweise auf Priorit\xE4ten, Timing oder aktuelle Probleme enthalten.\nEine gute Reaktion besteht nicht darin, jeden Einwand sofort zu widerlegen. Besser ist es, die Sorge anzuerkennen, mit einer offenen Frage mehr Informationen zu gewinnen und nur dann einen n\xE4chsten Schritt vorzuschlagen, wenn dieser f\xFCr den Prospect sinnvoll ist."
   questions:
   - questionId: CO-M04-Q01
     questionText: Welche Frage ist eine offene Discovery-Frage?
     answerOptions:
     - "\u201ENutzen Sie bereits eine CRM-Software, ja oder nein?\u201C"
     - "\u201EIst Ihr Budget gr\xF6\xDFer als 10.000 Euro?\u201C"
-    - "\u201EWie organisieren Sie aktuell Ihren Follow-up-Prozess?\u201C"
     - "\u201EWollen Sie unsere Software kaufen?\u201C"
-    correctAnswerIndex: 2
+    - "\u201EWie organisieren Sie aktuell Ihren Follow-up-Prozess?\u201C"
+    correctAnswerIndex: 3
     timeLimitSeconds: 30
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M04-Q02
-    questionText: "Ein Prospect sagt: \u201EDaf\xFCr haben wir momentan kein Budget.\u201C
-      Was ist eine gute erste Reaktion?"
+    questionText: "Ein Prospect sagt: \u201EDaf\xFCr haben wir momentan kein Budget.\u201C Was ist eine gute erste Reaktion?"
     answerOptions:
+    - "\u201EWelche Priorit\xE4ten bestimmen aktuell Ihre Budgetplanung?\u201C"
     - "\u201EDann ist unser Produkt vermutlich nichts f\xFCr Sie.\u201C"
     - "\u201ESie m\xFCssen trotzdem schnell entscheiden.\u201C"
-    - "\u201EWelche Priorit\xE4ten bestimmen aktuell Ihre Budgetplanung?\u201C"
     - "\u201EDas stimmt nicht, unser Preis ist sehr g\xFCnstig.\u201C"
-    correctAnswerIndex: 2
+    correctAnswerIndex: 0
     timeLimitSeconds: 30
     basePoints: 100
     speedBonusPoints: 50
@@ -52,40 +42,37 @@ MonoBehaviour:
     questionText: "Was zeigt aktives Zuh\xF6ren im Sales-Gespr\xE4ch?"
     answerOptions:
     - "Die n\xE4chste vorbereitete Aussage sofort vorzulesen"
-    - "Die Aussage des Prospects zusammenzufassen und zu \xFCberpr\xFCfen"
     - Den Prospect bei jedem Satz zu unterbrechen
+    - "Die Aussage des Prospects zusammenzufassen und zu \xFCberpr\xFCfen"
     - "M\xF6glichst schnell zur Preisdiskussion \xFCberzugehen"
-    correctAnswerIndex: 1
+    correctAnswerIndex: 2
     timeLimitSeconds: 30
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M04-Q04
     questionText: Wie sollte ein Sales-Mitarbeiter mit einem Gatekeeper umgehen?
     answerOptions:
-    - "Respektvoll auftreten und den Zweck des Kontakts klar erkl\xE4ren"
     - "Den Gatekeeper absichtlich t\xE4uschen"
+    - "Respektvoll auftreten und den Zweck des Kontakts klar erkl\xE4ren"
     - "Private Informationen \xFCber den Entscheider verlangen"
     - "M\xF6glichst schnell zur Preisdiskussion \xFCberzugehen"
-    correctAnswerIndex: 0
-    timeLimitSeconds: 30
-    basePoints: 100
-    speedBonusPoints: 50
-  - questionId: CO-M04-Q05
-    questionText: "Was sollte nach einem erfolgreichen Cold Call m\xF6glichst festgehalten
-      werden?"
-    answerOptions:
-    - Nur die Dauer des Telefonats
-    - "Die wichtigsten Bed\xFCrfnisse, Pain Points, Ansprechpartner und n\xE4chsten
-      Schritte"
-    - "Eine allgemeine Werbebotschaft ohne Gespr\xE4chsdetails"
-    - "Nur die pers\xF6nliche Einsch\xE4tzung des Sales-Mitarbeiters"
     correctAnswerIndex: 1
     timeLimitSeconds: 30
     basePoints: 100
     speedBonusPoints: 50
+  - questionId: CO-M04-Q05
+    questionText: "Was sollte nach einem erfolgreichen Cold Call m\xF6glichst festgehalten werden?"
+    answerOptions:
+    - Nur die Dauer des Telefonats
+    - "Eine allgemeine Werbebotschaft ohne Gespr\xE4chsdetails"
+    - "Die wichtigsten Bed\xFCrfnisse, Pain Points, Ansprechpartner und n\xE4chsten Schritte"
+    - "Nur die pers\xF6nliche Einsch\xE4tzung des Sales-Mitarbeiters"
+    correctAnswerIndex: 2
+    timeLimitSeconds: 30
+    basePoints: 100
+    speedBonusPoints: 50
   - questionId: CO-M04-Q06
-    questionText: "Objections k\xF6nnen Hinweise auf weitere Bed\xFCrfnisse oder
-      Priorit\xE4ten des Prospects enthalten"
+    questionText: "Objections k\xF6nnen Hinweise auf weitere Bed\xFCrfnisse oder Priorit\xE4ten des Prospects enthalten"
     answerOptions:
     - Richtig
     - Falsch
@@ -94,8 +81,7 @@ MonoBehaviour:
     basePoints: 80
     speedBonusPoints: 40
   - questionId: CO-M04-Q07
-    questionText: "Ein Cold Call sollte grunds\xE4tzlich aus einem langen, einseitigen
-      Product Pitch bestehen"
+    questionText: "Ein Cold Call sollte grunds\xE4tzlich aus einem langen, einseitigen Product Pitch bestehen"
     answerOptions:
     - Richtig
     - Falsch

@@ -14,59 +14,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AIDialogueScenario
   module: {fileID: 11400000, guid: 3b8c64e1107f52141b0237e5c1eb01f3, type: 2}
   scenarioId: AI-UC-02
-  scenarioContext: "Du betreust ein Unternehmen, das deine Projektmanagement-Software
-    seit acht Monaten erfolgreich nutzt. Das Unternehmen expandiert und plant, weitere
-    Abteilungen einzubinden. Das Gespr\xE4ch behandelt Customer Readiness, Health
-    Signals, erfolgreichen Produktgebrauch und den richtigen Zeitpunkt f\xFCr ein
-    Angebot."
-  customerPersona: "Name: Miriam Scholz\nRolle: Head of Operations\nPers\xF6nlichkeit:
-    Zufrieden mit dem aktuellen Produkt, aber vorsichtig gegen\xFCber zus\xE4tzlichen
-    Kosten."
-  openingMessage: "\u201EWir arbeiten inzwischen gut mit Ihrer Software. Warum sprechen
-    Sie gerade jetzt \xFCber eine Erweiterung?\u201C"
+  scenarioContext: "Du betreust ein Unternehmen, das deine Projektmanagement-Software seit acht Monaten erfolgreich nutzt. Das Unternehmen expandiert und plant, weitere Abteilungen einzubinden. Das Gespr\xE4ch behandelt Customer Readiness, Health Signals, erfolgreichen Produktgebrauch und den richtigen Zeitpunkt f\xFCr ein Angebot."
+  customerPersona: "Name: Miriam Scholz\nRolle: Head of Operations\nPers\xF6nlichkeit: Zufrieden mit dem aktuellen Produkt, aber vorsichtig gegen\xFCber zus\xE4tzlichen Kosten."
+  openingMessage: "\u201EWir arbeiten inzwischen gut mit Ihrer Software. Warum sprechen Sie gerade jetzt \xFCber eine Erweiterung?\u201C"
   questionContexts:
   - questionId: UC-M02-Q01
-    dialogueContext: "Reagiere nat\u00fcrlich auf das beobachtete Nutzungssignal und beziehe dich auf deine aktuelle Situation. Frage danach beil\u00e4ufig: Was w\u00fcrden Sie aus unserem Verhalten \u00fcber einen m\u00f6glichen Bedarf ableiten?"
+    dialogueContext: "Reagiere nat\xFCrlich auf das beobachtete Nutzungssignal und beziehe dich auf deine aktuelle Situation. Frage danach beil\xE4ufig: Was w\xFCrden Sie aus unserem Verhalten \xFCber einen m\xF6glichen Bedarf ableiten?"
     traineeDialogueTexts:
-    - "Obwohl die offenen Probleme mit der bestehenden L\u00f6sung noch nicht behoben sind, w\u00fcrde ich Ihnen jetzt ein Upgrade anbieten."
-    - "Sie erzielen stabile Ergebnisse und sto\u00dfen inzwischen an die Grenzen Ihres aktuellen Tarifs; deshalb w\u00fcrde ich mit Ihnen \u00fcber ein Upgrade sprechen."
-    - "Wir hatten lange keinen Kontakt, daher sehe ich allein diese Pause als ausreichendes Signal f\u00fcr ein Zusatzangebot."
-    - "Ich sehe Ihre offene Beschwerde als guten Zeitpunkt, Ihnen direkt ein Zusatzangebot zu machen."
+    - "Obwohl die offenen Probleme mit der bestehenden L\xF6sung noch nicht behoben sind, w\xFCrde ich Ihnen jetzt ein Upgrade anbieten."
+    - "Wir hatten lange keinen Kontakt, daher sehe ich allein diese Pause als ausreichendes Signal f\xFCr ein Zusatzangebot."
+    - Ich sehe Ihre offene Beschwerde als guten Zeitpunkt, Ihnen direkt ein Zusatzangebot zu machen.
+    - "Sie erzielen stabile Ergebnisse und sto\xDFen inzwischen an die Grenzen Ihres aktuellen Tarifs; deshalb w\xFCrde ich mit Ihnen \xFCber ein Upgrade sprechen."
   - questionId: UC-M02-Q02
-    dialogueContext: "Reagiere nat\u00fcrlich auf den vorgeschlagenen Zeitpunkt und deine noch offenen Herausforderungen. Frage danach beil\u00e4ufig: Welche Schwierigkeit bei uns w\u00fcrden Sie erst verstehen wollen, bevor Sie etwas empfehlen?"
+    dialogueContext: "Reagiere nat\xFCrlich auf den vorgeschlagenen Zeitpunkt und deine noch offenen Herausforderungen. Frage danach beil\xE4ufig: Welche Schwierigkeit bei uns w\xFCrden Sie erst verstehen wollen, bevor Sie etwas empfehlen?"
     traineeDialogueTexts:
-    - "Weil Sie erfolgreich mit dem Produkt arbeiten, w\u00fcrde ich unabh\u00e4ngig von weiteren Umst\u00e4nden sofort ein Zusatzangebot platzieren."
-    - "Sie verfolgen ein neues strategisches Ziel; ich w\u00fcrde Ihnen deshalb direkt ein Zusatzangebot machen, ohne die aktuelle Situation weiter zu pr\u00fcfen."
-    - "Solange ein ungel\u00f6stes Problem Ihre Nutzung beeintr\u00e4chtigt, w\u00fcrde ich mit einem Zusatzangebot zun\u00e4chst warten."
-    - "Weil Sie nach weiteren M\u00f6glichkeiten fragen, w\u00fcrde ich sofort etwas verkaufen, auch wenn noch grundlegende Probleme offen sind."
+    - "Weil Sie erfolgreich mit dem Produkt arbeiten, w\xFCrde ich unabh\xE4ngig von weiteren Umst\xE4nden sofort ein Zusatzangebot platzieren."
+    - "Solange ein ungel\xF6stes Problem Ihre Nutzung beeintr\xE4chtigt, w\xFCrde ich mit einem Zusatzangebot zun\xE4chst warten."
+    - "Sie verfolgen ein neues strategisches Ziel; ich w\xFCrde Ihnen deshalb direkt ein Zusatzangebot machen, ohne die aktuelle Situation weiter zu pr\xFCfen."
+    - "Weil Sie nach weiteren M\xF6glichkeiten fragen, w\xFCrde ich sofort etwas verkaufen, auch wenn noch grundlegende Probleme offen sind."
   - questionId: UC-M02-Q03
-    dialogueContext: "Reagiere nat\u00fcrlich auf das genannte Signal und frage aus Kundensicht weiter: Was w\u00fcrde Ihnen zeigen, dass wir mit der L\u00f6sung gerade gut vorankommen?"
+    dialogueContext: "Reagiere nat\xFCrlich auf das genannte Signal und frage aus Kundensicht weiter: Was w\xFCrde Ihnen zeigen, dass wir mit der L\xF6sung gerade gut vorankommen?"
     traineeDialogueTexts:
-    - "Sie nutzen eine zentrale Funktion regelm\u00e4\u00dfig und erzielen damit gute Ergebnisse; das w\u00e4re f\u00fcr mich ein positives Signal."
-    - "Unser Sales-Team hat sein Quartalsziel noch nicht erreicht; das sagt mir, dass Ihr Unternehmen f\u00fcr ein Angebot bereit ist."
-    - "Sie waren kurz auf unserer Website, daher gehe ich von einer guten Produktgesundheit bei Ihnen aus."
-    - "Unsere allgemeine Werbekampagne l\u00e4uft gerade, deshalb nehme ich an, dass Sie f\u00fcr ein Zusatzangebot bereit sind."
+    - "Sie nutzen eine zentrale Funktion regelm\xE4\xDFig und erzielen damit gute Ergebnisse; das w\xE4re f\xFCr mich ein positives Signal."
+    - "Unser Sales-Team hat sein Quartalsziel noch nicht erreicht; das sagt mir, dass Ihr Unternehmen f\xFCr ein Angebot bereit ist."
+    - Sie waren kurz auf unserer Website, daher gehe ich von einer guten Produktgesundheit bei Ihnen aus.
+    - "Unsere allgemeine Werbekampagne l\xE4uft gerade, deshalb nehme ich an, dass Sie f\xFCr ein Zusatzangebot bereit sind."
   - questionId: UC-M02-Q04
-    dialogueContext: "Reagiere nat\u00fcrlich auf die Bedeutung des bisherigen Ergebnisses. Frage danach beil\u00e4ufig: Welche Ver\u00e4nderung bei uns w\u00fcrde f\u00fcr Sie zeigen, dass wir bereit f\u00fcr den n\u00e4chsten Schritt sind?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die Bedeutung des bisherigen Ergebnisses. Frage danach beil\xE4ufig: Welche Ver\xE4nderung bei uns w\xFCrde f\xFCr Sie zeigen, dass wir bereit f\xFCr den n\xE4chsten Schritt sind?"
     traineeDialogueTexts:
-    - "Sie erzielen bereits gute Ergebnisse; deshalb m\u00fcssen Sie aus meiner Sicht keine weiteren Fragen mehr stellen."
-    - "Ihre guten Ergebnisse zeigen, dass ein Upgrade als hilfreiche Weiterentwicklung an Ihren bisherigen Erfolg ankn\u00fcpfen k\u00f6nnte."
-    - "Weil Sie mit dem Produkt Erfolg haben, sind Sie aus meiner Sicht automatisch zum Kauf eines Upgrades verpflichtet."
-    - "Da Sie gute Ergebnisse erzielen, sollte eine Preisverhandlung \u00fcber ein Upgrade nicht mehr n\u00f6tig sein."
+    - "Sie erzielen bereits gute Ergebnisse; deshalb m\xFCssen Sie aus meiner Sicht keine weiteren Fragen mehr stellen."
+    - "Ihre guten Ergebnisse zeigen, dass ein Upgrade als hilfreiche Weiterentwicklung an Ihren bisherigen Erfolg ankn\xFCpfen k\xF6nnte."
+    - Weil Sie mit dem Produkt Erfolg haben, sind Sie aus meiner Sicht automatisch zum Kauf eines Upgrades verpflichtet.
+    - "Da Sie gute Ergebnisse erzielen, sollte eine Preisverhandlung \xFCber ein Upgrade nicht mehr n\xF6tig sein."
   - questionId: UC-M02-Q05
-    dialogueContext: "Reagiere nat\u00fcrlich auf die Situation mit den neuen Standorten und deinen Wachstumsschmerz. Frage danach beil\u00e4ufig: Was m\u00fcssten Sie \u00fcber unsere Expansion noch wissen, bevor Sie etwas vorschlagen?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die Situation mit den neuen Standorten und deinen Wachstumsschmerz. Frage danach beil\xE4ufig: Was m\xFCssten Sie \xFCber unsere Expansion noch wissen, bevor Sie etwas vorschlagen?"
     traineeDialogueTexts:
-    - "Mit drei neuen Standorten w\u00fcrde ich Ihnen sofort das teuerste Paket anbieten, damit Sie schnell wachsen k\u00f6nnen."
-    - "Sie haben neue Standorte er\u00f6ffnet. Ich w\u00fcrde zuerst verstehen, welche zus\u00e4tzlichen Anforderungen dadurch entstehen und ob unser Produkt sie abdecken kann."
-    - "Weil Ihr Unternehmen w\u00e4chst, w\u00fcrde ich Sie unabh\u00e4ngig von Ihren Zielen zu einem Upgrade dr\u00e4ngen."
-    - "Sie nutzen unser Produkt bereits, deshalb muss ich Ihr Wachstum bei der Empfehlung nicht weiter ber\u00fccksichtigen."
+    - "Mit drei neuen Standorten w\xFCrde ich Ihnen sofort das teuerste Paket anbieten, damit Sie schnell wachsen k\xF6nnen."
+    - "Weil Ihr Unternehmen w\xE4chst, w\xFCrde ich Sie unabh\xE4ngig von Ihren Zielen zu einem Upgrade dr\xE4ngen."
+    - "Sie haben neue Standorte er\xF6ffnet. Ich w\xFCrde zuerst verstehen, welche zus\xE4tzlichen Anforderungen dadurch entstehen und ob unser Produkt sie abdecken kann."
+    - "Sie nutzen unser Produkt bereits, deshalb muss ich Ihr Wachstum bei der Empfehlung nicht weiter ber\xFCcksichtigen."
   - questionId: UC-M02-Q06
-    dialogueContext: "Reagiere nat\u00fcrlich auf den vorgeschlagenen Zeitpunkt eines Zusatzangebots. Frage danach beil\u00e4ufig: W\u00e4re ein solcher Vorschlag f\u00fcr Sie eher w\u00e4hrend der Planung oder erst nach unseren ersten Ergebnissen sinnvoll?"
+    dialogueContext: "Reagiere nat\xFCrlich auf den vorgeschlagenen Zeitpunkt eines Zusatzangebots. Frage danach beil\xE4ufig: W\xE4re ein solcher Vorschlag f\xFCr Sie eher w\xE4hrend der Planung oder erst nach unseren ersten Ergebnissen sinnvoll?"
     traineeDialogueTexts:
-    - "Upselling ist f\u00fcr mich nur vor dem urspr\u00fcnglichen Kauf m\u00f6glich; danach ist die Entscheidung abgeschlossen."
-    - "Auch nach dem urspr\u00fcnglichen Kauf kann ich pr\u00fcfen, ob ein Upgrade zu Ihrer aktuellen Situation passt."
+    - "Upselling ist f\xFCr mich nur vor dem urspr\xFCnglichen Kauf m\xF6glich; danach ist die Entscheidung abgeschlossen."
+    - "Auch nach dem urspr\xFCnglichen Kauf kann ich pr\xFCfen, ob ein Upgrade zu Ihrer aktuellen Situation passt."
   - questionId: UC-M02-Q07
-    dialogueContext: "Reagiere nat\u00fcrlich auf die Rolle von Customer Success und beende das Gespr\u00e4ch mit einer kurzen Nachfrage: Wie k\u00f6nnte Ihr Team erkennen, dass ein weiterer Schritt f\u00fcr uns passend w\u00e4re?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die Rolle von Customer Success, und beende das Gespr\xE4ch."
     traineeDialogueTexts:
-    - "Im Austausch sehe ich, wie Sie das Produkt nutzen und welche Ziele Sie verfolgen; daraus k\u00f6nnen sich passende Expansion-Chancen ergeben."
-    - "Auch wenn ich Ihre Nutzung und Ihre Ziele kenne, kann Customer Success daraus keine sinnvollen Expansion-Chancen ableiten."
+    - "Im Austausch sehe ich, wie Sie das Produkt nutzen und welche Ziele Sie verfolgen; daraus k\xF6nnen sich passende Expansion-Chancen ergeben."
+    - Auch wenn ich Ihre Nutzung und Ihre Ziele kenne, kann Customer Success daraus keine sinnvollen Expansion-Chancen ableiten.

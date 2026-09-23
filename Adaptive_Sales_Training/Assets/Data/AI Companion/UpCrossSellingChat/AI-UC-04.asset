@@ -14,57 +14,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AIDialogueScenario
   module: {fileID: 11400000, guid: dcd6d4e5b89654f468dc085874c6d5e7, type: 2}
   scenarioId: AI-UC-04
-  scenarioContext: "Du betreust einen Kunden, der mit dem aktuellen Tarif zufrieden
-    ist. Ein Premium-Tarif k\xF6nnte einen wichtigen Reporting-Prozess verbessern,
-    kostet aber deutlich mehr als der aktuelle Tarif. Das Gespr\xE4ch behandelt permission-based
-    Empfehlungen, Preis-Objections, Transparenz und den Erhalt des Kundenvertrauens."
-  customerPersona: "Name: Stefan K\xF6nig\nRolle: Einkaufsleiter\nPers\xF6nlichkeit:
-    Preisbewusst, erfahren und empfindlich gegen\xFCber manipulativen Verkaufstechniken."
-  openingMessage: "\u201EDas Upgrade klingt interessant, aber der Preis ist deutlich
-    h\xF6her. Warum sollte ich daf\xFCr mehr bezahlen?\u201C"
+  scenarioContext: "Du betreust einen Kunden, der mit dem aktuellen Tarif zufrieden ist. Ein Premium-Tarif k\xF6nnte einen wichtigen Reporting-Prozess verbessern, kostet aber deutlich mehr als der aktuelle Tarif. Das Gespr\xE4ch behandelt permission-based Empfehlungen, Preis-Objections, Transparenz und den Erhalt des Kundenvertrauens."
+  customerPersona: "Name: Stefan K\xF6nig\nRolle: Einkaufsleiter\nPers\xF6nlichkeit: Preisbewusst, erfahren und empfindlich gegen\xFCber manipulativen Verkaufstechniken."
+  openingMessage: "\u201EDas Upgrade klingt interessant, aber der Preis ist deutlich h\xF6her. Warum sollte ich daf\xFCr mehr bezahlen?\u201C"
   questionContexts:
   - questionId: UC-M04-Q01
-    dialogueContext: "Reagiere nat\u00fcrlich auf die permission-based Empfehlung und zeige, ob du dich ernst genommen f\u00fchlst. Frage danach beil\u00e4ufig: Was m\u00f6chten Sie von mir wissen, bevor Sie eine Option vorschlagen?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die permission-based Empfehlung und zeige, ob du dich ernst genommen f\xFChlst. Frage danach beil\xE4ufig: Was m\xF6chten Sie von mir wissen, bevor Sie eine Option vorschlagen?"
     traineeDialogueTexts:
-    - "Sie m\u00fcssen jetzt upgraden, damit Sie die Vorteile des gr\u00f6\u00dferen Tarifs sofort nutzen k\u00f6nnen."
-    - "Sie wachsen gerade. Wenn die zus\u00e4tzliche Funktion zu Ihrem Ziel passt, k\u00f6nnen wir gemeinsam pr\u00fcfen, ob sie f\u00fcr Sie sinnvoll ist."
-    - "Alle erfolgreichen Kunden entscheiden sich f\u00fcr dieses Paket, deshalb empfehle ich es Ihnen ebenfalls."
-    - "Ich habe das Upgrade direkt f\u00fcr Sie aktiviert, damit Sie sich nicht um weitere Schritte k\u00fcmmern m\u00fcssen."
+    - "Sie wachsen gerade. Wenn die zus\xE4tzliche Funktion zu Ihrem Ziel passt, k\xF6nnen wir gemeinsam pr\xFCfen, ob sie f\xFCr Sie sinnvoll ist."
+    - "Sie m\xFCssen jetzt upgraden, damit Sie die Vorteile des gr\xF6\xDFeren Tarifs sofort nutzen k\xF6nnen."
+    - "Alle erfolgreichen Kunden entscheiden sich f\xFCr dieses Paket, deshalb empfehle ich es Ihnen ebenfalls."
+    - "Ich habe das Upgrade direkt f\xFCr Sie aktiviert, damit Sie sich nicht um weitere Schritte k\xFCmmern m\xFCssen."
   - questionId: UC-M04-Q02
-    dialogueContext: "Reagiere nat\u00fcrlich auf die Preis-Bedenken und vermeide eine rein preisliche Rechtfertigung. Frage danach beil\u00e4ufig: Wie w\u00fcrden Sie mir den zus\u00e4tzlichen Nutzen im Verh\u00e4ltnis zu den Kosten erkl\u00e4ren?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die Preis-Bedenken und vermeide eine rein preisliche Rechtfertigung. Frage danach beil\xE4ufig: Wie w\xFCrden Sie mir den zus\xE4tzlichen Nutzen im Verh\xE4ltnis zu den Kosten erkl\xE4ren?"
     traineeDialogueTexts:
-    - "Lassen Sie mich Ihren Hinweis auf den Preis kurz \u00fcbergehen und mit meiner Pr\u00e4sentation fortfahren."
-    - "Trotz Ihrer Bedenken sollten Sie jetzt entscheiden, damit sich das Thema nicht weiter verz\u00f6gert."
-    - "Das verstehe ich. Welcher Teil des Preises macht Ihnen konkret Sorgen? Danach kann ich Ihnen transparent erkl\u00e4ren, welchen zus\u00e4tzlichen Nutzen das Angebot haben kann."
-    - "Der Preis spielt keine Rolle; unser Angebot ist f\u00fcr Sie offensichtlich die beste Wahl."
+    - "Lassen Sie mich Ihren Hinweis auf den Preis kurz \xFCbergehen und mit meiner Pr\xE4sentation fortfahren."
+    - "Trotz Ihrer Bedenken sollten Sie jetzt entscheiden, damit sich das Thema nicht weiter verz\xF6gert."
+    - "Der Preis spielt keine Rolle; unser Angebot ist f\xFCr Sie offensichtlich die beste Wahl."
+    - "Das verstehe ich. Welcher Teil des Preises macht Ihnen konkret Sorgen? Danach kann ich Ihnen transparent erkl\xE4ren, welchen zus\xE4tzlichen Nutzen das Angebot haben kann."
   - questionId: UC-M04-Q03
-    dialogueContext: "Reagiere nat\u00fcrlich auf die gew\u00fcnschte Transparenz. Frage danach beil\u00e4ufig: Welche Bestandteile und Bedingungen w\u00e4ren f\u00fcr meine Entscheidung besonders wichtig?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die gew\xFCnschte Transparenz. Frage danach beil\xE4ufig: Welche Bestandteile und Bedingungen w\xE4ren f\xFCr meine Entscheidung besonders wichtig?"
     traineeDialogueTexts:
-    - "F\u00fcr den Moment nenne ich Ihnen nur den neuen Gesamtpreis, damit die Entscheidung \u00fcbersichtlich bleibt."
-    - "Ich stelle den Preis, den Leistungsumfang und die relevanten Bedingungen offen dar, damit Sie die Entscheidung nachvollziehen k\u00f6nnen."
-    - "F\u00fcr uns z\u00e4hlt vor allem, welchen zus\u00e4tzlichen Umsatz dieses Angebot erzeugt."
-    - "Ich zeige Ihnen nur besonders positive Kundenbewertungen, damit die Empfehlung \u00fcberzeugender wirkt."
+    - "Ich stelle den Preis, den Leistungsumfang und die relevanten Bedingungen offen dar, damit Sie die Entscheidung nachvollziehen k\xF6nnen."
+    - "F\xFCr den Moment nenne ich Ihnen nur den neuen Gesamtpreis, damit die Entscheidung \xFCbersichtlich bleibt."
+    - "F\xFCr uns z\xE4hlt vor allem, welchen zus\xE4tzlichen Umsatz dieses Angebot erzeugt."
+    - "Ich zeige Ihnen nur besonders positive Kundenbewertungen, damit die Empfehlung \xFCberzeugender wirkt."
   - questionId: UC-M04-Q04
-    dialogueContext: "Reagiere nat\u00fcrlich darauf, ob die urspr\u00fcngliche Kaufentscheidung respektiert wird. Frage danach beil\u00e4ufig: Wie w\u00fcrden Sie mir etwas Neues anbieten, ohne meine bisherige Entscheidung infrage zu stellen?"
+    dialogueContext: "Reagiere nat\xFCrlich darauf, ob die urspr\xFCngliche Kaufentscheidung respektiert wird. Frage danach beil\xE4ufig: Wie w\xFCrden Sie mir etwas Neues anbieten, ohne meine bisherige Entscheidung infrage zu stellen?"
     traineeDialogueTexts:
-    - "Ich m\u00f6chte Ihre urspr\u00fcngliche Entscheidung respektieren, damit Sie sich nicht zu einem Zusatzkauf gedr\u00e4ngt f\u00fchlen."
-    - "Ich schlage Ihnen keine weiteren Produkte vor; dann muss ich Ihre urspr\u00fcngliche Entscheidung nicht weiter erkl\u00e4ren."
-    - "Bleiben Sie einfach bei Ihrem urspr\u00fcnglichen Produkt, unabh\u00e4ngig davon, ob sich Ihre Situation ver\u00e4ndert."
-    - "Ich sch\u00fctze Ihre urspr\u00fcngliche Entscheidung vor allem, damit eine Preisverhandlung gar nicht erst entstehen kann."
+    - "Ich schlage Ihnen keine weiteren Produkte vor; dann muss ich Ihre urspr\xFCngliche Entscheidung nicht weiter erkl\xE4ren."
+    - "Ich m\xF6chte Ihre urspr\xFCngliche Entscheidung respektieren, damit Sie sich nicht zu einem Zusatzkauf gedr\xE4ngt f\xFChlen."
+    - "Bleiben Sie einfach bei Ihrem urspr\xFCnglichen Produkt, unabh\xE4ngig davon, ob sich Ihre Situation ver\xE4ndert."
+    - "Ich sch\xFCtze Ihre urspr\xFCngliche Entscheidung vor allem, damit eine Preisverhandlung gar nicht erst entstehen kann."
   - questionId: UC-M04-Q05
-    dialogueContext: "Reagiere nat\u00fcrlich auf die Ablehnung des Cross-Sells und zeige, ob der Teilnehmer professionell damit umgeht. Frage danach beil\u00e4ufig: Wie w\u00fcrden Sie unser Gespr\u00e4ch danach sinnvoll fortsetzen?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die Ablehnung des Cross-Sells und zeige, ob der Teilnehmer professionell damit umgeht. Frage danach beil\xE4ufig: Wie w\xFCrden Sie unser Gespr\xE4ch danach sinnvoll fortsetzen?"
     traineeDialogueTexts:
-    - "Verstanden, dann lassen wir das Cross-Sell beiseite und setzen unsere gute Zusammenarbeit mit dem bestehenden Produkt fort."
-    - "Ich erkl\u00e4re Ihnen die Vorteile so lange weiter, bis Sie dem Cross-Sell zustimmen."
-    - "Wenn Sie ablehnen, reduziere ich den bestehenden Service sofort."
-    - "Dann treffen Sie aus meiner Sicht eine schlechte Entscheidung."
+    - "Ich erkl\xE4re Ihnen die Vorteile so lange weiter, bis Sie dem Cross-Sell zustimmen."
+    - Wenn Sie ablehnen, reduziere ich den bestehenden Service sofort.
+    - Verstanden, dann lassen wir das Cross-Sell beiseite und setzen unsere gute Zusammenarbeit mit dem bestehenden Produkt fort.
+    - Dann treffen Sie aus meiner Sicht eine schlechte Entscheidung.
   - questionId: UC-M04-Q06
-    dialogueContext: "Reagiere nat\u00fcrlich auf den vorgeschlagenen Verkaufsdruck und mache deine Zur\u00fcckhaltung deutlich. Frage danach beil\u00e4ufig: Was w\u00fcrde mir helfen, in Ruhe \u00fcber den Vorschlag nachzudenken?"
+    dialogueContext: "Reagiere nat\xFCrlich auf den vorgeschlagenen Verkaufsdruck und mache deine Zur\xFCckhaltung deutlich. Frage danach beil\xE4ufig: Was w\xFCrde mir helfen, in Ruhe \xFCber den Vorschlag nachzudenken?"
     traineeDialogueTexts:
-    - "Wenn Sie heute nicht zusagen, verlieren Sie die Gelegenheit; dieser Druck sollte Ihnen bei der Entscheidung helfen."
-    - "Mir ist wichtiger, dass Sie in Ruhe entscheiden k\u00f6nnen. Druck und k\u00fcnstliche Verknappung w\u00fcrden unsere langfristige Zusammenarbeit eher belasten."
+    - Wenn Sie heute nicht zusagen, verlieren Sie die Gelegenheit; dieser Druck sollte Ihnen bei der Entscheidung helfen.
+    - "Mir ist wichtiger, dass Sie in Ruhe entscheiden k\xF6nnen. Druck und k\xFCnstliche Verknappung w\xFCrden unsere langfristige Zusammenarbeit eher belasten."
   - questionId: UC-M04-Q07
-    dialogueContext: "Reagiere nat\u00fcrlich auf die wertorientierte Empfehlung und beende den Austausch mit einer kurzen Nachfrage: Welchen konkreten Unterschied w\u00fcrde das f\u00fcr unser Team machen?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die wertorientierte Empfehlung, und beende das Gespr\xE4ch."
     traineeDialogueTexts:
-    - "Wenn Ihr Problem durch das Angebot tats\u00e4chlich gel\u00f6st werden kann, erkl\u00e4re ich Ihnen den konkreten Mehrwert."
-    - "Ich empfehle Ihnen das Angebot, ohne den konkreten Nutzen f\u00fcr Ihre Situation weiter zu erkl\u00e4ren."
+    - "Wenn Ihr Problem durch das Angebot tats\xE4chlich gel\xF6st werden kann, erkl\xE4re ich Ihnen den konkreten Mehrwert."
+    - "Ich empfehle Ihnen das Angebot, ohne den konkreten Nutzen f\xFCr Ihre Situation weiter zu erkl\xE4ren."

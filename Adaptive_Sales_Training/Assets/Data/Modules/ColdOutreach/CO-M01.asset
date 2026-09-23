@@ -14,16 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MicroModule
   moduleId: CO-M01
   moduleTitle: Grundlagen von Cold Outreach
-  moduleText: "Cold Outreach bezeichnet die aktive Kontaktaufnahme mit potenziellen
-    Kunden, zu denen bisher keine Gesch\xE4ftsbeziehung oder Kommunikation bestanden
-    hat. Typische Kan\xE4le sind Telefon, E-Mail und Social Selling.\nDas Ziel des
-    ersten Kontakts ist normalerweise nicht der sofortige Abschluss. Stattdessen
-    soll zun\xE4chst Aufmerksamkeit f\xFCr ein relevantes Problem geschaffen, Interesse
-    gepr\xFCft und ein sinnvoller n\xE4chster Schritt vereinbart werden.\nEine gute
-    Ansprache verbindet eine kurze Value Proposition mit einem konkreten Kundennutzen.
-    Sie sollte zeigen, dass der Sales-Mitarbeiter die Situation des Prospects zumindest
-    grundlegend verstanden hat. Relevanz, Respekt und ein klarer n\xE4chster Schritt
-    sind wichtiger als eine m\xF6glichst lange Produktpr\xE4sentation."
+  moduleText: "Cold Outreach bezeichnet die aktive Kontaktaufnahme mit potenziellen Kunden, zu denen bisher keine Gesch\xE4ftsbeziehung oder Kommunikation bestanden hat. Typische Kan\xE4le sind Telefon, E-Mail und Social Selling.\nDas Ziel des ersten Kontakts ist normalerweise nicht der sofortige Abschluss. Stattdessen soll zun\xE4chst Aufmerksamkeit f\xFCr ein relevantes Problem geschaffen, Interesse gepr\xFCft und ein sinnvoller n\xE4chster Schritt vereinbart werden.\nEine gute Ansprache verbindet eine kurze Value Proposition mit einem konkreten Kundennutzen. Sie sollte zeigen, dass der Sales-Mitarbeiter die Situation des Prospects zumindest grundlegend verstanden hat. Relevanz, Respekt und ein klarer n\xE4chster Schritt sind wichtiger als eine m\xF6glichst lange Produktpr\xE4sentation."
   questions:
   - questionId: CO-M01-Q01
     questionText: Was beschreibt Cold Outreach am besten?
@@ -40,10 +31,10 @@ MonoBehaviour:
     questionText: Was ist normalerweise das wichtigste Ziel eines ersten Cold-Outreach-Kontakts?
     answerOptions:
     - "Den vollst\xE4ndigen Vertrag sofort abzuschlie\xDFen"
-    - "Interesse zu pr\xFCfen und einen passenden n\xE4chsten Schritt zu vereinbaren"
     - "Alle Produktfunktionen ausf\xFChrlich vorzustellen"
     - Den Prospect ohne weitere Fragen zu qualifizieren
-    correctAnswerIndex: 1
+    - "Interesse zu pr\xFCfen und einen passenden n\xE4chsten Schritt zu vereinbaren"
+    correctAnswerIndex: 3
     timeLimitSeconds: 30
     basePoints: 100
     speedBonusPoints: 50
@@ -52,8 +43,7 @@ MonoBehaviour:
     answerOptions:
     - "\u201EUnsere Software besitzt mehr als 80 Funktionen.\u201C"
     - "\u201EWir sind seit zehn Jahren am Markt.\u201C"
-    - "\u201EUnsere L\xF6sung kann den manuellen Aufwand bei der Angebotserstellung
-      reduzieren.\u201C"
+    - "\u201EUnsere L\xF6sung kann den manuellen Aufwand bei der Angebotserstellung reduzieren.\u201C"
     - "\u201EIch m\xF6chte Ihnen gerne unser gesamtes Produktportfolio zeigen.\u201C"
     correctAnswerIndex: 2
     timeLimitSeconds: 30
@@ -71,20 +61,18 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M01-Q05
-    questionText: "Wie sollte ein Sales-Mitarbeiter den passenden Kommunikationskanal
-      ausw\xE4hlen?"
+    questionText: "Wie sollte ein Sales-Mitarbeiter den passenden Kommunikationskanal ausw\xE4hlen?"
     answerOptions:
+    - "Abh\xE4ngig von Prospect, Situation, Dringlichkeit und verf\xFCgbarer Information"
     - "Immer per Telefon, unabh\xE4ngig vom Prospect"
     - Immer per E-Mail, weil sie am schnellsten ist
     - "Ausschlie\xDFlich nach pers\xF6nlicher Pr\xE4ferenz"
-    - "Abh\xE4ngig von Prospect, Situation, Dringlichkeit und verf\xFCgbarer Information"
-    correctAnswerIndex: 3
+    correctAnswerIndex: 0
     timeLimitSeconds: 30
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M01-Q06
-    questionText: "Cold Outreach f\xFChrt normalerweise direkt zum abgeschlossenen
-      Kauf"
+    questionText: "Cold Outreach f\xFChrt normalerweise direkt zum abgeschlossenen Kauf"
     answerOptions:
     - Richtig
     - Falsch

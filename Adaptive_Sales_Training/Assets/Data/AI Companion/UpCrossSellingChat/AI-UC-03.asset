@@ -14,58 +14,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AIDialogueScenario
   module: {fileID: 11400000, guid: 974d5408a3bbae64c81ed303c42bb2e6, type: 2}
   scenarioId: AI-UC-03
-  scenarioContext: "Du betreust einen Kunden, der eine CRM-Software verwendet. Im
-    Gespr\xE4ch wird deutlich, dass viele Daten noch manuell zwischen CRM und Marketing-System
-    \xFCbertragen werden. Das Gespr\xE4ch f\xFChrt von Discovery und Personalisierung
-    zu einer konkreten Cross-Selling-Empfehlung."
-  customerPersona: "Name: Oliver Meier\nRolle: Marketing Director\nPers\xF6nlichkeit:
-    L\xF6sungsorientiert, aber kritisch gegen\xFCber Angeboten, die nur aus einer
-    Feature-Liste bestehen."
-  openingMessage: "\u201EUnser gr\xF6\xDFtes Problem ist die manuelle Daten\xFCbertragung.
-    Welche Erweiterung w\xFCrde uns dabei konkret helfen?\u201C"
+  scenarioContext: "Du betreust einen Kunden, der eine CRM-Software verwendet. Im Gespr\xE4ch wird deutlich, dass viele Daten noch manuell zwischen CRM und Marketing-System \xFCbertragen werden. Das Gespr\xE4ch f\xFChrt von Discovery und Personalisierung zu einer konkreten Cross-Selling-Empfehlung."
+  customerPersona: "Name: Oliver Meier\nRolle: Marketing Director\nPers\xF6nlichkeit: L\xF6sungsorientiert, aber kritisch gegen\xFCber Angeboten, die nur aus einer Feature-Liste bestehen."
+  openingMessage: "\u201EUnser gr\xF6\xDFtes Problem ist die manuelle Daten\xFCbertragung. Welche Erweiterung w\xFCrde uns dabei konkret helfen?\u201C"
   questionContexts:
   - questionId: UC-M03-Q01
-    dialogueContext: "Reagiere nat\u00fcrlich auf die Discovery-Frage und beantworte sie mit einem konkreten Detail aus deiner Situation. Frage danach beil\u00e4ufig: Was w\u00fcrden Sie mich noch fragen, bevor Sie mir etwas empfehlen?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die Discovery-Frage und beantworte sie mit einem konkreten Detail aus deiner Situation. Frage danach beil\xE4ufig: Was w\xFCrden Sie mich noch fragen, bevor Sie mir etwas empfehlen?"
     traineeDialogueTexts:
-    - "M\u00f6chten Sie noch etwas kaufen, bevor ich Ihre Situation genauer kenne?"
-    - "Welche Ziele m\u00f6chten Sie mit Ihrer aktuellen L\u00f6sung in den n\u00e4chsten Monaten erreichen?"
-    - "Warum haben Sie unser teuerstes Produkt bisher noch nicht gekauft?"
-    - "Ich zeige Ihnen sofort drei weitere Produkte, damit Sie m\u00f6glichst viele M\u00f6glichkeiten kennen."
+    - "M\xF6chten Sie noch etwas kaufen, bevor ich Ihre Situation genauer kenne?"
+    - Warum haben Sie unser teuerstes Produkt bisher noch nicht gekauft?
+    - "Welche Ziele m\xF6chten Sie mit Ihrer aktuellen L\xF6sung in den n\xE4chsten Monaten erreichen?"
+    - "Ich zeige Ihnen sofort drei weitere Produkte, damit Sie m\xF6glichst viele M\xF6glichkeiten kennen."
   - questionId: UC-M03-Q02
-    dialogueContext: "Reagiere nat\u00fcrlich darauf, ob die Empfehlung wirklich zu deinem Bedarf passt. Frage danach beil\u00e4ufig: Woran w\u00fcrden Sie festmachen, dass gerade dieses Angebot f\u00fcr uns sinnvoll ist?"
+    dialogueContext: "Reagiere nat\xFCrlich darauf, ob die Empfehlung wirklich zu deinem Bedarf passt. Frage danach beil\xE4ufig: Woran w\xFCrden Sie festmachen, dass gerade dieses Angebot f\xFCr uns sinnvoll ist?"
     traineeDialogueTexts:
-    - "F\u00fcr Ihre bestehende L\u00f6sung w\u00fcrde ich nur etwas empfehlen, das zu Ihrem aktuellen Bedarf passt und einen erkennbaren Nutzen bringt."
-    - "Unser neuestes Produkt ist gerade auf dem Markt; deshalb w\u00fcrde ich es Ihnen unabh\u00e4ngig von Ihrer Situation empfehlen."
-    - "Ich stelle das Angebot mit der h\u00f6chsten Gewinnmarge in den Vordergrund."
-    - "Was f\u00fcr andere Kunden funktioniert, w\u00fcrde ich Ihnen genauso anbieten."
+    - "Unser neuestes Produkt ist gerade auf dem Markt; deshalb w\xFCrde ich es Ihnen unabh\xE4ngig von Ihrer Situation empfehlen."
+    - "F\xFCr Ihre bestehende L\xF6sung w\xFCrde ich nur etwas empfehlen, das zu Ihrem aktuellen Bedarf passt und einen erkennbaren Nutzen bringt."
+    - "Ich stelle das Angebot mit der h\xF6chsten Gewinnmarge in den Vordergrund."
+    - "Was f\xFCr andere Kunden funktioniert, w\xFCrde ich Ihnen genauso anbieten."
   - questionId: UC-M03-Q03
-    dialogueContext: "Reagiere nat\u00fcrlich auf die beschriebene Marketing-Automation-Integration und deren m\u00f6glichen Nutzen. Frage danach beil\u00e4ufig: Was m\u00fcsste die Verbindung k\u00f6nnen, damit sie unsere Arbeit wirklich erleichtert?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die beschriebene Marketing-Automation-Integration und deren m\xF6glichen Nutzen. Frage danach beil\xE4ufig: Was m\xFCsste die Verbindung k\xF6nnen, damit sie unsere Arbeit wirklich erleichtert?"
     traineeDialogueTexts:
-    - "Zus\u00e4tzlich zu Ihrer CRM-Software k\u00f6nnte ich Ihnen eine nicht verbundene B\u00fcroeinrichtung anbieten."
-    - "Damit Ihre Marketingdaten automatisch aus dem CRM \u00fcbertragen werden, w\u00fcrde ich eine passende Marketing-Automation-Integration vorschlagen."
-    - "Ich h\u00e4tte noch ein v\u00f6llig anderes Produkt f\u00fcr Sie, auch wenn es mit Ihrem aktuellen Problem nichts zu tun hat."
-    - "Vielleicht arbeiten Sie k\u00fcnftig mit einer zweiten CRM-Software, auch wenn dadurch kein zus\u00e4tzlicher Nutzen entsteht."
+    - "Zus\xE4tzlich zu Ihrer CRM-Software k\xF6nnte ich Ihnen eine nicht verbundene B\xFCroeinrichtung anbieten."
+    - "Ich h\xE4tte noch ein v\xF6llig anderes Produkt f\xFCr Sie, auch wenn es mit Ihrem aktuellen Problem nichts zu tun hat."
+    - "Vielleicht arbeiten Sie k\xFCnftig mit einer zweiten CRM-Software, auch wenn dadurch kein zus\xE4tzlicher Nutzen entsteht."
+    - "Damit Ihre Marketingdaten automatisch aus dem CRM \xFCbertragen werden, w\xFCrde ich eine passende Marketing-Automation-Integration vorschlagen."
   - questionId: UC-M03-Q04
-    dialogueContext: "Reagiere nat\u00fcrlich auf die Pr\u00fcfung des Problems und nenne eine konkrete Priorit\u00e4t. Frage danach beil\u00e4ufig: Welche Auswirkung auf unser Gesch\u00e4ft w\u00fcrden Sie dabei zuerst betrachten?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die Pr\xFCfung des Problems und nenne eine konkrete Priorit\xE4t. Frage danach beil\xE4ufig: Welche Auswirkung auf unser Gesch\xE4ft w\xFCrden Sie dabei zuerst betrachten?"
     traineeDialogueTexts:
-    - "Bevor ich den Premium-Tarif empfehle, pr\u00fcfe ich zuerst, ob ich das Produkt pers\u00f6nlich besonders gern verkaufe."
-    - "Bevor wir \u00fcber den Premium-Tarif sprechen, m\u00f6chte ich pr\u00fcfen, ob seine zus\u00e4tzlichen Funktionen ein konkretes Problem Ihres Teams l\u00f6sen."
-    - "Ich halte die Informationen bewusst knapp, damit Sie nicht zu viele Fragen zur Empfehlung stellen."
-    - "Ich empfehle den Tarif, weil er teurer ist, unabh\u00e4ngig davon, was Sie tats\u00e4chlich ben\u00f6tigen."
+    - "Bevor ich den Premium-Tarif empfehle, pr\xFCfe ich zuerst, ob ich das Produkt pers\xF6nlich besonders gern verkaufe."
+    - Ich halte die Informationen bewusst knapp, damit Sie nicht zu viele Fragen zur Empfehlung stellen.
+    - "Bevor wir \xFCber den Premium-Tarif sprechen, m\xF6chte ich pr\xFCfen, ob seine zus\xE4tzlichen Funktionen ein konkretes Problem Ihres Teams l\xF6sen."
+    - "Ich empfehle den Tarif, weil er teurer ist, unabh\xE4ngig davon, was Sie tats\xE4chlich ben\xF6tigen."
   - questionId: UC-M03-Q05
-    dialogueContext: "Reagiere nat\u00fcrlich auf die Verbindung zwischen Feature und Ziel. Frage danach beil\u00e4ufig: Wie w\u00fcrden Sie mir zeigen, dass diese Funktion gerade zu unserem Ziel beitr\u00e4gt?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die Verbindung zwischen Feature und Ziel. Frage danach beil\xE4ufig: Wie w\xFCrden Sie mir zeigen, dass diese Funktion gerade zu unserem Ziel beitr\xE4gt?"
     traineeDialogueTexts:
-    - "Das Feature erkl\u00e4rt sich von selbst; ich muss den Bezug zu Ihrem Arbeitsalltag nicht weiter herstellen."
-    - "Die automatische Auswertung w\u00e4re f\u00fcr Ihr Ziel nur dann interessant, wenn sie Ihr Team tats\u00e4chlich schneller zu den ben\u00f6tigten Reports bringt."
-    - "Ihre Kunden m\u00f6chten grunds\u00e4tzlich keine Premium-Produkte kaufen, deshalb w\u00fcrde ich Ihnen keines anbieten."
-    - "Ich beurteile das Upsell ausschlie\u00dflich danach, wie hoch sein Preis ist."
+    - "Die automatische Auswertung w\xE4re f\xFCr Ihr Ziel nur dann interessant, wenn sie Ihr Team tats\xE4chlich schneller zu den ben\xF6tigten Reports bringt."
+    - "Das Feature erkl\xE4rt sich von selbst; ich muss den Bezug zu Ihrem Arbeitsalltag nicht weiter herstellen."
+    - "Ihre Kunden m\xF6chten grunds\xE4tzlich keine Premium-Produkte kaufen, deshalb w\xFCrde ich Ihnen keines anbieten."
+    - "Ich beurteile das Upsell ausschlie\xDFlich danach, wie hoch sein Preis ist."
   - questionId: UC-M03-Q06
-    dialogueContext: "Reagiere nat\u00fcrlich auf die Begrenzung der Empfehlung und deine Aufmerksamkeitsspanne. Frage danach beil\u00e4ufig: Welche ein oder zwei M\u00f6glichkeiten w\u00e4ren f\u00fcr uns wirklich relevant?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die Begrenzung der Empfehlung und deine Aufmerksamkeitsspanne. Frage danach beil\xE4ufig: Welche ein oder zwei M\xF6glichkeiten w\xE4ren f\xFCr uns wirklich relevant?"
     traineeDialogueTexts:
-    - "Ich zeige Ihnen m\u00f6glichst viele Features, auch wenn sie f\u00fcr Ihre aktuelle Situation keine Rolle spielen."
-    - "Ich konzentriere mich auf die ein oder zwei Features, die f\u00fcr Ihre Situation tats\u00e4chlich relevant sind."
+    - "Ich zeige Ihnen m\xF6glichst viele Features, auch wenn sie f\xFCr Ihre aktuelle Situation keine Rolle spielen."
+    - "Ich konzentriere mich auf die ein oder zwei Features, die f\xFCr Ihre Situation tats\xE4chlich relevant sind."
   - questionId: UC-M03-Q07
-    dialogueContext: "Reagiere nat\u00fcrlich auf den Bezug zum bestehenden Produkt und beende den Austausch mit einer kurzen Nachfrage: Wie w\u00fcrde sich das in unserem bisherigen Ablauf erg\u00e4nzen?"
+    dialogueContext: "Reagiere nat\xFCrlich auf den Bezug zum bestehenden Produkt, und beende das Gespr\xE4ch."
     traineeDialogueTexts:
-    - "Auch ohne erkennbaren Bezug zu Ihrem Kauf oder Ihrer Situation w\u00fcrde ich Ihnen ein Cross-Sell anbieten."
-    - "Da das Angebot zu Ihrem bestehenden Kauf und Ihrem aktuellen Ablauf passt, kann ich Ihnen den Zusammenhang nachvollziehbar erkl\u00e4ren."
+    - "Auch ohne erkennbaren Bezug zu Ihrem Kauf oder Ihrer Situation w\xFCrde ich Ihnen ein Cross-Sell anbieten."
+    - "Da das Angebot zu Ihrem bestehenden Kauf und Ihrem aktuellen Ablauf passt, kann ich Ihnen den Zusammenhang nachvollziehbar erkl\xE4ren."

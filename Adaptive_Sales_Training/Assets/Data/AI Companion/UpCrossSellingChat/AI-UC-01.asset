@@ -14,59 +14,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AIDialogueScenario
   module: {fileID: 11400000, guid: 32f8043d0a15a8e49969fbfae84924e3, type: 2}
   scenarioId: AI-UC-01
-  scenarioContext: "Du betreust einen Kunden, der aktuell den Basic-Tarif einer SaaS-Plattform
-    nutzt. Das Unternehmen w\xE4chst und ben\xF6tigt m\xF6glicherweise mehr Nutzer,
-    zus\xE4tzliche Auswertungen und eine CRM-Integration. Das Gespr\xE4ch f\xFChrt
-    von der Unterscheidung zwischen Upselling und Cross-Selling zur Bedeutung des
-    Kundennutzens."
-  customerPersona: "Name: Laura Brandt\nRolle: Teamleiterin Sales Operations\nPers\xF6nlichkeit:
-    Praktisch und budgetbewusst. Sie m\xF6chte den Unterschied zwischen einem Upgrade
-    und einem Zusatzmodul verstehen."
-  openingMessage: "\u201ESie sprechen von einer Erweiterung. Meinen Sie damit einen
-    gr\xF6\xDFeren Tarif oder ein zus\xE4tzliches Produkt?\u201C"
+  scenarioContext: "Du betreust einen Kunden, der aktuell den Basic-Tarif einer SaaS-Plattform nutzt. Das Unternehmen w\xE4chst und ben\xF6tigt m\xF6glicherweise mehr Nutzer, zus\xE4tzliche Auswertungen und eine CRM-Integration. Das Gespr\xE4ch f\xFChrt von der Unterscheidung zwischen Upselling und Cross-Selling zur Bedeutung des Kundennutzens."
+  customerPersona: "Name: Laura Brandt\nRolle: Teamleiterin Sales Operations\nPers\xF6nlichkeit: Praktisch und budgetbewusst. Sie m\xF6chte den Unterschied zwischen einem Upgrade und einem Zusatzmodul verstehen."
+  openingMessage: "\u201ESie sprechen von einer Erweiterung. Meinen Sie damit einen gr\xF6\xDFeren Tarif oder ein zus\xE4tzliches Produkt?\u201C"
   questionContexts:
   - questionId: UC-M01-Q01
-    dialogueContext: "Reagiere nat\u00fcrlich auf die vorgeschlagene Erweiterung und beziehe dich auf deine aktuelle Nutzung. Frage danach beil\u00e4ufig: Was m\u00fcsste ich denn zus\u00e4tzlich bekommen, damit sich so eine Erweiterung f\u00fcr mich lohnt?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die vorgeschlagene Erweiterung und beziehe dich auf deine aktuelle Nutzung. Frage danach beil\xE4ufig: Was m\xFCsste ich denn zus\xE4tzlich bekommen, damit sich so eine Erweiterung f\xFCr mich lohnt?"
     traineeDialogueTexts:
-    - "Sie haben noch eine offene Support-Anfrage; ich nutze die Gelegenheit, Ihnen gleich ein zus\u00e4tzliches Angebot zu machen."
-    - "Sie nutzen bisher den Basic-Tarif. Weil Ihr Team w\u00e4chst, k\u00f6nnte der Premium-Tarif mehr Spielraum bieten."
-    - "Wenn Sie unser Produkt einem Freund empfehlen, w\u00e4re das f\u00fcr mich bereits ein Upselling."
-    - "Ihr bisheriger Vertrag l\u00e4uft einfach weiter; diese Verl\u00e4ngerung w\u00fcrde ich schon als Upselling einordnen."
+    - "Sie nutzen bisher den Basic-Tarif. Weil Ihr Team w\xE4chst, k\xF6nnte der Premium-Tarif mehr Spielraum bieten."
+    - "Sie haben noch eine offene Support-Anfrage; ich nutze die Gelegenheit, Ihnen gleich ein zus\xE4tzliches Angebot zu machen."
+    - "Wenn Sie unser Produkt einem Freund empfehlen, w\xE4re das f\xFCr mich bereits ein Upselling."
+    - "Ihr bisheriger Vertrag l\xE4uft einfach weiter; diese Verl\xE4ngerung w\xFCrde ich schon als Upselling einordnen."
   - questionId: UC-M01-Q02
-    dialogueContext: "Reagiere nat\u00fcrlich auf den Vorschlag eines erg\u00e4nzenden Produkts. Frage danach beil\u00e4ufig: Wie w\u00fcrden Sie wissen, welches zus\u00e4tzliche Angebot zu unserem Alltag passt?"
+    dialogueContext: "Reagiere nat\xFCrlich auf den Vorschlag eines erg\xE4nzenden Produkts. Frage danach beil\xE4ufig: Wie w\xFCrden Sie wissen, welches zus\xE4tzliche Angebot zu unserem Alltag passt?"
     traineeDialogueTexts:
-    - "Ich kann Ihnen denselben Produktumfang zu einem niedrigeren Preis anbieten."
-    - "Sie arbeiten bereits mit unserem Basic-Tarif. Wenn Ihr Team mehr Kapazit\u00e4t ben\u00f6tigt, k\u00f6nnten wir den gr\u00f6\u00dferen Tarif gemeinsam ansehen."
-    - "Zu Ihrer bestehenden Software k\u00f6nnte eine erg\u00e4nzende CRM-Integration passen, wenn sie Ihren aktuellen Ablauf erleichtert."
-    - "Ich w\u00fcrde den bestehenden Vertrag beenden, statt Ihnen ein weiteres Angebot zu machen."
+    - Ich kann Ihnen denselben Produktumfang zu einem niedrigeren Preis anbieten.
+    - "Sie arbeiten bereits mit unserem Basic-Tarif. Wenn Ihr Team mehr Kapazit\xE4t ben\xF6tigt, k\xF6nnten wir den gr\xF6\xDFeren Tarif gemeinsam ansehen."
+    - "Zu Ihrer bestehenden Software k\xF6nnte eine erg\xE4nzende CRM-Integration passen, wenn sie Ihren aktuellen Ablauf erleichtert."
+    - "Ich w\xFCrde den bestehenden Vertrag beenden, statt Ihnen ein weiteres Angebot zu machen."
   - questionId: UC-M01-Q03
-    dialogueContext: "Reagiere nat\u00fcrlich auf die Einordnung des Angebots und beziehe dich auf dein bestehendes Produkt. Frage danach beil\u00e4ufig: Was w\u00fcrde sich f\u00fcr uns konkret \u00e4ndern, wenn wir diese Option dazunehmen?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die Einordnung des Angebots und beziehe dich auf dein bestehendes Produkt. Frage danach beil\xE4ufig: Was w\xFCrde sich f\xFCr uns konkret \xE4ndern, wenn wir diese Option dazunehmen?"
     traineeDialogueTexts:
-    - "Zu Ihrem Laptop k\u00f6nnte ich noch einen leistungsf\u00e4higeren Prozessor als separates Cross-Sell anbieten."
-    - "Ich melde mich heute zum ersten Mal, um Ihnen einen leistungsf\u00e4higeren Prozessor anzubieten; das w\u00e4re Cold Outreach."
-    - "Wenn Sie den Laptop h\u00e4ufiger f\u00fcr rechenintensive Aufgaben nutzen, k\u00f6nnen Sie beim Kauf auf den leistungsf\u00e4higeren Prozessor upgraden."
-    - "Ich sende Ihnen in den n\u00e4chsten Wochen weitere Informationen zum Prozessor, damit wir die Beziehung langsam entwickeln."
+    - "Zu Ihrem Laptop k\xF6nnte ich noch einen leistungsf\xE4higeren Prozessor als separates Cross-Sell anbieten."
+    - "Ich melde mich heute zum ersten Mal, um Ihnen einen leistungsf\xE4higeren Prozessor anzubieten; das w\xE4re Cold Outreach."
+    - "Ich sende Ihnen in den n\xE4chsten Wochen weitere Informationen zum Prozessor, damit wir die Beziehung langsam entwickeln."
+    - "Wenn Sie den Laptop h\xE4ufiger f\xFCr rechenintensive Aufgaben nutzen, k\xF6nnen Sie beim Kauf auf den leistungsf\xE4higeren Prozessor upgraden."
   - questionId: UC-M01-Q04
-    dialogueContext: "Reagiere nat\u00fcrlich darauf, ob der Vorschlag einen echten Kundennutzen hat. Frage danach beil\u00e4ufig: Wie w\u00fcrden Sie herausfinden, was f\u00fcr unser Team wirklich hilfreich w\u00e4re?"
+    dialogueContext: "Reagiere nat\xFCrlich darauf, ob der Vorschlag einen echten Kundennutzen hat. Frage danach beil\xE4ufig: Wie w\xFCrden Sie herausfinden, was f\xFCr unser Team wirklich hilfreich w\xE4re?"
     traineeDialogueTexts:
-    - "Wenn die teurere Option unseren Umsatz erh\u00f6ht, w\u00fcrde ich Sie auch ohne weiteren Bedarf dazu dr\u00e4ngen."
-    - "Wenn der zus\u00e4tzliche Baustein Sie bei einem konkreten Ziel unterst\u00fctzt, w\u00fcrde ich ihn als sinnvolle Option mit Ihnen pr\u00fcfen."
-    - "Ich lege Ihnen zu Ihrem Kauf m\u00f6glichst viele zus\u00e4tzliche Optionen vor, damit die urspr\u00fcngliche Entscheidung nicht zu einfach bleibt."
-    - "Ich schicke Ihnen eine automatische Empfehlung; eine pers\u00f6nliche Beratung ist daf\u00fcr nicht erforderlich."
+    - "Wenn der zus\xE4tzliche Baustein Sie bei einem konkreten Ziel unterst\xFCtzt, w\xFCrde ich ihn als sinnvolle Option mit Ihnen pr\xFCfen."
+    - "Wenn die teurere Option unseren Umsatz erh\xF6ht, w\xFCrde ich Sie auch ohne weiteren Bedarf dazu dr\xE4ngen."
+    - "Ich lege Ihnen zu Ihrem Kauf m\xF6glichst viele zus\xE4tzliche Optionen vor, damit die urspr\xFCngliche Entscheidung nicht zu einfach bleibt."
+    - "Ich schicke Ihnen eine automatische Empfehlung; eine pers\xF6nliche Beratung ist daf\xFCr nicht erforderlich."
   - questionId: UC-M01-Q05
-    dialogueContext: "Reagiere nat\u00fcrlich auf die Begr\u00fcndung f\u00fcr das Zusatzangebot. Frage danach beil\u00e4ufig: Welche meiner aktuellen Anforderungen w\u00fcrden Sie daf\u00fcr zuerst ber\u00fccksichtigen?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die Begr\xFCndung f\xFCr das Zusatzangebot. Frage danach beil\xE4ufig: Welche meiner aktuellen Anforderungen w\xFCrden Sie daf\xFCr zuerst ber\xFCcksichtigen?"
     traineeDialogueTexts:
-    - "Auch wenn das Angebot nicht zu Ihrem Bedarf passt, w\u00fcrde ich es aufnehmen, solange es unseren Umsatz steigert."
-    - "Ihre Nutzung zeigt, dass der zus\u00e4tzliche Baustein zu Ihrem Bedarf passen und Ihr Ergebnis verbessern k\u00f6nnte; deshalb spreche ich ihn an."
-    - "Ich brauche noch einen Verkauf f\u00fcr mein Monatsziel und w\u00fcrde Ihnen deshalb dieses Angebot machen."
-    - "Auch wenn Sie bereits Nein gesagt haben, w\u00fcrde ich das Angebot weiterverfolgen."
+    - "Auch wenn das Angebot nicht zu Ihrem Bedarf passt, w\xFCrde ich es aufnehmen, solange es unseren Umsatz steigert."
+    - "Ihre Nutzung zeigt, dass der zus\xE4tzliche Baustein zu Ihrem Bedarf passen und Ihr Ergebnis verbessern k\xF6nnte; deshalb spreche ich ihn an."
+    - "Ich brauche noch einen Verkauf f\xFCr mein Monatsziel und w\xFCrde Ihnen deshalb dieses Angebot machen."
+    - "Auch wenn Sie bereits Nein gesagt haben, w\xFCrde ich das Angebot weiterverfolgen."
   - questionId: UC-M01-Q06
-    dialogueContext: "Reagiere nat\u00fcrlich auf die Unterscheidung zwischen Erweiterung und Erg\u00e4nzung. Frage danach beil\u00e4ufig: W\u00fcrden Sie mir eher mehr von dem Bestehenden oder etwas Erg\u00e4nzendes empfehlen?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die Unterscheidung zwischen Erweiterung und Erg\xE4nzung. Frage danach beil\xE4ufig: W\xFCrden Sie mir eher mehr von dem Bestehenden oder etwas Erg\xE4nzendes empfehlen?"
     traineeDialogueTexts:
-    - "Ob wir Ihr Paket erweitern oder Ihnen etwas Erg\u00e4nzendes anbieten, nenne ich im Gespr\u00e4ch einfach beides Upselling."
-    - "Beim Upgrade erweitern wir das bestehende Produkt; beim Cross-Sell kommt ein erg\u00e4nzendes Angebot hinzu."
+    - "Ob wir Ihr Paket erweitern oder Ihnen etwas Erg\xE4nzendes anbieten, nenne ich im Gespr\xE4ch einfach beides Upselling."
+    - "Beim Upgrade erweitern wir das bestehende Produkt; beim Cross-Sell kommt ein erg\xE4nzendes Angebot hinzu."
   - questionId: UC-M01-Q07
-    dialogueContext: "Reagiere nat\u00fcrlich auf die Verbindung von Gesch\u00e4ftsergebnis und Kundennutzen. Beende den Austausch mit einer kurzen Nachfrage: Woran k\u00f6nnten wir sp\u00e4ter gemeinsam erkennen, ob es sich gelohnt hat?"
+    dialogueContext: "Reagiere nat\xFCrlich auf die Verbindung von Gesch\xE4ftsergebnis und Kundennutzen, und beende das Gespr\xE4ch."
     traineeDialogueTexts:
-    - "Wenn die Erweiterung f\u00fcr Ihre Ziele relevant ist, kann sie Ihren Nutzen erh\u00f6hen und zugleich unseren Umsatz steigern."
-    - "Selbst wenn ein Angebot f\u00fcr Sie relevant ist, erwarte ich keinen zus\u00e4tzlichen Nutzen; wichtig w\u00e4re nur unser Umsatz."
+    - "Wenn die Erweiterung f\xFCr Ihre Ziele relevant ist, kann sie Ihren Nutzen erh\xF6hen und zugleich unseren Umsatz steigern."
+    - "Selbst wenn ein Angebot f\xFCr Sie relevant ist, erwarte ich keinen zus\xE4tzlichen Nutzen; wichtig w\xE4re nur unser Umsatz."
