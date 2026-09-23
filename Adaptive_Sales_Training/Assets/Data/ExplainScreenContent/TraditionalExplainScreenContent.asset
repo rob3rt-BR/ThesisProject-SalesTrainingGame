@@ -13,30 +13,8 @@ MonoBehaviour:
   m_Name: TraditionalExplainScreenContent
   m_EditorClassIdentifier: Assembly-CSharp::ExplainScreenContent
   texts:
-  - "Der Training besteht aus einem kleinen Lernspiel, das auf Ideen und Konzepten
-    aus dem Bereich \"Sales\" basiert. Im Hauptmen\xFC k\xF6nnen Sie ausw\xE4hlen,
-    welches Thema Sie zuerst behandeln m\xF6chten.\n\nJedes Thema besteht aus einer
-    Reihe von Microlearning-Modulen, die jeweils aus einer Informationsphase und
-    einer Interaktionsphase bestehen."
-  - "In der Informationsphase wird Ihnen ein Sachtext zu den Konzepten des Themas
-    zum Lesen vorgelegt. Lesen Sie den Text, bis Sie den Inhalt verstanden haben
-    und bereit sind, fortzufahren.\n\nAls N\xE4chstes werden Ihnen in der Interaktionsphase
-    eine Reihe von Fragen zu den zuvor erhaltenen Informationen gestellt. Bei jeder
-    Frage l\xE4uft ein Timer, und je nachdem, wie schnell Sie antworten, erhalten
-    Sie Punkte. Je schneller Sie antworten, desto mehr Punkte k\xF6nnen Sie erzielen."
-  - "Es gibt zwei Arten von Fragen: Single-Choice-Fragen mit vier Antwortm\xF6glichkeiten
-    und Richtig-oder-Falsch-Fragen.\n\nBei Single-Choice-Fragen w\xE4hlen Sie Ihre
-    Antwort mit den Pfeiltasten in die gew\xFCnschte Richtung aus, bei Richtig-oder-Falsch-Fragen
-    verwenden Sie die Pfeiltasten nach links und rechts, um die entsprechende Antwort
-    auszuw\xE4hlen."
-  - "Zwischen den einzelnen Fragerunden wird ein Zwischenbildschirm mit Ihrer aktuellen
-    Punktzahl angezeigt, und Sie werden aufgefordert, zur n\xE4chsten Informationsphase
-    \xFCberzugehen."
-  - "Nachdem Sie alle Microlearning-Module abgeschlossen haben, absolvieren Sie eine
-    letzte Fragerunde, in der Sie nun ein Szenario simulieren, in dem Sie Ihr neu
-    erworbenes Wissen anwenden und f\xFCr jede \xC4nderung im Szenario die richtige
-    Antwort ausw\xE4hlen m\xFCssen. Diese letzte Runde ist nicht zeitlich begrenzt."
-  - "Nach Abschluss der letzten Runde werden Sie schlie\xDFlich zum abschlie\xDFenden
-    Zwischenbildschirm weitergeleitet, auf dem Sie Ihre Endpunktzahl und Ihre Statistiken
-    einsehen k\xF6nnen. Danach k\xF6nnen Sie zum Hauptmen\xFC zur\xFCckkehren und
-    ein anderes Thema ausw\xE4hlen."
+  - "Der Training besteht aus einem kleinen Lernspiel, das auf Ideen und Konzepten aus dem Bereich \"Sales\" basiert. Im Hauptmen\xFC k\xF6nnen Sie ausw\xE4hlen, welches Thema Sie zuerst behandeln m\xF6chten.\n\nJedes Thema besteht aus einer Reihe von Microlearning-Modulen, die jeweils aus einer Informationsphase und einer Interaktionsphase bestehen."
+  - In der Informationsphase wird Ihnen ein Sachtext zu den Konzepten des Themas zum Lesen vorgelegt. Lesen Sie den Text, bis Sie den Inhalt verstanden haben und bereit sind, fortzufahren.
+  - "Als N\xE4chstes werden Ihnen in der Interaktionsphase eine Reihe von Fragen zu den zuvor erhaltenen Informationen gestellt. Bei jeder Frage l\xE4uft ein Timer, und je nachdem, wie schnell Sie antworten, erhalten Sie Punkte. Je schneller Sie antworten, desto mehr Punkte k\xF6nnen Sie erzielen.\n\nEs gibt zwei Arten von Fragen: Single-Choice-Fragen mit vier Antwortm\xF6glichkeiten und Richtig-oder-Falsch-Fragen."
+  - "Zwischen den einzelnen Fragerunden wird ein Zwischenbildschirm mit Ihrer aktuellen Punktzahl angezeigt, und Sie werden aufgefordert, zur n\xE4chsten Informationsphase \xFCberzugehen."
+  - "Nachdem Sie alle Microlearning-Module abgeschlossen haben, werden Sie schlie\xDFlich zum abschlie\xDFenden Zwischenbildschirm weitergeleitet, auf dem Sie Ihre Endpunktzahl und Ihre Statistiken von Thema einsehen k\xF6nnen. Danach k\xF6nnen Sie zum Hauptmen\xFC zur\xFCckkehren und ein anderes Thema ausw\xE4hlen."
