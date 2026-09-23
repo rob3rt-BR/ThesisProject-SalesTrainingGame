@@ -122,6 +122,7 @@ public class AIDialogueController : MonoBehaviour
     private List<ElementAnimation> finalStatsElements;
 
     ElementAnimation loadingIndicatorElement;
+    ElementAnimation traineeDialogueTextElement;
 
     private readonly TrainingSessionManager session = TrainingSessionManager.Instance;
 
@@ -167,7 +168,7 @@ public class AIDialogueController : MonoBehaviour
         // On click of continue button (point screen) => Go to next module info screen
         continueButton.onClick.AddListener(ContinueToNextModule);
 
-        // On click (just 1 time at the end) of finish button (final point screen) => Exit TrainigScene of current topic
+        // On click (just 1 time at the end) of finish button (final point screen) => Exit AITrainigScene of current topic
         finishTopicButton.onClick.AddListener(ExitTopicTraining);
 
         // On click of answerButton[i] (question screen) => select an answer with a designated index
@@ -197,7 +198,7 @@ public class AIDialogueController : MonoBehaviour
         // Dialogue screen elements 
         ElementAnimation dialogueTitleElement = animationController.GetElementAnimation(dialogueTitle.gameObject);
         ElementAnimation dialogueBoxBackgroundElement = animationController.GetElementAnimation(dialogueBoxBackground);
-        ElementAnimation traineeDialogueTextElement = animationController.GetElementAnimation(traineeDialogueText.gameObject);
+        traineeDialogueTextElement = animationController.GetElementAnimation(traineeDialogueText.gameObject);
         ElementAnimation aiResponseTextElement = animationController.GetElementAnimation(aiResponseText.gameObject);
         loadingIndicatorElement = animationController.GetElementAnimation(loadingIndicator);
         ElementAnimation startQuestionsButtonElement = animationController.GetElementAnimation(startQuestionsButton.gameObject);
@@ -207,7 +208,7 @@ public class AIDialogueController : MonoBehaviour
         dialogueScreenElementsPre = new() {dialogueTitleElement, dialogueBoxBackgroundElement, aiResponseTextElement, startQuestionsButtonElement};
         
         // Dialogue screen elements POST questions list
-        dialogueScreenElementsPost = new() {dialogueTitleElement, dialogueBoxBackgroundElement, traineeDialogueTextElement, aiResponseTextElement, loadingIndicatorElement, nextQuestionButtonElement};
+        dialogueScreenElementsPost = new() {dialogueTitleElement, dialogueBoxBackgroundElement, traineeDialogueTextElement, aiResponseTextElement, nextQuestionButtonElement};
 
         // Questions screen elements
         ElementAnimation questionsCounterElement = animationController.GetElementAnimation(questionCounterText.gameObject);
@@ -345,9 +346,7 @@ public class AIDialogueController : MonoBehaviour
         // For NON FIRST module start => enable start question button again
         // startQuestionsButton.gameObject.SetActive(true);
 
-        ElementAnimation traineeDialogueTextElement = animationController.GetElementAnimation(traineeDialogueText.gameObject);
         traineeDialogueTextElement.canvasGroup.alpha = 0f;
-
         loadingIndicatorElement.canvasGroup.alpha = 0f;
 
         // Animate screen change: info screen -> dialogue screen (PRE questions)
@@ -576,7 +575,8 @@ public class AIDialogueController : MonoBehaviour
         animationController.AnimateLoadingIndicatorLeave(loadingIndicator);
 
         // Remove loadingIndicatorElement before transitioning back to question screen => NOT animate loadingIndicatorElement
-        dialogueScreenElementsPost.Remove(loadingIndicatorElement);
+        bool loadingIndicatorRemoved = dialogueScreenElementsPost.Remove(loadingIndicatorElement);
+        Debug.Log(loadingIndicatorRemoved);
 
         // If web request result NOT successful => Failed and break coroutine
         if (webRequest.result != UnityWebRequest.Result.Success)
