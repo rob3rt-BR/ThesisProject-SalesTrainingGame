@@ -63,6 +63,10 @@ public class AIDialogueController : MonoBehaviour
     private Button[] answerButtons;
     [SerializeField]
     private TMP_Text[] answerButtonsText;
+    [SerializeField]
+    private GameObject correctIndicator;
+    [SerializeField]
+    private GameObject wrongIndicator;
 
     [Header("Points UI")]
     [SerializeField]
@@ -298,6 +302,7 @@ public class AIDialogueController : MonoBehaviour
             animationController.AnimateSceneStart(infoScreenElements);
         }
         
+        // IF index in middle of module list range => Animate screen change: current point screen -> info screen
         if (currentModuleIndex > 0 && currentModuleIndex < topic.modules.Count)
         {
             // Restart infoTextBox element to original position for correct animation position and direction
@@ -308,7 +313,6 @@ public class AIDialogueController : MonoBehaviour
 
             List<ElementAnimation> allCurrentPointScreenElements = animationController.CombinePointScreenElementsLists(currentPointScreenElements, currentStatsElements);
 
-            // Animate screen change: current point screen -> info screen
             animationController.AnimateScreenChange(allCurrentPointScreenElements, infoScreenElements, currentPointScreen, infoScreen);
         }
 
@@ -379,12 +383,12 @@ public class AIDialogueController : MonoBehaviour
             return;
         }
 
+        // IF index in middle of question list range => Animate screen change: dialogue screen (POST question) -> question screen
         if (currentQuestionIndex > 0 && currentQuestionIndex < currentModule.questions.Count)
         {
             // Restart questionTextHolder element to original position for correct animation position and direction
             animationController.RestartElementToOriginalPosition(questionTextHolder);
 
-            // Animate screen change: dialogue screen (POST question) -> question screen
             animationController.AnimateScreenChange(dialogueScreenElementsPost, questionScreenElements, dialogueScreen, questionScreen);
         }
 
@@ -432,10 +436,16 @@ public class AIDialogueController : MonoBehaviour
         // If answer correct => Calculate speed bonus points and add points to current module points
         if (isCorrect)
         {
+            animationController.AnimateAnswerIndicator(correctIndicator);
+
             float speedRatio = remainingTime / currentQuestion.timeLimitSeconds;
             int speedBonus = Mathf.RoundToInt(currentQuestion.speedBonusPoints * Mathf.Clamp01(speedRatio));
 
             pointsAwarded = currentQuestion.basePoints + speedBonus;
+        }
+        else
+        {
+            animationController.AnimateAnswerIndicator(wrongIndicator);
         }
 
         // Creat new question result and set its values based on answer

@@ -18,6 +18,8 @@ public class AnimationController : MonoBehaviour
     private float groupAnimationDuration = 0.5f;
     
     private float elapsedTime = 0f;
+    private float complementElapsedTime = 0f;
+
     private static readonly WaitForSeconds waitForSeconds = new(1.25f);
 
     private enum TransitionPhase
@@ -29,10 +31,12 @@ public class AnimationController : MonoBehaviour
         EndingScene,
         FadeOut,
         FadeIn,
+        AnswerIndicatorFade,
         LoadIndicatorLeave
     }
 
     private TransitionPhase transitionPhase = TransitionPhase.None;
+    private TransitionPhase complementTransitionPhase = TransitionPhase.None;
 
     private List<ElementAnimation> currentTransitionElements;
     private List<ElementAnimation> nextTransitionElements;
@@ -58,6 +62,7 @@ public class AnimationController : MonoBehaviour
     private ElementAnimation nextElementAnimation;
     private GameObject currentElement;
     private GameObject nextElement;
+    private bool isExplainText;
 
     private ElementAnimation complementElementAnimation;
     private bool preEnableComplementElement;
@@ -82,6 +87,10 @@ public class AnimationController : MonoBehaviour
         if (transitionPhase != TransitionPhase.None)
         {
             UpdateTransition();
+        }
+        if (complementTransitionPhase != TransitionPhase.None)
+        {
+            UpdateComplementAnimation();
         }
     }
 
@@ -243,9 +252,19 @@ public class AnimationController : MonoBehaviour
                 }
 
                 transitionPhase = TransitionPhase.None;
+                isExplainText = false;
             }
         }
-        else if (transitionPhase == TransitionPhase.LoadIndicatorLeave)
+    }
+
+    private void UpdateComplementAnimation()
+    {
+        complementElapsedTime += Time.deltaTime;
+
+        float normalizedTime = Mathf.Clamp01(complementElapsedTime / groupAnimationDuration);
+        float evaluationTime = groupEasingCurve.Evaluate(normalizedTime);
+
+        if (complementTransitionPhase == TransitionPhase.LoadIndicatorLeave)
         {
             AnimateElementFade(complementElementAnimation, evaluationTime, false);
 
@@ -253,7 +272,18 @@ public class AnimationController : MonoBehaviour
             {
                 FinishLoadingIndicatorLeave(complementElementAnimation);
 
-                transitionPhase = TransitionPhase.None;
+                complementTransitionPhase = TransitionPhase.None;
+            }
+        }
+        else if (complementTransitionPhase == TransitionPhase.AnswerIndicatorFade)
+        {
+            AnimateElementFade(complementElementAnimation, evaluationTime, false);
+
+            if (normalizedTime >= 1f)
+            {
+                FinishAnswerIndicatorFade(complementElementAnimation);
+
+                complementTransitionPhase = TransitionPhase.None;
             }
         }
     }
@@ -405,14 +435,6 @@ public class AnimationController : MonoBehaviour
         elapsedTime = 0f;
 
         transitionPhase = TransitionPhase.FadeOut;
-
-        /*
-        currentElement = texts[currentTextIndex];
-        currentTextIndex = forward? currentTextIndex + 1 : currentTextIndex - 1;
-        nextElement = currentTextIndex > 0 || currentTextIndex < texts.Count - 1? texts[currentTextIndex] : null;
-
-        return currentTextIndex;
-        */
     }
 
     // StartScene - Explain screen texts change animation call
@@ -422,6 +444,7 @@ public class AnimationController : MonoBehaviour
         elapsedTime = 0f;
 
         transitionPhase = TransitionPhase.FadeOut;
+        isExplainText = true;
 
         currentElement = texts[currentTextIndex];
         currentTextIndex = forward? currentTextIndex + 1 : currentTextIndex - 1;
@@ -438,12 +461,31 @@ public class AnimationController : MonoBehaviour
     private void FinishElementFade(ElementAnimation element, bool fadeIn)
     {
         element.canvasGroup.alpha = fadeIn? 1 : 0;
-        if (!fadeIn)
+
+        if (isExplainText && !fadeIn)
         {
             currentElement.SetActive(false);
             nextElement.SetActive(true);
         }
     }
+    #endregion
+
+    #region Correct / Wrong Answer Indicator Fade Animation
+    public void AnimateAnswerIndicator(GameObject answerIndicator)
+    {
+        complementElementAnimation = GetElementAnimation(answerIndicator);
+        complementElementAnimation.canvasGroup.alpha = 1f;
+
+        complementElapsedTime = 0f;
+
+        complementTransitionPhase = TransitionPhase.AnswerIndicatorFade;
+    }
+
+    private void FinishAnswerIndicatorFade(ElementAnimation answerIndicatorElement)
+    {
+        answerIndicatorElement.canvasGroup.alpha = 0f;
+    }
+
     #endregion
 
     #region Stats Display Animations
@@ -752,11 +794,11 @@ public class AnimationController : MonoBehaviour
 
     public void AnimateLoadingIndicatorLeave(GameObject loadingIndicator)
     {
-        elapsedTime = 0f;
+        complementElapsedTime = 0f;
 
         complementElementAnimation = GetElementAnimation(loadingIndicator);
 
-        transitionPhase = TransitionPhase.LoadIndicatorLeave;
+        complementTransitionPhase = TransitionPhase.LoadIndicatorLeave;
     }
 
     private void FinishLoadingIndicatorLeave(ElementAnimation loadingIndicatorElement)
