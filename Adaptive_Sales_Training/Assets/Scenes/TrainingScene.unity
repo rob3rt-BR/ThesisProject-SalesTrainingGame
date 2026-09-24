@@ -1506,10 +1506,10 @@ MonoBehaviour:
   rainbowSaturation: 0.85
   rainbowValue: 1
   motionMode: 4
-  motionAmount: 8
-  motionSpeed: 3
-  characterDelay: 0.08
-  scaleAmount: 0.25
+  motionAmount: 6
+  motionSpeed: 4.5
+  characterDelay: 0
+  scaleAmount: 0.2
   rotationAmount: 12
   typeAnimationMode: 0
   typeCharactersPerSecond: 24
@@ -1529,6 +1529,7 @@ GameObject:
   - component: {fileID: 287866058}
   - component: {fileID: 287866055}
   - component: {fileID: 287866057}
+  - component: {fileID: 287866059}
   m_Layer: 5
   m_Name: CurrentPointsTitle
   m_TagString: Untagged
@@ -1719,6 +1720,67 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &287866059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287866053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f181be6387f18b45959546d118eeb34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pixit.TMProVisualFX.TMProVisualFX
+  targetText: {fileID: 287866055}
+  effectRangeMode: 0
+  effectRanges: []
+  colorMode: 0
+  solidColor: {r: 1, g: 1, b: 1, a: 1}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0.22, b: 0.35, a: 1}
+    key1: {r: 0.2, g: 0.65, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  rainbowSpeed: 1
+  rainbowSaturation: 0.85
+  rainbowValue: 1
+  motionMode: 10
+  motionAmount: 3
+  motionSpeed: 2
+  characterDelay: 0
+  scaleAmount: 0.13
+  rotationAmount: 12
+  typeAnimationMode: 0
+  typeCharactersPerSecond: 24
+  typeFadeDuration: 0.06
+  playOnEnable: 1
+  useUnscaledTime: 0
 --- !u!1 &352792096
 GameObject:
   m_ObjectHideFlags: 0
@@ -2819,10 +2881,10 @@ MonoBehaviour:
   rainbowSaturation: 0.85
   rainbowValue: 1
   motionMode: 4
-  motionAmount: 8
-  motionSpeed: 3
-  characterDelay: 0.08
-  scaleAmount: 0.25
+  motionAmount: 6
+  motionSpeed: 4.5
+  characterDelay: 0
+  scaleAmount: 0.2
   rotationAmount: 12
   typeAnimationMode: 0
   typeCharactersPerSecond: 24
@@ -3685,6 +3747,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5316922238156215768, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
       insertIndex: -1
       addedObject: {fileID: 827843996}
+    - targetCorrespondingSourceObject: {fileID: 5316922238156215768, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 827843998}
   m_SourcePrefab: {fileID: 100100000, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
 --- !u!224 &827843994 stripped
 RectTransform:
@@ -3712,7 +3777,7 @@ MonoBehaviour:
   initialOffsetPosition: {x: -125, y: 0}
   hasInteractiveText: 0
   valueTextType: 0
-  hasTextVisualFX: 0
+  hasTextVisualFX: 1
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   textComponent: {fileID: 0}
@@ -3760,6 +3825,67 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &827843998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827843995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f181be6387f18b45959546d118eeb34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pixit.TMProVisualFX.TMProVisualFX
+  targetText: {fileID: 1177937956}
+  effectRangeMode: 0
+  effectRanges: []
+  colorMode: 0
+  solidColor: {r: 1, g: 1, b: 1, a: 1}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0.22, b: 0.35, a: 1}
+    key1: {r: 0.2, g: 0.65, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  rainbowSpeed: 1
+  rainbowSaturation: 0.85
+  rainbowValue: 1
+  motionMode: 0
+  motionAmount: 8
+  motionSpeed: 3
+  characterDelay: 0.08
+  scaleAmount: 0.25
+  rotationAmount: 12
+  typeAnimationMode: 3
+  typeCharactersPerSecond: 82
+  typeFadeDuration: 0.02
+  playOnEnable: 0
+  useUnscaledTime: 0
 --- !u!1 &840274641
 GameObject:
   m_ObjectHideFlags: 0
@@ -5399,10 +5525,10 @@ MonoBehaviour:
   rainbowSaturation: 0.85
   rainbowValue: 1
   motionMode: 4
-  motionAmount: 8
-  motionSpeed: 3
-  characterDelay: 0.08
-  scaleAmount: 0.25
+  motionAmount: 6
+  motionSpeed: 4.5
+  characterDelay: 0
+  scaleAmount: 0.2
   rotationAmount: 12
   typeAnimationMode: 0
   typeCharactersPerSecond: 24
@@ -5801,10 +5927,10 @@ MonoBehaviour:
   rainbowSaturation: 0.85
   rainbowValue: 1
   motionMode: 4
-  motionAmount: 8
-  motionSpeed: 3
-  characterDelay: 0.08
-  scaleAmount: 0.25
+  motionAmount: 6
+  motionSpeed: 4.5
+  characterDelay: 0
+  scaleAmount: 0.2
   rotationAmount: 12
   typeAnimationMode: 0
   typeCharactersPerSecond: 24
@@ -6282,10 +6408,10 @@ MonoBehaviour:
   rainbowSaturation: 0.85
   rainbowValue: 1
   motionMode: 4
-  motionAmount: 8
-  motionSpeed: 3
-  characterDelay: 0.08
-  scaleAmount: 0.25
+  motionAmount: 6
+  motionSpeed: 4.5
+  characterDelay: 0
+  scaleAmount: 0.2
   rotationAmount: 12
   typeAnimationMode: 0
   typeCharactersPerSecond: 24
@@ -7139,10 +7265,10 @@ MonoBehaviour:
   rainbowSpeed: 1
   rainbowSaturation: 0.85
   rainbowValue: 1
-  motionMode: 10
-  motionAmount: 8
+  motionMode: 1
+  motionAmount: 4
   motionSpeed: 3
-  characterDelay: 0.08
+  characterDelay: 0
   scaleAmount: 0.25
   rotationAmount: 12
   typeAnimationMode: 0
@@ -7477,6 +7603,7 @@ GameObject:
   - component: {fileID: 1979124618}
   - component: {fileID: 1979124615}
   - component: {fileID: 1979124617}
+  - component: {fileID: 1979124619}
   m_Layer: 5
   m_Name: TopicCompletedTitle
   m_TagString: Untagged
@@ -7667,6 +7794,67 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1979124619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979124613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f181be6387f18b45959546d118eeb34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pixit.TMProVisualFX.TMProVisualFX
+  targetText: {fileID: 1979124615}
+  effectRangeMode: 0
+  effectRanges: []
+  colorMode: 0
+  solidColor: {r: 1, g: 1, b: 1, a: 1}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0.22, b: 0.35, a: 1}
+    key1: {r: 0.2, g: 0.65, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  rainbowSpeed: 1
+  rainbowSaturation: 0.85
+  rainbowValue: 1
+  motionMode: 10
+  motionAmount: 3
+  motionSpeed: 2
+  characterDelay: 0
+  scaleAmount: 0.13
+  rotationAmount: 12
+  typeAnimationMode: 0
+  typeCharactersPerSecond: 24
+  typeFadeDuration: 0.06
+  playOnEnable: 1
+  useUnscaledTime: 0
 --- !u!1 &2105428577
 GameObject:
   m_ObjectHideFlags: 0

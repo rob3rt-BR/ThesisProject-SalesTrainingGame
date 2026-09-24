@@ -914,9 +914,9 @@ MonoBehaviour:
   characterDelay: 0.08
   scaleAmount: 0.25
   rotationAmount: 12
-  typeAnimationMode: 0
+  typeAnimationMode: 3
   typeCharactersPerSecond: 24
-  typeFadeDuration: 0.06
+  typeFadeDuration: 1
   playOnEnable: 1
   useUnscaledTime: 0
 --- !u!1 &1112966651

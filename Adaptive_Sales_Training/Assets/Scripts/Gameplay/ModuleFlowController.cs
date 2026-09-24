@@ -101,6 +101,8 @@ public class ModuleFlowController : MonoBehaviour
     private List<ElementAnimation> finalPointScreenElements;
     private List<ElementAnimation> finalStatsElements;
 
+    ElementAnimation questionTextHolderElement;
+
     private readonly TrainingSessionManager session = TrainingSessionManager.Instance;
 
     private SalesTopic topic;
@@ -157,7 +159,7 @@ public class ModuleFlowController : MonoBehaviour
 
         // Questions screen elements
         ElementAnimation qCounterAndTimerElement = animationController.GetElementAnimation(qCounterAndTimer);
-        ElementAnimation questionTextHolderElement = animationController.GetElementAnimation(questionTextHolder);
+        questionTextHolderElement = animationController.GetElementAnimation(questionTextHolder);
 
         questionScreenElements = new() {qCounterAndTimerElement, questionTextHolderElement};
         
@@ -297,8 +299,11 @@ public class ModuleFlowController : MonoBehaviour
         questionText.text = currentQuestion.questionText;
         questionCounterText.text = $"Frage {currentQuestionIndex + 1} / {currentModule.questions.Count}";
 
-        // Set timer
-        remainingTime = currentQuestion.timeLimitSeconds;
+        // Animate question text appear
+        questionTextHolderElement.textVisualFX.Play();
+
+        // Set timer => For traditional training needs to be quicker -> half predefined timeLimitSeconds
+        remainingTime = currentQuestion.timeLimitSeconds / 2;
 
         // Activate buttons based on available answers
         for (int i = 0; i < answerButtons.Length; i++)
