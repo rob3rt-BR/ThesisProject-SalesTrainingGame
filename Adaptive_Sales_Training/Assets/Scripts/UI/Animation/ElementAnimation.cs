@@ -1,4 +1,5 @@
 using System.Collections;
+using Pixit.TMProVisualFX;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,6 +17,8 @@ public class ElementAnimation : MonoBehaviour
     private bool hasInteractiveText;
     [SerializeField]
     private ValueTextType valueTextType;
+    [SerializeField]
+    private bool hasTextVisualFX;
 
     public enum ValueTextType
     {
@@ -34,10 +37,12 @@ public class ElementAnimation : MonoBehaviour
     [HideInInspector]
     public TMP_Text textComponent;
     [HideInInspector]
+    public TMProVisualFX textVisualFX;
+
+    [HideInInspector]
     public Vector2 currentPosition;
     [HideInInspector]
     public Vector2 targetPosition;
-
     [HideInInspector]
     public Vector2 originalPosition;
 
@@ -83,6 +88,10 @@ public class ElementAnimation : MonoBehaviour
         {
             textComponent = gameObject.GetComponent<TMP_Text>();
         }
+        if (hasTextVisualFX)
+        {
+            textVisualFX = gameObject.GetComponent<TMProVisualFX>();   
+        }
 
     }
 
@@ -125,6 +134,11 @@ public class ElementAnimation : MonoBehaviour
     public ValueTextType GetValueTextType()
     {
         return valueTextType;
+    }
+
+    public bool HasTextVisualFX()
+    {
+        return hasTextVisualFX;
     }
 
     public void RestartToOriginalPosition()

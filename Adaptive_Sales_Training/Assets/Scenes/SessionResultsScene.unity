@@ -284,9 +284,11 @@ MonoBehaviour:
   initialOffsetPosition: {x: 0, y: -125}
   hasInteractiveText: 0
   valueTextType: 0
+  hasTextVisualFX: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   textComponent: {fileID: 0}
+  textVisualFX: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
   originalPosition: {x: 0, y: 0}
@@ -485,9 +487,11 @@ MonoBehaviour:
   initialOffsetPosition: {x: 0, y: 110}
   hasInteractiveText: 0
   valueTextType: 0
+  hasTextVisualFX: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   textComponent: {fileID: 0}
+  textVisualFX: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
   originalPosition: {x: 0, y: 0}
@@ -687,9 +691,11 @@ MonoBehaviour:
   initialOffsetPosition: {x: 0, y: 0}
   hasInteractiveText: 1
   valueTextType: 2
+  hasTextVisualFX: 1
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   textComponent: {fileID: 0}
+  textVisualFX: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
   originalPosition: {x: 0, y: 0}
@@ -780,7 +786,7 @@ MonoBehaviour:
   typeAnimationMode: 0
   typeCharactersPerSecond: 24
   typeFadeDuration: 0.06
-  playOnEnable: 1
+  playOnEnable: 0
   useUnscaledTime: 0
 --- !u!1001 &375421395
 PrefabInstance:
@@ -942,9 +948,11 @@ MonoBehaviour:
   initialOffsetPosition: {x: 0, y: -170}
   hasInteractiveText: 0
   valueTextType: 0
+  hasTextVisualFX: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   textComponent: {fileID: 0}
+  textVisualFX: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
   originalPosition: {x: 0, y: 0}
@@ -1486,9 +1494,11 @@ MonoBehaviour:
   initialOffsetPosition: {x: 0, y: 0}
   hasInteractiveText: 1
   valueTextType: 3
+  hasTextVisualFX: 1
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   textComponent: {fileID: 0}
+  textVisualFX: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
   originalPosition: {x: 0, y: 0}
@@ -1579,7 +1589,7 @@ MonoBehaviour:
   typeAnimationMode: 0
   typeCharactersPerSecond: 24
   typeFadeDuration: 0.06
-  playOnEnable: 1
+  playOnEnable: 0
   useUnscaledTime: 0
 --- !u!1 &600039514
 GameObject:
@@ -2054,9 +2064,11 @@ MonoBehaviour:
   initialOffsetPosition: {x: 160, y: 0}
   hasInteractiveText: 0
   valueTextType: 0
+  hasTextVisualFX: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   textComponent: {fileID: 0}
+  textVisualFX: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
   originalPosition: {x: 0, y: 0}
@@ -2255,9 +2267,11 @@ MonoBehaviour:
   initialOffsetPosition: {x: -25, y: 0}
   hasInteractiveText: 0
   valueTextType: 0
+  hasTextVisualFX: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   textComponent: {fileID: 0}
+  textVisualFX: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
   originalPosition: {x: 0, y: 0}
@@ -2684,9 +2698,11 @@ MonoBehaviour:
   initialOffsetPosition: {x: 0, y: 0}
   hasInteractiveText: 1
   valueTextType: 4
+  hasTextVisualFX: 1
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   textComponent: {fileID: 0}
+  textVisualFX: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
   originalPosition: {x: 0, y: 0}
@@ -2777,7 +2793,7 @@ MonoBehaviour:
   typeAnimationMode: 0
   typeCharactersPerSecond: 24
   typeFadeDuration: 0.06
-  playOnEnable: 1
+  playOnEnable: 0
   useUnscaledTime: 0
 --- !u!1 &1367436828
 GameObject:
@@ -3083,9 +3099,11 @@ MonoBehaviour:
   initialOffsetPosition: {x: -25, y: 0}
   hasInteractiveText: 0
   valueTextType: 0
+  hasTextVisualFX: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   textComponent: {fileID: 0}
+  textVisualFX: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
   originalPosition: {x: 0, y: 0}
@@ -3273,9 +3291,11 @@ MonoBehaviour:
   initialOffsetPosition: {x: 0, y: -75}
   hasInteractiveText: 0
   valueTextType: 0
+  hasTextVisualFX: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   textComponent: {fileID: 0}
+  textVisualFX: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
   originalPosition: {x: 0, y: 0}
@@ -3487,9 +3507,11 @@ MonoBehaviour:
   initialOffsetPosition: {x: 0, y: 0}
   hasInteractiveText: 1
   valueTextType: 5
+  hasTextVisualFX: 1
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   textComponent: {fileID: 0}
+  textVisualFX: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
   originalPosition: {x: 0, y: 0}
@@ -3580,7 +3602,7 @@ MonoBehaviour:
   typeAnimationMode: 0
   typeCharactersPerSecond: 24
   typeFadeDuration: 0.06
-  playOnEnable: 1
+  playOnEnable: 0
   useUnscaledTime: 0
 --- !u!1 &1983192514
 GameObject:
@@ -3749,9 +3771,11 @@ MonoBehaviour:
   initialOffsetPosition: {x: -25, y: 0}
   hasInteractiveText: 0
   valueTextType: 0
+  hasTextVisualFX: 0
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   textComponent: {fileID: 0}
+  textVisualFX: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
   originalPosition: {x: 0, y: 0}
@@ -3951,9 +3975,11 @@ MonoBehaviour:
   initialOffsetPosition: {x: 0, y: 0}
   hasInteractiveText: 1
   valueTextType: 4
+  hasTextVisualFX: 1
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   textComponent: {fileID: 0}
+  textVisualFX: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
   originalPosition: {x: 0, y: 0}
@@ -4044,7 +4070,7 @@ MonoBehaviour:
   typeAnimationMode: 0
   typeCharactersPerSecond: 24
   typeFadeDuration: 0.06
-  playOnEnable: 1
+  playOnEnable: 0
   useUnscaledTime: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

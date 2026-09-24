@@ -616,6 +616,11 @@ public class AnimationController : MonoBehaviour
                 FinishDisplayStatsElement(element);
             }
 
+            if (element.HasTextVisualFX())
+            {
+                element.textVisualFX.Play();
+            }
+
             currentTopicCounter++;
 
             yield return waitForSeconds;
