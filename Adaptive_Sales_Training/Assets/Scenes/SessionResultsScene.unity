@@ -532,6 +532,7 @@ GameObject:
   - component: {fileID: 289591230}
   - component: {fileID: 289591228}
   - component: {fileID: 289591231}
+  - component: {fileID: 289591232}
   m_Layer: 5
   m_Name: CorrectAnswersText
   m_TagString: Untagged
@@ -720,6 +721,67 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   animationDuration: 0.5
+--- !u!114 &289591232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289591226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f181be6387f18b45959546d118eeb34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pixit.TMProVisualFX.TMProVisualFX
+  targetText: {fileID: 289591228}
+  effectRangeMode: 0
+  effectRanges: []
+  colorMode: 0
+  solidColor: {r: 1, g: 1, b: 1, a: 1}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0.22, b: 0.35, a: 1}
+    key1: {r: 0.2, g: 0.65, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  rainbowSpeed: 1
+  rainbowSaturation: 0.85
+  rainbowValue: 1
+  motionMode: 4
+  motionAmount: 8
+  motionSpeed: 3
+  characterDelay: 0.08
+  scaleAmount: 0.25
+  rotationAmount: 12
+  typeAnimationMode: 0
+  typeCharactersPerSecond: 24
+  typeFadeDuration: 0.06
+  playOnEnable: 1
+  useUnscaledTime: 0
 --- !u!1001 &375421395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1269,6 +1331,7 @@ GameObject:
   - component: {fileID: 593720868}
   - component: {fileID: 593720866}
   - component: {fileID: 593720869}
+  - component: {fileID: 593720870}
   m_Layer: 5
   m_Name: AverageRespTimeText
   m_TagString: Untagged
@@ -1457,6 +1520,67 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   animationDuration: 0.5
+--- !u!114 &593720870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593720864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f181be6387f18b45959546d118eeb34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pixit.TMProVisualFX.TMProVisualFX
+  targetText: {fileID: 593720866}
+  effectRangeMode: 0
+  effectRanges: []
+  colorMode: 0
+  solidColor: {r: 1, g: 1, b: 1, a: 1}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0.22, b: 0.35, a: 1}
+    key1: {r: 0.2, g: 0.65, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  rainbowSpeed: 1
+  rainbowSaturation: 0.85
+  rainbowValue: 1
+  motionMode: 4
+  motionAmount: 8
+  motionSpeed: 3
+  characterDelay: 0.08
+  scaleAmount: 0.25
+  rotationAmount: 12
+  typeAnimationMode: 0
+  typeCharactersPerSecond: 24
+  typeFadeDuration: 0.06
+  playOnEnable: 1
+  useUnscaledTime: 0
 --- !u!1 &600039514
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,6 +1592,7 @@ GameObject:
   - component: {fileID: 600039515}
   - component: {fileID: 600039517}
   - component: {fileID: 600039516}
+  - component: {fileID: 600039518}
   m_Layer: 5
   m_Name: ThxText
   m_TagString: Untagged
@@ -1594,6 +1719,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 600039514}
   m_CullTransparentMesh: 1
+--- !u!114 &600039518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600039514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f181be6387f18b45959546d118eeb34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pixit.TMProVisualFX.TMProVisualFX
+  targetText: {fileID: 600039516}
+  effectRangeMode: 0
+  effectRanges: []
+  colorMode: 0
+  solidColor: {r: 1, g: 1, b: 1, a: 1}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0.22, b: 0.35, a: 1}
+    key1: {r: 0.2, g: 0.65, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  rainbowSpeed: 1
+  rainbowSaturation: 0.85
+  rainbowValue: 1
+  motionMode: 1
+  motionAmount: 8
+  motionSpeed: 3
+  characterDelay: 0.08
+  scaleAmount: 0.25
+  rotationAmount: 12
+  typeAnimationMode: 0
+  typeCharactersPerSecond: 24
+  typeFadeDuration: 0.06
+  playOnEnable: 1
+  useUnscaledTime: 0
 --- !u!1 &712531777
 GameObject:
   m_ObjectHideFlags: 0
@@ -2343,6 +2529,7 @@ GameObject:
   - component: {fileID: 1259370149}
   - component: {fileID: 1259370147}
   - component: {fileID: 1259370150}
+  - component: {fileID: 1259370151}
   m_Layer: 5
   m_Name: Topic2FinalPointsText
   m_TagString: Untagged
@@ -2531,6 +2718,67 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   animationDuration: 0.5
+--- !u!114 &1259370151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259370145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f181be6387f18b45959546d118eeb34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pixit.TMProVisualFX.TMProVisualFX
+  targetText: {fileID: 1259370147}
+  effectRangeMode: 0
+  effectRanges: []
+  colorMode: 0
+  solidColor: {r: 1, g: 1, b: 1, a: 1}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0.22, b: 0.35, a: 1}
+    key1: {r: 0.2, g: 0.65, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  rainbowSpeed: 1
+  rainbowSaturation: 0.85
+  rainbowValue: 1
+  motionMode: 4
+  motionAmount: 8
+  motionSpeed: 3
+  characterDelay: 0.08
+  scaleAmount: 0.25
+  rotationAmount: 12
+  typeAnimationMode: 0
+  typeCharactersPerSecond: 24
+  typeFadeDuration: 0.06
+  playOnEnable: 1
+  useUnscaledTime: 0
 --- !u!1 &1367436828
 GameObject:
   m_ObjectHideFlags: 0
@@ -3084,6 +3332,7 @@ GameObject:
   - component: {fileID: 1764680511}
   - component: {fileID: 1764680509}
   - component: {fileID: 1764680512}
+  - component: {fileID: 1764680513}
   m_Layer: 5
   m_Name: FinalPointsText
   m_TagString: Untagged
@@ -3272,6 +3521,67 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   animationDuration: 0.5
+--- !u!114 &1764680513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764680507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f181be6387f18b45959546d118eeb34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pixit.TMProVisualFX.TMProVisualFX
+  targetText: {fileID: 1764680509}
+  effectRangeMode: 0
+  effectRanges: []
+  colorMode: 0
+  solidColor: {r: 1, g: 1, b: 1, a: 1}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0.22, b: 0.35, a: 1}
+    key1: {r: 0.2, g: 0.65, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  rainbowSpeed: 1
+  rainbowSaturation: 0.85
+  rainbowValue: 1
+  motionMode: 4
+  motionAmount: 8
+  motionSpeed: 3
+  characterDelay: 0.08
+  scaleAmount: 0.25
+  rotationAmount: 12
+  typeAnimationMode: 0
+  typeCharactersPerSecond: 24
+  typeFadeDuration: 0.06
+  playOnEnable: 1
+  useUnscaledTime: 0
 --- !u!1 &1983192514
 GameObject:
   m_ObjectHideFlags: 0
@@ -3486,6 +3796,7 @@ GameObject:
   - component: {fileID: 2127056553}
   - component: {fileID: 2127056551}
   - component: {fileID: 2127056554}
+  - component: {fileID: 2127056555}
   m_Layer: 5
   m_Name: Topic1FinalPointsText
   m_TagString: Untagged
@@ -3674,6 +3985,67 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   animationDuration: 0.5
+--- !u!114 &2127056555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127056549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f181be6387f18b45959546d118eeb34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pixit.TMProVisualFX.TMProVisualFX
+  targetText: {fileID: 2127056551}
+  effectRangeMode: 0
+  effectRanges: []
+  colorMode: 0
+  solidColor: {r: 1, g: 1, b: 1, a: 1}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0.22, b: 0.35, a: 1}
+    key1: {r: 0.2, g: 0.65, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  rainbowSpeed: 1
+  rainbowSaturation: 0.85
+  rainbowValue: 1
+  motionMode: 4
+  motionAmount: 8
+  motionSpeed: 3
+  characterDelay: 0.08
+  scaleAmount: 0.25
+  rotationAmount: 12
+  typeAnimationMode: 0
+  typeCharactersPerSecond: 24
+  typeFadeDuration: 0.06
+  playOnEnable: 1
+  useUnscaledTime: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
