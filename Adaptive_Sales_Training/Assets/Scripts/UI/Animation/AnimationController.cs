@@ -44,7 +44,14 @@ public class AnimationController : MonoBehaviour
     private GameObject nextTransitionScreen;
 
     private List<ElementAnimation> complementTransitionElements;
-    private bool displayStats;
+    private enum ComplementAnimation
+    {
+        None,
+        DisplayStats,
+        DialogueTexts
+    }
+    private ComplementAnimation complementAnimationType = ComplementAnimation.None;
+
     private enum StatsType
     {
         None,
@@ -124,16 +131,16 @@ public class AnimationController : MonoBehaviour
                 FinishSceneChange(currentTransitionElements, true);
 
                 // IF displayStats set (call to AnimateFinalStatsDisplay()) => Start coroutine to display one line of text at a time
-                if (displayStats)
+                if (complementAnimationType == ComplementAnimation.DisplayStats)
                 {
-                    displayStats = false;
-
                     if (activeCoroutine != null)
                     {
                         StopCoroutine(activeCoroutine);
                     }
 
                     activeCoroutine = StartCoroutine(DisplayStats(complementTransitionElements));
+
+                    complementAnimationType = ComplementAnimation.None;
                 }
 
                 transitionPhase = TransitionPhase.None;
@@ -198,16 +205,33 @@ public class AnimationController : MonoBehaviour
                 }
 
                 // IF displayStats set (call to Animate[Module/Topic]StatsDisplay()) => Start coroutine to display one line of text at a time
-                if (displayStats)
+
+                switch (complementAnimationType)
                 {
-                    displayStats = false;
+                    case ComplementAnimation.DisplayStats:
+                        {
+                            if (activeCoroutine != null)
+                            {
+                                StopCoroutine(activeCoroutine);
+                            }
+                            activeCoroutine = StartCoroutine(DisplayStats(complementTransitionElements));
 
-                    if (activeCoroutine != null)
-                    {
-                        StopCoroutine(activeCoroutine);
-                    }
+                            complementAnimationType = ComplementAnimation.None;
+                        }
+                    break;
+                    case ComplementAnimation.DialogueTexts:
+                        {
+                            if (activeCoroutine != null)
+                            {
+                                StopCoroutine(activeCoroutine);
+                            }
+                            activeCoroutine = StartCoroutine(DisplayDialogueTexts(complementTransitionElements));
 
-                    activeCoroutine = StartCoroutine(DisplayStats(complementTransitionElements));
+                            complementAnimationType = ComplementAnimation.None;
+                        }
+                    break;
+                    default:
+                    break;
                 }
 
                 transitionPhase = TransitionPhase.None;
@@ -485,7 +509,6 @@ public class AnimationController : MonoBehaviour
     {
         answerIndicatorElement.canvasGroup.alpha = 0f;
     }
-
     #endregion
 
     #region Stats Display Animations
@@ -494,7 +517,7 @@ public class AnimationController : MonoBehaviour
     {
         PrepareStatsDisplayAnimation(statsElements);
 
-        displayStats = true;
+        complementAnimationType = ComplementAnimation.DisplayStats;
         statsType = StatsType.Module;
 
         complementTransitionElements = statsElements;
@@ -506,7 +529,7 @@ public class AnimationController : MonoBehaviour
     {
         PrepareStatsDisplayAnimation(statsElements);
 
-        displayStats = true;
+        complementAnimationType = ComplementAnimation.DisplayStats;
         statsType = StatsType.Topic;
 
         complementTransitionElements = statsElements;
@@ -518,7 +541,7 @@ public class AnimationController : MonoBehaviour
     {
         PrepareStatsDisplayAnimation(statsElements);
 
-        displayStats = true;
+        complementAnimationType = ComplementAnimation.DisplayStats;
         statsType = StatsType.FinalResults;
 
         complementTransitionElements = statsElements;
@@ -795,7 +818,7 @@ public class AnimationController : MonoBehaviour
     }
     #endregion
 
-    #region AITrainingScene - Questions To Dialogue Screen Change
+    #region AITrainingScene Animations
 
     public void AnimateLoadingIndicatorLeave(GameObject loadingIndicator)
     {
@@ -811,6 +834,41 @@ public class AnimationController : MonoBehaviour
         loadingIndicatorElement.canvasGroup.alpha = 0f;
         loadingIndicatorElement.canvasGroup.interactable = false;
         loadingIndicatorElement.canvasGroup.blocksRaycasts = false;
+    }
+
+    // TODO: Cambiar esto a solo en openeing, DESPUES EN OTRA COROUTINE HACER .PLAY() EN PUNTOS NECESARIOS
+    public void AnimateOpeningDialogueTextDisplay(List<ElementAnimation> dialogueTextsElements)
+    {
+        PrepareDialogueTextDisplayAnimation(dialogueTextsElements);
+
+        complementAnimationType = ComplementAnimation.DialogueTexts;
+
+        complementTransitionElements = dialogueTextsElements;
+    }
+
+    private void PrepareDialogueTextDisplayAnimation(List<ElementAnimation> elements)
+    {
+        foreach (ElementAnimation element in elements)
+        {
+            if (element.HasTextVisualFX())
+            {
+                element.textComponent.text = "";
+                element.canvasGroup.alpha = 1f;
+            }
+        }
+    }
+
+    private IEnumerator DisplayDialogueTexts(List<ElementAnimation> dialogueTextsElements)
+    {
+        foreach (ElementAnimation element in dialogueTextsElements)
+        {
+            if (element.HasTextVisualFX())
+            {
+                element.textVisualFX.Play();
+            }
+
+            yield return waitForSeconds;
+        }
     }
 
     #endregion
