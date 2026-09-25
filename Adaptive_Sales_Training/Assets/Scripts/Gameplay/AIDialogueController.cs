@@ -128,7 +128,6 @@ public class AIDialogueController : MonoBehaviour
     private List<ElementAnimation> finalStatsElements;
 
     ElementAnimation loadingIndicatorElement;
-    ElementAnimation traineeDialogueTextElement;
 
     private readonly TrainingSessionManager session = TrainingSessionManager.Instance;
 
@@ -205,14 +204,14 @@ public class AIDialogueController : MonoBehaviour
         // Dialogue screen elements 
         ElementAnimation dialogueTitleElement = animationController.GetElementAnimation(dialogueTitle.gameObject);
         ElementAnimation dialogueBoxBackgroundElement = animationController.GetElementAnimation(dialogueBoxBackground);
-        traineeDialogueTextElement = animationController.GetElementAnimation(traineeDialogueText.gameObject);
+        ElementAnimation traineeDialogueTextElement = animationController.GetElementAnimation(traineeDialogueText.gameObject);
         ElementAnimation aiResponseTextElement = animationController.GetElementAnimation(aiResponseText.gameObject);
         loadingIndicatorElement = animationController.GetElementAnimation(loadingIndicator);
         ElementAnimation startQuestionsButtonElement = animationController.GetElementAnimation(startQuestionsButton.gameObject);
         ElementAnimation nextQuestionButtonElement = animationController.GetElementAnimation(nextQuestionButton.gameObject);
 
         // Dialogue screen elements PRE questions list
-        dialogueScreenElementsPre = new() {dialogueTitleElement, dialogueBoxBackgroundElement, aiResponseTextElement, startQuestionsButtonElement};
+        dialogueScreenElementsPre = new() {dialogueTitleElement, dialogueBoxBackgroundElement, traineeDialogueTextElement, aiResponseTextElement, startQuestionsButtonElement};
         
         // Dialogue screen elements POST questions list
         dialogueScreenElementsPost = new() {dialogueTitleElement, dialogueBoxBackgroundElement, traineeDialogueTextElement, aiResponseTextElement, nextQuestionButtonElement};
@@ -346,17 +345,27 @@ public class AIDialogueController : MonoBehaviour
         };
         currentConversationHistory.Add(startMessage);
 
-        // Set text attributes in dialogue screen => display opening message in textbox
+        // Set text attributes in dialogue screen => display current scenario in traineeDialogue textbox and opening message in aiResponse textbox
         dialogueTitle.text = currentDialogueScenario.module.moduleTitle;
+        
+        traineeDialogueText.text = TrimScenarioContext(currentDialogueScenario.scenarioContext);
         aiResponseText.text = currentDialogueScenario.openingMessage;
 
-        traineeDialogueTextElement.canvasGroup.alpha = 0f;
         loadingIndicatorElement.canvasGroup.alpha = 0f;
 
         // Animate screen change: info screen -> dialogue screen (PRE questions)
         animationController.AnimateScreenChange(infoScreenElements, dialogueScreenElementsPre, infoScreen, dialogueScreen);
 
         // TODO: Aqui animate opening message de AI
+    }
+
+    private string TrimScenarioContext(string scenarioContext)
+    {
+        string trimedScenarioContext = scenarioContext.Replace(" Das Gespräch", "$");
+        int symbolIndex = trimedScenarioContext.IndexOf('$');
+        trimedScenarioContext = trimedScenarioContext[..symbolIndex];
+
+        return trimedScenarioContext;
     }
 
     private void StartQuestionSequence()
