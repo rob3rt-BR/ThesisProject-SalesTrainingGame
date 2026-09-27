@@ -16,7 +16,7 @@ MonoBehaviour:
   scenarioId: AI-UC-02
   scenarioContext: "Du betreust ein Unternehmen, das deine Projektmanagement-Software seit acht Monaten erfolgreich nutzt. Das Unternehmen expandiert und plant, weitere Abteilungen einzubinden. Das Gespr\xE4ch behandelt Customer Readiness, Health Signals, erfolgreichen Produktgebrauch und den richtigen Zeitpunkt f\xFCr ein Angebot."
   customerPersona: "Name: Miriam Scholz\nRolle: Head of Operations\nPers\xF6nlichkeit: Zufrieden mit dem aktuellen Produkt, aber vorsichtig gegen\xFCber zus\xE4tzlichen Kosten."
-  openingMessage: "\u201EWir arbeiten inzwischen gut mit Ihrer Software. Warum sprechen Sie gerade jetzt \xFCber eine Erweiterung?\u201C"
+  openingMessage: "Wir arbeiten inzwischen gut mit Ihrer Software. Warum sprechen Sie gerade jetzt \xFCber eine Erweiterung?"
   questionContexts:
   - questionId: UC-M02-Q01
     dialogueContext: "Reagiere nat\xFCrlich auf das beobachtete Nutzungssignal und beziehe dich auf deine aktuelle Situation. Frage danach beil\xE4ufig: Was w\xFCrden Sie aus unserem Verhalten \xFCber einen m\xF6glichen Bedarf ableiten?"

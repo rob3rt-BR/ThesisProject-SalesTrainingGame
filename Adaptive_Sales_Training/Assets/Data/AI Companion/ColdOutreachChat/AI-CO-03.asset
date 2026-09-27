@@ -16,7 +16,7 @@ MonoBehaviour:
   scenarioId: AI-CO-03
   scenarioContext: "Du kontaktierst einen Prospect f\xFCr eine Software zur Automatisierung von Reports. Die Ansprechpartnerin hat gerade ein neues Reporting-Team aufgebaut. Das Gespr\xE4ch behandelt den Aufbau einer kurzen ersten Nachricht: Er\xF6ffnung, Betreff, Call-to-Action, Kundennutzen und Personalisierung."
   customerPersona: "Name: Julia Neumann\nRolle: Head of Business Intelligence\nPers\xF6nlichkeit: Effizient, neugierig und wenig geduldig mit langen Produktpr\xE4sentationen."
-  openingMessage: "\u201EIch habe nur kurz Zeit. K\xF6nnen Sie mir in einem Satz erkl\xE4ren, warum Sie anrufen?\u201C"
+  openingMessage: "Ich habe nur kurz Zeit. K\xF6nnen Sie mir in einem Satz erkl\xE4ren, warum Sie anrufen?"
   questionContexts:
   - questionId: CO-M03-Q01
     dialogueContext: "Reagiere nat\xFCrlich auf den Einstieg und entscheide aus Kundensicht, ob du weiter zuh\xF6ren m\xF6chtest. Frage danach beil\xE4ufig: Wie w\xFCrden Sie in einem kurzen Moment erkl\xE4ren, warum Sie gerade mich anrufen?"

@@ -16,7 +16,7 @@ MonoBehaviour:
   scenarioId: AI-UC-01
   scenarioContext: "Du betreust einen Kunden, der aktuell den Basic-Tarif einer SaaS-Plattform nutzt. Das Unternehmen w\xE4chst und ben\xF6tigt m\xF6glicherweise mehr Nutzer, zus\xE4tzliche Auswertungen und eine CRM-Integration. Das Gespr\xE4ch f\xFChrt von der Unterscheidung zwischen Upselling und Cross-Selling zur Bedeutung des Kundennutzens."
   customerPersona: "Name: Laura Brandt\nRolle: Teamleiterin Sales Operations\nPers\xF6nlichkeit: Praktisch und budgetbewusst. Sie m\xF6chte den Unterschied zwischen einem Upgrade und einem Zusatzmodul verstehen."
-  openingMessage: "\u201ESie sprechen von einer Erweiterung. Meinen Sie damit einen gr\xF6\xDFeren Tarif oder ein zus\xE4tzliches Produkt?\u201C"
+  openingMessage: "Sie sprechen von einer Erweiterung. Meinen Sie damit einen gr\xF6\xDFeren Tarif oder ein zus\xE4tzliches Produkt?"
   questionContexts:
   - questionId: UC-M01-Q01
     dialogueContext: "Reagiere nat\xFCrlich auf die vorgeschlagene Erweiterung und beziehe dich auf deine aktuelle Nutzung. Frage danach beil\xE4ufig: Was m\xFCsste ich denn zus\xE4tzlich bekommen, damit sich so eine Erweiterung f\xFCr mich lohnt?"

@@ -21,7 +21,7 @@ public class AnimationController : MonoBehaviour
     private float complementElapsedTime = 0f;
 
     private static readonly WaitForSeconds waitForSecondsStats = new(1.25f);
-    private static readonly WaitForSeconds waitForSecondsDialogue = new(4f);
+    private static readonly WaitForSeconds waitForSecondsDialogue = new(5.5f);
 
     private enum TransitionPhase
     {
@@ -873,12 +873,11 @@ public class AnimationController : MonoBehaviour
 
     private IEnumerator DisplayOpeningDialogueTexts(List<ElementAnimation> elements)
     {
-        foreach (ElementAnimation element in elements)
-        {
-            element.gameObject.SetActive(true);
+        elements[0].gameObject.SetActive(true);
 
-            yield return waitForSecondsDialogue;
-        }
+        yield return waitForSecondsDialogue;
+        
+        elements[1].gameObject.SetActive(true);
     }
 
     private void DisplayDialogueText(ElementAnimation dialogueTextElement)

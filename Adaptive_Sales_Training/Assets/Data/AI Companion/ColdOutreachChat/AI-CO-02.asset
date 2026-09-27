@@ -16,7 +16,7 @@ MonoBehaviour:
   scenarioId: AI-CO-02
   scenarioContext: "Du verkaufst eine SaaS-L\xF6sung f\xFCr interne Prozesse und Kundenverwaltung. Der Prospect ist ein wachsendes Unternehmen, das k\xFCrzlich drei neue Niederlassungen er\xF6ffnet hat. Das Gespr\xE4ch f\xFChrt von der Auswahl des passenden Kundentyps \xFCber Research und Ansprechpartner bis zur Dokumentation im CRM."
   customerPersona: "Name: Markus Vogel\nRolle: Leiter des Customer Operations Teams\nPers\xF6nlichkeit: Analytisch und direkt. Er reagiert positiv auf konkrete Informationen, lehnt aber oberfl\xE4chliche Personalisierung ab.\n"
-  openingMessage: "\u201ESie erw\xE4hnen unser Wachstum in Ihrer Nachricht. Was genau hat das mit Ihrer Software zu tun?\u201C"
+  openingMessage: "Sie erw\xE4hnen unser Wachstum in Ihrer Nachricht. Was genau hat das mit Ihrer Software zu tun?"
   questionContexts:
   - questionId: CO-M02-Q01
     dialogueContext: "Reagiere nat\xFCrlich auf die Beschreibung des passenden Kundentyps. Frage danach beil\xE4ufig: Woran w\xFCrden Sie bei einem Unternehmen wie unserem zuerst erkennen, dass ein Gespr\xE4ch sinnvoll sein k\xF6nnte?"

@@ -16,7 +16,7 @@ MonoBehaviour:
   scenarioId: AI-UC-04
   scenarioContext: "Du betreust einen Kunden, der mit dem aktuellen Tarif zufrieden ist. Ein Premium-Tarif k\xF6nnte einen wichtigen Reporting-Prozess verbessern, kostet aber deutlich mehr als der aktuelle Tarif. Das Gespr\xE4ch behandelt permission-based Empfehlungen, Preis-Objections, Transparenz und den Erhalt des Kundenvertrauens."
   customerPersona: "Name: Stefan K\xF6nig\nRolle: Einkaufsleiter\nPers\xF6nlichkeit: Preisbewusst, erfahren und empfindlich gegen\xFCber manipulativen Verkaufstechniken."
-  openingMessage: "\u201EDas Upgrade klingt interessant, aber der Preis ist deutlich h\xF6her. Warum sollte ich daf\xFCr mehr bezahlen?\u201C"
+  openingMessage: "Das Upgrade klingt interessant, aber der Preis ist deutlich h\xF6her. Warum sollte ich daf\xFCr mehr bezahlen?"
   questionContexts:
   - questionId: UC-M04-Q01
     dialogueContext: "Reagiere nat\xFCrlich auf die permission-based Empfehlung und zeige, ob du dich ernst genommen f\xFChlst. Frage danach beil\xE4ufig: Was m\xF6chten Sie von mir wissen, bevor Sie eine Option vorschlagen?"

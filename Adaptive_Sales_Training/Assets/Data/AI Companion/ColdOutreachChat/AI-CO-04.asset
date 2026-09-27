@@ -16,7 +16,7 @@ MonoBehaviour:
   scenarioId: AI-CO-04
   scenarioContext: "Du sprichst mit einem Prospect, dessen Team aktuell mit mehreren Tabellen arbeitet. Der Prospect hat jedoch erkl\xE4rt, dass momentan kein Budget eingeplant ist. Das Gespr\xE4ch behandelt Discovery-Fragen, aktives Zuh\xF6ren, den Umgang mit Objections und die \xDCbergabe eines qualifizierten Prospects."
   customerPersona: "Name: Thomas Richter\nRolle: Finance Manager\nPers\xF6nlichkeit: Skeptisch, aber gespr\xE4chsbereit, wenn seine Bedenken ernst genommen werden."
-  openingMessage: "\u201EWir haben daf\xFCr kein Budget. Ich glaube nicht, dass dieses Gespr\xE4ch etwas bringt.\u201C"
+  openingMessage: "Wir haben daf\xFCr kein Budget. Ich glaube nicht, dass dieses Gespr\xE4ch etwas bringt."
   questionContexts:
   - questionId: CO-M04-Q01
     dialogueContext: "Reagiere nat\xFCrlich auf die gestellte Frage und beantworte sie aus deiner Kundensituation heraus. Frage danach beil\xE4ufig: Was m\xF6chten Sie \xFCber unsere aktuelle Arbeitsweise noch verstehen?"

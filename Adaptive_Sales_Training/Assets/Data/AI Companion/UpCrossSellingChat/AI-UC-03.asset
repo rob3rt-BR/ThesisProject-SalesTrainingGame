@@ -16,7 +16,7 @@ MonoBehaviour:
   scenarioId: AI-UC-03
   scenarioContext: "Du betreust einen Kunden, der eine CRM-Software verwendet. Im Gespr\xE4ch wird deutlich, dass viele Daten noch manuell zwischen CRM und Marketing-System \xFCbertragen werden. Das Gespr\xE4ch f\xFChrt von Discovery und Personalisierung zu einer konkreten Cross-Selling-Empfehlung."
   customerPersona: "Name: Oliver Meier\nRolle: Marketing Director\nPers\xF6nlichkeit: L\xF6sungsorientiert, aber kritisch gegen\xFCber Angeboten, die nur aus einer Feature-Liste bestehen."
-  openingMessage: "\u201EUnser gr\xF6\xDFtes Problem ist die manuelle Daten\xFCbertragung. Welche Erweiterung w\xFCrde uns dabei konkret helfen?\u201C"
+  openingMessage: "Unser gr\xF6\xDFtes Problem ist die manuelle Daten\xFCbertragung. Welche Erweiterung w\xFCrde uns dabei konkret helfen?"
   questionContexts:
   - questionId: UC-M03-Q01
     dialogueContext: "Reagiere nat\xFCrlich auf die Discovery-Frage und beantworte sie mit einem konkreten Detail aus deiner Situation. Frage danach beil\xE4ufig: Was w\xFCrden Sie mich noch fragen, bevor Sie mir etwas empfehlen?"

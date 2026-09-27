@@ -34,9 +34,9 @@ public class AIDialogueController : MonoBehaviour
 
     [Header("Dialogue UI")]
     [SerializeField]
-    private TMP_Text dialogueTitle;
+    private GameObject traineeBoxBackground;
     [SerializeField]
-    private GameObject dialogueBoxBackground;
+    private GameObject aiBoxBackground;
     [SerializeField]
     private TMP_Text traineeDialogueText;
     [SerializeField]
@@ -142,7 +142,7 @@ public class AIDialogueController : MonoBehaviour
     private List<AIDialogueScenario> dialogueScenarios;
     private List<DialogueMessage> currentConversationHistory = new();
     private bool requestInProgress;
-    private static readonly WaitForSeconds waitForSeconds = new(3f);
+    private static readonly WaitForSeconds waitForSecondsDialogue = new(5.5f);
 
     void Start()
     {
@@ -204,8 +204,8 @@ public class AIDialogueController : MonoBehaviour
         infoScreenElements = new() {infoTitleElement, infoTextBoxElement, startDialogueButtonElement};
 
         // Dialogue screen elements 
-        ElementAnimation dialogueTitleElement = animationController.GetElementAnimation(dialogueTitle.gameObject);
-        ElementAnimation dialogueBoxBackgroundElement = animationController.GetElementAnimation(dialogueBoxBackground);
+        ElementAnimation traineeBoxBackgroundElement = animationController.GetElementAnimation(traineeBoxBackground);
+        ElementAnimation aiBoxBackgroundElement = animationController.GetElementAnimation(aiBoxBackground);
         traineeDialogueTextElement = animationController.GetElementAnimation(traineeDialogueText.gameObject);
         aiResponseTextElement = animationController.GetElementAnimation(aiResponseText.gameObject);
         loadingIndicatorElement = animationController.GetElementAnimation(loadingIndicator);
@@ -213,10 +213,10 @@ public class AIDialogueController : MonoBehaviour
         ElementAnimation nextQuestionButtonElement = animationController.GetElementAnimation(nextQuestionButton.gameObject);
 
         // Dialogue screen elements PRE questions list
-        dialogueScreenElementsPre = new() {dialogueTitleElement, dialogueBoxBackgroundElement, traineeDialogueTextElement, aiResponseTextElement, startQuestionsButtonElement};
+        dialogueScreenElementsPre = new() {traineeBoxBackgroundElement, aiBoxBackgroundElement, traineeDialogueTextElement, aiResponseTextElement, startQuestionsButtonElement};
         
         // Dialogue screen elements POST questions list
-        dialogueScreenElementsPost = new() {dialogueTitleElement, dialogueBoxBackgroundElement, traineeDialogueTextElement, aiResponseTextElement, nextQuestionButtonElement};
+        dialogueScreenElementsPost = new() {traineeBoxBackgroundElement, aiBoxBackgroundElement, traineeDialogueTextElement, aiResponseTextElement, nextQuestionButtonElement};
 
         // Questions screen elements
         ElementAnimation qCounterAndTimerElement = animationController.GetElementAnimation(qCounterAndTimer);
@@ -358,9 +358,7 @@ public class AIDialogueController : MonoBehaviour
         };
         currentConversationHistory.Add(startMessage);
 
-        // Set text attributes in dialogue screen => display current scenario in traineeDialogue textbox and opening message in aiResponse textbox
-        dialogueTitle.text = currentDialogueScenario.module.moduleTitle;
-        
+        // Set text attributes in dialogue screen => display current scenario in traineeDialogue textbox and opening message in aiResponse textbox        
         traineeDialogueText.text = TrimScenarioContext(currentDialogueScenario.scenarioContext);
         aiResponseText.text = currentDialogueScenario.openingMessage;
 
@@ -668,7 +666,7 @@ public class AIDialogueController : MonoBehaviour
         // Set text attribute in dialogue screen => display trainee dialogue and AI response message in textbox
         aiResponseText.text = responseData.replyText;
 
-        yield return waitForSeconds;
+        yield return waitForSecondsDialogue;
 
         // Animate loadingIndicator fadeout and AI response display
         animationController.AnimateAIResponseDisplay(new() {loadingIndicatorElement, aiResponseTextElement});

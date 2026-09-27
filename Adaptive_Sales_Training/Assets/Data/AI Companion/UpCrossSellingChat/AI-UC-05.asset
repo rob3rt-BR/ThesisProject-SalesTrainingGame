@@ -16,7 +16,7 @@ MonoBehaviour:
   scenarioId: AI-UC-05
   scenarioContext: "Du betreust einen bestehenden SaaS-Kunden, der erfolgreich mit dem aktuellen Produkt arbeitet. Ein Bundle aus Analytics-Modul und zus\xE4tzlichem Support k\xF6nnte den Kunden bei der Expansion unterst\xFCtzen. Das Gespr\xE4ch behandelt Post-Purchase-Angebote, AOV, Bundles, Zusammenarbeit zwischen Sales und Customer Success sowie langfristige Kundenbindung."
   customerPersona: "Name: Katharina Wolf\nRolle: Customer Success Managerin auf Kundenseite\nPers\xF6nlichkeit: Kundenorientiert und datenbewusst. Sie m\xF6chte den langfristigen Nutzen vor einer Kaufentscheidung verstehen."
-  openingMessage: "\u201ESie schlagen ein Bundle vor. Wie k\xF6nnen wir beurteilen, ob es uns tats\xE4chlich hilft und nicht nur unseren Bestellwert erh\xF6ht?\u201C"
+  openingMessage: "Sie schlagen ein Bundle vor. Wie k\xF6nnen wir beurteilen, ob es uns tats\xE4chlich hilft und nicht nur unseren Bestellwert erh\xF6ht?"
   questionContexts:
   - questionId: UC-M05-Q01
     dialogueContext: "Reagiere nat\xFCrlich auf das Zusatzangebot nach dem Kauf und beziehe dich auf deine ersten Erfahrungen mit dem Produkt. Frage danach beil\xE4ufig: Was w\xFCrden Sie aus unserer bisherigen Nutzung ableiten?"
