@@ -369,7 +369,7 @@ public class AIDialogueController : MonoBehaviour
         // Animate screen change: info screen -> dialogue screen (PRE questions)
         animationController.AnimateScreenChange(infoScreenElements, dialogueScreenElementsPre, infoScreen, dialogueScreen);
 
-        // Animate opening dialogue texts display
+        // Animate opening dialogue texts display - traineeDialogueText AND aiResponseText
         animationController.AnimateDialogueTextsDisplay(new() {traineeDialogueTextElement, aiResponseTextElement}, true);
     }
 
@@ -420,6 +420,9 @@ public class AIDialogueController : MonoBehaviour
             animationController.AnimateScreenChange(dialogueScreenElementsPost, questionScreenElements, dialogueScreen, questionScreen);
         }
 
+        // Deactivate dialogue texts to prepare for later animation
+        traineeDialogueText.gameObject.SetActive(false);
+        aiResponseText.gameObject.SetActive(false);
 
         ModuleQuestion currentQuestion = currentModule.questions[currentQuestionIndex];
 
@@ -517,6 +520,9 @@ public class AIDialogueController : MonoBehaviour
 
         // Animate screen change: question screen -> dialogue screen (POST questions)
         animationController.AnimateScreenChange(questionScreenElements, dialogueScreenElementsPost, questionScreen, dialogueScreen);
+
+        // Animate dialogue text display - Just traineeDialogueText
+        animationController.AnimateDialogueTextsDisplay(new() {traineeDialogueTextElement}, false);
         
         // Submit answer to AI and start coroutine of requesting AI response
         SubmitAnswerToAI(currentModule, currentQuestion, selectedAnswerIndex);
@@ -664,8 +670,8 @@ public class AIDialogueController : MonoBehaviour
 
         yield return waitForSeconds;
 
-        // Animate loadingIndicator fadeout
-        animationController.AnimateLoadingIndicatorLeave(loadingIndicator);
+        // Animate loadingIndicator fadeout and AI response display
+        animationController.AnimateAIResponseDisplay(new() {loadingIndicatorElement, aiResponseTextElement});
 
         // Remove loadingIndicatorElement before transitioning back to question screen => NOT animate loadingIndicatorElement
         dialogueScreenElementsPost.Remove(loadingIndicatorElement);

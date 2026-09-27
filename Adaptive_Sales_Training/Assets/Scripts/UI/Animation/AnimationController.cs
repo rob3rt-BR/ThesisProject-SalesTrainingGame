@@ -54,9 +54,10 @@ public class AnimationController : MonoBehaviour
     {
         None,
         DisplayStats,
-        DialogueTexts,
+        OpeningDialogueTexts,
+        DisplayTraineeDialogue,
+        DisplayAIResponse,
         AnswerIndicatorFade,
-        LoadIndicatorLeave,
     }
     private ComplementAnimation complementAnimation = ComplementAnimation.None;
     private bool isOpeningDialogue;
@@ -139,7 +140,7 @@ public class AnimationController : MonoBehaviour
             {
                 FinishSceneChange(currentTransitionElements, true);
 
-                // IF displayStats set (call to AnimateFinalStatsDisplay()) => Start coroutine to display one line of text at a time
+                // IF complementAnimationType set to .Stats (call to AnimateFinalStatsDisplay()) => Set complementAnimation to .DisplayStats
                 if (complementAnimationType == ComplementAnimationType.Stats)
                 {
                     complementAnimation = ComplementAnimation.DisplayStats;
@@ -207,18 +208,29 @@ public class AnimationController : MonoBehaviour
                     UpdateElementInteraction(complementElementAnimation, false);
                 }
 
-                // IF displayStats set (call to Animate[Module/Topic]StatsDisplay()) => Start coroutine to display one line of text at a time
                 switch (complementAnimationType)
                 {
+                    // IF complementAnimationType set to .Stats (call to Animate[Module/Topic]StatsDisplay()) => Set complementAnimation to .DisplayStats
                     case ComplementAnimationType.Stats:
                         {
                             complementAnimation = ComplementAnimation.DisplayStats;
                             complementAnimationType = ComplementAnimationType.None;
                         }
                     break;
+
+                    // IF complementAnimationType set to .Dialogue (call to AnimateDialogueTextDisplay()):
+                    // IF is opening dialogue => Set complementAnimation to .OpeningDialogueTexts,
+                    // ELSE => Set complementAnimation to .DisplayTraineeDialogue
                     case ComplementAnimationType.Dialogue:
                         {
-                            complementAnimation = ComplementAnimation.DialogueTexts;
+                            if (isOpeningDialogue)
+                            {
+                                complementAnimation = ComplementAnimation.OpeningDialogueTexts;
+                            }
+                            else
+                            {
+                                complementAnimation = ComplementAnimation.DisplayTraineeDialogue;
+                            }
                             complementAnimationType = ComplementAnimationType.None;
                         }
                     break;
@@ -287,46 +299,52 @@ public class AnimationController : MonoBehaviour
                 StopCoroutine(activeCoroutine);
             }
 
+            // Start coroutine to display stats texts one line at a time
             activeCoroutine = StartCoroutine(DisplayStats(complementAnimationElements));
 
             complementAnimation = ComplementAnimation.None;
         }
-        else if (complementAnimation == ComplementAnimation.DialogueTexts)
+        else if (complementAnimation == ComplementAnimation.OpeningDialogueTexts)
         {
-            if (isOpeningDialogue)
+            if (activeCoroutine != null)
             {
-                if (activeCoroutine != null)
-                {
-                    StopCoroutine(activeCoroutine);
-                }
-
-                activeCoroutine = StartCoroutine(OpeningDialogueTextsDisplay(complementAnimationElements));
+                StopCoroutine(activeCoroutine);
             }
-            else
-            {
-                DialogueTextDisplay(complementElementAnimation);
-            }
+            
+            // Start corountine to display opening dialogue texts with some delay in between
+            activeCoroutine = StartCoroutine(DisplayOpeningDialogueTexts(complementAnimationElements));
 
-            isOpeningDialogue = false;
             complementAnimation = ComplementAnimation.None;
         }
-        else if (complementAnimation == ComplementAnimation.LoadIndicatorLeave)
+        else if (complementAnimation == ComplementAnimation.DisplayTraineeDialogue)
         {
-            AnimateElementFade(complementElementAnimation, evaluationTime, false);
+            // Activate traineeDialogueText to display text as typewriter animation
+            DisplayDialogueText(complementElementAnimation);
+
+            complementAnimation = ComplementAnimation.None;
+        }
+        else if (complementAnimation == ComplementAnimation.DisplayAIResponse)
+        {
+            // Fade loading indicator out
+            AnimateElementFade(complementAnimationElements[0], evaluationTime, false);
 
             if (normalizedTime >= 1f)
             {
-                FinishLoadingIndicatorLeave(complementElementAnimation);
+                // Finish fadeout of load indicator and activate aiResponseText to display text as typewriter animation
+                FinishLoadIndicatorLeave(complementAnimationElements[0]);
+                DisplayDialogueText(complementAnimationElements[1]);
 
                 complementAnimation = ComplementAnimation.None;
             }
         }
         else if (complementAnimation == ComplementAnimation.AnswerIndicatorFade)
         {
+            // Fade answer indicator out
             AnimateElementFade(complementElementAnimation, evaluationTime, false);
 
             if (normalizedTime >= 1f)
             {
+                //Finish fadout of answer indicator
                 FinishAnswerIndicatorFade(complementElementAnimation);
 
                 complementAnimation = ComplementAnimation.None;
@@ -846,6 +864,8 @@ public class AnimationController : MonoBehaviour
     {
         complementElapsedTime = 0f;
 
+        isOpeningDialogue = opening;
+
         if (opening)
         {
             complementAnimationElements = dialogueTexts;
@@ -854,12 +874,11 @@ public class AnimationController : MonoBehaviour
         {
             complementElementAnimation = dialogueTexts[0];
         }
-        isOpeningDialogue = opening;
 
         complementAnimationType = ComplementAnimationType.Dialogue;
     }
 
-    private IEnumerator OpeningDialogueTextsDisplay(List<ElementAnimation> elements)
+    private IEnumerator DisplayOpeningDialogueTexts(List<ElementAnimation> elements)
     {
         foreach (ElementAnimation element in elements)
         {
@@ -869,21 +888,21 @@ public class AnimationController : MonoBehaviour
         }
     }
 
-    private void DialogueTextDisplay(ElementAnimation dialogueTextElement)
+    private void DisplayDialogueText(ElementAnimation dialogueTextElement)
     {
         dialogueTextElement.gameObject.SetActive(true);
     }
 
-    public void AnimateLoadingIndicatorLeave(GameObject loadingIndicator)
+    public void AnimateAIResponseDisplay(List<ElementAnimation> loadIndicatorAndAIResponseElements)
     {
         complementElapsedTime = 0f;
 
-        complementElementAnimation = GetElementAnimation(loadingIndicator);
+        complementAnimationElements = loadIndicatorAndAIResponseElements;
 
-        complementAnimation = ComplementAnimation.LoadIndicatorLeave;
+        complementAnimation = ComplementAnimation.DisplayAIResponse;
     }
 
-    private void FinishLoadingIndicatorLeave(ElementAnimation loadingIndicatorElement)
+    private void FinishLoadIndicatorLeave(ElementAnimation loadingIndicatorElement)
     {
         loadingIndicatorElement.canvasGroup.alpha = 0f;
         loadingIndicatorElement.canvasGroup.interactable = false;
