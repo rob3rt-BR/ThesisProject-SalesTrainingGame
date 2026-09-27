@@ -319,7 +319,7 @@ public class AnimationController : MonoBehaviour
         else if (complementAnimation == ComplementAnimation.DisplayTraineeDialogue)
         {
             // Activate traineeDialogueText to display text as typewriter animation
-            DisplayDialogueText(complementElementAnimation);
+            DisplayDialogueText(complementAnimationElements[0]);
 
             complementAnimation = ComplementAnimation.None;
         }
@@ -866,14 +866,7 @@ public class AnimationController : MonoBehaviour
 
         isOpeningDialogue = opening;
 
-        if (opening)
-        {
-            complementAnimationElements = dialogueTexts;
-        }
-        else
-        {
-            complementElementAnimation = dialogueTexts[0];
-        }
+        complementAnimationElements = dialogueTexts;
 
         complementAnimationType = ComplementAnimationType.Dialogue;
     }
