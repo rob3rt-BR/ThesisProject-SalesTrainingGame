@@ -20,7 +20,8 @@ public class AnimationController : MonoBehaviour
     private float elapsedTime = 0f;
     private float complementElapsedTime = 0f;
 
-    private static readonly WaitForSeconds waitForSeconds = new(1.25f);
+    private static readonly WaitForSeconds waitForSecondsStats = new(1.25f);
+    private static readonly WaitForSeconds waitForSecondsDialogue = new(4f);
 
     private enum TransitionPhase
     {
@@ -40,7 +41,7 @@ public class AnimationController : MonoBehaviour
     private GameObject currentTransitionScreen;
     private GameObject nextTransitionScreen;
 
-    private List<ElementAnimation> complementTransitionElements;
+    private List<ElementAnimation> complementAnimationElements;
     private enum ComplementAnimationType
     {
         None,
@@ -58,6 +59,7 @@ public class AnimationController : MonoBehaviour
         LoadIndicatorLeave,
     }
     private ComplementAnimation complementAnimation = ComplementAnimation.None;
+    private bool isOpeningDialogue;
 
     private enum StatsType
     {
@@ -285,13 +287,27 @@ public class AnimationController : MonoBehaviour
                 StopCoroutine(activeCoroutine);
             }
 
-            activeCoroutine = StartCoroutine(DisplayStats(complementTransitionElements));
+            activeCoroutine = StartCoroutine(DisplayStats(complementAnimationElements));
 
             complementAnimation = ComplementAnimation.None;
         }
         else if (complementAnimation == ComplementAnimation.DialogueTexts)
         {
-            
+            if (isOpeningDialogue)
+            {
+                if (activeCoroutine != null)
+                {
+                    StopCoroutine(activeCoroutine);
+                }
+
+                activeCoroutine = StartCoroutine(OpeningDialogueTextsDisplay(complementAnimationElements));
+            }
+            else
+            {
+                DialogueTextDisplay(complementElementAnimation);
+            }
+
+            isOpeningDialogue = false;
             complementAnimation = ComplementAnimation.None;
         }
         else if (complementAnimation == ComplementAnimation.LoadIndicatorLeave)
@@ -427,7 +443,7 @@ public class AnimationController : MonoBehaviour
 
     private IEnumerator WaitTimeInSceneStart()
     {
-        yield return waitForSeconds;
+        yield return waitForSecondsStats;
 
         transitionPhase = TransitionPhase.StartingScene;
     }
@@ -526,7 +542,7 @@ public class AnimationController : MonoBehaviour
         complementAnimationType = ComplementAnimationType.Stats;
         statsType = StatsType.Module;
 
-        complementTransitionElements = statsElements;
+        complementAnimationElements = statsElements;
 
         currentModuleResult = moduleResult;
     }
@@ -538,7 +554,7 @@ public class AnimationController : MonoBehaviour
         complementAnimationType = ComplementAnimationType.Stats;
         statsType = StatsType.Topic;
 
-        complementTransitionElements = statsElements;
+        complementAnimationElements = statsElements;
 
         currentTopicResult = topicResult;
     }
@@ -550,7 +566,7 @@ public class AnimationController : MonoBehaviour
         complementAnimationType = ComplementAnimationType.Stats;
         statsType = StatsType.FinalResults;
 
-        complementTransitionElements = statsElements;
+        complementAnimationElements = statsElements;
 
         finalResultData = trainingResultData;
     }
@@ -577,7 +593,7 @@ public class AnimationController : MonoBehaviour
 
     private IEnumerator DisplayStats(List<ElementAnimation> statsElements)
     {
-        yield return waitForSeconds;
+        yield return waitForSecondsStats;
 
         int currentTopicCounter = 0; // Just for StatsType.FinalResults
 
@@ -652,7 +668,7 @@ public class AnimationController : MonoBehaviour
 
             currentTopicCounter++;
 
-            yield return waitForSeconds;
+            yield return waitForSecondsStats;
         }
 
         statsType = StatsType.None;
@@ -826,7 +842,37 @@ public class AnimationController : MonoBehaviour
 
     #region AITrainingScene Animations
 
-    
+    public void AnimateDialogueTextsDisplay(List<ElementAnimation> dialogueTexts, bool opening)
+    {
+        complementElapsedTime = 0f;
+
+        if (opening)
+        {
+            complementAnimationElements = dialogueTexts;
+        }
+        else
+        {
+            complementElementAnimation = dialogueTexts[0];
+        }
+        isOpeningDialogue = opening;
+
+        complementAnimationType = ComplementAnimationType.Dialogue;
+    }
+
+    private IEnumerator OpeningDialogueTextsDisplay(List<ElementAnimation> elements)
+    {
+        foreach (ElementAnimation element in elements)
+        {
+            element.gameObject.SetActive(true);
+
+            yield return waitForSecondsDialogue;
+        }
+    }
+
+    private void DialogueTextDisplay(ElementAnimation dialogueTextElement)
+    {
+        dialogueTextElement.gameObject.SetActive(true);
+    }
 
     public void AnimateLoadingIndicatorLeave(GameObject loadingIndicator)
     {

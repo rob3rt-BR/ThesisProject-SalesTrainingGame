@@ -213,7 +213,7 @@ public class AIDialogueController : MonoBehaviour
         ElementAnimation nextQuestionButtonElement = animationController.GetElementAnimation(nextQuestionButton.gameObject);
 
         // Dialogue screen elements PRE questions list
-        dialogueScreenElementsPre = new() {dialogueTitleElement, dialogueBoxBackgroundElement, startQuestionsButtonElement};
+        dialogueScreenElementsPre = new() {dialogueTitleElement, dialogueBoxBackgroundElement, traineeDialogueTextElement, aiResponseTextElement, startQuestionsButtonElement};
         
         // Dialogue screen elements POST questions list
         dialogueScreenElementsPost = new() {dialogueTitleElement, dialogueBoxBackgroundElement, traineeDialogueTextElement, aiResponseTextElement, nextQuestionButtonElement};
@@ -315,10 +315,10 @@ public class AIDialogueController : MonoBehaviour
 
             // Remove dialogue text boxes from dialogueScreenElementsPre before animating opening dialogue text display
             // and restart elements to original position for correct animation position and direction
-            dialogueScreenElementsPre.Remove(traineeDialogueTextElement);
-            dialogueScreenElementsPre.Remove(aiResponseTextElement);
-            animationController.RestartElementToOriginalPosition(traineeDialogueText.gameObject);
-            animationController.RestartElementToOriginalPosition(aiResponseText.gameObject);
+            //dialogueScreenElementsPre.Remove(traineeDialogueTextElement);
+            //dialogueScreenElementsPre.Remove(aiResponseTextElement);
+            //animationController.RestartElementToOriginalPosition(traineeDialogueText.gameObject);
+            //animationController.RestartElementToOriginalPosition(aiResponseText.gameObject);
 
             List<ElementAnimation> allCurrentPointScreenElements = animationController.CombinePointScreenElementsLists(currentPointScreenElements, currentStatsElements);
 
@@ -333,6 +333,10 @@ public class AIDialogueController : MonoBehaviour
         // Set text attributes in info screen
         moduleTitle.text = currentModule.moduleTitle;
         infoText.text = currentModule.moduleText;
+
+        // Deactivate dialogue texts to prepare for later animation
+        traineeDialogueText.gameObject.SetActive(false);
+        aiResponseText.gameObject.SetActive(false);
     }
     public void StartDialogue()
     {
@@ -365,7 +369,8 @@ public class AIDialogueController : MonoBehaviour
         // Animate screen change: info screen -> dialogue screen (PRE questions)
         animationController.AnimateScreenChange(infoScreenElements, dialogueScreenElementsPre, infoScreen, dialogueScreen);
 
-        // TODO: Aqui animate opening message de AI
+        // Animate opening dialogue texts display
+        animationController.AnimateDialogueTextsDisplay(new() {traineeDialogueTextElement, aiResponseTextElement}, true);
     }
 
     private string TrimScenarioContext(string scenarioContext)
@@ -383,8 +388,8 @@ public class AIDialogueController : MonoBehaviour
         timerText.text = "Zeit: 0.0";
  
         // Add dialogue text boxes to dialogueScreenElementsPre before animating screen change to question screen
-        dialogueScreenElementsPre.Add(traineeDialogueTextElement);
-        dialogueScreenElementsPre.Add(aiResponseTextElement);
+        //dialogueScreenElementsPre.Add(traineeDialogueTextElement);
+        //dialogueScreenElementsPre.Add(aiResponseTextElement);
 
         // Animate screen change: dialogue screen (PRE questions) -> question screen
         animationController.AnimateScreenChange(dialogueScreenElementsPre, questionScreenElements, dialogueScreen, questionScreen);
