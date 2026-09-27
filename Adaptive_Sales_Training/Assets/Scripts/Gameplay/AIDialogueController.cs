@@ -127,6 +127,8 @@ public class AIDialogueController : MonoBehaviour
     private List<ElementAnimation> finalPointScreenElements;
     private List<ElementAnimation> finalStatsElements;
 
+    ElementAnimation traineeDialogueTextElement;
+    ElementAnimation aiResponseTextElement;
     ElementAnimation loadingIndicatorElement;
 
     private readonly TrainingSessionManager session = TrainingSessionManager.Instance;
@@ -204,14 +206,14 @@ public class AIDialogueController : MonoBehaviour
         // Dialogue screen elements 
         ElementAnimation dialogueTitleElement = animationController.GetElementAnimation(dialogueTitle.gameObject);
         ElementAnimation dialogueBoxBackgroundElement = animationController.GetElementAnimation(dialogueBoxBackground);
-        ElementAnimation traineeDialogueTextElement = animationController.GetElementAnimation(traineeDialogueText.gameObject);
-        ElementAnimation aiResponseTextElement = animationController.GetElementAnimation(aiResponseText.gameObject);
+        traineeDialogueTextElement = animationController.GetElementAnimation(traineeDialogueText.gameObject);
+        aiResponseTextElement = animationController.GetElementAnimation(aiResponseText.gameObject);
         loadingIndicatorElement = animationController.GetElementAnimation(loadingIndicator);
         ElementAnimation startQuestionsButtonElement = animationController.GetElementAnimation(startQuestionsButton.gameObject);
         ElementAnimation nextQuestionButtonElement = animationController.GetElementAnimation(nextQuestionButton.gameObject);
 
         // Dialogue screen elements PRE questions list
-        dialogueScreenElementsPre = new() {dialogueTitleElement, dialogueBoxBackgroundElement, traineeDialogueTextElement, aiResponseTextElement, startQuestionsButtonElement};
+        dialogueScreenElementsPre = new() {dialogueTitleElement, dialogueBoxBackgroundElement, startQuestionsButtonElement};
         
         // Dialogue screen elements POST questions list
         dialogueScreenElementsPost = new() {dialogueTitleElement, dialogueBoxBackgroundElement, traineeDialogueTextElement, aiResponseTextElement, nextQuestionButtonElement};
@@ -311,6 +313,13 @@ public class AIDialogueController : MonoBehaviour
             // Restart questionTextHolder element to original position for correct animation position and direction
             animationController.RestartElementToOriginalPosition(questionTextHolder);
 
+            // Remove dialogue text boxes from dialogueScreenElementsPre before animating opening dialogue text display
+            // and restart elements to original position for correct animation position and direction
+            dialogueScreenElementsPre.Remove(traineeDialogueTextElement);
+            dialogueScreenElementsPre.Remove(aiResponseTextElement);
+            animationController.RestartElementToOriginalPosition(traineeDialogueText.gameObject);
+            animationController.RestartElementToOriginalPosition(aiResponseText.gameObject);
+
             List<ElementAnimation> allCurrentPointScreenElements = animationController.CombinePointScreenElementsLists(currentPointScreenElements, currentStatsElements);
 
             animationController.AnimateScreenChange(allCurrentPointScreenElements, infoScreenElements, currentPointScreen, infoScreen);
@@ -372,6 +381,10 @@ public class AIDialogueController : MonoBehaviour
     {
         currentQuestionIndex = 0;
         timerText.text = "Zeit: 0.0";
+ 
+        // Add dialogue text boxes to dialogueScreenElementsPre before animating screen change to question screen
+        dialogueScreenElementsPre.Add(traineeDialogueTextElement);
+        dialogueScreenElementsPre.Add(aiResponseTextElement);
 
         // Animate screen change: dialogue screen (PRE questions) -> question screen
         animationController.AnimateScreenChange(dialogueScreenElementsPre, questionScreenElements, dialogueScreen, questionScreen);
