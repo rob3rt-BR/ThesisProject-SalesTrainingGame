@@ -54,11 +54,13 @@ public class AIDialogueController : MonoBehaviour
     [SerializeField]
     private TMP_Text questionCounterText;
     [SerializeField]
+    private TMP_Text timerText;
+    [SerializeField]
+    private Slider timerBar;
+    [SerializeField]
     private GameObject questionTextHolder;
     [SerializeField]
     private TMP_Text questionText;
-    [SerializeField]
-    private TMP_Text timerText;
     [SerializeField]
     private Button[] answerButtons;
     [SerializeField]
@@ -67,6 +69,10 @@ public class AIDialogueController : MonoBehaviour
     private GameObject correctIndicator;
     [SerializeField]
     private GameObject wrongIndicator;
+    [SerializeField]
+    private GameObject pointsDisplayersHolder;
+    [SerializeField]
+    private TMP_Text[] pointsDisplayers;
 
     [Header("Points UI")]
     [SerializeField]
@@ -131,13 +137,19 @@ public class AIDialogueController : MonoBehaviour
     ElementAnimation aiResponseTextElement;
     ElementAnimation loadingIndicatorElement;
 
+    ElementAnimation correctIndicatorElement;
+    ElementAnimation wrongIndicatorElement;
+    ElementAnimation pointsDisplayersHolderElement;
+
     private readonly TrainingSessionManager session = TrainingSessionManager.Instance;
+    private static readonly System.Random random = new();
 
     private SalesTopic topic;
     private int currentModuleIndex;
     private int currentQuestionIndex;
     private float remainingTime;
     private bool isQuestionActive;
+    private TMP_Text currentPointsDisplayer;
 
     private List<AIDialogueScenario> dialogueScenarios;
     private List<DialogueMessage> currentConversationHistory = new();
@@ -185,11 +197,21 @@ public class AIDialogueController : MonoBehaviour
             int capturedIndex = i;
             answerButtons[i].onClick.AddListener(() => SelectAnswer(capturedIndex));
         }
+        
+        // Deactivate all point displayers before starting
+        foreach (TMP_Text displayer in pointsDisplayers)
+        {
+            displayer.gameObject.SetActive(false);
+        }
 
         currentModuleIndex = 0;
 
         // Initialize ElementAnimation objects of each element per UI screen
         InitializeElementAnimationGroups();
+
+        correctIndicatorElement.canvasGroup.alpha = 0f;
+        wrongIndicatorElement.canvasGroup.alpha = 0f;
+        pointsDisplayersHolderElement.canvasGroup.alpha = 0f;
 
         SetInfoScreen();
     }
@@ -229,6 +251,10 @@ public class AIDialogueController : MonoBehaviour
             ElementAnimation currentButtonElement = animationController.GetElementAnimation(currentbutton.gameObject);
             questionScreenElements.Add(currentButtonElement);
         }
+
+        correctIndicatorElement = animationController.GetElementAnimation(correctIndicator);
+        wrongIndicatorElement = animationController.GetElementAnimation(wrongIndicator);
+        pointsDisplayersHolderElement = animationController.GetElementAnimation(pointsDisplayersHolder);
 
         // Current points screen elements
         ElementAnimation currStatsTitleElement = animationController.GetElementAnimation(moduleTitleEnd.gameObject);
@@ -273,9 +299,11 @@ public class AIDialogueController : MonoBehaviour
 
         if (animationController.IsCurrentTransitionPhaseNone())
         {
-            // Track timer and update timer text
+            // Track timer and update timer text / bar
             remainingTime -= Time.unscaledDeltaTime;
-            timerText.text = $"Zeit: {Mathf.Max(remainingTime, 0f):0.0}";
+            timerText.text = $"{Mathf.Max(remainingTime, 0f):0.0}s";
+
+            timerBar.value = remainingTime;
 
             if (remainingTime <= 0f)
             {
@@ -312,13 +340,6 @@ public class AIDialogueController : MonoBehaviour
 
             // Restart questionTextHolder element to original position for correct animation position and direction
             animationController.RestartElementToOriginalPosition(questionTextHolder);
-
-            // Remove dialogue text boxes from dialogueScreenElementsPre before animating opening dialogue text display
-            // and restart elements to original position for correct animation position and direction
-            //dialogueScreenElementsPre.Remove(traineeDialogueTextElement);
-            //dialogueScreenElementsPre.Remove(aiResponseTextElement);
-            //animationController.RestartElementToOriginalPosition(traineeDialogueText.gameObject);
-            //animationController.RestartElementToOriginalPosition(aiResponseText.gameObject);
 
             List<ElementAnimation> allCurrentPointScreenElements = animationController.CombinePointScreenElementsLists(currentPointScreenElements, currentStatsElements);
 
@@ -383,12 +404,8 @@ public class AIDialogueController : MonoBehaviour
     private void StartQuestionSequence()
     {
         currentQuestionIndex = 0;
-        timerText.text = "Zeit: 0.0";
+        timerText.text = "0.0s";
  
-        // Add dialogue text boxes to dialogueScreenElementsPre before animating screen change to question screen
-        //dialogueScreenElementsPre.Add(traineeDialogueTextElement);
-        //dialogueScreenElementsPre.Add(aiResponseTextElement);
-
         // Animate screen change: dialogue screen (PRE questions) -> question screen
         animationController.AnimateScreenChange(dialogueScreenElementsPre, questionScreenElements, dialogueScreen, questionScreen);
 
@@ -430,6 +447,8 @@ public class AIDialogueController : MonoBehaviour
 
         // Set timer
         remainingTime = currentQuestion.timeLimitSeconds;
+        timerBar.maxValue = remainingTime;
+        timerBar.value = remainingTime;
 
         // Activate buttons based on available answers
         for (int i = 0; i < answerButtons.Length; i++)
@@ -465,16 +484,21 @@ public class AIDialogueController : MonoBehaviour
         // If answer correct => Calculate speed bonus points and add points to current module points
         if (isCorrect)
         {
-            animationController.AnimateAnswerIndicator(correctIndicator);
-
             float speedRatio = remainingTime / currentQuestion.timeLimitSeconds;
             int speedBonus = Mathf.RoundToInt(currentQuestion.speedBonusPoints * Mathf.Clamp01(speedRatio));
 
             pointsAwarded = currentQuestion.basePoints + speedBonus;
+
+            currentPointsDisplayer = pointsDisplayers[random.Next(0, pointsDisplayers.Length)];
+            currentPointsDisplayer.text = $"+ {pointsAwarded}xp";
+            
+            // Animate correct answer and points awarded fade in random points displayer (predefined)
+            animationController.AnimateCorrectIndicators(new() {correctIndicatorElement, pointsDisplayersHolderElement}, currentPointsDisplayer.gameObject);
         }
         else
         {
-            animationController.AnimateAnswerIndicator(wrongIndicator);
+            // Animate wrong answer fade
+            animationController.AnimateWrongIndicator(wrongIndicatorElement);
         }
 
         // Creat new question result and set its values based on answer

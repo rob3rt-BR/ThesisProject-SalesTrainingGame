@@ -16,10 +16,17 @@ public class AnimationController : MonoBehaviour
     [Range(0.1f, 5f)]
     [SerializeField]
     private float groupAnimationDuration = 0.5f;
+    [Range(0.1f, 5f)]
+    [SerializeField]
+    private float complementAnimationDuration = 0.75f;
+    [Range(0.1f, 5f)]
+    [SerializeField]
+    private float statsDisplayAnimationDuration = 0.35f;
     
     private float elapsedTime = 0f;
     private float complementElapsedTime = 0f;
 
+    private static readonly WaitForSeconds waitForSecondsStartScene = new(1f);
     private static readonly WaitForSeconds waitForSecondsStats = new(1.25f);
     private static readonly WaitForSeconds waitForSecondsDialogue = new(5.5f);
 
@@ -42,6 +49,7 @@ public class AnimationController : MonoBehaviour
     private GameObject nextTransitionScreen;
 
     private List<ElementAnimation> complementAnimationElements;
+    private List<ElementAnimation> correctIndicatorsElements;
     private enum ComplementAnimationType
     {
         None,
@@ -57,7 +65,8 @@ public class AnimationController : MonoBehaviour
         OpeningDialogueTexts,
         DisplayTraineeDialogue,
         DisplayAIResponse,
-        AnswerIndicatorFade,
+        CorrectAnswerFade,
+        WrongAnswerFade,
     }
     private ComplementAnimation complementAnimation = ComplementAnimation.None;
     private bool isOpeningDialogue;
@@ -76,7 +85,6 @@ public class AnimationController : MonoBehaviour
     private TrainingResultData finalResultData;
 
     private ElementAnimation currentElementAnimation;
-    private ElementAnimation nextElementAnimation;
     private GameObject currentElement;
     private GameObject nextElement;
     private bool isExplainText;
@@ -289,7 +297,7 @@ public class AnimationController : MonoBehaviour
     {
         complementElapsedTime += Time.deltaTime;
 
-        float normalizedTime = Mathf.Clamp01(complementElapsedTime / groupAnimationDuration);
+        float normalizedTime = Mathf.Clamp01(complementElapsedTime / complementAnimationDuration);
         float evaluationTime = groupEasingCurve.Evaluate(normalizedTime);
 
         if (complementAnimation == ComplementAnimation.DisplayStats)
@@ -337,15 +345,36 @@ public class AnimationController : MonoBehaviour
                 complementAnimation = ComplementAnimation.None;
             }
         }
-        else if (complementAnimation == ComplementAnimation.AnswerIndicatorFade)
+        else if (complementAnimation == ComplementAnimation.CorrectAnswerFade)
         {
-            // Fade answer indicator out
+            // Fade correct answer indicator and points out
+            foreach (ElementAnimation element in correctIndicatorsElements)
+            {
+                AnimateCorrectIndicatorFade(element, evaluationTime);
+            }
+
+            if (normalizedTime >= 1f)
+            {
+                //Finish fadout of correct answer indicator and deactivate pointsDisplayer
+                FinishCorrectIndicatorsFade(correctIndicatorsElements, currentElement);
+
+                complementElapsedTime = 0f;
+                currentElement = null;
+
+                complementAnimation = ComplementAnimation.None;
+            }
+        }
+        else if (complementAnimation == ComplementAnimation.WrongAnswerFade)
+        {
+            // Fade wrong answer indicator out
             AnimateElementFade(complementElementAnimation, evaluationTime, false);
 
             if (normalizedTime >= 1f)
             {
-                //Finish fadout of answer indicator
-                FinishAnswerIndicatorFade(complementElementAnimation);
+                //Finish fadout of wrong answer indicator
+                FinishWrongAnswerFade(complementElementAnimation);
+
+                complementElapsedTime = 0f;
 
                 complementAnimation = ComplementAnimation.None;
             }
@@ -461,7 +490,7 @@ public class AnimationController : MonoBehaviour
 
     private IEnumerator WaitTimeInSceneStart()
     {
-        yield return waitForSecondsStats;
+        yield return waitForSecondsStartScene;
 
         transitionPhase = TransitionPhase.StartingScene;
     }
@@ -535,17 +564,57 @@ public class AnimationController : MonoBehaviour
     #endregion
 
     #region Correct / Wrong Answer Indicator Fade Animation
-    public void AnimateAnswerIndicator(GameObject answerIndicator)
+
+    public void AnimateCorrectIndicators(List<ElementAnimation> correctAndPointsIndicators, GameObject pointsDisplayer)
     {
-        complementElementAnimation = GetElementAnimation(answerIndicator);
+        ShowCorrectIndicators(correctAndPointsIndicators);
+        correctIndicatorsElements = correctAndPointsIndicators;
+
+        if (currentElement != null)
+        {
+            currentElement.SetActive(false);
+        }
+        currentElement = pointsDisplayer;
+        currentElement.SetActive(true);
+
+        complementElapsedTime = 0f;
+
+        complementAnimation = ComplementAnimation.CorrectAnswerFade;
+    }
+
+    private void ShowCorrectIndicators(List<ElementAnimation> correctIndicators)
+    {
+        foreach (ElementAnimation element in correctIndicators)
+        {
+            element.canvasGroup.alpha = 1f;
+        }
+    }
+
+    private void AnimateCorrectIndicatorFade(ElementAnimation element, float evaluationTime)
+    {
+        element.canvasGroup.alpha = Mathf.Lerp(1f, 0f, evaluationTime);
+    }
+
+    private void FinishCorrectIndicatorsFade(List<ElementAnimation> elements, GameObject pointsDisplayer)
+    {
+        foreach (ElementAnimation element in elements)
+        {
+            element.canvasGroup.alpha = 0f;
+        }
+        pointsDisplayer.SetActive(false);
+    }
+
+    public void AnimateWrongIndicator(ElementAnimation wrongIndicatorElement)
+    {
+        complementElementAnimation = wrongIndicatorElement;
         complementElementAnimation.canvasGroup.alpha = 1f;
 
         complementElapsedTime = 0f;
 
-        complementAnimation = ComplementAnimation.AnswerIndicatorFade;
+        complementAnimation = ComplementAnimation.WrongAnswerFade;
     }
 
-    private void FinishAnswerIndicatorFade(ElementAnimation answerIndicatorElement)
+    private void FinishWrongAnswerFade(ElementAnimation answerIndicatorElement)
     {
         answerIndicatorElement.canvasGroup.alpha = 0f;
     }
@@ -618,9 +687,9 @@ public class AnimationController : MonoBehaviour
         foreach (ElementAnimation element in statsElements)
         {
             float elapsedTimeLocal = 0f;
-            while (elapsedTimeLocal < groupAnimationDuration)
+            while (elapsedTimeLocal < statsDisplayAnimationDuration)
             {
-                float normalizedTime = Mathf.Clamp01(elapsedTimeLocal / groupAnimationDuration);
+                float normalizedTime = Mathf.Clamp01(elapsedTimeLocal / statsDisplayAnimationDuration);
                 float evaluationTimeLocal = groupEasingCurve.Evaluate(normalizedTime);
 
                 if (element.HasInteractiveText())
@@ -699,7 +768,7 @@ public class AnimationController : MonoBehaviour
         {
             case ElementAnimation.ValueTextType.Points:
                 {
-                    textToDisplay = Mathf.RoundToInt(Mathf.Lerp(0f, currentModuleResult.points, evaluationTime)).ToString();
+                    textToDisplay = Mathf.RoundToInt(Mathf.Lerp(0f, currentModuleResult.points, evaluationTime)).ToString() + "xp";
                 } 
             break;
             case ElementAnimation.ValueTextType.CorrectAnswers:
@@ -719,7 +788,7 @@ public class AnimationController : MonoBehaviour
         {
             case ElementAnimation.ValueTextType.Points:
                 {
-                    textToDisplay = currentModuleResult.points.ToString();
+                    textToDisplay = currentModuleResult.points.ToString() + "xp";
                 } 
             break;
             case ElementAnimation.ValueTextType.CorrectAnswers:
@@ -739,7 +808,7 @@ public class AnimationController : MonoBehaviour
         {
             case ElementAnimation.ValueTextType.Points:
                 {
-                    textToDisplay = Mathf.RoundToInt(Mathf.Lerp(0f, currentTopicResult.points, evaluationTime)).ToString();
+                    textToDisplay = Mathf.RoundToInt(Mathf.Lerp(0f, currentTopicResult.points, evaluationTime)).ToString() + "xp";
                 } 
             break;
             case ElementAnimation.ValueTextType.CorrectAnswers:
@@ -764,7 +833,7 @@ public class AnimationController : MonoBehaviour
         {
             case ElementAnimation.ValueTextType.Points:
                 {
-                    textToDisplay = currentTopicResult.points.ToString();
+                    textToDisplay = currentTopicResult.points.ToString() + "xp";
                 } 
             break;
             case ElementAnimation.ValueTextType.CorrectAnswers:
@@ -790,12 +859,12 @@ public class AnimationController : MonoBehaviour
             case ElementAnimation.ValueTextType.ResultsTopicPoints:
                 {
                     TopicResult currentTopic = finalResultData.topicResults[topicIndex];
-                    textToDisplay = $"{currentTopic.topicTitle} Punkte: {Mathf.RoundToInt(Mathf.Lerp(0f, currentTopic.points, evaluationTime))}";
+                    textToDisplay = $"{currentTopic.topicTitle} Punkte: {Mathf.RoundToInt(Mathf.Lerp(0f, currentTopic.points, evaluationTime))}xp";
                 } 
             break;
             case ElementAnimation.ValueTextType.ResultsTotalPoints:
                 {
-                    textToDisplay = $"Gesamtpunktzahl: {Mathf.RoundToInt(Mathf.Lerp(0f, finalResultData.totalPoints, evaluationTime))}";
+                    textToDisplay = $"Gesamtpunktzahl: {Mathf.RoundToInt(Mathf.Lerp(0f, finalResultData.totalPoints, evaluationTime))}xp";
                 } 
             break;
             case ElementAnimation.ValueTextType.CorrectAnswers:
@@ -823,12 +892,12 @@ public class AnimationController : MonoBehaviour
             case ElementAnimation.ValueTextType.ResultsTopicPoints:
                 {
                     TopicResult currentTopic = finalResultData.topicResults[topicIndex];
-                    textToDisplay = $"{currentTopic.topicTitle} Punkte: {currentTopic.points}";
+                    textToDisplay = $"{currentTopic.topicTitle} Punkte: {currentTopic.points}xp";
                 } 
             break;
             case ElementAnimation.ValueTextType.ResultsTotalPoints:
                 {
-                    textToDisplay = $"Gesamtpunktzahl: {finalResultData.totalPoints}";
+                    textToDisplay = $"Gesamtpunktzahl: {finalResultData.totalPoints}xp";
                 } 
             break;
             case ElementAnimation.ValueTextType.CorrectAnswers:
