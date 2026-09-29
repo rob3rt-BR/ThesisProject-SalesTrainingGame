@@ -422,7 +422,7 @@ public class ModuleFlowController : MonoBehaviour
     private void ShowFinalPointScreen()
     {
         // Set title text attribute
-        topicCompletedText.text = session.GetCurrentTopicResult().topicTitle;
+        topicCompletedText.text = $"{session.GetCurrentTopicResult().topicTitle} geschafft!";
 
         List<ElementAnimation> allCurrentPointScreenElements = animationController.CombinePointScreenElementsLists(currentPointScreenElements, currentStatsElements);
 

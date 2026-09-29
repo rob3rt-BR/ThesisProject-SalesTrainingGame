@@ -626,10 +626,14 @@ public class AnimationController : MonoBehaviour
     {
         PrepareStatsDisplayAnimation(statsElements);
 
+        if (complementAnimationElements != null)
+        {
+            complementAnimationElements = null;
+        }
+        complementAnimationElements = statsElements;
+
         complementAnimationType = ComplementAnimationType.Stats;
         statsType = StatsType.Module;
-
-        complementAnimationElements = statsElements;
 
         currentModuleResult = moduleResult;
     }
@@ -638,10 +642,14 @@ public class AnimationController : MonoBehaviour
     {
         PrepareStatsDisplayAnimation(statsElements);
 
+        if (complementAnimationElements != null)
+        {
+            complementAnimationElements = null;
+        }
+        complementAnimationElements = statsElements;
+
         complementAnimationType = ComplementAnimationType.Stats;
         statsType = StatsType.Topic;
-
-        complementAnimationElements = statsElements;
 
         currentTopicResult = topicResult;
     }
@@ -650,10 +658,14 @@ public class AnimationController : MonoBehaviour
     {
         PrepareStatsDisplayAnimation(statsElements);
 
+        if (complementAnimationElements != null)
+        {
+            complementAnimationElements = null;
+        }
+        complementAnimationElements = statsElements;
+
         complementAnimationType = ComplementAnimationType.Stats;
         statsType = StatsType.FinalResults;
-
-        complementAnimationElements = statsElements;
 
         finalResultData = trainingResultData;
     }
@@ -753,7 +765,10 @@ public class AnimationController : MonoBehaviour
                 element.textVisualFX.Play();
             }
 
-            currentTopicCounter++;
+            if (statsType == StatsType.FinalResults)
+            {
+                currentTopicCounter++;
+            }
 
             yield return waitForSecondsStats;
         }

@@ -263,6 +263,11 @@ public class TrainingSessionManager : MonoBehaviour
         {
             return;
         }
+
+        // Average all average response times of each module result from current topic
+        static float moduleAvgTime(ModuleResult m) => m.questionResults.Average(q => q.responseTime);
+        currentTopicResult.avgResponseTime = currentTopicResult.moduleResults.Average(moduleAvgTime);
+
         currentTopicResult.completed = true;
     }
 
@@ -297,12 +302,6 @@ public class TrainingSessionManager : MonoBehaviour
         {
             Debug.LogError("No current topic active.");
             return 0f;
-        }
-
-        // Sum all average response times of each module result from current topic
-        foreach (ModuleResult moduleResult in currentTopicResult.moduleResults)
-        {
-            currentTopicResult.avgResponseTime += moduleResult.questionResults.Average(q => q.responseTime);
         }
         return currentTopicResult.avgResponseTime;
     }
