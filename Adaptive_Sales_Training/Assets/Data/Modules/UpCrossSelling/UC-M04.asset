@@ -28,7 +28,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: UC-M04-Q02
-    questionText: "Ein Kunde sagt: \u201EDas ist teurer als erwartet.\u201C Wie sollte der Sales-Mitarbeiter reagieren?"
+    questionText: 'Ein Kunde sagt: "Das ist teurer als erwartet." Wie sollte der Sales-Mitarbeiter reagieren?'
     answerOptions:
     - Den Einwand ignorieren und weiterreden
     - Den Kunden unter Druck setzen
@@ -50,7 +50,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: UC-M04-Q04
-    questionText: "Warum sollte ein Sales-Mitarbeiter die urspruengliche Kaufentscheidung des Kunden sch\xFCtzen?"
+    questionText: Warum sollte ein Sales-Mitarbeiter die urspruengliche Kaufentscheidung des Kunden schuetzen?
     answerOptions:
     - "Damit der Anbieter keine weiteren Produkte erkl\xE4ren muss"
     - "Damit der Kunde nicht das Gef\xFChl bekommt, zum Zusatzkauf gedr\xE4ngt zu werden"

@@ -28,7 +28,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M05-Q02
-    questionText: "Welche Kennzahl ist fuer die Qualit\xE4t von Cold Outreach besonders aussagekraeftig?"
+    questionText: Welche Kennzahl ist fuer die Qualitaet von Cold Outreach besonders aussagekraeftig?
     answerOptions:
     - Die Anzahl der geschriebenen internen Notizen
     - "Die Zahl qualifizierter Meetings oder sinnvoller Gespr\xE4che"

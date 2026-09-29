@@ -39,7 +39,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: UC-M01-Q03
-    questionText: "Ein Kunde kauft einen Laptop und erhaelt das Angebot f\xFCr einen leistungsfaehigeren Prozessor. Welche Technik wird angewendet?"
+    questionText: Ein Kunde kauft einen Laptop und erhaelt das Angebot fuer einen leistungsfaehigeren Prozessor. Welche Technik wird angewendet?
     answerOptions:
     - Cross-Selling
     - Cold Outreach

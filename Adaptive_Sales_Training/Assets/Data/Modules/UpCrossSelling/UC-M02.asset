@@ -72,7 +72,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: UC-M02-Q06
-    questionText: "Upselling sollte ausschlie\xDFlich vor dem urspruenglichen Kauf stattfinden"
+    questionText: Upselling sollte ausschliesslich vor dem urspruenglichen Kauf stattfinden
     answerOptions:
     - Richtig
     - Falsch

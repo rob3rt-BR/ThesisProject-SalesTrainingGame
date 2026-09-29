@@ -28,7 +28,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M04-Q02
-    questionText: "Ein Prospect sagt: \u201EDafuer haben wir momentan kein Budget.\u201C Was ist eine gute erste Reaktion?"
+    questionText: 'Ein Prospect sagt: "Dafuer haben wir momentan kein Budget." Was ist eine gute erste Reaktion?'
     answerOptions:
     - "\u201EWelche Priorit\xE4ten bestimmen aktuell Ihre Budgetplanung?\u201C"
     - "\u201EDann ist unser Produkt vermutlich nichts f\xFCr Sie.\u201C"
@@ -72,7 +72,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M04-Q06
-    questionText: "Objections koennen Hinweise auf weitere Bed\xFCrfnisse oder Prioritaeten des Prospects enthalten"
+    questionText: Objections koennen Hinweise auf weitere Beduerfnisse oder Prioritaeten des Prospects enthalten
     answerOptions:
     - Richtig
     - Falsch
