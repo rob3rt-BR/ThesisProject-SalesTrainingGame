@@ -358,16 +358,17 @@ public class ModuleFlowController : MonoBehaviour
 
         MicroModule currentModule = topic.modules[currentModuleIndex];
         ModuleQuestion currentQuestion = currentModule.questions[currentQuestionIndex];
+        float halfedTimeLimit = currentQuestion.timeLimitSeconds / 2;
 
         bool isCorrect = selectedAnswerIndex >= 0 && selectedAnswerIndex == currentQuestion.correctAnswerIndex;
         bool timedOut = selectedAnswerIndex < 0;
-        float responseTime = currentQuestion.timeLimitSeconds - remainingTime;
+        float responseTime = halfedTimeLimit - remainingTime;
         int pointsAwarded = 0;
 
         // If answer correct => Calculate speed bonus points and add points to current module points
         if (isCorrect)
         {
-            float speedRatio = remainingTime / currentQuestion.timeLimitSeconds;
+            float speedRatio = remainingTime / halfedTimeLimit;
             int speedBonus = Mathf.RoundToInt(currentQuestion.speedBonusPoints * Mathf.Clamp01(speedRatio));
 
             pointsAwarded = currentQuestion.basePoints + speedBonus;

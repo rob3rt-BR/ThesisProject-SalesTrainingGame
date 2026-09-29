@@ -28,7 +28,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M03-Q02
-    questionText: "Welche Eigenschaft ist f\xFCr den Betreff einer Cold Email besonders sinnvoll?"
+    questionText: Welche Eigenschaft ist fuer den Betreff einer Cold Email besonders sinnvoll?
     answerOptions:
     - "Er enth\xE4lt m\xF6glichst viele Gro\xDFbuchstaben und Ausrufezeichen"
     - Er beschreibt alle Produktfunktionen
@@ -39,7 +39,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M03-Q03
-    questionText: "Welcher Call-to-Action ist f\xFCr eine erste Cold-Outreach-Nachricht meist am passendsten?"
+    questionText: Welcher Call-to-Action ist fuer eine erste Cold-Outreach-Nachricht meist am passendsten?
     answerOptions:
     - "\u201EW\xE4ren 15 Minuten n\xE4chste Woche sinnvoll, um die Situation kurz zu pr\xFCfen?\u201C"
     - "\u201EKaufen Sie jetzt sofort.\u201C"
@@ -61,7 +61,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M03-Q05
-    questionText: "Welche Form der Personalisierung ist am st\xE4rksten?"
+    questionText: Welche Form der Personalisierung ist am staerksten?
     answerOptions:
     - Den Vornamen des Prospects in eine identische Massenmail einzusetzen
     - "Einen aktuellen gesch\xE4ftlichen Anlass mit dem m\xF6glichen Kundennutzen zu verbinden"
@@ -72,7 +72,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M03-Q06
-    questionText: "Ein Sales-Script sollte wortw\xF6rtlich vorgelesen werden, damit kein Satz ver\xE4ndert wird"
+    questionText: "Ein Sales-Script sollte wortw\xF6rtlich vorgelesen werden, damit kein Satz veraendert wird"
     answerOptions:
     - Richtig
     - Falsch

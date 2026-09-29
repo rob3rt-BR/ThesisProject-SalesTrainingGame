@@ -39,7 +39,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M01-Q03
-    questionText: "Welche Aussage ist ein gutes Beispiel f\xFCr eine Value Proposition?"
+    questionText: Welche Aussage ist ein gutes Beispiel fuer eine Value Proposition?
     answerOptions:
     - "\u201EUnsere Software besitzt mehr als 80 Funktionen.\u201C"
     - "\u201EWir sind seit zehn Jahren am Markt.\u201C"
@@ -61,7 +61,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M01-Q05
-    questionText: "Wie sollte ein Sales-Mitarbeiter den passenden Kommunikationskanal ausw\xE4hlen?"
+    questionText: Wie sollte ein Sales-Mitarbeiter den passenden Kommunikationskanal auswaehlen?
     answerOptions:
     - "Abh\xE4ngig von Prospect, Situation, Dringlichkeit und verf\xFCgbarer Information"
     - "Immer per Telefon, unabh\xE4ngig vom Prospect"
@@ -72,7 +72,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M01-Q06
-    questionText: "Cold Outreach f\xFChrt normalerweise direkt zum abgeschlossenen Kauf"
+    questionText: Cold Outreach fuehrt normalerweise direkt zum abgeschlossenen Kauf
     answerOptions:
     - Richtig
     - Falsch

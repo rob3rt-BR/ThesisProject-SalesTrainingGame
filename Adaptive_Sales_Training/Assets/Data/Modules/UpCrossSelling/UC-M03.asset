@@ -17,7 +17,7 @@ MonoBehaviour:
   moduleText: "Gute Zusatzangebote beginnen mit Discovery. Der Sales-Mitarbeiter sollte verstehen, welche Ziele der Kunde verfolgt, welche Probleme aktuell bestehen und wie das bestehende Produkt verwendet wird.\nEine personalisierte Empfehlung verbindet diese Informationen mit einem konkreten Angebot. Bei Software k\xF6nnen beispielsweise zus\xE4tzliche Nutzer, erweiterte Analytics, Automatisierungen oder Integrationen sinnvoll sein. In einem allgemeinen Sales-Kontext k\xF6nnen passende Zubeh\xF6rprodukte oder erg\xE4nzende Services angeboten werden.\nNicht jedes verwandte Produkt ist automatisch ein gutes Cross-Sell. Relevanz, Kompatibilit\xE4t, Timing und der erwartete Kundennutzen sollten vor der Empfehlung gepr\xFCft werden."
   questions:
   - questionId: UC-M03-Q01
-    questionText: "Welche Frage unterst\xFCtzt eine gute Discovery vor einem Cross-Sell?"
+    questionText: Welche Frage unterstuetzt eine gute Discovery vor einem Cross-Sell?
     answerOptions:
     - "\u201EM\xF6chten Sie noch etwas kaufen?\u201C"
     - "\u201EWarum haben Sie unser teuerstes Produkt noch nicht gekauft?\u201C"
@@ -39,7 +39,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: UC-M03-Q03
-    questionText: "Ein Kunde nutzt eine CRM-Software und m\xF6chte seine Marketingdaten automatisch \xFCbertragen. Welches Angebot k\xF6nnte relevant sein?"
+    questionText: Ein Kunde nutzt eine CRM-Software und moechte seine Marketingdaten automatisch uebertragen. Welches Angebot koennte relevant sein?
     answerOptions:
     - "Eine nicht verbundene B\xFCroeinrichtung"
     - Ein komplett anderes Produkt ohne Bezug
@@ -50,7 +50,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: UC-M03-Q04
-    questionText: "Was sollte vor der Empfehlung eines Premium-Tarifs gepr\xFCft werden?"
+    questionText: Was sollte vor der Empfehlung eines Premium-Tarifs geprueft werden?
     answerOptions:
     - Ob der Sales-Mitarbeiter das Produkt besonders gerne verkauft
     - "Ob der Kunde m\xF6glichst wenig Informationen erh\xE4lt"
@@ -61,7 +61,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: UC-M03-Q05
-    questionText: "Warum ist ein Product Feature allein noch kein ausreichender Grund f\xFCr ein Upsell?"
+    questionText: Warum ist ein Product Feature allein noch kein ausreichender Grund fuer ein Upsell?
     answerOptions:
     - Weil der Bezug zum Kundenziel und zum erwarteten Nutzen fehlt
     - "Weil Features niemals erkl\xE4rt werden d\xFCrfen"
@@ -72,7 +72,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: UC-M03-Q06
-    questionText: "Eine Empfehlung sollte m\xF6glichst viele Features enthalten, auch wenn sie f\xFCr den Kunden nicht relevant sind"
+    questionText: Eine Empfehlung sollte moeglichst viele Features enthalten, auch wenn sie fuer den Kunden nicht relevant sind
     answerOptions:
     - Richtig
     - Falsch

@@ -17,7 +17,7 @@ MonoBehaviour:
   moduleText: "Upselling bedeutet, einem Kunden eine h\xF6herwertige oder umfangreichere Version des bereits betrachteten oder genutzten Produkts anzubieten. Ein Beispiel ist der Wechsel von einem Basic- auf einen Premium-Tarif.\nCross-Selling bedeutet, ein erg\xE4nzendes oder verwandtes Produkt beziehungsweise eine zus\xE4tzliche Leistung anzubieten. Bei einer Software kann dies beispielsweise ein passendes Reporting-Modul, eine Integration oder ein zus\xE4tzlicher Service sein.\nBeide Ans\xE4tze k\xF6nnen den durchschnittlichen Bestellwert erh\xF6hen. Entscheidend ist jedoch, dass das Angebot einen nachvollziehbaren Mehrwert f\xFCr den Kunden bietet. Ein h\xF6herer Umsatz allein ist kein ausreichender Grund f\xFCr eine Empfehlung."
   questions:
   - questionId: UC-M01-Q01
-    questionText: "Was ist ein typisches Beispiel f\xFCr Upselling?"
+    questionText: Was ist ein typisches Beispiel fuer Upselling?
     answerOptions:
     - Ein Kunde wechselt von einem Basic- auf einen Premium-Tarif
     - "Ein Kunde erh\xE4lt eine Support-Anfrage zu seinem bestehenden Vertrag"
@@ -28,7 +28,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: UC-M01-Q02
-    questionText: "Was ist ein typisches Beispiel f\xFCr Cross-Selling?"
+    questionText: Was ist ein typisches Beispiel fuer Cross-Selling?
     answerOptions:
     - "Der Kunde erh\xE4lt einen niedrigeren Preis f\xFCr dasselbe Produkt"
     - Der Kunde wechselt zu einer teureren Version desselben Produkts
@@ -39,7 +39,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: UC-M01-Q03
-    questionText: "Ein Kunde kauft einen Laptop und erh\xE4lt das Angebot f\xFCr einen leistungsf\xE4higeren Prozessor. Welche Technik wird angewendet?"
+    questionText: "Ein Kunde kauft einen Laptop und erhaelt das Angebot f\xFCr einen leistungsfaehigeren Prozessor. Welche Technik wird angewendet?"
     answerOptions:
     - Cross-Selling
     - Cold Outreach
@@ -81,7 +81,7 @@ MonoBehaviour:
     basePoints: 80
     speedBonusPoints: 40
   - questionId: UC-M01-Q07
-    questionText: "Upselling und Cross-Selling k\xF6nnen sowohl den Umsatz als auch den Kundennutzen erh\xF6hen, wenn das Angebot relevant ist"
+    questionText: Upselling und Cross-Selling koennen sowohl den Umsatz als auch den Kundennutzen erhoehen, wenn das Angebot relevant ist
     answerOptions:
     - Richtig
     - Falsch

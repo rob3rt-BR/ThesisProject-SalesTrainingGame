@@ -17,7 +17,7 @@ MonoBehaviour:
   moduleText: "Ein Angebot f\xFCr Upselling oder Cross-Selling sollte zum richtigen Zeitpunkt erfolgen. Besonders geeignet sind Situationen, in denen der Kunde mit dem bestehenden Produkt bereits Erfolg erzielt, eine hohe Nutzung zeigt oder ein neues Ziel verfolgt.\nCustomer Success und Sales k\xF6nnen sogenannte Health Signals beobachten. Dazu geh\xF6ren beispielsweise erfolgreiche Nutzung wichtiger Funktionen, steigende Nutzung, neue Anforderungen oder ein ver\xE4ndertes Gesch\xE4ftsmodell.\nEin Zusatzangebot ist weniger geeignet, wenn der Kunde noch grundlegende Probleme mit dem bestehenden Produkt hat, unzufrieden ist oder einen offenen Support-Fall bearbeitet. Zuerst sollte der bestehende Kundennutzen hergestellt werden."
   questions:
   - questionId: UC-M02-Q01
-    questionText: "Welches Signal deutet am ehesten darauf hin, dass ein Kunde f\xFCr ein Upselling bereit sein k\xF6nnte?"
+    questionText: Welches Signal deutet am ehesten darauf hin, dass ein Kunde fuer ein Upselling bereit sein koennte?
     answerOptions:
     - "Der Kunde hat grundlegende Probleme mit der bestehenden L\xF6sung"
     - Der Kunde hat seit Monaten keinen Kontakt zum Unternehmen
@@ -50,7 +50,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: UC-M02-Q04
-    questionText: "Warum ist der nachweisbare Erfolg mit dem bestehenden Produkt f\xFCr ein Upsell wichtig?"
+    questionText: Warum ist der nachweisbare Erfolg mit dem bestehenden Produkt fuer ein Upsell wichtig?
     answerOptions:
     - Weil der Kunde dann keine Fragen mehr stellen darf
     - Weil ein Upgrade leichter als hilfreiche Weiterentwicklung verstanden werden kann
@@ -61,7 +61,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: UC-M02-Q05
-    questionText: "Ein Kunde er\xF6ffnet mehrere neue Standorte. Welche Reaktion ist am sinnvollsten?"
+    questionText: Ein Kunde eroeffnet mehrere neue Standorte. Welche Reaktion ist am sinnvollsten?
     answerOptions:
     - Sofort das teuerste Paket anbieten
     - "Den Kunden unabh\xE4ngig von seinen Zielen zu einem Upgrade dr\xE4ngen"
@@ -72,7 +72,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: UC-M02-Q06
-    questionText: "pselling sollte ausschlie\xDFlich vor dem urspr\xFCnglichen Kauf stattfinden"
+    questionText: "Upselling sollte ausschlie\xDFlich vor dem urspruenglichen Kauf stattfinden"
     answerOptions:
     - Richtig
     - Falsch

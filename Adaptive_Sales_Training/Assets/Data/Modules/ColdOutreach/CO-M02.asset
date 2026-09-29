@@ -17,7 +17,7 @@ MonoBehaviour:
   moduleText: "Effektives Cold Outreach beginnt mit der Auswahl geeigneter Prospects. Ein Ideal Customer Profile (ICP) beschreibt, welche Unternehmen besonders gut zum Angebot passen. Dabei k\xF6nnen Branche, Unternehmensgr\xF6\xDFe, Rolle, technische Umgebung und typische Herausforderungen ber\xFCcksichtigt werden.\nVor der Kontaktaufnahme sollte der Sales-Mitarbeiter relevante Informationen recherchieren. Besonders hilfreich sind aktuelle Trigger Events, zum Beispiel ein starkes Unternehmenswachstum, eine neue F\xFChrungskraft, eine Expansion oder eine neue technologische Initiative.\nResearch soll die Ansprache relevanter machen und nicht dazu dienen, m\xF6glichst viele private Details zu sammeln. Die wichtigsten Erkenntnisse sollten im CRM dokumentiert werden, damit weitere Kontaktversuche konsistent und nachvollziehbar bleiben."
   questions:
   - questionId: CO-M02-Q01
-    questionText: "Wof\xFCr steht ein Ideal Customer Profile (ICP)?"
+    questionText: Wofuer steht ein Ideal Customer Profile (ICP)?
     answerOptions:
     - "F\xFCr eine Liste aller Unternehmen, die bereits gekauft haben"
     - "F\xFCr ein standardisiertes E-Mail-Template"
@@ -28,7 +28,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M02-Q02
-    questionText: "Was ist ein sinnvolles Trigger Event f\xFCr Cold Outreach?"
+    questionText: Was ist ein sinnvolles Trigger Event fuer Cold Outreach?
     answerOptions:
     - Der Prospect hat vor Jahren einmal eine allgemeine Werbung gesehen
     - Das Unternehmen expandiert und baut ein neues Team auf
@@ -39,7 +39,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M02-Q03
-    questionText: "Welche Information ist f\xFCr die Auswahl eines passenden Ansprechpartners besonders relevant?"
+    questionText: Welche Information ist fuer die Auswahl eines passenden Ansprechpartners besonders relevant?
     answerOptions:
     - "Die Rolle und der m\xF6gliche Einfluss des Prospects auf das Problem"
     - Die Lieblingsfarbe des Unternehmenslogos
@@ -50,7 +50,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M02-Q04
-    questionText: "Welche Recherche ist f\xFCr eine personalisierte Ansprache am geeignetsten?"
+    questionText: Welche Recherche ist fuer eine personalisierte Ansprache am geeignetsten?
     answerOptions:
     - "Eine allgemeine Suche nach m\xF6glichst vielen privaten Informationen"
     - Das Kopieren einer Nachricht aus einem anderen Unternehmen
@@ -72,7 +72,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M02-Q06
-    questionText: "Ein Trigger Event kann ein guter Anlass f\xFCr eine personalisierte Ansprache sein"
+    questionText: Ein Trigger Event kann ein guter Anlass fuer eine personalisierte Ansprache sein
     answerOptions:
     - Richtig
     - Falsch
@@ -81,7 +81,7 @@ MonoBehaviour:
     basePoints: 80
     speedBonusPoints: 40
   - questionId: CO-M02-Q07
-    questionText: "Je mehr private Informationen ein Sales-Mitarbeiter \xFCber einen Prospect sammelt, desto besser ist die Ansprache automatisch"
+    questionText: Je mehr private Informationen ein Sales-Mitarbeiter ueber einen Prospect sammelt, desto besser ist die Ansprache automatisch
     answerOptions:
     - Richtig
     - Falsch

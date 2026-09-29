@@ -50,7 +50,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: UC-M04-Q04
-    questionText: "Warum sollte ein Sales-Mitarbeiter die urspr\xFCngliche Kaufentscheidung des Kunden sch\xFCtzen?"
+    questionText: "Warum sollte ein Sales-Mitarbeiter die urspruengliche Kaufentscheidung des Kunden sch\xFCtzen?"
     answerOptions:
     - "Damit der Anbieter keine weiteren Produkte erkl\xE4ren muss"
     - "Damit der Kunde nicht das Gef\xFChl bekommt, zum Zusatzkauf gedr\xE4ngt zu werden"
@@ -72,7 +72,7 @@ MonoBehaviour:
     basePoints: 100
     speedBonusPoints: 50
   - questionId: UC-M04-Q06
-    questionText: "Druck und k\xFCnstliche Verknappung sind gute Methoden, um langfristiges Kundenvertrauen aufzubauen"
+    questionText: Druck und kuenstliche Verknappung sind gute Methoden, um langfristiges Kundenvertrauen aufzubauen
     answerOptions:
     - Richtig
     - Falsch
@@ -81,7 +81,7 @@ MonoBehaviour:
     basePoints: 80
     speedBonusPoints: 40
   - questionId: UC-M04-Q07
-    questionText: "Eine wertorientierte Empfehlung erkl\xE4rt, wie das Angebot ein relevantes Kundenproblem l\xF6sen kann"
+    questionText: Eine wertorientierte Empfehlung erklaert, wie das Angebot ein relevantes Kundenproblem loesen kann
     answerOptions:
     - Richtig
     - Falsch
