@@ -765,7 +765,7 @@ public class AnimationController : MonoBehaviour
                 element.textVisualFX.Play();
             }
 
-            if (statsType == StatsType.FinalResults)
+            if (statsType == StatsType.FinalResults && element.GetValueTextType() == ElementAnimation.ValueTextType.ResultsTopicPoints)
             {
                 currentTopicCounter++;
             }
@@ -874,12 +874,12 @@ public class AnimationController : MonoBehaviour
             case ElementAnimation.ValueTextType.ResultsTopicPoints:
                 {
                     TopicResult currentTopic = finalResultData.topicResults[topicIndex];
-                    textToDisplay = $"{currentTopic.topicTitle} Punkte: {Mathf.RoundToInt(Mathf.Lerp(0f, currentTopic.points, evaluationTime))}xp";
+                    textToDisplay = $"\"{currentTopic.topicTitle}\": {Mathf.RoundToInt(Mathf.Lerp(0f, currentTopic.points, evaluationTime))}xp";
                 } 
             break;
             case ElementAnimation.ValueTextType.ResultsTotalPoints:
                 {
-                    textToDisplay = $"Gesamtpunktzahl: {Mathf.RoundToInt(Mathf.Lerp(0f, finalResultData.totalPoints, evaluationTime))}xp";
+                    textToDisplay = $"Total: {Mathf.RoundToInt(Mathf.Lerp(0f, finalResultData.totalPoints, evaluationTime))}xp";
                 } 
             break;
             case ElementAnimation.ValueTextType.CorrectAnswers:
@@ -887,7 +887,8 @@ public class AnimationController : MonoBehaviour
                     static int moduleTotalQuestion(ModuleResult m) => m.questionResults.Count;
                     int totalCorrectAnswers = finalResultData.topicResults.Sum(t => t.moduleResults.Sum(moduleTotalQuestion));
 
-                    textToDisplay = $"{Mathf.RoundToInt(Mathf.Lerp(0f, finalResultData.totalCorrectAnswers, evaluationTime))} / {totalCorrectAnswers}";
+                    //textToDisplay = $"{Mathf.RoundToInt(Mathf.Lerp(0f, finalResultData.totalCorrectAnswers, evaluationTime))} / {totalCorrectAnswers}";
+                    textToDisplay = $"{Mathf.RoundToInt(Mathf.Lerp(0f, finalResultData.totalCorrectAnswers, evaluationTime))} / 70";
                 } 
             break;
             case ElementAnimation.ValueTextType.AvgResponseTime:
@@ -907,12 +908,12 @@ public class AnimationController : MonoBehaviour
             case ElementAnimation.ValueTextType.ResultsTopicPoints:
                 {
                     TopicResult currentTopic = finalResultData.topicResults[topicIndex];
-                    textToDisplay = $"{currentTopic.topicTitle} Punkte: {currentTopic.points}xp";
+                    textToDisplay = $"\"{currentTopic.topicTitle}\": {currentTopic.points}xp";
                 } 
             break;
             case ElementAnimation.ValueTextType.ResultsTotalPoints:
                 {
-                    textToDisplay = $"Gesamtpunktzahl: {finalResultData.totalPoints}xp";
+                    textToDisplay = $"Total: {finalResultData.totalPoints}xp";
                 } 
             break;
             case ElementAnimation.ValueTextType.CorrectAnswers:
@@ -920,7 +921,8 @@ public class AnimationController : MonoBehaviour
                     static int moduleTotalQuestion(ModuleResult m) => m.questionResults.Count;
                     int totalCorrectAnswers = finalResultData.topicResults.Sum(t => t.moduleResults.Sum(moduleTotalQuestion));
 
-                    textToDisplay = $"{finalResultData.totalCorrectAnswers} / {totalCorrectAnswers}";
+                    //textToDisplay = $"{finalResultData.totalCorrectAnswers} / {totalCorrectAnswers}";
+                    textToDisplay = $"{finalResultData.totalCorrectAnswers} / 70";
                 } 
             break;
             case ElementAnimation.ValueTextType.AvgResponseTime:

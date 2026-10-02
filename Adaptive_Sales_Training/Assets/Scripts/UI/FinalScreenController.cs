@@ -62,7 +62,8 @@ public class FinalScreenController : MonoBehaviour
         animationController.AnimateSceneStart(finalResultsScreenElements);
 
         // Animate final results stats display (one line of text at a time)
-        animationController.AnimateFinalStatsDisplay(finalStatsElements, session.FinalTrainingData);
+        //animationController.AnimateFinalStatsDisplay(finalStatsElements, session.FinalTrainingData);
+        animationController.AnimateFinalStatsDisplay(finalStatsElements, TestFinalScreenResults());
     }
 
     private void InitializeElementAnimationGroups()
@@ -93,10 +94,34 @@ public class FinalScreenController : MonoBehaviour
         thanksScreenElements = new() {thxTextElement, finishTrainingElement};
     }
 
+    private TrainingResultData TestFinalScreenResults()
+    {
+        List<TopicResult> testTopicResults = new()
+        {
+            new TopicResult()
+            {
+                topicTitle = "Cold Outreach",
+                points = 15000
+            },
+            new TopicResult()
+            {
+                topicTitle = "Upselling und Cross-Selling",
+                points = 15000
+            }
+        };
+        return new()
+        {
+            totalPoints = 30000,
+            totalCorrectAnswers = 60,
+            finalAvgResponseTime = 2.5f,
+            topicResults = testTopicResults
+        };
+    }
+
     public void ContinueToThanksScreen()
     {
         // Export final participant training data to predefined local storage directory
-        session.ExportFinalTrainingData();
+        // session.ExportFinalTrainingData();
 
         List<ElementAnimation> allFinalResultsScreenElements = animationController.CombinePointScreenElementsLists(finalResultsScreenElements, finalStatsElements);
 
