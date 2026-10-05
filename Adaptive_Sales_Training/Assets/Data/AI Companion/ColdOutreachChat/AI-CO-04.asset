@@ -15,8 +15,8 @@ MonoBehaviour:
   module: {fileID: 11400000, guid: da6e65ccdd83e7c4da09abeb5258144f, type: 2}
   scenarioId: AI-CO-04
   scenarioContext: "Du sprichst mit einem Prospect, dessen Team aktuell mit mehreren Tabellen arbeitet. Der Prospect hat jedoch erkl\xE4rt, dass momentan kein Budget eingeplant ist. Das Gespr\xE4ch behandelt Discovery-Fragen, aktives Zuh\xF6ren, den Umgang mit Objections und die \xDCbergabe eines qualifizierten Prospects."
-  customerPersona: "Name: Thomas Richter\nRolle: Finance Manager\nPers\xF6nlichkeit: Skeptisch, aber gespr\xE4chsbereit, wenn seine Bedenken ernst genommen werden."
-  openingMessage: "Wir haben daf\xFCr kein Budget. Ich glaube nicht, dass dieses Gespr\xE4ch etwas bringt."
+  customerPersona: "Rolle: Finance Manager\nPers\xF6nlichkeit: Skeptisch, aber gespr\xE4chsbereit, wenn seine Bedenken ernst genommen werden."
+  openingMessage: "\"Wir haben daf\xFCr kein Budget. Ich glaube nicht, dass dieses Gespr\xE4ch etwas bringt.\""
   questionContexts:
   - questionId: CO-M04-Q01
     dialogueContext: "Reagiere nat\xFCrlich auf die gestellte Frage und beantworte sie aus deiner Kundensituation heraus. Frage danach beil\xE4ufig: Was m\xF6chten Sie \xFCber unsere aktuelle Arbeitsweise noch verstehen?"
@@ -43,7 +43,7 @@ MonoBehaviour:
     dialogueContext: "Reagiere nat\xFCrlich auf den Umgang mit dir als erster Kontaktperson. Frage danach beil\xE4ufig: Wie w\xFCrden Sie vorgehen, wenn ich nicht die richtige Person f\xFCr dieses Thema bin?"
     traineeDialogueTexts:
     - "Sagen Sie am besten einfach, dass Sie mich dringend durchstellen m\xFCssen, dann komme ich direkt zum Entscheider."
-    - "Guten Tag, ich rufe aus unserem Software-Team an. Ich erkl\xE4re Ihnen gern kurz, warum ich anrufe, und Sie entscheiden dann, ob das Thema weitergegeben werden sollte."
+    - "Ich erkl\xE4re Ihnen gern kurz, warum ich anrufe, und Sie entscheiden dann, ob das Thema weitergegeben werden sollte."
     - "K\xF6nnen Sie mir die private Telefonnummer des Entscheiders geben? Dann erreiche ich ihn schneller."
     - "Ich brauche nur die Budget-Information des Unternehmens; mit dem Gatekeeper muss ich nicht \xFCber den Gespr\xE4chszweck sprechen."
   - questionId: CO-M04-Q05
@@ -59,7 +59,7 @@ MonoBehaviour:
     - "Ihr Einwand hilft mir, die Priorit\xE4ten hinter Ihrer Aussage besser zu verstehen. Darf ich kurz nachfragen, was Ihnen dabei am meisten Sorgen macht?"
     - "Ich sehe in Ihrer Objection keinen Hinweis auf weitere Bed\xFCrfnisse oder Priorit\xE4ten; ich w\xFCrde einfach mit meinem Pitch fortfahren."
   - questionId: CO-M04-Q07
-    dialogueContext: "Reagiere nat\xFCrlich auf die Zusammenfassung des Angebots, und beende das Gespr\xE4ch."
+    dialogueContext: "Reagiere nat\xFCrlich auf die Zusammenfassung des Angebots, und beende das Gespr\xE4ch ohne weitere Fragen zu stellen."
     traineeDialogueTexts:
     - "Ich nutze den Cold Call, um Ihnen m\xF6glichst viele Produktinformationen in einem langen Pitch vorzustellen."
     - "Lassen Sie uns zuerst Ihre Situation verstehen. Danach kann ich die n\xE4chsten Schritte an Ihrem tats\xE4chlichen Bedarf ausrichten."

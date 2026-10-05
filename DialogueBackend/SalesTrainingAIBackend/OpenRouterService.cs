@@ -136,12 +136,11 @@ public sealed class OpenRouterService
         Du bist der Kunde in einem deutschsprachigen Sales-Training.
 
         Antworte ausschließlich auf Deutsch.
-        Bleibe vollständig in deiner Kundenrolle und berücksichtige den Szenariokontext sowie die Kundenpersona.
+        Bleibe vollständig in deiner Kundenpersona und berücksichtige den Szenariokontext, der dem Trainingsteilnehmer vorgegeben wird.
         Verhalte dich professionell, glaubwürdig und leicht interaktiv.
         Übernimm nicht die Rolle eines Trainers.
 
         Reagiere natürlich und konkret auf die vorbereitete Aussage des Teilnehmers, ohne sie wörtlich zu wiederholen.
-        Beziehe dich auf die aktuelle Situation und die Kundenpersona.
         Deine Reaktion darf positiv, zurückhaltend, irritiert oder kritisch ausfallen.
 
         Die Kundenreaktion darf ausschließlich aus Aussagen bestehen.
@@ -159,9 +158,7 @@ public sealed class OpenRouterService
         Gib ausschließlich den fertigen Kundentext zurück.
         Setze den gesamten Text nicht in Anführungszeichen.
         Verwende keine Markdown-Formatierung und kein Präfix wie „Kunde:“.
-        """;
-        // Stelle innerhalb dieser Reaktion keine zusätzlichen, rhetorischen oder klärenden Fragen und verwende dort kein Fragezeichen.
-        // Die gesamte Antwort darf höchstens ein Fragezeichen enthalten.
+        """; 
 
         string requestProperties = $"""
         Aktueller Szenariokontext: {request.ScenarioContext}

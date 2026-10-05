@@ -15,8 +15,8 @@ MonoBehaviour:
   module: {fileID: 11400000, guid: 5a40a77c91919994cb4258e2fe430890, type: 2}
   scenarioId: AI-CO-02
   scenarioContext: "Du verkaufst eine SaaS-L\xF6sung f\xFCr interne Prozesse und Kundenverwaltung. Der Prospect ist ein wachsendes Unternehmen, das k\xFCrzlich drei neue Niederlassungen er\xF6ffnet hat. Das Gespr\xE4ch f\xFChrt von der Auswahl des passenden Kundentyps \xFCber Research und Ansprechpartner bis zur Dokumentation im CRM."
-  customerPersona: "Name: Markus Vogel\nRolle: Leiter des Customer Operations Teams\nPers\xF6nlichkeit: Analytisch und direkt. Er reagiert positiv auf konkrete Informationen, lehnt aber oberfl\xE4chliche Personalisierung ab.\n"
-  openingMessage: "Sie erw\xE4hnen unser Wachstum in Ihrer Nachricht. Was genau hat das mit Ihrer Software zu tun?"
+  customerPersona: "Rolle: Leiter des Customer Operations Teams\nPers\xF6nlichkeit: Analytisch und direkt. Er reagiert positiv auf konkrete Informationen, lehnt aber oberfl\xE4chliche Personalisierung ab.\n"
+  openingMessage: "\"Sie erw\xE4hnen unser Wachstum in Ihrer Nachricht. Was genau hat das mit Ihrer Software zu tun?\""
   questionContexts:
   - questionId: CO-M02-Q01
     dialogueContext: "Reagiere nat\xFCrlich auf die Beschreibung des passenden Kundentyps. Frage danach beil\xE4ufig: Woran w\xFCrden Sie bei einem Unternehmen wie unserem zuerst erkennen, dass ein Gespr\xE4ch sinnvoll sein k\xF6nnte?"
@@ -59,7 +59,7 @@ MonoBehaviour:
     - "Ihre Expansion ist ein konkreter Anlass f\xFCr mich, jetzt eine Nachricht zu schicken und den m\xF6glichen Bedarf anzusprechen."
     - "Auch wenn sich bei Ihnen gerade nichts ver\xE4ndert, w\xFCrde ich denselben Anlass f\xFCr eine personalisierte Nachricht verwenden."
   - questionId: CO-M02-Q07
-    dialogueContext: "Reagiere nat\xFCrlich auf die Grenze zwischen pers\xF6nlicher Vorbereitung und unangemessenen Details, und beende das Gespr\xE4ch."
+    dialogueContext: "Reagiere nat\xFCrlich auf die Grenze zwischen pers\xF6nlicher Vorbereitung und unangemessenen Details, und beende das Gespr\xE4ch ohne weitere Fragen zu stellen."
     traineeDialogueTexts:
     - "Ich habe mir deshalb m\xF6glichst viele private Details \xFCber Sie zusammengesucht; je mehr ich wei\xDF, desto pers\xF6nlicher kann ich schlie\xDFlich wirken."
     - "Ich bleibe bei den gesch\xE4ftlichen Informationen, die f\xFCr Ihre Situation wichtig sind. Ihr Privatleben muss ich f\xFCr eine gute Ansprache nicht kennen."

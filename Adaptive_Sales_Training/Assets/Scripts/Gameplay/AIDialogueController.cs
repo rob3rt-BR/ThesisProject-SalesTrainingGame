@@ -109,8 +109,8 @@ public class AIDialogueController : MonoBehaviour
     private GameObject topicAvgResponseTimeTitle;
     [SerializeField]
     private TMP_Text topicAvgResponseTimeText;
-    [SerializeField]
-    private Button finishTopicButton;
+    // [SerializeField]
+    // private Button finishTopicButton;
 
     [Header("Backend")]
     [SerializeField]
@@ -189,7 +189,7 @@ public class AIDialogueController : MonoBehaviour
         continueButton.onClick.AddListener(ContinueToNextModule);
 
         // On click (just 1 time at the end) of finish button (final point screen) => Exit AITrainigScene of current topic
-        finishTopicButton.onClick.AddListener(ExitTopicTraining);
+        // finishTopicButton.onClick.AddListener(ExitTopicTraining);
 
         // On click of answerButton[i] (question screen) => select an answer with a designated index
         for (int i = 0; i < answerButtons.Length; i++)
@@ -275,9 +275,9 @@ public class AIDialogueController : MonoBehaviour
         // Final points screen elements
         ElementAnimation finalStatsTitleElement = animationController.GetElementAnimation(topicCompletedText.gameObject);
         ElementAnimation finalStatsBackgroundElement = animationController.GetElementAnimation(finalStatsBackground);
-        ElementAnimation finishTopicButtonElement = animationController.GetElementAnimation(finishTopicButton.gameObject);
+        // ElementAnimation finishTopicButtonElement = animationController.GetElementAnimation(finishTopicButton.gameObject);
 
-        finalPointScreenElements = new() {finalStatsTitleElement, finalStatsBackgroundElement, finishTopicButtonElement};
+        finalPointScreenElements = new() {finalStatsTitleElement, finalStatsBackgroundElement};
 
         // Final points screen stats elements
         ElementAnimation finalPointsTitleElement = animationController.GetElementAnimation(finalPointsTitle);
@@ -745,7 +745,7 @@ public class AIDialogueController : MonoBehaviour
         startQuestionsButton.onClick.RemoveListener(StartQuestionSequence);
         nextQuestionButton.onClick.RemoveListener(ContinueToNextQuestion);
         continueButton.onClick.RemoveListener(ContinueToNextModule);
-        finishTopicButton.onClick.RemoveListener(ContinueToNextModule);
+        // finishTopicButton.onClick.RemoveListener(ContinueToNextModule);
 
         for (int i = 0; i < answerButtons.Length; i++)
         {
@@ -776,7 +776,9 @@ public class AIDialogueController : MonoBehaviour
         session.CompleteCurrentTopic();
 
         // Go to final points screen (topic)
-        ShowFinalPointScreen();
+        // ShowFinalPointScreen();
+
+        ExitTopicTraining();
     }
 
     private void ExitTopicTraining()

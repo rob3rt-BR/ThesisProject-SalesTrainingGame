@@ -15,8 +15,8 @@ MonoBehaviour:
   module: {fileID: 11400000, guid: 2b520aeb0eaad0b4780aec3345a6879d, type: 2}
   scenarioId: AI-CO-01
   scenarioContext: "Du arbeitest als Sales Development Representative f\xFCr eine Software, die mittelst\xE4ndische Unternehmen bei der Verwaltung von Angeboten und Kundenkontakten unterst\xFCtzt. Du f\xFChrst ein erstes Gespr\xE4ch mit einem Prospect, zu dem bisher keine Gesch\xE4ftsbeziehung besteht. Das Gespr\xE4ch soll schrittweise von der Bedeutung von Cold Outreach bis zu einem respektvollen n\xE4chsten Schritt f\xFChren."
-  customerPersona: "Name: Sabine Keller\nRolle: Operations Managerin eines mittelst\xE4ndischen Unternehmens\nPers\xF6nlichkeit: H\xF6flich, aber vorsichtig und zeitlich stark ausgelastet.\nSie m\xF6chte schnell erkennen, ob ein Gespr\xE4ch relevant ist."
-  openingMessage: "Guten Tag. Sie haben ungef\xE4hr zwei Minuten. Worum geht es genau?"
+  customerPersona: "Rolle: Operations Managerin eines mittelst\xE4ndischen Unternehmens\nPers\xF6nlichkeit: H\xF6flich, aber vorsichtig und zeitlich stark ausgelastet.\nSie m\xF6chte schnell erkennen, ob ein Gespr\xE4ch relevant ist."
+  openingMessage: "\"Guten Tag. Sie haben ungef\xE4hr zwei Minuten. Worum geht es genau?\""
   questionContexts:
   - questionId: CO-M01-Q01
     dialogueContext: "Reagiere nat\xFCrlich auf die Aussage des Teilnehmers aus Sicht einer vorsichtigen Operations Managerin. Frage danach beil\xE4ufig: Was m\xF6chten Sie mit diesem ersten Kontakt konkret erreichen?"
@@ -59,7 +59,7 @@ MonoBehaviour:
     - "Lassen Sie uns den Kauf heute direkt abschlie\xDFen; dann ist die Sache f\xFCr beide Seiten erledigt."
     - "Heute m\xF6chte ich erst verstehen, ob wir \xFCberhaupt ein relevantes Thema f\xFCr Sie haben. \xDCber einen Kauf m\xFCssen wir jetzt noch nicht sprechen."
   - questionId: CO-M01-Q07
-    dialogueContext: "Reagiere nat\xFCrlich auf die Haltung des Teilnehmers und beende das Gespr\xE4ch."
+    dialogueContext: "Reagiere nat\xFCrlich auf die Haltung des Teilnehmers und beende das Gespr\xE4ch ohne weitere Fragen zu stellen."
     traineeDialogueTexts:
     - "Wenn das Thema f\xFCr Sie nicht passt, sage ich Ihnen das offen und beende die Ansprache. Ihre Zeit m\xF6chte ich nicht unn\xF6tig beanspruchen."
     - Ich versende die Nachricht einfach weiter, auch wenn sie keinen Bezug zu Ihrem Unternehmen hat; vielleicht reagieren Sie irgendwann.

@@ -296,17 +296,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &56176553 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6539949368821092515, guid: 728d4589888e87d489165dcf0089072f, type: 3}
-  m_PrefabInstance: {fileID: 56176548}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 56176550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &63380671
 GameObject:
   m_ObjectHideFlags: 0
@@ -5639,10 +5628,10 @@ MonoBehaviour:
   rainbowSpeed: 1
   rainbowSaturation: 0.85
   rainbowValue: 1
-  motionMode: 2
-  motionAmount: 3
-  motionSpeed: 3
-  characterDelay: 0.08
+  motionMode: 0
+  motionAmount: 1.25
+  motionSpeed: 2
+  characterDelay: 0
   scaleAmount: 0.25
   rotationAmount: 12
   typeAnimationMode: 1
@@ -6439,7 +6428,6 @@ MonoBehaviour:
   topicCorrectAnsText: {fileID: 581600818}
   topicAvgResponseTimeTitle: {fileID: 1749332108}
   topicAvgResponseTimeText: {fileID: 1767559964}
-  finishTopicButton: {fileID: 56176553}
   backendUrl: http://localhost:5065/api/dialogue
   animationController: {fileID: 897362692}
   eventSystem: {fileID: 1276461026}
@@ -7214,13 +7202,13 @@ MonoBehaviour:
   rainbowSaturation: 0.85
   rainbowValue: 1
   motionMode: 2
-  motionAmount: 3
-  motionSpeed: 3
-  characterDelay: 0.08
+  motionAmount: 1.25
+  motionSpeed: 2
+  characterDelay: 0
   scaleAmount: 0.25
   rotationAmount: 12
   typeAnimationMode: 1
-  typeCharactersPerSecond: 24
+  typeCharactersPerSecond: 32
   typeFadeDuration: 0.08
   playOnEnable: 1
   useUnscaledTime: 0

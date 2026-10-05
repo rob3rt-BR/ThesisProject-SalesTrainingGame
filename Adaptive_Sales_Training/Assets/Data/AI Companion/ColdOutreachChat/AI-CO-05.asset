@@ -15,8 +15,8 @@ MonoBehaviour:
   module: {fileID: 11400000, guid: 66ba2efa598cd6e46bd4391e9bd31a25, type: 2}
   scenarioId: AI-CO-05
   scenarioContext: "Du hast einem Prospect bereits eine erste E-Mail geschickt und einmal angerufen. Der Prospect hat bisher nicht geantwortet. Das Gespr\xE4ch behandelt Sales Cadence, relevante Metriken, Follow-up, \xDCbergabe, Persistence und CRM-Dokumentation."
-  customerPersona: "Name: Daniel Hoffmann\nRolle: Gesch\xE4ftsf\xFChrer eines kleinen Softwareunternehmens\nPers\xF6nlichkeit: Sehr besch\xE4ftigt. Er reagiert positiv auf kurze, relevante Nachrichten, aber negativ auf wiederholten Druck."
-  openingMessage: Ich sehe, dass Sie bereits mehrmals versucht haben, mich zu erreichen. Was ist jetzt anders?
+  customerPersona: "Rolle: Gesch\xE4ftsf\xFChrer eines kleinen Softwareunternehmens\nPers\xF6nlichkeit: Sehr besch\xE4ftigt. Er reagiert positiv auf kurze, relevante Nachrichten, aber negativ auf wiederholten Druck."
+  openingMessage: '"Ich sehe, dass Sie bereits mehrmals versucht haben, mich zu erreichen. Was ist jetzt anders?"'
   questionContexts:
   - questionId: CO-M05-Q01
     dialogueContext: "Reagiere nat\xFCrlich auf die angek\xFCndigte Kontaktfolge und deine begrenzte Zeit. Frage danach beil\xE4ufig: Wie w\xFCrden Sie entscheiden, wann eine weitere Nachricht noch hilfreich ist?"
@@ -59,7 +59,7 @@ MonoBehaviour:
     - Auch wenn Sie nicht reagieren, kontaktiere ich Sie ohne zeitliche oder inhaltliche Grenze weiter.
     - "Ich bleibe erreichbar und versuche es beharrlich, achte aber auf angemessene Abst\xE4nde, neue Inhalte und ein klares Ende der Kontaktfolge."
   - questionId: CO-M05-Q07
-    dialogueContext: "Reagiere nat\xFCrlich auf die Bedeutung einer sauberen Dokumentation, und beende das Gespr\xE4ch."
+    dialogueContext: "Reagiere nat\xFCrlich auf die Bedeutung einer sauberen Dokumentation, und beende das Gespr\xE4ch ohne weitere Fragen zu stellen."
     traineeDialogueTexts:
     - "Ich dokumentiere die Gespr\xE4chsergebnisse im CRM, damit ein sp\xE4terer Kollege den Kontakt sinnvoll \xFCbernehmen kann."
     - "Die CRM-Dokumentation erleichtert eine sp\xE4tere \xDCbergabe eines Prospects nicht wesentlich; entscheidend ist nur, dass wir ihn erneut kontaktieren."
