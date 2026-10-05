@@ -879,7 +879,7 @@ public class AnimationController : MonoBehaviour
             break;
             case ElementAnimation.ValueTextType.ResultsTotalPoints:
                 {
-                    textToDisplay = $"Total: {Mathf.RoundToInt(Mathf.Lerp(0f, finalResultData.totalPoints, evaluationTime))}xp";
+                    textToDisplay = $"{Mathf.RoundToInt(Mathf.Lerp(0f, finalResultData.totalPoints, evaluationTime))}xp";
                 } 
             break;
             case ElementAnimation.ValueTextType.CorrectAnswers:
@@ -887,8 +887,8 @@ public class AnimationController : MonoBehaviour
                     static int moduleTotalQuestion(ModuleResult m) => m.questionResults.Count;
                     int totalCorrectAnswers = finalResultData.topicResults.Sum(t => t.moduleResults.Sum(moduleTotalQuestion));
 
-                    //textToDisplay = $"{Mathf.RoundToInt(Mathf.Lerp(0f, finalResultData.totalCorrectAnswers, evaluationTime))} / {totalCorrectAnswers}";
-                    textToDisplay = $"{Mathf.RoundToInt(Mathf.Lerp(0f, finalResultData.totalCorrectAnswers, evaluationTime))} / 70";
+                    textToDisplay = $"{Mathf.RoundToInt(Mathf.Lerp(0f, finalResultData.totalCorrectAnswers, evaluationTime))} / {totalCorrectAnswers}";
+                    //textToDisplay = $"{Mathf.RoundToInt(Mathf.Lerp(0f, finalResultData.totalCorrectAnswers, evaluationTime))} / 35";
                 } 
             break;
             case ElementAnimation.ValueTextType.AvgResponseTime:
@@ -913,7 +913,7 @@ public class AnimationController : MonoBehaviour
             break;
             case ElementAnimation.ValueTextType.ResultsTotalPoints:
                 {
-                    textToDisplay = $"Total: {finalResultData.totalPoints}xp";
+                    textToDisplay = $"{finalResultData.totalPoints}xp";
                 } 
             break;
             case ElementAnimation.ValueTextType.CorrectAnswers:
@@ -921,8 +921,8 @@ public class AnimationController : MonoBehaviour
                     static int moduleTotalQuestion(ModuleResult m) => m.questionResults.Count;
                     int totalCorrectAnswers = finalResultData.topicResults.Sum(t => t.moduleResults.Sum(moduleTotalQuestion));
 
-                    //textToDisplay = $"{finalResultData.totalCorrectAnswers} / {totalCorrectAnswers}";
-                    textToDisplay = $"{finalResultData.totalCorrectAnswers} / 70";
+                    textToDisplay = $"{finalResultData.totalCorrectAnswers} / {totalCorrectAnswers}";
+                    //textToDisplay = $"{finalResultData.totalCorrectAnswers} / 35";
                 } 
             break;
             case ElementAnimation.ValueTextType.AvgResponseTime:

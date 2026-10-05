@@ -19,10 +19,10 @@ public class FinalScreenController : MonoBehaviour
     private GameObject finalResultsBackground;
     [SerializeField]
     private GameObject finalPointsTitle;
-    [SerializeField]
-    private TMP_Text topic1FinalPointsText;
-    [SerializeField]
-    private TMP_Text topic2FinalPointsText;
+    //[SerializeField]
+    //private TMP_Text topic1FinalPointsText;
+    //[SerializeField]
+    //private TMP_Text topic2FinalPointsText;
     [SerializeField]
     private TMP_Text finalPointsText;
     [SerializeField]
@@ -62,8 +62,8 @@ public class FinalScreenController : MonoBehaviour
         animationController.AnimateSceneStart(finalResultsScreenElements);
 
         // Animate final results stats display (one line of text at a time)
-        //animationController.AnimateFinalStatsDisplay(finalStatsElements, session.FinalTrainingData);
-        animationController.AnimateFinalStatsDisplay(finalStatsElements, TestFinalScreenResults());
+        animationController.AnimateFinalStatsDisplay(finalStatsElements, session.FinalTrainingData);
+        //animationController.AnimateFinalStatsDisplay(finalStatsElements, TestFinalScreenResults());
     }
 
     private void InitializeElementAnimationGroups()
@@ -77,15 +77,15 @@ public class FinalScreenController : MonoBehaviour
 
         // Final result screen stats elements
         ElementAnimation finalPointsTitleElement = animationController.GetElementAnimation(finalPointsTitle);
-        ElementAnimation topic1FinalPointsTextElement = animationController.GetElementAnimation(topic1FinalPointsText.gameObject);
-        ElementAnimation topic2FinalointsTextElement = animationController.GetElementAnimation(topic2FinalPointsText.gameObject);
+        //ElementAnimation topic1FinalPointsTextElement = animationController.GetElementAnimation(topic1FinalPointsText.gameObject);
+        //ElementAnimation topic2FinalointsTextElement = animationController.GetElementAnimation(topic2FinalPointsText.gameObject);
         ElementAnimation finalPointsTextElement = animationController.GetElementAnimation(finalPointsText.gameObject);
         ElementAnimation finalCorrectAnsTitleElement = animationController.GetElementAnimation(finalCorrectAnswersTitle);
         ElementAnimation finalCorrectAnsTextElement = animationController.GetElementAnimation(finalCorrectAnswersText.gameObject);
         ElementAnimation finalAvgRespTimeTitleElement = animationController.GetElementAnimation(finalAvgResponseTimeTitle);
         ElementAnimation finalAvgRespTimeTextElement = animationController.GetElementAnimation(finalAvgResponseTimeText.gameObject);
 
-        finalStatsElements = new() {finalPointsTitleElement, topic1FinalPointsTextElement, topic2FinalointsTextElement, finalPointsTextElement, finalCorrectAnsTitleElement, finalCorrectAnsTextElement, finalAvgRespTimeTitleElement, finalAvgRespTimeTextElement};
+        finalStatsElements = new() {finalPointsTitleElement, finalPointsTextElement, finalCorrectAnsTitleElement, finalCorrectAnsTextElement, finalAvgRespTimeTitleElement, finalAvgRespTimeTextElement};
     
         // Thanks screen elemens
         ElementAnimation thxTextElement = animationController.GetElementAnimation(thxText);
@@ -103,11 +103,6 @@ public class FinalScreenController : MonoBehaviour
                 topicTitle = "Cold Outreach",
                 points = 15000
             },
-            new TopicResult()
-            {
-                topicTitle = "Upselling und Cross-Selling",
-                points = 15000
-            }
         };
         return new()
         {
@@ -121,7 +116,7 @@ public class FinalScreenController : MonoBehaviour
     public void ContinueToThanksScreen()
     {
         // Export final participant training data to predefined local storage directory
-        // session.ExportFinalTrainingData();
+        session.ExportFinalTrainingData();
 
         List<ElementAnimation> allFinalResultsScreenElements = animationController.CombinePointScreenElementsLists(finalResultsScreenElements, finalStatsElements);
 
