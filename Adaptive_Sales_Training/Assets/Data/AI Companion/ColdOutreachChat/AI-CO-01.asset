@@ -21,8 +21,8 @@ MonoBehaviour:
   - questionId: CO-M01-Q01
     dialogueContext: "Reagiere nat\xFCrlich auf die Aussage des Teilnehmers aus Sicht einer vorsichtigen Operations Managerin. Frage danach beil\xE4ufig: Was m\xF6chten Sie mit diesem ersten Kontakt konkret erreichen?"
     traineeDialogueTexts:
-    - "Guten Tag Frau Keller, ich melde mich wegen Ihres offenen Support-Falls. Wenn wir schon im Austausch sind, w\xFCrde ich gern auch \xFCber die Vertragsverl\xE4ngerung sprechen."
-    - "Guten Tag Frau Keller, wir hatten bisher noch keinen Kontakt. Ich melde mich, weil ich eine m\xF6gliche Herausforderung in Ihrem Bereich ansprechen und erst einmal pr\xFCfen m\xF6chte, ob sie f\xFCr Sie relevant ist."
+    - "Guten Tag, ich melde mich wegen Ihres offenen Support-Falls. Wenn wir schon im Austausch sind, w\xFCrde ich gern auch \xFCber die Vertragsverl\xE4ngerung sprechen."
+    - "Guten Tag, wir hatten bisher noch keinen Kontakt. Ich melde mich, weil ich eine m\xF6gliche Herausforderung in Ihrem Bereich ansprechen und erst einmal pr\xFCfen m\xF6chte, ob sie f\xFCr Sie relevant ist."
     - "Ihr Vertrag verl\xE4ngert sich zum Monatsende automatisch; ich wollte Sie nur kurz dar\xFCber informieren."
     - "Ich habe Ihre Kontaktdaten gerade an unser Sales-Team weitergeleitet. Ein Kollege \xFCbernimmt den Kontakt in K\xFCrze."
   - questionId: CO-M01-Q02
