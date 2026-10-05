@@ -485,7 +485,8 @@ public class ModuleFlowController : MonoBehaviour
     {
         CleanUp();
 
-        List<ElementAnimation> allFinalPointScreenElements = animationController.CombinePointScreenElementsLists(finalPointScreenElements, finalStatsElements);
+        // List<ElementAnimation> allFinalPointScreenElements = animationController.CombinePointScreenElementsLists(finalPointScreenElements, finalStatsElements);
+        List<ElementAnimation> allFinalPointScreenElements = animationController.CombinePointScreenElementsLists(currentPointScreenElements, currentStatsElements);
 
         // If all topics completed => End participant session, send respective values to local store and go to SessionResultsScene
         // Else => Record intermediate participant results (save and export), and return to TopicMenuScene for next topic
