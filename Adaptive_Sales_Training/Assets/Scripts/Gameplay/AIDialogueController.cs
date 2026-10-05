@@ -381,7 +381,7 @@ public class AIDialogueController : MonoBehaviour
 
         // Set text attributes in dialogue screen => display current scenario in traineeDialogue textbox and opening message in aiResponse textbox        
         traineeDialogueText.text = TrimScenarioContext(currentDialogueScenario.scenarioContext);
-        aiResponseText.text = currentDialogueScenario.openingMessage;
+        aiResponseText.text = "Kunde: " + currentDialogueScenario.openingMessage;
 
         loadingIndicatorElement.canvasGroup.alpha = 0f;
 
@@ -531,7 +531,7 @@ public class AIDialogueController : MonoBehaviour
             };
         }
 
-        traineeDialogueText.text = currentQuestionContext.traineeDialogueTexts[selectedAnswerIndex];
+        traineeDialogueText.text = $"\"{currentQuestionContext.traineeDialogueTexts[selectedAnswerIndex]}\"";
         aiResponseText.text = "";
 
         // Restart loadingIndicator element to original position for correct animation position and direction
@@ -688,7 +688,7 @@ public class AIDialogueController : MonoBehaviour
         currentConversationHistory.Add(currentAIResponseMessage);
 
         // Set text attribute in dialogue screen => display trainee dialogue and AI response message in textbox
-        aiResponseText.text = responseData.replyText;
+        aiResponseText.text = $"\"{responseData.replyText}\"";
 
         yield return waitForSecondsDialogue;
 
