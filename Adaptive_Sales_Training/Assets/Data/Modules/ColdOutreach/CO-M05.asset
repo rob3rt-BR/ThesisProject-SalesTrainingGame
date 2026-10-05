@@ -24,7 +24,7 @@ MonoBehaviour:
     - Eine Liste aller Produktfunktionen
     - Eine Methode zur Berechnung des Produktpreises
     correctAnswerIndex: 0
-    timeLimitSeconds: 30
+    timeLimitSeconds: 15
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M05-Q02
@@ -35,7 +35,7 @@ MonoBehaviour:
     - "Die Anzahl der abgesendeten Nachrichten unabh\xE4ngig von ihrer Qualit\xE4t"
     - "Die L\xE4nge des verwendeten Sales Scripts"
     correctAnswerIndex: 1
-    timeLimitSeconds: 30
+    timeLimitSeconds: 15
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M05-Q03
@@ -46,7 +46,7 @@ MonoBehaviour:
     - "Sofort eine Beschwerde an die Gesch\xE4ftsf\xFChrung zu schicken"
     - "Eine kurze, relevante Nachricht mit zus\xE4tzlichem Nutzen und klarer Ausstiegsm\xF6glichkeit zu senden"
     correctAnswerIndex: 3
-    timeLimitSeconds: 30
+    timeLimitSeconds: 15
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M05-Q04
@@ -57,7 +57,7 @@ MonoBehaviour:
     - Nur die Anzahl der bisherigen Kontaktversuche
     - "Eine allgemeine Produktbrosch\xFCre ohne Gespr\xE4chszusammenfassung"
     correctAnswerIndex: 1
-    timeLimitSeconds: 30
+    timeLimitSeconds: 15
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M05-Q05
@@ -68,7 +68,7 @@ MonoBehaviour:
     - "Durch den Vergleich relevanter Erfolgskennzahlen und der Gespr\xE4chsqualit\xE4t"
     - Durch die Anzahl der verwendeten Produktbegriffe
     correctAnswerIndex: 2
-    timeLimitSeconds: 30
+    timeLimitSeconds: 15
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M05-Q06
@@ -77,7 +77,7 @@ MonoBehaviour:
     - Richtig
     - Falsch
     correctAnswerIndex: 1
-    timeLimitSeconds: 20
+    timeLimitSeconds: 10
     basePoints: 80
     speedBonusPoints: 40
   - questionId: CO-M05-Q07
@@ -86,6 +86,6 @@ MonoBehaviour:
     - Richtig
     - Falsch
     correctAnswerIndex: 0
-    timeLimitSeconds: 20
+    timeLimitSeconds: 10
     basePoints: 80
     speedBonusPoints: 40

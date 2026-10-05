@@ -23,7 +23,7 @@ public class ModuleQuestion
     public List<string> answerOptions = new();
     public int correctAnswerIndex;
 
-    [Min(15)]
+    [Min(10)]
     public float timeLimitSeconds;
     public int basePoints;
     public int speedBonusPoints;

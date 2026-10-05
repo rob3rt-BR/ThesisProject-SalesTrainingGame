@@ -24,7 +24,7 @@ MonoBehaviour:
     - Jede einzelne Funktion des Produkts
     - "Der gesamte Ablauf eines sp\xE4teren Vertrags"
     correctAnswerIndex: 1
-    timeLimitSeconds: 30
+    timeLimitSeconds: 15
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M03-Q02
@@ -35,7 +35,7 @@ MonoBehaviour:
     - "Er bleibt vollst\xE4ndig leer"
     - Er ist kurz und stellt einen relevanten Bezug zum Prospect her
     correctAnswerIndex: 3
-    timeLimitSeconds: 30
+    timeLimitSeconds: 15
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M03-Q03
@@ -46,7 +46,7 @@ MonoBehaviour:
     - "\u201ELesen Sie bitte unser komplettes Handbuch.\u201C"
     - "\u201ELeiten Sie diese Nachricht an alle Kollegen weiter.\u201C"
     correctAnswerIndex: 0
-    timeLimitSeconds: 30
+    timeLimitSeconds: 15
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M03-Q04
@@ -57,7 +57,7 @@ MonoBehaviour:
     - "\u201EIhr Team kann den manuellen Aufwand bei der Auswertung reduzieren.\u201C"
     - "\u201EDas System besitzt f\xFCnf Benutzerrollen.\u201C"
     correctAnswerIndex: 2
-    timeLimitSeconds: 30
+    timeLimitSeconds: 15
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M03-Q05
@@ -68,7 +68,7 @@ MonoBehaviour:
     - Den Namen des Unternehmens mehrfach zu wiederholen
     - "Einen besonders langen Text \xFCber die eigene Firma zu schreiben"
     correctAnswerIndex: 1
-    timeLimitSeconds: 30
+    timeLimitSeconds: 15
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M03-Q06
@@ -77,7 +77,7 @@ MonoBehaviour:
     - Richtig
     - Falsch
     correctAnswerIndex: 1
-    timeLimitSeconds: 20
+    timeLimitSeconds: 10
     basePoints: 80
     speedBonusPoints: 40
   - questionId: CO-M03-Q07
@@ -86,6 +86,6 @@ MonoBehaviour:
     - Richtig
     - Falsch
     correctAnswerIndex: 0
-    timeLimitSeconds: 20
+    timeLimitSeconds: 10
     basePoints: 80
     speedBonusPoints: 40

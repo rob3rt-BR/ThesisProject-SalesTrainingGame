@@ -329,7 +329,7 @@ public class ModuleFlowController : MonoBehaviour
         questionTextHolderElement.textVisualFX.Play();
 
         // Set timer => For traditional training needs to be quicker -> half predefined timeLimitSeconds
-        remainingTime = currentQuestion.timeLimitSeconds / 2;
+        remainingTime = currentQuestion.timeLimitSeconds;
         timerBar.maxValue = remainingTime;
         timerBar.value = remainingTime;
 
@@ -358,17 +358,16 @@ public class ModuleFlowController : MonoBehaviour
 
         MicroModule currentModule = topic.modules[currentModuleIndex];
         ModuleQuestion currentQuestion = currentModule.questions[currentQuestionIndex];
-        float halfedTimeLimit = currentQuestion.timeLimitSeconds / 2;
 
         bool isCorrect = selectedAnswerIndex >= 0 && selectedAnswerIndex == currentQuestion.correctAnswerIndex;
         bool timedOut = selectedAnswerIndex < 0;
-        float responseTime = halfedTimeLimit - remainingTime;
+        float responseTime = currentQuestion.timeLimitSeconds - remainingTime;
         int pointsAwarded = 0;
 
         // If answer correct => Calculate speed bonus points and add points to current module points
         if (isCorrect)
         {
-            float speedRatio = remainingTime / halfedTimeLimit;
+            float speedRatio = remainingTime / currentQuestion.timeLimitSeconds;
             int speedBonus = Mathf.RoundToInt(currentQuestion.speedBonusPoints * Mathf.Clamp01(speedRatio));
 
             pointsAwarded = currentQuestion.basePoints + speedBonus;

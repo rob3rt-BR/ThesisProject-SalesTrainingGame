@@ -24,7 +24,7 @@ MonoBehaviour:
     - "F\xFCr eine Beschreibung des am besten passenden Kundentyps"
     - "F\xFCr eine \xDCbersicht der monatlichen Sales-Ziele"
     correctAnswerIndex: 2
-    timeLimitSeconds: 30
+    timeLimitSeconds: 15
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M02-Q02
@@ -35,7 +35,7 @@ MonoBehaviour:
     - Die Sales-Abteilung hat ihr internes Meeting verschoben
     - "Der Sales-Mitarbeiter m\xF6chte heute mehr Anrufe machen"
     correctAnswerIndex: 1
-    timeLimitSeconds: 30
+    timeLimitSeconds: 15
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M02-Q03
@@ -46,7 +46,7 @@ MonoBehaviour:
     - Die private Wohnadresse des Prospects
     - Die Anzahl der Social-Media-Follower des Sales-Mitarbeiters
     correctAnswerIndex: 0
-    timeLimitSeconds: 30
+    timeLimitSeconds: 15
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M02-Q04
@@ -57,7 +57,7 @@ MonoBehaviour:
     - Die Auswahl des Unternehmens mit dem bekanntesten Namen
     - "Die Pr\xFCfung einer aktuellen Unternehmensentwicklung, die zum Angebot passt"
     correctAnswerIndex: 3
-    timeLimitSeconds: 30
+    timeLimitSeconds: 15
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M02-Q05
@@ -68,7 +68,7 @@ MonoBehaviour:
     - Damit der Sales-Mitarbeiter keine weiteren Fragen stellen muss
     - "Damit automatisch ein Vertragsabschluss ausgel\xF6st wird"
     correctAnswerIndex: 0
-    timeLimitSeconds: 30
+    timeLimitSeconds: 15
     basePoints: 100
     speedBonusPoints: 50
   - questionId: CO-M02-Q06
@@ -77,7 +77,7 @@ MonoBehaviour:
     - Richtig
     - Falsch
     correctAnswerIndex: 0
-    timeLimitSeconds: 20
+    timeLimitSeconds: 10
     basePoints: 80
     speedBonusPoints: 40
   - questionId: CO-M02-Q07
@@ -86,6 +86,6 @@ MonoBehaviour:
     - Richtig
     - Falsch
     correctAnswerIndex: 1
-    timeLimitSeconds: 20
+    timeLimitSeconds: 10
     basePoints: 80
     speedBonusPoints: 40
