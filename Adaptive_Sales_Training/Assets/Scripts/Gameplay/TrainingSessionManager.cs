@@ -80,7 +80,7 @@ public class TrainingSessionManager : MonoBehaviour
 
         FinalTrainingDataPath = string.Empty;
 
-        Debug.Log($"Participant {ParticipantId} started session at {ParticipantStart}.");
+        Debug.Log($"Participant {ParticipantId} started session at {ParticipantStart}.\n Global session ID: {SessionId}.\n Training Version: {Version}");
     }
 
     private string NewParticipantIDFromRandomInt() => random.Next(int.MaxValue).ToString("x");

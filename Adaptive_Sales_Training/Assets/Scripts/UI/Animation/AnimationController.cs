@@ -834,7 +834,7 @@ public class AnimationController : MonoBehaviour
             break;
             case ElementAnimation.ValueTextType.AvgResponseTime:
                 {
-                    textToDisplay = Mathf.Lerp(0f, currentTopicResult.avgResponseTime, evaluationTime).ToString("0.0") + "s";
+                    textToDisplay = Mathf.Lerp(0f, currentTopicResult.avgResponseTime, evaluationTime).ToString("0.00") + "s";
                 }
             break;
         }
@@ -859,7 +859,7 @@ public class AnimationController : MonoBehaviour
             break;
             case ElementAnimation.ValueTextType.AvgResponseTime:
                 {
-                   textToDisplay = currentTopicResult.avgResponseTime.ToString("0.0") + "s";
+                   textToDisplay = currentTopicResult.avgResponseTime.ToString("0.00") + "s";
                 }
             break;
         }
@@ -893,7 +893,7 @@ public class AnimationController : MonoBehaviour
             break;
             case ElementAnimation.ValueTextType.AvgResponseTime:
                 {
-                    textToDisplay = Mathf.Lerp(0f, finalResultData.finalAvgResponseTime, evaluationTime).ToString("0.0") + "s";
+                    textToDisplay = Mathf.Lerp(0f, finalResultData.finalAvgResponseTime, evaluationTime).ToString("0.00") + "s";
                 }
             break;
         }
@@ -927,7 +927,7 @@ public class AnimationController : MonoBehaviour
             break;
             case ElementAnimation.ValueTextType.AvgResponseTime:
                 {
-                   textToDisplay = finalResultData.finalAvgResponseTime.ToString("0.0") + "s";
+                   textToDisplay = finalResultData.finalAvgResponseTime.ToString("0.00") + "s";
                 }
             break;
         }

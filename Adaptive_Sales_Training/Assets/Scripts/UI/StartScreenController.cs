@@ -189,6 +189,9 @@ public class StartScreenController : MonoBehaviour
         // Start tracking participant training session
         session.StartParticipantSession(allTopics);
 
+        // Set explain screen content of texts based on set training version
+        SetExplainScreenTextContent(session.Version);
+
         // Animate screen change: start screen -> explain screen
         animationController.AnimateScreenChange(startScreenElements, explainScreenElements, startScreen, explainScreen);
     }
@@ -289,9 +292,6 @@ public class StartScreenController : MonoBehaviour
 
         // Set text attribute of current global session training version
         trainingModeSetText.text = session.Version.ToString();
-
-        // Set explain screen content of texts based on set training version
-        SetExplainScreenTextContent(trainingVersion);
 
         // Enable backToStartScreenButton canvas group interactbale and blocksRayCasts properties
         backToStartButtonCanvasGrp.interactable = true;

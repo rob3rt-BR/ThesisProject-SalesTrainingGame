@@ -495,7 +495,6 @@ public class ModuleFlowController : MonoBehaviour
             
             // Animate screen change: final point screen -> end of TrainingScene and load SessionResultsScene
             animationController.AnimateSceneEnd(allFinalPointScreenElements, "SessionResultsScene");
-            Debug.Log("Loading SessionResultsScene.");
         }
         else
         {
