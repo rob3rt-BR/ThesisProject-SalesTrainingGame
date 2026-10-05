@@ -2155,7 +2155,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StartScreenController
   allTopics:
   - {fileID: 11400000, guid: ad0f135467daae14480a0d9741cb1536, type: 2}
-  - {fileID: 11400000, guid: 5bc0d2740df22d14fb9cda9d6112eb82, type: 2}
   startScreen: {fileID: 149233094}
   passwordScreen: {fileID: 960039261}
   assignTrainingModeScreen: {fileID: 1896757640}
@@ -2536,6 +2535,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   groupAnimationDuration: 0.5
+  complementAnimationDuration: 0.75
+  statsDisplayAnimationDuration: 0.35
 --- !u!4 &530255610
 Transform:
   m_ObjectHideFlags: 0
@@ -3690,7 +3691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3493516919491773051, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 445
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 3493516919491773051, guid: 58300244b1a508f459ed8e53cc8af022, type: 3}
       propertyPath: m_SizeDelta.y
