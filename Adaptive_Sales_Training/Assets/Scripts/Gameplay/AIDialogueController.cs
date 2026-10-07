@@ -597,7 +597,6 @@ public class AIDialogueController : MonoBehaviour
         // Create new dialogue request data based on passed parameters data (module, question, selected answer)
         DialogueRequest requestData = new()
         {
-            sessionId = session.SessionId,
             scenarioId = currentDialogueScenario.scenarioId,
             moduleId = module.moduleId,
             questionId = question.questionId,

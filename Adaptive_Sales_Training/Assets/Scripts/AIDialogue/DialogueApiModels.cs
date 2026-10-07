@@ -5,7 +5,6 @@ using UnityEngine;
 [Serializable]
 public class DialogueRequest
 {
-    public string sessionId;
     public string scenarioId;
     public string moduleId;
     public string questionId;

@@ -7,7 +7,6 @@ using UnityEngine;
 public class TrainingResultData
 {
     public string participantId;
-    public string sessionId;
     public string version;
     public string participantStart;
     public string participantEnd;

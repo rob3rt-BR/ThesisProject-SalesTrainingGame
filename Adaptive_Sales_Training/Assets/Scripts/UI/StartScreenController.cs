@@ -44,11 +44,13 @@ public class StartScreenController : MonoBehaviour
     [SerializeField]
     private GameObject assignTrainingModeGroup;
     [SerializeField]
-    private TMP_Text sessionIdText;
+    private TMP_Text participantIdText;
     [SerializeField]
     private TMP_Text trainingModeSetText;
     [SerializeField]
-    private Button generateSessionIdButton;
+    private TMP_InputField participantIdInputField;
+    [SerializeField]
+    private Button setParticipantIdButton;
     [SerializeField]
     private Button traditionalModeButton;
     [SerializeField]
@@ -82,7 +84,8 @@ public class StartScreenController : MonoBehaviour
     private AnimationController animationController;
 
     private const string password = "PerroLocoST456+";
-    private string inputFieldText;
+    private string passwordInputFieldText;
+    private string participantIdInputFieldText;
 
     private CanvasGroup backToStartButtonCanvasGrp;
 
@@ -110,7 +113,7 @@ public class StartScreenController : MonoBehaviour
         }
 
         // On end edit => Store input from password input field in variable to later compare for password
-        passwordInputField.onEndEdit.AddListener(GetInput);
+        passwordInputField.onEndEdit.AddListener(GetPasswordInput);
 
         // On click => Check whether input text from input field equals predefined password
         checkPasswortButton.onClick.AddListener(CheckPassword);
@@ -118,8 +121,11 @@ public class StartScreenController : MonoBehaviour
         // On click => Go back to start screen from password screen
         pswdBackButton.onClick.AddListener(PswdReturnToStartScreen);
 
+        // On end edit => Store input from participantId input field in variable to later set to participant Id in TrainingSessionManager
+        participantIdInputField.onEndEdit.AddListener(GetParticipantIDInput);
+
         // On click => Generate session ID
-        generateSessionIdButton.onClick.AddListener(GenerateSessionID);
+        setParticipantIdButton.onClick.AddListener(FixParticipantID);
 
         // On click => Select normal training mode
         traditionalModeButton.onClick.AddListener(SelectTraditionalTrainingMode);
@@ -179,10 +185,15 @@ public class StartScreenController : MonoBehaviour
 
     public void StartGame()
     {
-        // IF global session ID AND training version NOT set => Return
-        if (session.SessionId == null && session.Version.Equals(TrainingVersion.Undefined))
+        // IF participant Id OR training version NOT set => Return
+        if (session.ParticipantId == null || IsInvalidParticipantID(session.ParticipantId))
         {
-            Debug.LogWarning("Can't start game - No global session Id set and no training version specified.");
+            Debug.LogWarning("Can't start game - No participant Id specified.");
+            return;
+        }
+        if (session.Version == TrainingVersion.Undefined)
+        {
+            Debug.LogWarning("Can't start game - No training version specified.");
             return;
         }
 
@@ -208,9 +219,9 @@ public class StartScreenController : MonoBehaviour
         Application.Quit();
     }
 
-    private void GetInput(string input)
+    private void GetPasswordInput(string input)
     {
-        inputFieldText = input;
+        passwordInputFieldText = input;
     }
 
     private void CheckPassword()
@@ -218,7 +229,7 @@ public class StartScreenController : MonoBehaviour
         // IF input field text set AND equals to predefined password => Animate screen change: password screen -> assignTrainingMode screen,
         // and disable backToStartButton canvas group interactbale and blocksRayCasts properties
         // ELSE => Display wrong password text
-        if (inputFieldText != null && inputFieldText.Equals(password))
+        if (passwordInputFieldText != null && passwordInputFieldText.Equals(password))
         {
             animationController.EnableElementInteraction(backToStartButton.gameObject, enableStart:true, postAnimation: true);
             animationController.AnimateScreenChange(passwordScreenElements, assignTrainingModeScreenElements, passwordScreen, assignTrainingModeScreen);
@@ -249,22 +260,39 @@ public class StartScreenController : MonoBehaviour
         // Reset password box internal values
         wrongPasswordText.gameObject.SetActive(false);
         passwordInputField.text = null;
-        inputFieldText = null;
+        passwordInputFieldText = null;
 
         // Reset text attributes of assignTrainingMode screen UI elements
-        sessionIdText.text = null;
+        participantIdText.text = null;
+        participantIdInputField.text = null;
+        participantIdInputFieldText = null;
         trainingModeSetText.text = null;
         traditionalModeButton.interactable = true;
         aiModeButton.interactable = true;
     }
 
-    private void GenerateSessionID()
+    private void GetParticipantIDInput(string input)
     {
-        // Generate current global session ID internally in TrainingSessionManager => ONE session PER training version with X amount of participants
-        session.GenerateGlobalSessionID();
+        participantIdInputFieldText = input;
+    }
 
-        // Set text attribute of current global session ID
-        sessionIdText.text = session.SessionId;
+    private bool IsInvalidParticipantID(string id)
+    {
+        return !id.StartsWith("P-") || id[2..].Length != 8;
+    }
+
+    private void FixParticipantID()
+    {
+        if (IsInvalidParticipantID(participantIdInputFieldText))
+        {
+            Debug.LogWarning("Incorrect participant ID format");
+            return;
+        }
+        // Set ParticipantId with stored value from input field
+        session.SetParticipantID(participantIdInputFieldText);
+
+        // Display ParticipantId on screen
+        participantIdText.text = session.ParticipantId;
     }
 
     private void SelectTraditionalTrainingMode()
@@ -377,11 +405,12 @@ public class StartScreenController : MonoBehaviour
     private void CleanUp()
     {
         // Clenaup Assign Training Mode Screen
-        passwordInputField.onEndEdit.RemoveListener(GetInput);
+        passwordInputField.onEndEdit.RemoveListener(GetPasswordInput);
         checkPasswortButton.onClick.RemoveListener(CheckPassword);
         pswdBackButton.onClick.RemoveListener(PswdReturnToStartScreen);
 
-        generateSessionIdButton.onClick.RemoveListener(GenerateSessionID);
+        participantIdInputField.onEndEdit.RemoveListener(GetParticipantIDInput);
+        setParticipantIdButton.onClick.RemoveListener(FixParticipantID);
         traditionalModeButton.onClick.RemoveListener(SelectTraditionalTrainingMode);
         aiModeButton.onClick.RemoveListener(SelectAITrainingMode);
         setModeButton.onClick.RemoveListener(SetTrainingMode);
