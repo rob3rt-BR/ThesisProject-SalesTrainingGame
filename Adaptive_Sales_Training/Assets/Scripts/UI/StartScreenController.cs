@@ -27,6 +27,8 @@ public class StartScreenController : MonoBehaviour
     private GameObject startButton;
     [SerializeField]
     private GameObject lowerButtons;
+    [SerializeField]
+    private GameObject leaderboardsButton;
 
     [Header("Password UI")]
     [SerializeField]
@@ -160,8 +162,9 @@ public class StartScreenController : MonoBehaviour
         ElementAnimation welcomeTitleElement = animationController.GetElementAnimation(welcomeTitle);
         ElementAnimation startButtonElement = animationController.GetElementAnimation(startButton);
         ElementAnimation lowerButtonsElement = animationController.GetElementAnimation(lowerButtons);
+        ElementAnimation leaderboardsElement = animationController.GetElementAnimation(leaderboardsButton);
 
-        startScreenElements = new() {welcomeTitleElement, startButtonElement, lowerButtonsElement};
+        startScreenElements = new() {welcomeTitleElement, startButtonElement, lowerButtonsElement, leaderboardsElement};
         
         // Password screen elements
         ElementAnimation passwordBoxElement = animationController.GetElementAnimation(passwordBox);
@@ -217,6 +220,12 @@ public class StartScreenController : MonoBehaviour
     {
         Debug.Log("Game exited.");
         Application.Quit();
+    }
+
+    public void ViewLeaderboards()
+    {
+        // Animate screen change: start screen -> end of StartScene and load LeaderboardsScene
+        animationController.AnimateSceneEnd(startScreenElements, "LeaderboardsScene");
     }
 
     private void GetPasswordInput(string input)
