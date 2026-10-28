@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -83,6 +85,13 @@ public class LeaderboardsController : MonoBehaviour
     [SerializeField]
     private AnimationController animationController;
 
+    [Header("PlayerStats Data")]
+    [SerializeField]
+    private List<PlayerStats> statsData;
+    
+    private List<PlayerStats> totalPlayerStats;
+    private List<PlayerStats> versionPlayerStats;
+
     private List<ElementAnimation> menuScreenElements;
     private List<ElementAnimation> tradScreenElements;
     private List<ElementAnimation> aIScreenElements;
@@ -137,11 +146,7 @@ public class LeaderboardsController : MonoBehaviour
         // Animate scene start: start of menu screens
         animationController.AnimateSceneStart(menuScreenElements);
 
-        // Disable all leaderboard items before starting display for the first time
-        //DisableLeaderboardsItems(tradBoardItems);
-        //DisableLeaderboardsItems(aIBoardItems);
-        //DisableLeaderboardsItems(totalBoardItems);
-        //DisableLeaderboardsItems(topFiveBoardItems);
+        totalPlayerStats = statsData;
     }
 
     private void InitializeElementAnimationGroups()
@@ -325,11 +330,27 @@ public class LeaderboardsController : MonoBehaviour
         totalBoardHolderElement.canvasGroup.alpha = 1f;
     }
 
-    private void DisableLeaderboardsItems(List<LeaderboardItem> leaderboardItems)
+    private List<PlayerStats> SortByPoints(List<PlayerStats> playerStats)
     {
-        foreach (LeaderboardItem item in leaderboardItems)
+        return playerStats.OrderBy(p => p.points).ToList();
+    }
+
+    private List<PlayerStats> SortByResponseTime(List<PlayerStats> playerStats)
+    {
+        return playerStats.OrderBy(p => p.avgResponseTime).ToList();
+    }
+
+    private void SortByVersion(TrainingVersion version, LeaderboardType leaderboardType)
+    {
+        if (leaderboardType == LeaderboardType.Points)
         {
-            item.gameObject.SetActive(false);
+            versionPlayerStats = SortByPoints(statsData.FindAll(p => p.trainingVersion == version));
+            return;
+        }
+        if (leaderboardType == LeaderboardType.ResponseTime)
+        {
+            versionPlayerStats = SortByResponseTime(statsData.FindAll(p => p.trainingVersion == version));
+            return;
         }
     }
 }

@@ -18951,6 +18951,25 @@ MonoBehaviour:
   - {fileID: 1673901802}
   returnToStartButton: {fileID: 1563509252}
   animationController: {fileID: 220773869}
+  statsData:
+  - {fileID: 11400000, guid: 2db64c9b57242494e99aa89a43994bf8, type: 2}
+  - {fileID: 11400000, guid: 982a3911b90fd204680c1d29e36b1ae1, type: 2}
+  - {fileID: 11400000, guid: 4384cca1422378c4db97f8182375a068, type: 2}
+  - {fileID: 11400000, guid: 5108423a5a164704499e8f3bd987a347, type: 2}
+  - {fileID: 11400000, guid: 8760e0e69445c704eac9f8bf0d9b3823, type: 2}
+  - {fileID: 11400000, guid: b30847692bae6c242a2bf5418874d663, type: 2}
+  - {fileID: 11400000, guid: cd196d7d2c922544f9d7dda590db9e38, type: 2}
+  - {fileID: 11400000, guid: e7c23bf9ad1bb144786993dc329b41fb, type: 2}
+  - {fileID: 11400000, guid: 7efbdcdc94ec70b449da49244c6b2e5b, type: 2}
+  - {fileID: 11400000, guid: c77e6a994bbc41f4a85ea597370f4cb8, type: 2}
+  - {fileID: 11400000, guid: 2291829f87b2897478fb2d732ad818e3, type: 2}
+  - {fileID: 11400000, guid: dac1db6d99ed1aa4896229cc62f375da, type: 2}
+  - {fileID: 11400000, guid: b3a2c6909c4bcfa48b9b027992cf3b8f, type: 2}
+  - {fileID: 11400000, guid: 20f0b60be893f894e9e9a64fce807aaa, type: 2}
+  - {fileID: 11400000, guid: 14eb024b3888e1e4fbb20d9a21c5d7f3, type: 2}
+  - {fileID: 11400000, guid: 045c0e90d1529f14789443cd343c4664, type: 2}
+  - {fileID: 11400000, guid: 882223f0cf20fd840b4e87fc057b6956, type: 2}
+  - {fileID: 11400000, guid: dd9e300f204c0a14dbe45ad03d6a57cc, type: 2}
   currentLeaderboard: 0
 --- !u!4 &1628984967
 Transform:
