@@ -191,11 +191,14 @@ public class LeaderboardsController : MonoBehaviour
 
     private void ShowAILeaderboard()
     {
+        RestartMenuAndTotalBackgroundsPosition();
+        
         // Animate screen change: traditional screen -> AI screen
         animationController.AnimateScreenChange(tradScreenElements, aIScreenElements, traditionalScreen, aIScreen);
 
         if (currentLeaderboard == LeaderboardType.Points)
         {
+
             return;
         }
         if (currentLeaderboard == LeaderboardType.ResponseTime)
@@ -219,8 +222,20 @@ public class LeaderboardsController : MonoBehaviour
         }
     }
 
+    private string PlayerStatsText(LeaderboardType type)
+    {
+        return type switch
+        {
+            LeaderboardType.Points => "",
+            LeaderboardType.ResponseTime => "",
+            _ => ""
+        };
+    }
+
     private void ReturnToMenu()
     {
+        RestartVersionBackgroundsPosition();
+
         // Animate screen change: total screen -> menu screen
         animationController.AnimateScreenChange(totalScreenElements, menuScreenElements, totalScreen, menuScreen);
 
@@ -233,7 +248,23 @@ public class LeaderboardsController : MonoBehaviour
 
     private void ReturnToStart()
     {
-        // Animate screen change: top five screen -> end of LeaderboardsScene and load StartScene        
+        // Animate screen change: top five screen -> end of LeaderboardsScene and load StartScene
         animationController.AnimateSceneEnd(topFiveScreenElements, "StartScene");
+    }
+
+    private void RestartVersionBackgroundsPosition()
+    {
+        // Restart version boards background from traditional and AI screens to original position before animating again
+        animationController.RestartElementToOriginalPosition(tradBackground);
+        animationController.RestartElementToOriginalPosition(aIBackground);
+    }
+
+    private void RestartMenuAndTotalBackgroundsPosition()
+    {
+        // Restart menu boards and boards background from menu and total screens to original position before animating again
+        animationController.RestartElementToOriginalPosition(boardsBackground);
+        animationController.RestartElementToOriginalPosition(boardsHolder);
+
+        animationController.RestartElementToOriginalPosition(totalBackground);
     }
 }
