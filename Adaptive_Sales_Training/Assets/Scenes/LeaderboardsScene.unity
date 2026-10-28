@@ -2864,7 +2864,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   groupAnimationDuration: 0.5
-  complementAnimationDuration: 0.75
+  complementAnimationDuration: 0.35
   statsDisplayAnimationDuration: 0.35
 --- !u!1 &228792343
 GameObject:
