@@ -37,6 +37,8 @@ public class LeaderboardsController : MonoBehaviour
     [SerializeField]
     private GameObject tradBackground;
     [SerializeField]
+    private GameObject tradBoardHolder;
+    [SerializeField]
     private List<LeaderboardItem> tradBoardItems;
     [SerializeField]
     private Button continueToAIButton;
@@ -46,6 +48,8 @@ public class LeaderboardsController : MonoBehaviour
     private TMP_Text aITitle;
     [SerializeField]
     private GameObject aIBackground;
+    [SerializeField]
+    private GameObject aIBoardHolder;
     [SerializeField]
     private List<LeaderboardItem> aIBoardItems;
     [SerializeField]
@@ -57,6 +61,8 @@ public class LeaderboardsController : MonoBehaviour
     [SerializeField]
     private GameObject totalBackground;
     [SerializeField]
+    private GameObject totalBoardHolder;
+    [SerializeField]
     private List<LeaderboardItem> totalBoardItems;
     [SerializeField]
     private Button returnToMenuButton;
@@ -66,6 +72,8 @@ public class LeaderboardsController : MonoBehaviour
     private TMP_Text topFiveTitle;
     [SerializeField]
     private GameObject topFiveBackground;
+    [SerializeField]
+    private GameObject topFiveBoardHolder;
     [SerializeField]
     private List<LeaderboardItem> topFiveBoardItems;
     [SerializeField]
@@ -80,6 +88,11 @@ public class LeaderboardsController : MonoBehaviour
     private List<ElementAnimation> aIScreenElements;
     private List<ElementAnimation> totalScreenElements;
     private List<ElementAnimation> topFiveScreenElements;
+
+    ElementAnimation tradBoardHolderElement;
+    ElementAnimation aIBoardHolderElement;
+    ElementAnimation totalBoardHolderElement;
+    ElementAnimation topFiveBoardHolderElement;
 
     public enum LeaderboardType
     {
@@ -123,6 +136,12 @@ public class LeaderboardsController : MonoBehaviour
 
         // Animate scene start: start of menu screens
         animationController.AnimateSceneStart(menuScreenElements);
+
+        // Disable all leaderboard items before starting display for the first time
+        //DisableLeaderboardsItems(tradBoardItems);
+        //DisableLeaderboardsItems(aIBoardItems);
+        //DisableLeaderboardsItems(totalBoardItems);
+        //DisableLeaderboardsItems(topFiveBoardItems);
     }
 
     private void InitializeElementAnimationGroups()
@@ -138,6 +157,7 @@ public class LeaderboardsController : MonoBehaviour
         ElementAnimation tradTitleElement = animationController.GetElementAnimation(tradTitle.gameObject);
         ElementAnimation tradBackgroundElement = animationController.GetElementAnimation(tradBackground);
         ElementAnimation continueToAIButtonElement = animationController.GetElementAnimation(continueToAIButton.gameObject);
+        tradBoardHolderElement = animationController.GetElementAnimation(tradBoardHolder);
 
         tradScreenElements = new() {tradTitleElement, tradBackgroundElement, continueToAIButtonElement};
         
@@ -145,6 +165,7 @@ public class LeaderboardsController : MonoBehaviour
         ElementAnimation aITitleElement = animationController.GetElementAnimation(aITitle.gameObject);
         ElementAnimation aIBackgroundElement = animationController.GetElementAnimation(aIBackground);
         ElementAnimation continueToTotalButtonElement = animationController.GetElementAnimation(continueToTotalButton.gameObject);
+        aIBoardHolderElement = animationController.GetElementAnimation(aIBoardHolder);
 
         aIScreenElements = new() {aITitleElement, aIBackgroundElement, continueToTotalButtonElement};
         
@@ -152,6 +173,7 @@ public class LeaderboardsController : MonoBehaviour
         ElementAnimation totalTitleElement = animationController.GetElementAnimation(totalTitle.gameObject);
         ElementAnimation totalBackgroundElement = animationController.GetElementAnimation(totalBackground);
         ElementAnimation returnToMenuButtonElement = animationController.GetElementAnimation(returnToMenuButton.gameObject);
+        totalBoardHolderElement = animationController.GetElementAnimation(totalBoardHolder);
 
         totalScreenElements = new() {totalTitleElement, totalBackgroundElement, returnToMenuButtonElement};
         
@@ -159,6 +181,7 @@ public class LeaderboardsController : MonoBehaviour
         ElementAnimation topFiveTitleElement = animationController.GetElementAnimation(topFiveTitle.gameObject);
         ElementAnimation topFiveBackgroundElement = animationController.GetElementAnimation(topFiveBackground);
         ElementAnimation returnToStartButtonElement = animationController.GetElementAnimation(returnToStartButton.gameObject);
+        topFiveBoardHolderElement = animationController.GetElementAnimation(topFiveBoardHolder);
 
         topFiveScreenElements = new() {topFiveTitleElement, topFiveBackgroundElement, returnToStartButtonElement};
     }
@@ -170,6 +193,9 @@ public class LeaderboardsController : MonoBehaviour
         
         // Animate screen change: menu screen -> traditional screen (points mode)
         animationController.AnimateScreenChange(menuScreenElements, tradScreenElements, menuScreen, traditionalScreen);
+
+        // Animate traditional board display (points mode)
+        animationController.AnimateLeaderboardDisplay(tradBoardItems);
     }
 
     private void StartResponseTimeLeaderboards()
@@ -179,6 +205,9 @@ public class LeaderboardsController : MonoBehaviour
 
         // Animate screen change: menu screen -> traditional screen (response time mode)
         animationController.AnimateScreenChange(menuScreenElements, tradScreenElements, menuScreen, traditionalScreen);
+
+        // Animate traditional board display (response time mode)
+        animationController.AnimateLeaderboardDisplay(tradBoardItems);
     }
 
     private void StartTopFiveLeaderboard()
@@ -187,14 +216,23 @@ public class LeaderboardsController : MonoBehaviour
         
         // Animate screen change: menu screen -> top five screen
         animationController.AnimateScreenChange(menuScreenElements, topFiveScreenElements, menuScreen, topFiveScreen);
+
+        // Animate top five board display
+        animationController.AnimateLeaderboardDisplay(topFiveBoardItems);
     }
 
     private void ShowAILeaderboard()
     {
-        RestartMenuAndTotalBackgroundsPosition();
+        ResetMenuAndTotalScreens();
+
+        // Animate traditional board fadeout before changing screen
+        animationController.AnimateLeaderboardFadeOut(tradBoardHolderElement);
         
         // Animate screen change: traditional screen -> AI screen
         animationController.AnimateScreenChange(tradScreenElements, aIScreenElements, traditionalScreen, aIScreen);
+
+        // Animate AI board display
+        animationController.AnimateLeaderboardDisplay(aIBoardItems);
 
         if (currentLeaderboard == LeaderboardType.Points)
         {
@@ -209,9 +247,15 @@ public class LeaderboardsController : MonoBehaviour
 
     private void ShowTotalLeaderboard()
     {
+        // Animate AI board fadeout before changing screen
+        animationController.AnimateLeaderboardFadeOut(aIBoardHolderElement);
+
         // Animate screen change: AI screen -> total screen
         animationController.AnimateScreenChange(aIScreenElements, totalScreenElements, aIScreen, totalScreen);
 
+        // Animate total board display
+        animationController.AnimateLeaderboardDisplay(totalBoardItems);
+        
         if (currentLeaderboard == LeaderboardType.Points)
         {
             return;
@@ -234,11 +278,15 @@ public class LeaderboardsController : MonoBehaviour
 
     private void ReturnToMenu()
     {
-        RestartVersionBackgroundsPosition();
+        ResetVersionScreens();
+
+        // Animate total board fadeout before changing screen
+        animationController.AnimateLeaderboardFadeOut(totalBoardHolderElement);
 
         // Animate screen change: total screen -> menu screen
         animationController.AnimateScreenChange(totalScreenElements, menuScreenElements, totalScreen, menuScreen);
 
+        // IF leaderboards counter == 2: both leaderboards completed -> enable top five leaderboards
         if (twoLeaderboardsCompleted == 2)
         {
             topFiveButton.interactable = true;
@@ -248,23 +296,40 @@ public class LeaderboardsController : MonoBehaviour
 
     private void ReturnToStart()
     {
+        // Animate top five board fadeout before changing screen
+        animationController.AnimateLeaderboardFadeOut(topFiveBoardHolderElement);
+
         // Animate screen change: top five screen -> end of LeaderboardsScene and load StartScene
         animationController.AnimateSceneEnd(topFiveScreenElements, "StartScene");
     }
 
-    private void RestartVersionBackgroundsPosition()
+    private void ResetVersionScreens()
     {
-        // Restart version boards background from traditional and AI screens to original position before animating again
+        // Restart version boards background from traditional and AI screens to original position
+        // AND reset canvas group alpha value for later display before animating again
         animationController.RestartElementToOriginalPosition(tradBackground);
+        tradBoardHolderElement.canvasGroup.alpha = 1f;
         animationController.RestartElementToOriginalPosition(aIBackground);
+        aIBoardHolderElement.canvasGroup.alpha = 1f;
     }
 
-    private void RestartMenuAndTotalBackgroundsPosition()
+    private void ResetMenuAndTotalScreens()
     {
-        // Restart menu boards and boards background from menu and total screens to original position before animating again
+        // Reset menu boards and boards background from menu screen to original position before animating again
         animationController.RestartElementToOriginalPosition(boardsBackground);
         animationController.RestartElementToOriginalPosition(boardsHolder);
 
+        // Reset board background from total screen to original position
+        // AND reset canvas group alpha value for later display before animating again 
         animationController.RestartElementToOriginalPosition(totalBackground);
+        totalBoardHolderElement.canvasGroup.alpha = 1f;
+    }
+
+    private void DisableLeaderboardsItems(List<LeaderboardItem> leaderboardItems)
+    {
+        foreach (LeaderboardItem item in leaderboardItems)
+        {
+            item.gameObject.SetActive(false);
+        }
     }
 }

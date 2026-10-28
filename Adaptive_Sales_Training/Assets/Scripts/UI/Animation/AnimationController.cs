@@ -50,11 +50,14 @@ public class AnimationController : MonoBehaviour
 
     private List<ElementAnimation> complementAnimationElements;
     private List<ElementAnimation> correctIndicatorsElements;
+
+    private List<LeaderboardItem> boardItems;
     private enum ComplementAnimationType
     {
         None,
         Stats,
-        Dialogue
+        Dialogue,
+        Leaderboard
     }
     private ComplementAnimationType complementAnimationType = ComplementAnimationType.None;
 
@@ -67,6 +70,7 @@ public class AnimationController : MonoBehaviour
         DisplayAIResponse,
         CorrectAnswerFade,
         WrongAnswerFade,
+        DisplayLeaderboard
     }
     private ComplementAnimation complementAnimation = ComplementAnimation.None;
     private bool isOpeningDialogue;
@@ -242,6 +246,14 @@ public class AnimationController : MonoBehaviour
                             complementAnimationType = ComplementAnimationType.None;
                         }
                     break;
+
+                    // IF complementAnimationType set to .Leaderboars (call to AnimateLeaderboardDisplay()) => Set complementAnimation to .DisplayLeaderboard
+                    case ComplementAnimationType.Leaderboard:
+                        {
+                            complementAnimation = ComplementAnimation.DisplayLeaderboard;
+                            complementAnimationType = ComplementAnimationType.None;
+                        }
+                    break;
                     default:
                     break;
                 }
@@ -378,6 +390,18 @@ public class AnimationController : MonoBehaviour
 
                 complementAnimation = ComplementAnimation.None;
             }
+        }
+        else if (complementAnimation == ComplementAnimation.DisplayLeaderboard)
+        {
+            if (activeCoroutine != null)
+            {
+                StopCoroutine(activeCoroutine);
+            }
+
+            // Start coroutine to display leaderboard items one at a time
+            activeCoroutine = StartCoroutine(DisplayLeaderboardItems(boardItems));
+
+            complementAnimation = ComplementAnimation.None;
         }
     }
 
@@ -986,6 +1010,49 @@ public class AnimationController : MonoBehaviour
         loadingIndicatorElement.canvasGroup.interactable = false;
         loadingIndicatorElement.canvasGroup.blocksRaycasts = false;
     }
+    #endregion
+
+    #region Leaderboard Animation
+
+    public void AnimateLeaderboardDisplay(List<LeaderboardItem> leaderboardItems)
+    {
+        PrepareLeaderboardDisplayAnimation(leaderboardItems);
+
+        boardItems = leaderboardItems;
+
+        complementAnimationType = ComplementAnimationType.Leaderboard;
+    }
+
+    public void AnimateLeaderboardFadeOut(ElementAnimation leaderboardItemsHolder)
+    {
+        complementElementAnimation = leaderboardItemsHolder;
+
+        complementElapsedTime = 0f;
+
+        // Just need that complement animation type
+        complementAnimation = ComplementAnimation.WrongAnswerFade; 
+    }
+
+    private void PrepareLeaderboardDisplayAnimation(List<LeaderboardItem> items)
+    {
+        foreach(LeaderboardItem item in items)
+        {
+            item.gameObject.SetActive(false);
+        }
+    }
+
+    private IEnumerator DisplayLeaderboardItems(List<LeaderboardItem> leaderboardItems)
+    {
+        yield return waitForSecondsStats;
+
+        foreach (LeaderboardItem item in leaderboardItems)
+        {
+            item.gameObject.SetActive(true);
+            
+            yield return waitForSecondsStats;
+        }
+    }
+
 
     #endregion
 
