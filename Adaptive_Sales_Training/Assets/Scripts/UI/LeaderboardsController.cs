@@ -191,33 +191,28 @@ public class LeaderboardsController : MonoBehaviour
         topFiveScreenElements = new() {topFiveTitleElement, topFiveBackgroundElement, returnToStartButtonElement};
     }
 
+
     private void StartPointsLeaderboards()
     {
-        currentLeaderboard = LeaderboardType.Points;
-        twoLeaderboardsCompleted++;
-        
-        // Animate screen change: menu screen -> traditional screen (points mode)
-        animationController.AnimateScreenChange(menuScreenElements, tradScreenElements, menuScreen, traditionalScreen);
-
-        // Animate traditional board display (points mode)
-        animationController.AnimateLeaderboardDisplay(tradBoardItems);
+        // Start points screen sequences with traditional board
+        ShowTraditionalLeaderboard(LeaderboardType.Points);
     }
 
     private void StartResponseTimeLeaderboards()
     {
-        currentLeaderboard = LeaderboardType.ResponseTime;
-        twoLeaderboardsCompleted++;
-
-        // Animate screen change: menu screen -> traditional screen (response time mode)
-        animationController.AnimateScreenChange(menuScreenElements, tradScreenElements, menuScreen, traditionalScreen);
-
-        // Animate traditional board display (response time mode)
-        animationController.AnimateLeaderboardDisplay(tradBoardItems);
+        // Start response time screen sequences with traditional board
+        ShowTraditionalLeaderboard(LeaderboardType.ResponseTime);
     }
 
     private void StartTopFiveLeaderboard()
     {
         currentLeaderboard = LeaderboardType.TopFive;
+
+        // Sort top five player stats (first by points, then by response time)
+        SortTopFive();
+
+        // Set sorted totalPlayerStats on top five leaderboard items
+        SetLeaderboardInfo(topFiveBoardItems, false);
         
         // Animate screen change: menu screen -> top five screen
         animationController.AnimateScreenChange(menuScreenElements, topFiveScreenElements, menuScreen, topFiveScreen);
@@ -226,9 +221,39 @@ public class LeaderboardsController : MonoBehaviour
         animationController.AnimateLeaderboardDisplay(topFiveBoardItems);
     }
 
+    private void ShowTraditionalLeaderboard(LeaderboardType type)
+    {
+        currentLeaderboard = type;
+        twoLeaderboardsCompleted++;
+
+        // Set traditional screen title based on current leaderboard type
+        tradTitle.text = $"{currentLeaderboard} - Traditional";
+
+        // Sort based on current leader board type (points or response time) for traditional version player stats
+        SortByVersion(TrainingVersion.Traditional, currentLeaderboard);
+
+        // Set sorted versionPlayerStats on traditional leaderboard items
+        SetLeaderboardInfo(tradBoardItems, true);
+        
+        // Animate screen change: menu screen -> traditional screen
+        animationController.AnimateScreenChange(menuScreenElements, tradScreenElements, menuScreen, traditionalScreen);
+
+        // Animate traditional board display
+        animationController.AnimateLeaderboardDisplay(tradBoardItems);
+    }
+
     private void ShowAILeaderboard()
     {
         ResetMenuAndTotalScreens();
+
+        // Set AI screen title based on current leaderboard type
+        aITitle.text = $"{currentLeaderboard} - AI";
+
+        // Sort based on current leader board type (points or response time) for AI version player stats
+        SortByVersion(TrainingVersion.AI, currentLeaderboard);
+
+        // Set sorted versionPlayerStats on AI leaderboard items
+        SetLeaderboardInfo(aIBoardItems, true);
 
         // Animate traditional board fadeout before changing screen
         animationController.AnimateLeaderboardFadeOut(tradBoardHolderElement);
@@ -238,20 +263,19 @@ public class LeaderboardsController : MonoBehaviour
 
         // Animate AI board display
         animationController.AnimateLeaderboardDisplay(aIBoardItems);
-
-        if (currentLeaderboard == LeaderboardType.Points)
-        {
-
-            return;
-        }
-        if (currentLeaderboard == LeaderboardType.ResponseTime)
-        {
-            return;
-        }
     }
 
     private void ShowTotalLeaderboard()
     {
+        // Sort based on current leader board type (points or response time) for all player stats
+        SortTotal(currentLeaderboard);
+
+        // Set total screen title based on current leaderboard type
+        totalTitle.text = $"{currentLeaderboard} - Total";
+
+        // Set sorted totalBoardStats on total leaderboard items
+        SetLeaderboardInfo(totalBoardItems, false);
+
         // Animate AI board fadeout before changing screen
         animationController.AnimateLeaderboardFadeOut(aIBoardHolderElement);
 
@@ -260,23 +284,43 @@ public class LeaderboardsController : MonoBehaviour
 
         // Animate total board display
         animationController.AnimateLeaderboardDisplay(totalBoardItems);
-        
-        if (currentLeaderboard == LeaderboardType.Points)
+    }
+
+    private void SetLeaderboardInfo(List<LeaderboardItem> leaderboardItems, bool versionBoard)
+    {
+        List<PlayerStats> currentStats;
+
+        // IF version leaderboard -> 9 iterations and use versionPlayerStats
+        // ELSE (total leaderboard) -> 18 iterations and use totalPlayerStats
+        if (versionBoard)
         {
-            return;
+            currentStats = versionPlayerStats;
         }
-        if (currentLeaderboard == LeaderboardType.ResponseTime)
+        else
         {
-            return;
+            currentStats = totalPlayerStats;
+        }
+
+        int maxItems = currentStats.Count;
+        int placeCounter = maxItems;
+
+        for (int i = 0; i < maxItems; i++)
+        {
+            string playerName = $"{placeCounter}. {currentStats[i].playerName}";
+            string playerStats = PlayerStatsText(currentLeaderboard, currentStats[i]);
+            leaderboardItems[i].SetPlayerTexts(playerName, playerStats);
+
+            placeCounter--;
         }
     }
 
-    private string PlayerStatsText(LeaderboardType type)
+    private string PlayerStatsText(LeaderboardType type, PlayerStats playerStats)
     {
         return type switch
         {
-            LeaderboardType.Points => "",
-            LeaderboardType.ResponseTime => "",
+            LeaderboardType.Points => $"{playerStats.points}xp ({playerStats.correctAnswers} / 35)",
+            LeaderboardType.ResponseTime => $"{playerStats.avgResponseTime:0.00}s",
+            LeaderboardType.TopFive => $"{playerStats.points}xp | {playerStats.avgResponseTime:0.00}s",
             _ => ""
         };
     }
@@ -337,7 +381,7 @@ public class LeaderboardsController : MonoBehaviour
 
     private List<PlayerStats> SortByResponseTime(List<PlayerStats> playerStats)
     {
-        return playerStats.OrderBy(p => p.avgResponseTime).ToList();
+        return playerStats.OrderByDescending(p => p.avgResponseTime).ToList();
     }
 
     private void SortByVersion(TrainingVersion version, LeaderboardType leaderboardType)
@@ -352,5 +396,26 @@ public class LeaderboardsController : MonoBehaviour
             versionPlayerStats = SortByResponseTime(statsData.FindAll(p => p.trainingVersion == version));
             return;
         }
+    }
+
+    private void SortTotal(LeaderboardType leaderboardType)
+    {
+        if (leaderboardType == LeaderboardType.Points)
+        {
+            totalPlayerStats = SortByPoints(statsData);
+            return;
+        }
+        if (leaderboardType == LeaderboardType.ResponseTime)
+        {
+            totalPlayerStats = SortByResponseTime(statsData);
+            return;
+        }
+    }
+
+    private void SortTopFive()
+    {
+        // Sort first by points and limit it to the first 5 player stats, then sort those 5 by response time
+        totalPlayerStats = SortByPoints(statsData).GetRange(13, 5); // Index 13 since the leaderboard items are ordered in ascending order
+        totalPlayerStats = SortByResponseTime(totalPlayerStats);
     }
 }
